@@ -8,5 +8,6 @@
 
 abstract class Constantes
 {
-
+    //Vistas
+    const HOMEVIEW = "home";
 }
