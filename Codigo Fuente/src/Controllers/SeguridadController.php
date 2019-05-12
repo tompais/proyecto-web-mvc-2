@@ -8,7 +8,7 @@ class SeguridadController extends Controller
         require_once ROOT . "Models/Provincia.php";
 
         $this->layout = "layoutSeguridad";
-        
+
         $sexo = new Sexo();
         $provincia = new Provincia();
 
@@ -16,7 +16,7 @@ class SeguridadController extends Controller
         $d['provincias'] = $provincia->getAllProvincias();
 
         usort($d['sexos'], Constantes::CMPBYID);
-        usort($d['provincias'], Constantes::CMPBYID);
+        usort($d['provincias'], Constantes::CMPBYNOMBRE);
 
         $d['title'] = Constantes::REGISTRARTITLE;
 

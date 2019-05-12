@@ -60,7 +60,12 @@ class FuncionesUtiles
 
     public static function cmpById($a, $b)
     {
-        return $a[Constantes::ID] > $b[Constantes::ID];
+        return $a->getId() > $b->getId();
+    }
+
+    public static function cmpByNombre($a, $b)
+    {
+        return strcasecmp($a->getNombre(), $b->getNombre()) > 0;
     }
 }
 

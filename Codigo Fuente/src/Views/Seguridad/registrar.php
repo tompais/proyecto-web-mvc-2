@@ -150,8 +150,8 @@
             </div>
             <div class="col-md">
                 <div class="form-group">
-                  <label for="inputProvincia">Provincia</label>
-                  <select class="form-control" name="provincia" id="inputProvincia">
+                  <label for="selectProvincia">Provincia</label>
+                  <select class="form-control" name="provincia" id="selectProvincia">
                       <?php
                       foreach ($provincias as $provincia)
                           echo "<option value='" . $provincia->getId() . "'>" . $provincia->getNombre() . "</option>";

@@ -1,7 +1,13 @@
 var inputFechaNacimiento = $("#inputFechaNacimiento");
 var btnInputFechaNacimiento = $("#btnInputFechaNacimiento");
+var selectProvincia = $("#selectProvincia");
 
 inicializarDatePicker();
+inicializarPartidoSelect();
+
+function inicializarPartidoSelect() {
+    
+}
 
 btnInputFechaNacimiento.click(function () {
     inputFechaNacimiento.data("daterangepicker").toggle();
@@ -48,7 +54,6 @@ function inicializarDatePicker() {
         selectOnFocus: true
     });
 }
-
 
 //Oculta el spinner de los input number
 $(document).ready(function ($) {
