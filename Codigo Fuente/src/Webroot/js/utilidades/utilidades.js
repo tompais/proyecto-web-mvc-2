@@ -1,3 +1,9 @@
+const nombresMeses = [
+    "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre",
+    "Diciembre"
+];
+const nombresDias = ["D", "L", "M", "M", "J", "V", "S"];
+
 // llamadoAWebService: Ejecuta un Servicio Web
 // --------------------------------------------------------------------------------------------------------------------------
 // urlServicioWeb = Url del Servicio Web que serà llamado por POST (ej: )
