@@ -105,14 +105,29 @@
     <div class="hamburger_menu_content text-right">
         <ul class="menu_top_nav">
             <li class="menu_item has-children">
-                <a href="#">
-                    Mi Cuenta
-                    <i class="fa fa-angle-down"></i>
-                </a>
-                <ul class="menu_selection">
-                    <li><a href="../../Views/Seguridad/login.php"><i class="fa fa-sign-in mr-1" aria-hidden="true"></i>Iniciar Sesion</a></li>
-                    <li><a href="../../Views/Seguridad/registrar.php"><i class="fa fa-user-plus mr-1" aria-hidden="true"></i>Registrarse</a></li>
-                </ul>
+                <?php
+
+                if (!$sessionManejada){
+                    echo "<a href='#'>
+                             Mi Cuenta <i class='ml-1 fa fa-angle-down'></i>
+                          </a>
+                          <ul class='menu_selection'>
+                              <li><a href='" . getBaseAddress().'Seguridad/login' . "'><i class='fas fa-sign-in-alt mr-1'></i>Iniciar Sesion</a></li>
+                              <li><a href='" . getBaseAddress().'Seguridad/registrar' . "'><i class='fas fa-registered mr-1'></i>Registrarse</a></li>
+                          </ul>";
+                }
+                else{
+                    echo"
+                         <a href='#'>
+                            <i class='fas fa-user mr-1'></i> ". $sessionManejada->getUserName() . "<i class='ml-1 fa fa-angle-down'></i>
+                         </a>
+                         <ul class='menu_selection'>
+                            <li><a href='#'><i class='far fa-id-badge mr-1'></i></i>Mi Perfil</a></li>
+                            <li><a href='#exampleModal' data-toggle='modal' data-target='#exampleModal'><i class='fas fa-sign-in-alt mr-1'></i>Cerrar Sesion</a></li>
+                         </ul>";
+                }
+
+                ?>
             </li>
             <li class="menu_item"><a href="#">Inicio</a></li>
             <li class="menu_item"><a href="#">Categorias</a></li>
