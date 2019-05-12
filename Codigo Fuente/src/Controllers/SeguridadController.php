@@ -76,6 +76,12 @@ class SeguridadController extends Controller
 
     }
 
+    function cerrarSession()
+    {
+        session_destroy();
+        header("location: " . getBaseAddress() . "Home/inicio");
+    }
+
 }
 
 ?>

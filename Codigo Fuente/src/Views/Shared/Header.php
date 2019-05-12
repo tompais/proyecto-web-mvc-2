@@ -37,7 +37,7 @@
                                         </a>
                                         <ul class='account_selection'>
                                             <li><a href='#'><i class='far fa-id-badge mr-1'></i></i>Mi Perfil</a></li>
-                                            <li><a href='#'><i class='fas fa-sign-in-alt mr-1'></i>Cerrar Sesion</a></li>
+                                            <li><a href='#exampleModal' data-toggle='modal' data-target='#exampleModal'><i class='fas fa-sign-in-alt mr-1'></i>Cerrar Sesion</a></li>
                                         </ul>
                                     ";
                                 }
@@ -51,8 +51,6 @@
             </div>
         </div>
     </div>
-
-
 
     <!-- Barra de navegacion -->
 

@@ -1,6 +1,27 @@
 <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/home/Inicio.css" ?>">
 <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/home/responsive.css" ?>">
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">¿Estas Seguro que desea Cerrar Sesion?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <form action="<?php echo getBaseAddress() . "Seguridad/cerrarSession" ?>" method="post">
+                    <button type="submit" class="btn btn-primary">Cerrar Sesion</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
     <!-- Slider -->
 
     <div class="main_slider" style="background-image:url('<?php echo getBaseAddress() . "Webroot/img/home/bannerAlt.jpg" ?>')">

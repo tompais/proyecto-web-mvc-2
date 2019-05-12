@@ -1,7 +1,7 @@
 <!-- Footer -->
 
 <footer class="footer">
-    <div class="container">
+    <div class="container position-relative">
         <div class="row">
             <div class="col-lg-6">
                 <div class="footer_nav_container d-flex flex-sm-row flex-column align-items-center justify-content-lg-start justify-content-center text-center">
