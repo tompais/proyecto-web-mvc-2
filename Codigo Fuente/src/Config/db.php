@@ -100,7 +100,7 @@ class Database
 
      * @param $sql
 
-     * @return array asociativo o bool
+     * @return mixed
 
      */
 

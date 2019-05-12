@@ -1,305 +1,285 @@
 <?php
-    class Model
+
+class Model
+{
+    protected $db; //objeto de conexión a la bd
+
+    protected $table; //nombre de tabla
+
+    protected $fields = array();  //lista de campos
+
+    public function __construct()
     {
-        protected $db; //objeto de conexión a la bd
 
-        protected $table; //nombre de tabla
+        require_once ROOT . 'Config/config.php';
 
-        protected $fields = array();  //lista de campos
+        $dbconfig['host'] = $host;
 
-        public function __construct(){
+        $dbconfig['user'] = $user;
 
-            require_once ROOT . 'Config/config.php';
+        $dbconfig['password'] = $password;
 
-            $dbconfig['host'] = $host;
+        $dbconfig['dbname'] = $dbname;
 
-            $dbconfig['user'] = $user;
+        $dbconfig['port'] = $port;
 
-            $dbconfig['password'] = $password;
+        $this->db = new Database($dbconfig);
 
-            $dbconfig['dbname'] = $dbname;
+        $this->table = get_called_class();
 
-            $dbconfig['port'] = $port;
+        $this->getFields();
 
-            $this->db = new Database($dbconfig);
+    }
 
-            $this->table = get_called_class();
+    /**
+     * Obtiene una lista de los campos de una tabla
+     */
+    private function getFields()
+    {
 
-            $this->getFields();
+        $sql = "DESC " . $this->table;
 
-        }
+        $result = $this->db->getAll($sql);
 
-        /**
+        foreach ($result as $v) {
 
-         * Obtiene una lista de los campos de una tabla
+            $this->fields[] = $v['Field'];
 
-         */
-        private function getFields(){
+            if (!strcasecmp($v['Key'], 'PRI') && !strcasecmp($v['Field'], 'Id')) {
 
-            $sql = "DESC ". $this->table;
+                // Si hay una PK, la guardo en $pk
 
-            $result = $this->db->getAll($sql);
-
-            foreach ($result as $v) {
-
-                $this->fields[] = $v['Field'];
-
-                if ($v['Key'] == 'PRI') {
-
-                    // Si hay una PK, la guardo en $pk
-
-                    $pk = $v['Field'];
-
-                }
-
-            }
-
-            //Si hay una PK, la agrego dentro de la lista de campos
-
-            if (isset($pk))
-                $this->fields['pk'] = $pk;
-        }
-
-        /**
-
-         * Insertar filas
-
-         * @access public
-
-         * @param $list array asociativo
-
-         * @return mixed Si sale bien, se retorna el id asociado a la inserción. Sino, false
-
-         */
-        public function insert($list){
-
-            $field_list = '';  //Lista de campos string
-
-            $value_list = '';  //Lista de valores string
-
-            foreach ($list as $k => $v) {
-                if (in_array($k, $this->fields)) {
-                    $field_list .= "`".$k."`" . ',';
-                    $value_list .= "'".$v."'" . ',';
-                }
-            }
-
-            // Recorto la coma en la derecha
-
-            $field_list = rtrim($field_list,',');
-
-            $value_list = rtrim($value_list,',');
-
-            // Construyo sql statement
-
-            $sql = "INSERT INTO `{$this->table}` ({$field_list}) VALUES ($value_list)";
-
-            if ($this->db->query($sql)) {
-
-                // La inserción resultó, entonces retorno el id de la última fila insertada.
-                // Insert succeed, return the last record’s id
-
-                return $this->db->getInsertId();
-
-                //Retorna true;
-
-            } else {
-
-                // Si falló, entonces FALSE.
-
-                return false;
-
-            }
-        }
-
-        /**
-
-         * Actualizar filas
-
-         * @access public
-
-         * @param $list array asociativo que necesita ser actualizado
-
-         * @return mixed Si sale bien, retorno cant de filas afectadas. Sino, false
-
-         */
-        public function update($list){
-
-            $uplist = ''; //Campos a actualizar
-
-            $where = 0;   //Condición de actualización. El default es 0.
-
-            foreach ($list as $k => $v) {
-
-                if (in_array($k, $this->fields)) {
-
-                    if ($k == $this->fields['pk']) {
-
-                        // Si es PK, construyo condición WHERE.
-
-                        $where = "`$k`=$v";
-
-                    } else {
-
-                        // De lo contrario, construyo lista de actualización
-
-                        $uplist .= "`$k`='$v'".",";
-
-                    }
-
-                }
-
-            }
-
-            // Recorto coma en la derecha de la lista de actualización
-
-            $uplist = rtrim($uplist,',');
-
-            // Construyo statement
-
-            $sql = "UPDATE `{$this->table}` SET {$uplist} WHERE {$where}";
-
-
-
-            if ($this->db->query($sql)) {
-
-                // Si salió bien, retorno la cantidad de filas afectadas
-
-                if ($rows = $this->db->getAffectedRows()) {
-
-                    // Tiene cantidad de filas afectadas
-
-                    return $rows;
-
-                } else {
-
-                    // No tiene filas afectadas
-
-                    return false;
-
-                }
-
-            } else {
-
-                // Si falla, FALSE
-
-                return false;
-
-            }
-        }
-
-        /**
-
-         * Borrar filas
-
-         * @access public
-
-         * @param $pk mixed puede ser un int o un array
-
-         * @return mixed Si sale bien, devuelve la cantidad de filas eliminadas. Sino, FALSE.
-
-         */
-        public function delete($pk){
-
-            $where = 0; //Condición string
-
-            //Chequeo is $pk es un solo valor o un array de valores, y construyo la condición where acorde a ello.
-
-            if (is_array($pk)) {
-
-                // array
-
-                $where = "`{$this->fields['pk']}` in (".implode(',', $pk).")";
-
-            } else {
-
-                // solo un valor
-
-                $where = "`{$this->fields['pk']}`=$pk";
-
-            }
-
-            // Construyo statement
-
-            $sql = "DELETE FROM `{$this->table}` WHERE $where";
-
-            if ($this->db->query($sql)) {
-
-                // Si sale bien, retorno la cantidad de filas afectadas
-
-                if ($rows = $this->db->getAffectedRows()) {
-
-                    // Tiene cantidad de filas afectadas
-
-                    return $rows;
-
-                } else {
-
-                    // No tiene cantidad de filas afectadas
-
-                    return false;
-
-                }
-
-            } else {
-
-                // Si falló, retorno false.
-
-                return false;
+                $pk = $v['Field'];
 
             }
 
         }
 
-        /**
+        //Si hay una PK, la agrego dentro de la lista de campos
 
-         * Obtener info por PK
+        if (isset($pk))
+            $this->fields['pk'] = $pk;
+    }
 
-         * @param $pk int Primary Key
+    /**
+     * Insertar filas
+     * @access public
+     * @param $list array asociativo
+     * @return mixed Si sale bien, se retorna el id asociado a la inserción. Sino, false
+     */
+    public function insert($list)
+    {
 
-         * @return array de una sola fila
+        $field_list = '';  //Lista de campos string
 
-         */
-        public function selectByPk($pk){
+        $value_list = '';  //Lista de valores string
 
-            $sql = "select * from `{$this->table}` where `{$this->fields['pk']}`=$pk";
-
-            return $this->db->getRow($sql);
-
+        foreach ($list as $k => $v) {
+            if (in_array($k, $this->fields)) {
+                $field_list .= "`" . $k . "`" . ',';
+                $value_list .= "'" . $v . "'" . ',';
+            }
         }
 
-        /**
+        // Recorto la coma en la derecha
 
-         * Obtiene la cantidad de todas las filas
+        $field_list = rtrim($field_list, ',');
 
-         */
-        public function total(){
+        $value_list = rtrim($value_list, ',');
 
-            $sql = "select count(*) from {$this->table}";
+        // Construyo sql statement
 
-            return $this->db->getOne($sql);
+        $sql = "INSERT INTO `{$this->table}` ({$field_list}) VALUES ($value_list)";
 
-        }
+        if ($this->db->query($sql)) {
 
-        /**
+            // La inserción resultó, entonces retorno el id de la última fila insertada.
 
-         * Obtiene información con paginado
+            return $this->db->getInsertId();
 
-         * @param $offset int offset
+            //Retorna true;
 
-         * @param $limit int número de filas en cada página
+        } else {
 
-         * @param $where string condición WHERE. Default es vacío
-         *
-         * @return array
+            // Si falló, entonces FALSE.
 
-         */
-        public function pageRows($offset, $limit,$where = ''){
-            if (empty($where))
-                $sql = "select * from {$this->table} limit $offset, $limit";
-            else
-                $sql = "select * from {$this->table}  where $where limit $offset, $limit";
-            return $this->db->getAll($sql);
+            return false;
+
         }
     }
+
+    /**
+     * Actualizar filas
+     * @access public
+     * @param $list array asociativo que necesita ser actualizado
+     * @return mixed Si sale bien, retorno cant de filas afectadas. Sino, false
+     */
+    public function update($list)
+    {
+
+        $uplist = ''; //Campos a actualizar
+
+        $where = 0;   //Condición de actualización. El default es 0.
+
+        foreach ($list as $k => $v) {
+
+            if (in_array($k, $this->fields)) {
+
+                if (!strcasecmp($k, $this->fields['pk'])) {
+
+                    // Si es PK, construyo condición WHERE.
+
+                    $where = "`$k`=$v";
+
+                } else {
+
+                    // De lo contrario, construyo lista de actualización
+
+                    $uplist .= "`$k`='$v'" . ",";
+
+                }
+
+            }
+
+        }
+
+        // Recorto coma en la derecha de la lista de actualización
+
+        $uplist = rtrim($uplist, ',');
+
+        // Construyo statement
+
+        $sql = "UPDATE `{$this->table}` SET {$uplist} WHERE {$where}";
+
+
+        if ($this->db->query($sql)) {
+
+            // Si salió bien, retorno la cantidad de filas afectadas
+
+            if ($rows = $this->db->getAffectedRows()) {
+
+                // Tiene cantidad de filas afectadas
+
+                return $rows;
+
+            } else {
+
+                // No tiene filas afectadas
+
+                return false;
+
+            }
+
+        } else {
+
+            // Si falla, FALSE
+
+            return false;
+
+        }
+    }
+
+    /**
+     * Borrar filas
+     * @access public
+     * @param $pk mixed puede ser un int o un array
+     * @return mixed Si sale bien, devuelve la cantidad de filas eliminadas. Sino, FALSE.
+     */
+    public function delete($pk)
+    {
+
+        $where = 0; //Condición string
+
+        //Chequeo is $pk es un solo valor o un array de valores, y construyo la condición where acorde a ello.
+
+        if (is_array($pk)) {
+
+            // array
+
+            $where = "`{$this->fields['pk']}` in (" . implode(',', $pk) . ")";
+
+        } else {
+
+            // solo un valor
+
+            $where = "`{$this->fields['pk']}`=$pk";
+
+        }
+
+        // Construyo statement
+
+        $sql = "DELETE FROM `{$this->table}` WHERE $where";
+
+        if ($this->db->query($sql)) {
+
+            // Si sale bien, retorno la cantidad de filas afectadas
+
+            if ($rows = $this->db->getAffectedRows()) {
+
+                // Tiene cantidad de filas afectadas
+
+                return $rows;
+
+            } else {
+
+                // No tiene cantidad de filas afectadas
+
+                return false;
+
+            }
+
+        } else {
+
+            // Si falló, retorno false.
+
+            return false;
+
+        }
+
+    }
+
+    /**
+     * Obtener info por PK
+     * @param $pk int Primary Key
+     * @return array de una sola fila
+     */
+    public function selectByPk($pk)
+    {
+
+        $sql = "select * from `{$this->table}` where `{$this->fields['pk']}`=$pk";
+
+        return $this->db->getRow($sql);
+
+    }
+
+    /**
+     * Obtiene la cantidad de todas las filas
+     */
+    public function total()
+    {
+
+        $sql = "select count(*) from {$this->table}";
+
+        return $this->db->getOne($sql);
+
+    }
+
+    /**
+     * Obtiene información con paginado
+     * @param $offset int offset
+     * @param $limit int número de filas en cada página
+     * @param $where string condición WHERE. Default es vacío
+     *
+     * @return array
+     */
+    public function pageRows($offset, $limit, $where = '')
+    {
+        if (empty($where))
+            $sql = "select * from {$this->table} limit $offset, $limit";
+        else
+            $sql = "select * from {$this->table}  where $where limit $offset, $limit";
+        return $this->db->getAll($sql);
+    }
+}
+
 ?>
