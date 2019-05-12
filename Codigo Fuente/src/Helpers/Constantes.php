@@ -8,5 +8,9 @@
 
 abstract class Constantes
 {
+    //Vistas
+    const HOMEVIEW = "home";
 
+    //Títulos
+    const MAINTITLE = "ShopLine";
 }
