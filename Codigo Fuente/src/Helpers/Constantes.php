@@ -10,9 +10,11 @@ abstract class Constantes
 {
     //Vistas
     const HOMEVIEW = "home";
+    const REGISTRARVIEW = "registrar";
 
     //Títulos
     const MAINTITLE = "ShopLine";
+    const REGISTRARTITLE = "Registrar";
 
     //Regex
     const REGEXLETRASYNUMEROS = "/^[0-9a-zA-Z]+$/";
