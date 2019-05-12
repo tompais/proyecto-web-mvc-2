@@ -12,7 +12,8 @@ class Dispatcher
 
         $controller = $this->loadController();
 
-        call_user_func_array([$controller, $this->request->action], $this->request->params);
+        if(call_user_func_array([$controller, $this->request->action], array($this->request->params)) === false)
+            $this->throwError404();
     }
 
     public function loadController()
@@ -22,6 +23,13 @@ class Dispatcher
         require($file);
         $controller = new $name();
         return $controller;
+    }
+
+    public function throwError404()
+    {
+        http_response_code(404);
+        include ROOT . "Views/NoCompletado/noCompletado.php";
+        die();
     }
 
 }
