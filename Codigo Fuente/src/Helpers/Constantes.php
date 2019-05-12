@@ -27,6 +27,7 @@ abstract class Constantes
 
     //Comparadores
     const CMPBYID = "FuncionesUtiles::cmpById";
+    const CMPBYNOMBRE = "FuncionesUtiles::cmpByNombre";
 
     //Propiedades
     const ID = "Id";
