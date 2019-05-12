@@ -44,18 +44,10 @@
 
     <main role="main">
 
-        <div class="starter-template super_container">
-
-            <?php
-            require_once ROOT . "Views/Shared/header.php";
-            ?>
+        <div class="starter-template">
 
             <?php
             echo $content_for_layout;
-            ?>
-
-            <?php
-            require_once ROOT . "Views/Shared/footer.php";
             ?>
 
         </div>

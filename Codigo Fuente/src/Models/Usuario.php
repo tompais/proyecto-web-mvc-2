@@ -321,6 +321,10 @@ class Usuario extends Model
             && (Sexos::MASCULINO == $this->sexoId || Sexos::FEMENINO == $this->sexoId || Sexos::OTRO == $this->sexoId);
     }
 
+    public function existeUsuarioDB (){
+        return $this->pageRows(0, 1, "(Username LIKE '$this->username' OR Email LIKE '$this->email') AND UPassword LIKE '$this->upassword'");
+    }
+
 }
 
 
