@@ -35,8 +35,10 @@ class SeguridadController extends Controller
     function validarLogin ($usuario) {
         $this->layout = "layoutSeguridad";
         require_once ROOT . "Models/Usuario.php";
+        require_once ROOT . "Models/Session.php";
 
         $user = new Usuario();
+        $session = new Session();
 
         if (FuncionesUtiles::esPalabraConNumeros($usuario["emailOrNick"])) {
             $user->setUsername($usuario["emailOrNick"]);
@@ -56,7 +58,13 @@ class SeguridadController extends Controller
             throwError404();
         }
 
-        if ($user->existeUsuarioDB()){
+        $arrayUsurio = $user->existeUsuarioDB();
+
+
+       if ($arrayUsurio){
+            $session->setId($arrayUsurio[0]["Id"]);
+            $session->setUserName($arrayUsurio[0]["Username"]);
+            $_SESSION["session"] = serialize($session);
             header("location: " . getBaseAddress() . "Home/inicio");
         }
         else{
