@@ -22,4 +22,10 @@ abstract class Constantes
     const REGEXSOLOLETRAS = "/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/";
     const REGEXLETRASYESPACIO = "/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/";
     const REGEXSOLONUMEROS = "/^[0-9]+$/";
+
+    //Comparadores
+    const CMPBYID = "FuncionesUtiles::cmpById";
+
+    //Propiedades
+    const ID = "Id";
 }
