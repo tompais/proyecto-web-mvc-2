@@ -8,44 +8,59 @@
 
 class FuncionesUtiles
 {
-    public static function esCadenaNoNulaOVacia($string) {
+    public static function esCadenaNoNulaOVacia($string)
+    {
         return is_string($string) && $string && strlen($string) && strcmp($string, "");
     }
 
-    public static function esOracion($string) {
+    public static function esOracion($string)
+    {
         return self::esCadenaNoNulaOVacia($string) && preg_match(Constantes::REGEXLETRASYESPACIO, $string);
     }
 
-    public static function esPalabra($string) {
+    public static function esPalabra($string)
+    {
         return self::esCadenaNoNulaOVacia($string) && preg_match(Constantes::REGEXSOLOLETRAS, $string);
     }
 
-    public static function esPalabraConNumeros($string) {
+    public static function esPalabraConNumeros($string)
+    {
         return self::esCadenaNoNulaOVacia($string) && preg_match(Constantes::REGEXLETRASYNUMEROS, $string);
     }
 
-    public static function validarPassword($pass) {
+    public static function validarPassword($pass)
+    {
         return self::esPalabraConNumeros($pass) && ($cantLetras = strlen($pass)) <= 15 && $cantLetras >= 6;
     }
 
-    public static function confirmarPassword($pass, $repass) {
+    public static function confirmarPassword($pass, $repass)
+    {
         return self::validarPassword($pass) && self::validarPassword($repass) && $pass === $repass;
     }
 
-    public static function validarEmail($email) {
+    public static function validarEmail($email)
+    {
         return self::esCadenaNoNulaOVacia($email) && filter_var($email, FILTER_VALIDATE_EMAIL);
     }
 
-    public static function esEntero($num) {
+    public static function esEntero($num)
+    {
         return is_int($num) || is_long($num) || is_integer($num) || is_numeric($num);
     }
 
-    public static function esDecimal($num) {
+    public static function esDecimal($num)
+    {
         return is_float($num) || is_double($num);
     }
 
-    public static function esCadenaNumerica($string) {
+    public static function esCadenaNumerica($string)
+    {
         return ctype_digit($string);
+    }
+
+    public static function cmpById($a, $b)
+    {
+        return $a[Constantes::ID] > $b[Constantes::ID];
     }
 }
 

@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/seguridad/registrar.css" ?>">
+
 <div class="container-fluid">
     <form action="registrar.php" method="post" class="border shadow rounded mx-auto w-50 p-4 my-5">
         <h4 class="mb-4 text-center">Regístrese</h4>
@@ -92,7 +93,7 @@
             </div>
             <div class="col-md">
                 <div class="form-group">
-                    <label for="inputRePassword">Confirme su Contraseña</label>
+                    <label for="inputRePassword">Confirmar Contraseña</label>
                     <div class="input-group">
                         <input type="password" name="inputRePassword" id="inputRePassword" class="form-control pwd"
                                placeholder="Ej: juan1234" aria-describedby="helpIdInputRePassword">
@@ -117,6 +118,12 @@
                 <div class="form-group">
                     <label for="selectSexo">Sexo</label>
                     <select class="form-control" name="selectSexo" id="selectSexo">
+                        <?php
+                        foreach ($sexos as $sexo)
+                        {
+                            echo "<option value='" . $sexo['Id'] . "'>" . $sexo['Nombre'] . "</option>";
+                        }
+                        ?>
                     </select>
                 </div>
             </div>
@@ -144,7 +151,7 @@
                 </div>
             </div>
             <div class="col-md">
-
+                
             </div>
         </div>
 
