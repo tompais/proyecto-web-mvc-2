@@ -8,6 +8,14 @@ class SeguridadController extends Controller
         $this->set($d);
         $this->render(Constantes::REGISTRARVIEW);
     }
+
+    function login()
+    {
+        $d['title'] = Constantes::LOGINTITLE;
+        $this->set($d);
+        $this->render(Constantes::LOGINVIEW);
+    }
+
 }
 
 ?>
