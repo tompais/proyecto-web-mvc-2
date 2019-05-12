@@ -17,14 +17,33 @@
                             <!-- Barra con Inicico de Sesion -->
 
                             <li class="account w-25">
-                                <a href="#">
-                                    Mi Cuenta <i class="ml-1 fa fa-angle-down"></i>
-                                </a>
-                                <ul class="account_selection">
-                                    <li><a href="<?php echo getBaseAddress() . "Seguridad/login"?>"><i class="fas fa-sign-in-alt mr-1"></i>Iniciar Sesion</a></li>
-                                    <li><a href="<?php echo getBaseAddress() . "Seguridad/registrar"?>"><i class="fas fa-sign-out-alt mr-1"></i>Registrarse</a></li>
-                                </ul>
-                                src="<?php echo getBaseAddress() . "Webroot/img/home/product_1.png" ?>"
+                                <?php
+
+                                $sessionManejada = isset($_SESSION["session"]) ? unserialize($_SESSION["session"]) : null;
+
+                                if (!$sessionManejada){
+                                    echo "<a href='#'>
+                                            Mi Cuenta <i class='ml-1 fa fa-angle-down'></i>
+                                        </a>
+                                        <ul class='account_selection'>
+                                            <li><a href='" . getBaseAddress().'Seguridad/login' . "'><i class='fas fa-sign-in-alt mr-1'></i>Iniciar Sesion</a></li>
+                                            <li><a href='" . getBaseAddress().'Seguridad/registrar' . "'><i class='fas fa-registered mr-1'></i>Registrarse</a></li>
+                                        </ul>";
+                                }
+                                else{
+                                    echo"
+                                        <a href='#'>
+                                           <i class='fas fa-user mr-1'></i> ". $sessionManejada->getUserName() . "<i class='ml-1 fa fa-angle-down'></i>
+                                        </a>
+                                        <ul class='account_selection'>
+                                            <li><a href='#'><i class='far fa-id-badge mr-1'></i></i>Mi Perfil</a></li>
+                                            <li><a href='#'><i class='fas fa-sign-in-alt mr-1'></i>Cerrar Sesion</a></li>
+                                        </ul>
+                                    ";
+                                }
+
+                                ?>
+
                             </li>
                         </ul>
                     </div>
