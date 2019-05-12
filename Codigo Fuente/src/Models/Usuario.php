@@ -1,6 +1,7 @@
 <?php
 
-class Usuario extends  Model {
+class Usuario extends Model
+{
 
     private $id;
     private $nombre;
@@ -275,40 +276,47 @@ class Usuario extends  Model {
         $this->fechaBaja = $fechaBaja;
     }
 
-    public function validarNombre() {
+    public function validarNombre()
+    {
         return FuncionesUtiles::esOracion($this->nombre)
             && ($cantLetras = strlen($this->nombre)) <= 15
             && $cantLetras >= 3;
     }
 
-    public function validarApellido() {
+    public function validarApellido()
+    {
         return FuncionesUtiles::esOracion($this->apellido)
             && ($cantLetras = strlen($this->apellido)) <= 15
             && $cantLetras >= 3;
     }
 
-    public function validarUsername() {
+    public function validarUsername()
+    {
         return FuncionesUtiles::esPalabraConNumeros($this->username)
             && ($cantLetras = strlen($this->username)) <= 10
             && $cantLetras >= 3;
     }
 
-    public function validarEmail() {
+    public function validarEmail()
+    {
         return FuncionesUtiles::validarEmail($this->email);
     }
 
-    public function validarTelefono() {
+    public function validarTelefono()
+    {
         return (FuncionesUtiles::esEntero($this->telefono)
-            || FuncionesUtiles::esCadenaNumerica($this->telefono))
+                || FuncionesUtiles::esCadenaNumerica($this->telefono))
             && strlen($this->telefono) === 10;
     }
 
-    public function validarRol() {
+    public function validarRol()
+    {
         return (FuncionesUtiles::esEntero($this->rolId) || FuncionesUtiles::esCadenaNumerica($this->rolId))
             && (Roles::ADMINISTRADOR === $this->rolId || Roles::MODERADOR === $this->rolId || Roles::USUARIO === $this->rolId);
     }
 
-    public function validarSexo() {
+    public function validarSexo()
+    {
         return (FuncionesUtiles::esEntero($this->sexoId) || FuncionesUtiles::esCadenaNumerica($this->sexoId))
             && (Sexos::MASCULINO == $this->sexoId || Sexos::FEMENINO == $this->sexoId || Sexos::OTRO == $this->sexoId);
     }
