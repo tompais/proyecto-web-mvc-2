@@ -168,3 +168,4 @@
 </div>
 
 <script src="<?php echo getBaseAddress() . "Webroot/js/seguridad/registrar.js" ?>"></script>
+<script src="<?php echo getBaseAddress() . "Webroot/js/seguridad/validacionRegistrar.js" ?>"></script>
