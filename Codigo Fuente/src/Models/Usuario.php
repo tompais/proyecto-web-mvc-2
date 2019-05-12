@@ -9,12 +9,63 @@ class Usuario extends  Model {
     private $upassword;
     private $email;
     private $telefono;
-    private $domicilioId;
+    private $direccionId;
+    private $direccion;
     private $sexoId;
+    private $sexo;
     private $rolId;
+    private $rol;
     private $fechaNacimiento;
     private $fechaBaneo;
     private $fechaBaja;
+
+    /**
+     * @return mixed
+     */
+    public function getDireccion()
+    {
+        return $this->direccion;
+    }
+
+    /**
+     * @param mixed $direccion
+     */
+    public function setDireccion($direccion)
+    {
+        $this->direccion = $direccion;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSexo()
+    {
+        return $this->sexo;
+    }
+
+    /**
+     * @param mixed $sexo
+     */
+    public function setSexo($sexo)
+    {
+        $this->sexo = $sexo;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRol()
+    {
+        return $this->rol;
+    }
+
+    /**
+     * @param mixed $rol
+     */
+    public function setRol($rol)
+    {
+        $this->rol = $rol;
+    }
 
     /**
      * @return mixed
@@ -147,17 +198,17 @@ class Usuario extends  Model {
     /**
      * @return mixed
      */
-    public function getDomicilioId()
+    public function getDireccionId()
     {
-        return $this->domicilioId;
+        return $this->direccionId;
     }
 
     /**
-     * @param mixed $domicilioId
+     * @param mixed $direccionId
      */
-    public function setDomicilioId($domicilioId)
+    public function setDireccionId($direccionId)
     {
-        $this->domicilioId = $domicilioId;
+        $this->direccionId = $direccionId;
     }
 
     /**
