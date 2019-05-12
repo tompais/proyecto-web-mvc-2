@@ -10,6 +10,8 @@ class HomeController extends Controller
 {
     function home()
     {
+        $d["title"] = Constantes::MAINTITLE;
+        $this->set($d);
         $this->render(Constantes::HOMEVIEW);
     }
 }
