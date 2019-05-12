@@ -25,6 +25,31 @@ class SeguridadController extends Controller
         $this->render(Constantes::LOGINVIEW);
     }
 
+    function validarLogin ($usuario) {
+
+        require_once ROOT . "Models/Usuario.php";
+
+        $user = new Usuario();
+
+        if (FuncionesUtiles::esPalabraConNumeros($usuario["emailOrNick"])) {
+            $user->setUsername($usuario["emailOrNick"]);
+            $user->setEmail(null);
+        }
+        else if (FuncionesUtiles::validarEmail($usuario["emailOrNick"])) {
+            $user->setEmail($usuario["emailOrNick"]);
+            $user->setUsername(null);
+        }
+
+        if (FuncionesUtiles::esPalabraConNumeros($usuario["password"])) {
+            $user->setUpassword(strtoupper(sha1($usuario["password"])));
+        } else {
+            header("location: ../NoCompletado/noCompletado.php");
+            exit();
+        }
+
+
+    }
+
 }
 
 ?>
