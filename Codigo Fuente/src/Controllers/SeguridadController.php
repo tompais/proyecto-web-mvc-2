@@ -7,6 +7,8 @@ class SeguridadController extends Controller
         require_once ROOT . "Models/Sexo.php";
         require_once ROOT . "Models/Provincia.php";
 
+        $this->layout = "layoutSeguridad";
+        
         $sexo = new Sexo();
         $provincia = new Provincia();
 
