@@ -42,4 +42,21 @@ class Sexo extends Model
     {
         $this->nombre = $nombre;
     }
+
+    public function getAllSexos()
+    {
+        $sexos = array();
+
+        $rows = $this->pageRows(0, PHP_INT_MAX);
+
+        foreach($rows as $row)
+        {
+            $sexo = new Sexo();
+            $sexo->setId($row['Id']);
+            $sexo->setNombre($row['Nombre']);
+            $sexos[] = $sexo;
+        }
+
+        return $sexos;
+    }
 }
