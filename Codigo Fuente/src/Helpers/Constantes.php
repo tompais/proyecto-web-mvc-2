@@ -8,7 +8,5 @@
 
 abstract class Constantes
 {
-    //Vistas
-    const INDEXVIEW = "index";
-    const USUARIOVIEW = "usuario";
+
 }

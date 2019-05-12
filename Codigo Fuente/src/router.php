@@ -20,6 +20,8 @@ class Router
             $request->controller = $explode_url[0];
             $request->action = $explode_url[1];
             $request->params = array_slice($explode_url, 2);
+            if($_POST)
+                $request->params = array_merge($request->params, $_POST);
         }
 
     }
