@@ -12,7 +12,7 @@ class Router
         if (!strcmp($explode_url[0], ""))
         {
             $request->controller = "Home";
-            $request->action = "home";
+            $request->action = "inicio";
             $request->params = [];
         }
         else

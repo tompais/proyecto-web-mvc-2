@@ -9,7 +9,7 @@
 abstract class Constantes
 {
     //Vistas
-    const HOMEVIEW = "home";
+    const INICIOVIEW = "inicio";
     const REGISTRARVIEW = "registrar";
     const LOGINVIEW =  "login";
 
