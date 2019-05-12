@@ -21,6 +21,11 @@
     <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/lib/OwlCarousel2-2.2.1/owl.theme.default.css" ?>">
     <link rel="shortcut icon" href="<?php echo getBaseAddress() . "Webroot/img/favicon.ico" ?>" type="image/x-icon">
     <link rel="icon" href="<?php echo getBaseAddress() . "Webroot/img/favicon.ico" ?>" type="image/x-icon">
+    <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/seguridad/login.css" ?>">
+    <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/home/Inicio.css" ?>">
+    <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/home/responsive.css" ?>">
+
+
 </head>
 
 <body>
@@ -48,6 +53,10 @@
 
             <?php
             echo $content_for_layout;
+            ?>
+
+            <?php
+            require_once ROOT . "Views/Shared/footer.php";
             ?>
 
         </div>

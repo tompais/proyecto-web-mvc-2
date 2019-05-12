@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/seguridad/registrar.css" ?>">
 
-<div class="container-fluid">
-    <form action="registrar.php" method="post" class="border shadow rounded mx-auto w-50 p-4 my-5">
+<div class="container-fluid mt-4">
+    <form action="registrar.php" method="post" class="border shadow rounded mx-auto w-50 p-4 my-5 bg-white ">
         <h4 class="mb-4 text-center">Regístrese</h4>
 
         <div class="form-row">
