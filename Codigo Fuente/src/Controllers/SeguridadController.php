@@ -5,12 +5,18 @@ class SeguridadController extends Controller
     function registrar()
     {
         require_once ROOT . "Models/Sexo.php";
+        require_once ROOT . "Models/Provincia.php";
 
+        $this->layout = "layoutSeguridad";
+        
         $sexo = new Sexo();
+        $provincia = new Provincia();
 
-        $d['sexos'] = $sexo->pageRows(0, PHP_INT_MAX);
+        $d['sexos'] = $sexo->getAllSexos();
+        $d['provincias'] = $provincia->getAllProvincias();
 
         usort($d['sexos'], Constantes::CMPBYID);
+        usort($d['provincias'], Constantes::CMPBYID);
 
         $d['title'] = Constantes::REGISTRARTITLE;
 

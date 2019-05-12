@@ -8,7 +8,7 @@
             <div class="col-md">
                 <div class="form-group">
                     <label for="inputNombre">Nombre</label>
-                    <input type="text" name="inputNombre" id="inputNombre" class="form-control" placeholder="Ej: Pepe">
+                    <input type="text" name="inputNombre" id="nombre" class="form-control" placeholder="Ej: Pepe">
                     <div id="errorNombre" class="error"><i class="fas fa-exclamation-triangle"></i> Ingrese su nombre
                     </div>
                     <div id="errorNombre2" class="error"><i class="fas fa-exclamation-triangle"></i> Su nombre no debe
@@ -22,7 +22,7 @@
             <div class="col-md">
                 <div class="form-group">
                     <label for="inputApellido">Apellido</label>
-                    <input type="text" name="inputApellido" id="inputApellido" class="form-control"
+                    <input type="text" name="apellido" id="inputApellido" class="form-control"
                            placeholder="Ej: González">
                     <div id="errorApellido" class="error"><i class="fas fa-exclamation-triangle"></i> Ingrese su
                         apellido
@@ -41,7 +41,7 @@
             <div class="col-md">
                 <div class="form-group">
                     <label for="inputNickname">Nickname</label>
-                    <input type="text" name="inputNickname" id="inputNickname" class="form-control"
+                    <input type="text" name="nickname" id="inputNickname" class="form-control"
                            placeholder="Ej: pgonzalez">
                     <div id="errorNickname" class="error"><i class="fas fa-exclamation-triangle"></i> Ingrese su
                         Nickname
@@ -57,7 +57,7 @@
             <div class="col-md">
                 <div class="form-group">
                     <label for="inputEmail">Email</label>
-                    <input type="email" name="inputEmail" id="inputEmail" class="form-control"
+                    <input type="email" name="email" id="inputEmail" class="form-control"
                            placeholder="ejemplo@correo.com">
                     <div id="errorEmail" class="error"><i class="fas fa-exclamation-triangle"></i> Ingrese su E-Mail
                     </div>
@@ -73,7 +73,7 @@
                 <div class="form-group">
                     <label for="inputPassword">Contraseña</label>
                     <div class="input-group">
-                        <input type="password" name="inputPassword" id="inputPassword" class="form-control pwd"
+                        <input type="password" name="password" id="inputPassword" class="form-control pwd"
                                placeholder="Ej: juan1234">
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary" type="button" onclick="showPassword(this)"><i
@@ -95,7 +95,7 @@
                 <div class="form-group">
                     <label for="inputRePassword">Confirmar Contraseña</label>
                     <div class="input-group">
-                        <input type="password" name="inputRePassword" id="inputRePassword" class="form-control pwd"
+                        <input type="password" name="rePassword" id="inputRePassword" class="form-control pwd"
                                placeholder="Ej: juan1234" aria-describedby="helpIdInputRePassword">
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary" type="button" onclick="showPassword(this)"><i
@@ -117,12 +117,10 @@
             <div class="col-md">
                 <div class="form-group">
                     <label for="selectSexo">Sexo</label>
-                    <select class="form-control" name="selectSexo" id="selectSexo">
+                    <select class="form-control" name="sexo" id="selectSexo">
                         <?php
                         foreach ($sexos as $sexo)
-                        {
-                            echo "<option value='" . $sexo['Id'] . "'>" . $sexo['Nombre'] . "</option>";
-                        }
+                            echo "<option value='" . $sexo->getId() . "'>" . $sexo->getNombre() . "</option>";
                         ?>
                     </select>
                 </div>
@@ -131,7 +129,7 @@
                 <div class="form-group">
                     <label for="inputFechaNacimiento">Fecha de Nacimiento</label>
                     <div class="input-group">
-                        <input type="text" name="inputFechaNacimiento" id="inputFechaNacimiento" class="form-control">
+                        <input type="text" name="fechaNacimiento" id="inputFechaNacimiento" class="form-control">
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary" id="btnInputFechaNacimiento" type="button"><i
                                         class="fas fa-calendar-alt"></i></button>
@@ -145,13 +143,21 @@
             <div class="col-md">
                 <div class="form-group">
                     <label for="inputTelefono">Teléfono</label>
-                    <input type="number" class="form-control" name="inputTelefono" id="inputTelefono"
+                    <input type="number" class="form-control" name="telefono" id="inputTelefono"
                            aria-describedby="helpIdInputTelefono" placeholder="111234567">
                     <small id="helpIdInputTelefono" class="form-text text-muted">Sin código de área</small>
                 </div>
             </div>
             <div class="col-md">
-                
+                <div class="form-group">
+                  <label for="inputProvincia">Provincia</label>
+                  <select class="form-control" name="provincia" id="inputProvincia">
+                      <?php
+                      foreach ($provincias as $provincia)
+                          echo "<option value='" . $provincia->getId() . "'>" . $provincia->getNombre() . "</option>";
+                      ?>
+                  </select>
+                </div>
             </div>
         </div>
 
