@@ -15,6 +15,8 @@ function getBaseAddress() {
     return substr_replace($url, "", strripos($url, "/src/") + 5);
 }
 
+session_start();
+
 $dispatch = new Dispatcher();
 $dispatch->dispatch();
 ?>
