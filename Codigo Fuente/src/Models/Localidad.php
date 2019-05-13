@@ -76,4 +76,24 @@ class Localidad extends Model
     {
         $this->nombre = $nombre;
     }
+
+    public function getLocalidadesByPartidoId($partidoId)
+    {
+        $localidades = array();
+
+        $rows = $this->pageRows(0, PHP_INT_MAX, "PartidoId = " . $partidoId);
+
+        foreach ($rows as $row) {
+            $localidad = new Localidad();
+            $localidad->db->disconnect();
+
+            $localidad->setId($row['Id']);
+            $localidad->setNombre(ucwords(strtolower($row['Nombre'])));
+            $localidad->setPartidoId($row['PartidoId']);
+
+            $localidades[] = $localidad;
+        }
+
+        return $localidades;
+    }
 }

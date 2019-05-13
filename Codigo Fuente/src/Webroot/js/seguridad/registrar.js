@@ -1,13 +1,60 @@
 var inputFechaNacimiento = $("#inputFechaNacimiento");
 var btnInputFechaNacimiento = $("#btnInputFechaNacimiento");
 var selectProvincia = $("#selectProvincia");
+var selectPartido = $("#selectPartido");
+var selectLocalidad = $("#selectLocalidad");
 
 inicializarDatePicker();
-inicializarPartidoSelect();
 
-function inicializarPartidoSelect() {
-    
+function inicializarSelectPartido(provinciaId) {
+    var obj = {};
+    obj.provinciaId = parseInt(provinciaId, 10);
+    llamadaAjax(window.pathGetPartidosByProvinciaId, JSON.stringify(obj), true, "cargarSelectPartido", "dummy");
 }
+
+function inicializarSelectLocalidad(partidoId) {
+    var obj = {};
+    obj.partidoId = parseInt(partidoId, 10);
+    llamadaAjax(window.pathGetLocalidadesByPartidoId, JSON.stringify(obj), true, "cargarSelectLocalidad", "dummy");
+}
+
+function cargarSelectLocalidad(localidades) {
+    limpiarSelect(selectLocalidad);
+    $.each(localidades, function(i, localidad) {
+        var option = $("<option>");
+        option.val(localidad.id);
+        option.text(localidad.nombre);
+        selectLocalidad.append(option);
+    });
+    selectLocalidad.prop('disabled', false);
+}
+
+function cargarSelectPartido(partidos) {
+    limpiarSelect(selectPartido);
+    $.each(partidos, function(i, partido) {
+        var option = $("<option>");
+        option.val(partido.id);
+        option.text(partido.nombre);
+        selectPartido.append(option);
+    });
+    inicializarSelectLocalidad(selectPartido.val());
+    selectPartido.prop('disabled', false);
+}
+
+selectPartido.change(function() {
+    selectLocalidad.prop('disabled', true);
+    inicializarSelectLocalidad($(this).val());
+});
+
+function limpiarSelect(select) {
+    select.find('option').remove().end();
+}
+
+selectProvincia.change(function() {
+    selectPartido.prop('disabled', true);
+    selectLocalidad.prop('disabled', true);
+    inicializarSelectPartido($(this).val());
+});
 
 btnInputFechaNacimiento.click(function () {
     inputFechaNacimiento.data("daterangepicker").toggle();

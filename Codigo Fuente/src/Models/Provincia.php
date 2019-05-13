@@ -51,6 +51,7 @@ class Provincia extends Model
 
         foreach ($rows as $row) {
             $provincia = new Provincia();
+            $provincia->db->disconnect();
             $provincia->setId($row['Id']);
             $provincia->setNombre(ucwords(strtolower($row['Nombre'])));
             $provincias[] = $provincia;

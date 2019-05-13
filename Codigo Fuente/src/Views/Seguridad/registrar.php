@@ -1,8 +1,11 @@
 <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/seguridad/registrar.css" ?>">
 
+<script>
+    var pathGetPartidosByProvinciaId = "<?php echo getBaseAddress() . "Seguridad/getPartidosByProvinciaId"; ?>";
+    var pathGetLocalidadesByPartidoId = "<?php echo getBaseAddress() . "Seguridad/getLocalidadesByPartidoId"; ?>";
+</script>
 <div class="container-fluid mt-4">
-    <form action="registrar.php" method="post" class="border shadow rounded mx-auto w-50 p-4 my-5 bg-white ">
-        <h4 class="mb-4 text-center">Regístrese</h4>
+    <form action="registrar.php" method="post" class="border shadow rounded mx-auto w-50 p-4 my-5 bg-white ">        <h4 class="mb-4 text-center">Regístrese</h4>
 
         <div class="form-row">
             <div class="col-md">
@@ -157,6 +160,31 @@
                           echo "<option value='" . $provincia->getId() . "'>" . $provincia->getNombre() . "</option>";
                       ?>
                   </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col-md">
+                <div class="form-group">
+                  <label for="selectPartido">Partido</label>
+                  <select class="form-control" name="partido" id="selectPartido">
+                      <?php
+                      foreach ($partidos as $partido)
+                          echo "<option value='" . $partido->getId() . "'>" . $partido->getNombre() . "</option>";
+                      ?>
+                  </select>
+                </div>
+            </div>
+            <div class="col-md">
+                <div class="form-group">
+                    <label for="selectLocalidad">Localidad</label>
+                    <select class="form-control" name="localidad" id="selectLocalidad">
+                        <?php
+                        foreach ($localidades as $localidad)
+                            echo "<option value='" . $localidad->getId() . "'>" . $localidad->getNombre() . "</option>";
+                        ?>
+                    </select>
                 </div>
             </div>
         </div>

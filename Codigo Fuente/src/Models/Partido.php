@@ -76,4 +76,24 @@ class Partido extends Model
     {
         $this->nombre = $nombre;
     }
+
+    public function getPartidosByProvinciaId($provinciaId)
+    {
+        $partidos = array();
+
+        $rows = $this->pageRows(0, PHP_INT_MAX, "ProvinciaId = " . $provinciaId);
+
+        foreach ($rows as $row) {
+            $partido = new Partido();
+            $partido->db->disconnect();
+
+            $partido->setId($row['Id']);
+            $partido->setNombre(ucwords(strtolower($row['Nombre'])));
+            $partido->setProvinciaId($row['ProvinciaId']);
+
+            $partidos[] = $partido;
+        }
+
+        return $partidos;
+    }
 }
