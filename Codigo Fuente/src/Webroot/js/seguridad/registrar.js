@@ -1,3 +1,10 @@
+const nombresMeses = [
+    "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre",
+    "Diciembre"
+];
+
+const nombresDias = ["D", "L", "M", "M", "J", "V", "S"];
+
 var inputFechaNacimiento = $("#inputFechaNacimiento");
 var btnInputFechaNacimiento = $("#btnInputFechaNacimiento");
 var selectProvincia = $("#selectProvincia");
@@ -9,13 +16,13 @@ inicializarDatePicker();
 function inicializarSelectPartido(provinciaId) {
     var obj = {};
     obj.provinciaId = parseInt(provinciaId, 10);
-    llamadaAjax(window.pathGetPartidosByProvinciaId, JSON.stringify(obj), true, "cargarSelectPartido", "dummy");
+    llamadaAjax(pathGetPartidosByProvinciaId, JSON.stringify(obj), true, "cargarSelectPartido", "dummy");
 }
 
 function inicializarSelectLocalidad(partidoId) {
     var obj = {};
     obj.partidoId = parseInt(partidoId, 10);
-    llamadaAjax(window.pathGetLocalidadesByPartidoId, JSON.stringify(obj), true, "cargarSelectLocalidad", "dummy");
+    llamadaAjax(pathGetLocalidadesByPartidoId, JSON.stringify(obj), true, "cargarSelectLocalidad", "dummy");
 }
 
 function cargarSelectLocalidad(localidades) {

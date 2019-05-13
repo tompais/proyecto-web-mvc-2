@@ -1,9 +1,3 @@
-const nombresMeses = [
-    "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre",
-    "Diciembre"
-];
-const nombresDias = ["D", "L", "M", "M", "J", "V", "S"];
-
 // llamadoAWebService: Ejecuta un Servicio Web
 // --------------------------------------------------------------------------------------------------------------------------
 // urlServicioWeb = Url del Servicio Web que serà llamado por POST (ej: )
@@ -20,8 +14,8 @@ const nombresDias = ["D", "L", "M", "M", "J", "V", "S"];
 // Retornno: devuelve un booleano indicando si hubo errores
 // --------------------------------------------------------------------------------------------------------------------------
 function llamadaAjax(urlServicioWeb, datosServicioWeb, esAsincronico,
-                     funcionEscenarioExitoso, funcionEscenarioErroneo, parametrosExtra,
-                     noMostrarLoading, mensajeLoading) {
+    funcionEscenarioExitoso, funcionEscenarioErroneo, parametrosExtra,
+    noMostrarLoading, mensajeLoading) {
 
     var respuesta;
 
@@ -31,7 +25,9 @@ function llamadaAjax(urlServicioWeb, datosServicioWeb, esAsincronico,
     $.ajax({
         type: "POST",
         url: urlServicioWeb,
-        data: {data: datosServicioWeb},
+        data: {
+            data: datosServicioWeb
+        },
         async: esAsincronico,
         dataType: "json",
         traditional: true,
@@ -44,9 +40,7 @@ function llamadaAjax(urlServicioWeb, datosServicioWeb, esAsincronico,
                 res = window[funcionEscenarioExitoso](jsDeRetorno,
                     parametrosExtra);
                 return res;
-            }
-
-            else {
+            } else {
                 res = window[funcionEscenarioErroneo](jsDeRetorno.error,
                     parametrosExtra, true);
                 return res;
@@ -58,8 +52,7 @@ function llamadaAjax(urlServicioWeb, datosServicioWeb, esAsincronico,
             if (e.status == 300) {
                 window.location = e.responseText;
                 return;
-            }
-            else if (e.readyState == 0) {
+            } else if (e.readyState == 0) {
                 // Network error
                 var err =
                     "No se pudo conectar al servidor. Revise si tiene acceso a internet y vuelva a intentar nuevamente";

@@ -1,270 +1,259 @@
-$(document).ready(function() {
+var inputNombre = $('#inputNombre');
+var inputApellido = $('#inputApellido');
+var inputNickname = $('#inputNickname');
+var inputPassword = $('#inputPassword');
+var inputRePassword = $('#inputRePassword');
+var inputEmail = $('#inputEmail');
+var inputFechaNacimiento = $('#inputFechaNacimiento');
+var inputTelefono = $("#inputTelefono");
+var inputCalle = $("#inputCalle");
+var inputAltura = $("#inputAltura");
+var inputPiso = $("#inputPiso");
+var inputDepartamento = $("#inputDepartamento");
 
-    $("#btnRegistrar").click(function() {
+const regexEmail = /^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+$/;
+const regexSoloLetras = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/;
+const regexLetrasYNumeros = /^[0-9a-zA-Z]+$/;
+const regexSoloNumeros = /^[0-9]+$/;
+const regexLetrasYEspacio = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/;
 
-        const exprEmail = /^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+$/;
-        const exprLet = /^[a-zA-Z]+$/;
-        const exprLetAndNum = /^[0-9a-zA-Z]+$/;
-        const exprNum = /^[0-9]+$/;
-        const exprLetAndSpace = /^[a-zA-Z]+(\s*[a-zA-Z]*)*[a-zA-Z]+$/;
+function validarNombre() {
+    var nombre = inputNombre.val();
 
-        var nombre = $('#inputNombre').val();
-        var apellido = $('#inputApellido').val();
-        var nickname = $('#inputNickname').val();
-        var pass = $('#inputPassword').val();
-        var rePass = $('#inputRePassword').val();
-        var email = $('#inputEmail').val();
-        var fecha = $('#inputFechaNacimiento').val();
-        // var prov = $('#inputProvincia').val();
-        // var localidad = $('#inputLocalidad').val();
-        // var calle = $('#inputCalle').val();
-        // var altura = $('#inputAltura').val();
+    var validacion = false;
 
-        /* Nombre */
+    if(nombre == null || nombre.length === 0 || nombre === "") {
+        $("#errorNombre").fadeIn("slow");
+    } else if(nombre.length < 3) {
+        $("#errorNombre2").fadeIn("slow");
+    } else if(nombre.length > 15) {
+        $("#errorNombre3").fadeIn("slow");
+    } else if(!regexSoloLetras.test(nombre)) {
+        $("#errorNombre4").fadeIn("slow");
+    } else {
+        $("#errorNombre").fadeOut();
+        $("#errorNombre2").fadeOut();
+        $("#errorNombre3").fadeOut();
+        $("#errorNombre4").fadeOut();
+        validacion = true;
+    }
 
-        if (nombre.length === 0){
-            $("#errorNombre").fadeIn("slow");
-            return false;
-        }
-        else{
-            $("#errorNombre").fadeOut();
-        }
+    return validacion;
+}
 
-        if (nombre.length > 15){
-            $("#errorNombre2").fadeIn("slow");
-            return false;
-        }
-        else{
-            $("#errorNombre2").fadeOut();
-        }
+function validarApellido() {
+    var apellido = inputApellido.val();
 
-        if (!exprLet.test(nombre)){
-            $("#errorNombre3").fadeIn("slow");
-            return false;
-        }
-        else{
-            $("#errorNombre3").fadeOut();
-        }
+    var validacion = false;
 
-        /* Apellido */
+    if(apellido == null || apellido.length === 0 || apellido === "") {
+        $("#errorApellido").fadeIn("slow");
+    } else if(apellido.length < 3) {
+        $("#errorApellido2").fadeIn("slow");
+    } else if(apellido.length > 15) {
+        $("#errorApellido3").fadeIn("slow");
+    } else if(!regexSoloLetras.test(apellido)) {
+        $("#errorApellido4").fadeIn("slow");
+    } else {
+        $("#errorApellido").fadeOut();
+        $("#errorApellido2").fadeOut();
+        $("#errorApellido3").fadeOut();
+        $("#errorApellido4").fadeOut();
+        validacion = true;
+    }
 
-        if (apellido.length === 0){
-            $("#errorApellido").fadeIn("slow");
-            return false;
-        }
-        else{
-            $("#errorApellido").fadeOut();
-        }
+    return validacion;
+}
 
-        if (nombre.length > 15){
-            $("#errorApellido2").fadeIn("slow");
-            return false;
-        }
-        else{
-            $("#errorApellido2").fadeOut();
-        }
+function validarNickname() {
+    var nickname = inputNickname.val();
 
-        if (!exprLet.test(apellido)){
-            $("#errorApellido3").fadeIn("slow");
-            return false;
-        }
-        else{
-            $("#errorApellido3").fadeOut();
-        }
+    var validacion = false;
 
-        /* NickName */
+    if(nickname == null || nickname.length === 0 || nickname === "") {
+        $("#errorNickname").fadeIn("slow");
+    } else if(nickname.length < 5) {
+        $("#errorNickname2").fadeIn("slow");
+    } else if(nickname.length > 15) {
+        $("#errorNickname3").fadeIn("slow");
+    } else if(!regexLetrasYNumeros.test(nickname)) {
+        $("#errorNickname4").fadeIn("slow");
+    } else {
+        $("#errorNickname").fadeOut();
+        $("#errorNickname2").fadeOut();
+        $("#errorNickname3").fadeOut();
+        $("#errorNickname4").fadeOut();
+        validacion = true;
+    }
 
-        if (nickname.length === 0){
-            $("#errorNickname").fadeIn("slow");
-            return false;
-        }
-        else{
-            $("#errorNickname").fadeOut();
-        }
+    return validacion;
+}
 
-        if (nickname.length > 15){
-            $("#errorNickname2").fadeIn("slow");
-            return false;
-        }
-        else{
-            $("#errorNickname2").fadeOut();
-        }
+function validarPassword() {
+    var password = inputPassword.val();
+    var rePassword = inputRePassword.val();
 
-        if (!exprLetAndNum.test(nickname)){
-            $("#errorNickname3").fadeIn("slow");
-            return false;
-        }
-        else{
-            $("#errorNickname3").fadeOut();
-        }
+    var validacion = false;
 
-        /* Contraseña */
+    if(password == null || password.length === 0 || password === "") {
+        $("#errorPassword").fadeIn("slow");
+    } else if(password.length < 6 || password.length > 15) {
+        $("#errorPassword2").fadeIn("slow");
+    } else if(!regexLetrasYNumeros.test(password)) {
+        $("#errorPassword3").fadeIn("slow");
+    }
 
-        if (pass.length === 0){
-            $("#errorPassword").fadeIn("slow");
-            return false;
-        }
-        else{
-            $("#errorPassword").fadeOut();
-        }
+    if(rePassword == null || rePassword.length === 0 || rePassword === "") {
+        $("#errorRePassword").fadeIn("slow");
+    } else if(password !== rePassword) {
+        $("#errorRePassword2").fadeIn("slow");
+    } else {
+        $("#errorPassword").fadeOut();
+        $("#errorPassword2").fadeOut();
+        $("#errorPassword3").fadeOut();
+        $("#errorRePassword").fadeOut();
+        $("#errorRePassword2").fadeOut();
+        validacion = true;
+    }
 
-        if (pass.length < 6 && pass.length < 15) {
-            $("#errorPassword2").fadeIn("slow");
-            return false;
-        }
-        else{
-            $("#errorPassword2").fadeOut();
-        }
+    return validacion;
+}
 
-        if (!exprLetAndNum.test(pass)){
-            $("#errorPassword3").fadeIn("slow");
-            return false;
-        }
-        else{
-            $("#errorPassword3").fadeOut();
-        }
+function validarEmail() {
+    var email = inputEmail.val();
 
-        /* Confirmacion de Contraseña */
+    var validacion = false;
 
-        if (rePass.length === 0){
-            $("#errorRePassword").fadeIn("slow");
-            return false;
-        }
-        else{
-            $("#errorRePassword").fadeOut();
-        }
+    if(email == null || email.length === 0 || email === "") {
+        $("#errorEmail").fadeIn("slow");
+    } else if(!regexEmail.test(email)) {
+        $("#errorEmail2").fadeIn("slow");
+    } else {
+        $("#errorEmail").fadeOut();
+        $("#errorEmail2").fadeOut();
+        validacion = true;
+    }
 
-        if ( rePass !== pass ){
-            $("#errorRePassword2").fadeIn("slow");
-            return false;
-        }
-        else {
-            $("#errorRePassword2").fadeOut();
-        }
+    return validacion;
+}
 
-        /* Email */
+function validarFechaNacimiento() {
+    var fechaNacimiento = inputFechaNacimiento.val();
 
-        if (email.length === 0){
-            $("#errorEmail").fadeIn("slow");
-            return false;
-        }
-        else{
-            $("#errorEmail").fadeOut();
-        }
+    var validacion = false;
 
-        if (!exprEmail.test(email)){
-            $("#errorEmail2").fadeIn("slow");
-            return false;
-        }
-        else{
-            $("#errorEmail2").fadeOut();
-        }
+    if(!moment(fechaNacimiento, "DD/MM/YYYY").isValid()) {
+        $("#errorFechaNacimiento").fadeIn("slow");
+    } else if(Math.round(moment.duration(moment().diff(moment(fechaNacimiento, "DD/MM/YYYY"))).asYears()) < 18) {
+        $("#errorFechaNacimiento2").fadeIn("slow");
+    } else {
+        $("#errorFechaNacimiento").fadeOut();
+        $("#errorFechaNacimiento2").fadeOut();
+        validacion = true;
+    }
 
-        // /* Provincia */
+    return validacion;
+}
 
-        // if (prov.length === 0){
-        //     $("#errorProv").fadeIn("slow");
-        //     return false;
-        // }
-        // else{
-        //     $("#errorProv").fadeOut();
-        // }
+function validarTelefono() {
+    var telefono = inputTelefono.val();
 
-        // if (!exprLetAndSpace.test(prov)){
-        //     $("#errorProv2").fadeIn("slow");
-        //     return false;
-        // }
-        // else{
-        //     $("#errorProv2").fadeOut();
-        // }
+    var validacion = false;
 
-        // if (prov.length > 20 && prov.length < 8){
-        //     $("#errorProv3").fadeIn("slow");
-        //     return false;
-        // }
-        // else{
-        //     $("#errorProv3").fadeOut();
-        // }
+    if(telefono == null || telefono.length === 0 || telefono === "") {
+        $("#errorTelfono").fadeIn("slow");
+    } else if(telefono.length !== 10 || !regexSoloNumeros.test(telefono)) {
+        $("#errorTelfono2").fadeIn("slow");
+    } else {
+        $("#errorTelfono").fadeOut();
+        $("#errorTelfono2").fadeOut();
+        validacion = true;
+    }
 
-        // /* Localidad */
+    return validacion;
+}
 
-        // if (localidad.length === 0){
-        //     $("#errorLocalidad").fadeIn("slow");
-        //     return false;
-        // }
-        // else{
-        //     $("#errorLocalidad").fadeOut();
-        // }
+function validarCalle() {
+    var calle = inputCalle.val();
 
-        // if (!exprLetAndSpace.test(localidad)){
-        //     $("#errorLocalidad2").fadeIn("slow");
-        //     return false;
-        // }
-        // else{
-        //     $("#errorLocalidad2").fadeOut();
-        // }
+    var validacion = false;
 
-        // if (localidad.length > 20 && localidad.length < 4){
-        //     $("#errorLocalidad3").fadeIn("slow");
-        //     return false;
-        // }
-        // else{
-        //     $("#errorLocalidad3").fadeOut();
-        // }
+    if(calle == null || calle.length === 0 || calle === "") {
+        $("#errorCalle").fadeIn("slow");
+    } else if(!regexLetrasYEspacio.test(calle)) {
+        $("#errorCalle2").fadeIn("slow");
+    } else {
+        $("#errorCalle").fadeOut();
+        $("#errorCalle2").fadeOut();
+        validacion = true;
+    }
 
-        // /* Calle */
+    return validacion;
+}
 
-        // if (calle.length === 0){
-        //     $("#errorCalle").fadeIn("slow");
-        //     return false;
-        // }
-        // else{
-        //     $("#errorCalle").fadeOut();
-        // }
+function validarAltura() {
+    var altura = inputAltura.val();
 
-        // if (!exprLetAndSpace.test(calle)){
-        //     $("#errorCalle2").fadeIn("slow");
-        //     return false;
-        // }
-        // else{
-        //     $("#errorCalle2").fadeOut();
-        // }
+    var validacion = false;
 
-        // if (calle.length > 20 && calle.length < 4){
-        //     $("#errorCalle3").fadeIn("slow");
-        //     return false;
-        // }
-        // else{
-        //     $("#errorCalle3").fadeOut();
-        // }
+    if(altura == null || altura.length === 0 || altura === "") {
+        $("#errorAltura").fadeIn("slow");
+    } else if(altura.length > 5 || !regexSoloNumeros.test(altura)) {
+        $("#errorAltura2").fadeIn("slow");
+    } else {
+        $("#errorAltura").fadeOut();
+        $("#errorAltura2").fadeOut();
+        validacion = true;
+    }
 
-        // /* Altura */
+    return validacion;
+}
 
-        // if (altura.length === 0){
-        //     $("#errorAltura").fadeIn("slow");
-        //     return false;
-        // }
-        // else{
-        //     $("#errorAltura").fadeOut();
-        // }
+function validarPisoYDepto() {
+    var piso = inputPiso.val();
+    var departamento = inputDepartamento.val();
 
-        // if (!exprNum.test(altura)){
-        //     $("#errorAltura2").fadeIn("slow");
-        //     return false;
-        // }
-        // else{
-        //     $("#errorAltura2").fadeOut();
-        // }
+    var validacion = false;
 
-        // if (altura.length >= 7 ){
-        //     $("#errorAltura3").fadeIn("slow");
-        //     return false;
-        // }
-        // else{
-        //     $("#errorAltura3").fadeOut();
-        // }
+    if((piso == null || piso.length === 0 || piso === "") && (departamento != null && departamento.length > 0 && departamento !== "")) {
+        $("#errorPiso").fadeIn("slow");
+    } else if ((piso != null && piso.length > 0 && piso !== "") && (departamento == null || departamento.length === 0 || departamento === "")) {
+        $("#errorDepartamento").fadeIn("slow");
+    } else if(
+        (piso != null && piso.length > 0 && piso !== "")
+        && (departamento != null && departamento.length > 0 && departamento !== "")
+        && !regexSoloNumeros.test(piso)
+    ) {
+        $("#errorPiso2").fadeIn("slow");
+    } else if(
+        (piso != null && piso.length > 0 && piso !== "")
+        && (departamento != null && departamento.length > 0 && departamento !== "")
+        && !regexSoloLetras.test(departamento)
+    ) {
+        $("#errorDepartamento2").fadeIn("slow");
+    } else {
+        $("#errorPiso").fadeOut();
+        $("#errorDepartamento").fadeOut();
+        $("#errorPiso2").fadeOut();
+        $("#errorDepartamento2").fadeOut();
+        validacion = true;
+    }
 
+    return validacion;
+}
 
-    });
+$("#btnRegistrar").click(function () {
 
+    $(".error").fadeOut();
+
+    return validarNombre()
+        && validarApellido()
+        && validarNickname()
+        && validarEmail()
+        && validarPassword()
+        && validarFechaNacimiento()
+        && validarTelefono()
+        && validarCalle()
+        && validarAltura()
+        && validarPisoYDepto();
 });
