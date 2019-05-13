@@ -27,7 +27,7 @@
 
     <!-- Slider -->
 
-    <div class="main_slider" style="background-image:url('<?php echo getBaseAddress() . "Webroot/img/home/bannerAlt.jpg" ?>')">
+    <div class="main_slider"  style="background-image:url('<?php echo getBaseAddress() . "Webroot/img/home/bannerAlt.jpg" ?>')">
         <div class="container fill_height">
             <div class="row align-items-center fill_height">
                 <div class="col">
