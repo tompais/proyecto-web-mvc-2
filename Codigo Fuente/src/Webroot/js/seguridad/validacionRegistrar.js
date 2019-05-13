@@ -1,3 +1,9 @@
+const regexEmail = /^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+$/;
+const regexSoloLetras = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/;
+const regexLetrasYNumeros = /^[0-9a-zA-Z]+$/;
+const regexSoloNumeros = /^[0-9]+$/;
+const regexLetrasYEspacio = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/;
+
 var inputNombre = $('#inputNombre');
 var inputApellido = $('#inputApellido');
 var inputNickname = $('#inputNickname');
@@ -10,12 +16,9 @@ var inputCalle = $("#inputCalle");
 var inputAltura = $("#inputAltura");
 var inputPiso = $("#inputPiso");
 var inputDepartamento = $("#inputDepartamento");
-
-const regexEmail = /^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+$/;
-const regexSoloLetras = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/;
-const regexLetrasYNumeros = /^[0-9a-zA-Z]+$/;
-const regexSoloNumeros = /^[0-9]+$/;
-const regexLetrasYEspacio = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/;
+var btnRegistrar = $("#btnRegistrar");
+var registrarModal = $("#registrarModal");
+var registrarModalLabel = $("#registrarModalLabel");
 
 function validarNombre() {
     var nombre = inputNombre.val();
@@ -31,10 +34,6 @@ function validarNombre() {
     } else if(!regexSoloLetras.test(nombre)) {
         $("#errorNombre4").fadeIn("slow");
     } else {
-        $("#errorNombre").fadeOut();
-        $("#errorNombre2").fadeOut();
-        $("#errorNombre3").fadeOut();
-        $("#errorNombre4").fadeOut();
         validacion = true;
     }
 
@@ -55,10 +54,6 @@ function validarApellido() {
     } else if(!regexSoloLetras.test(apellido)) {
         $("#errorApellido4").fadeIn("slow");
     } else {
-        $("#errorApellido").fadeOut();
-        $("#errorApellido2").fadeOut();
-        $("#errorApellido3").fadeOut();
-        $("#errorApellido4").fadeOut();
         validacion = true;
     }
 
@@ -79,10 +74,6 @@ function validarNickname() {
     } else if(!regexLetrasYNumeros.test(nickname)) {
         $("#errorNickname4").fadeIn("slow");
     } else {
-        $("#errorNickname").fadeOut();
-        $("#errorNickname2").fadeOut();
-        $("#errorNickname3").fadeOut();
-        $("#errorNickname4").fadeOut();
         validacion = true;
     }
 
@@ -108,11 +99,6 @@ function validarPassword() {
     } else if(password !== rePassword) {
         $("#errorRePassword2").fadeIn("slow");
     } else {
-        $("#errorPassword").fadeOut();
-        $("#errorPassword2").fadeOut();
-        $("#errorPassword3").fadeOut();
-        $("#errorRePassword").fadeOut();
-        $("#errorRePassword2").fadeOut();
         validacion = true;
     }
 
@@ -129,8 +115,6 @@ function validarEmail() {
     } else if(!regexEmail.test(email)) {
         $("#errorEmail2").fadeIn("slow");
     } else {
-        $("#errorEmail").fadeOut();
-        $("#errorEmail2").fadeOut();
         validacion = true;
     }
 
@@ -147,8 +131,6 @@ function validarFechaNacimiento() {
     } else if(Math.round(moment.duration(moment().diff(moment(fechaNacimiento, "DD/MM/YYYY"))).asYears()) < 18) {
         $("#errorFechaNacimiento2").fadeIn("slow");
     } else {
-        $("#errorFechaNacimiento").fadeOut();
-        $("#errorFechaNacimiento2").fadeOut();
         validacion = true;
     }
 
@@ -165,8 +147,6 @@ function validarTelefono() {
     } else if(telefono.length !== 10 || !regexSoloNumeros.test(telefono)) {
         $("#errorTelfono2").fadeIn("slow");
     } else {
-        $("#errorTelfono").fadeOut();
-        $("#errorTelfono2").fadeOut();
         validacion = true;
     }
 
@@ -183,8 +163,6 @@ function validarCalle() {
     } else if(!regexLetrasYEspacio.test(calle)) {
         $("#errorCalle2").fadeIn("slow");
     } else {
-        $("#errorCalle").fadeOut();
-        $("#errorCalle2").fadeOut();
         validacion = true;
     }
 
@@ -201,8 +179,6 @@ function validarAltura() {
     } else if(altura.length > 5 || !regexSoloNumeros.test(altura)) {
         $("#errorAltura2").fadeIn("slow");
     } else {
-        $("#errorAltura").fadeOut();
-        $("#errorAltura2").fadeOut();
         validacion = true;
     }
 
@@ -232,21 +208,17 @@ function validarPisoYDepto() {
     ) {
         $("#errorDepartamento2").fadeIn("slow");
     } else {
-        $("#errorPiso").fadeOut();
-        $("#errorDepartamento").fadeOut();
-        $("#errorPiso2").fadeOut();
-        $("#errorDepartamento2").fadeOut();
         validacion = true;
     }
 
     return validacion;
 }
 
-$("#btnRegistrar").click(function () {
+btnRegistrar.click(function () {
 
     $(".error").fadeOut();
 
-    return validarNombre()
+    var validacion = validarNombre()
         && validarApellido()
         && validarNickname()
         && validarEmail()
@@ -256,4 +228,47 @@ $("#btnRegistrar").click(function () {
         && validarCalle()
         && validarAltura()
         && validarPisoYDepto();
+
+    if(validacion) {
+        $("input").prop('disabled', true);
+        btnRegistrar.prop('disabled', true);
+        var obj = {};
+        obj.nombre = inputNombre.val();
+        obj.apellido = inputApellido.val();
+        obj.nickname = inputNickname.val();
+        obj.email = inputEmail.val();
+        obj.password = inputPassword.val();
+        obj.fechaNacimiento = inputFechaNacimiento.val();
+        obj.telefono = inputTelefono.val();
+        obj.sexoId = $("#selectSexo").val();
+        obj.provinciaId = $("#selectProvincia");
+        obj.partidoId = $("#selectPartido");
+        obj.localidadId = $("#selectLocalidad");
+        obj.calle = inputCalle.val();
+        obj.altura = inputAltura.val();
+        obj.piso = inputPiso.val();
+        obj.departamento = inputDepartamento.val();
+        llamadaAjax(pathValidarRegistrar, JSON.stringify(obj), true, "mostrarModalRegistracionExitosa", "mostrarModalError");
+    }
+
+    return validacion;
 });
+
+function mostrarModalRegistracionExitosa() {
+    registrarModalLabel.text("¡Registración Exitosa!");
+    registrarModal.find(".btn-secondary").addClass('d-none');
+    registrarModal.find(".btn-primary").removeClass('d-none');
+    registrarModal.find(".moda-body").addClass('text-center').append('Presione Continuar, o espere y en unos minutos será redirigido');
+    registrarModal.modal('show');
+    setTimeout(function() {
+        window.location.href = pathHome;
+    }, 5000);
+}
+
+function mostrarModalError() {
+    registrarModalLabel.text("Error de Registración");
+    registrarModal.find(".btn-secondary").removeClass('d-none');
+    registrarModal.find(".btn-primary").addClass('d-none');
+    registrarModal.find(".moda-body").addClass('text-center').append('Ha ocurrido un error y no se ha podido registrar el usuario. Revise sus datos y vuelva a intentarlo');
+    registrarModal.modal('show');
+}

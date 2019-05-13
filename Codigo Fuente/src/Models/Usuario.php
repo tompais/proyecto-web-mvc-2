@@ -317,12 +317,37 @@ class Usuario extends Model
 
     public function validarSexo()
     {
+        require_once ROOT . "Enums/Sexos.php";
         return (FuncionesUtiles::esEntero($this->sexoId) || FuncionesUtiles::esCadenaNumerica($this->sexoId))
-            && (Sexos::MASCULINO == $this->sexoId || Sexos::FEMENINO == $this->sexoId || Sexos::OTRO == $this->sexoId);
+            && (Sexos::Masculino == $this->sexoId || Sexos::Femenino == $this->sexoId || Sexos::Otro == $this->sexoId);
     }
 
     public function existeUsuarioDB (){
         return $this->pageRows(0, 1, "(Username LIKE '$this->username' OR Email LIKE '$this->email') AND UPassword LIKE '$this->upassword'");
+    }
+
+    public function validarUsuario()
+    {
+        return $this->validarNombre() && $this->validarApellido() && $this->validarUsername()
+            && $this->validarEmail() && $this->validarRol() && $this->validarSexo() && $this->validarTelefono();
+    }
+
+    public function insertarUsuario()
+    {
+        $array = [
+            "Nombre" => $this->getNombre(),
+            "Apellido" => $this->getApellido(),
+            "Username" => $this->getUsername(),
+            "UPassword" => $this->getUpassword(),
+            "Email" => $this->getEmail(),
+            "Telefono" => $this->getTelefono(),
+            "DireccionId" => $this->getDireccionId(),
+            "SexoId" => $this->getSexoId(),
+            "RolId" => $this->getRolId(),
+            "FechaNacimiento" => $this->getFechaNacimiento()
+        ];
+        $this->setId($this->insert($array));
+        return $this->getId();
     }
 
 }

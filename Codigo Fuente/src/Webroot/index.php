@@ -10,7 +10,7 @@ require_once ROOT . 'Utils/FuncionesUtiles.php';
 require_once ROOT . 'router.php';
 require_once ROOT . 'request.php';
 require_once ROOT . 'dispatcher.php';
-require_once ROOT . 'Models/Session.php';
+require_once ROOT . 'Helpers/Session.php';
 
 function getBaseAddress()
 {
@@ -26,6 +26,17 @@ function throwError404()
     include ROOT . "Views/NoCompletado/noCompletado.php";
     die();
 }
+
+function globalExceptionHandler($exception)
+{
+    $strError = "Error " . $exception->getCode() . ":" . $exception->getMessage();
+    echo $strError;
+    $strLog = "[". date("Y-m-d H:i:s") ."]" . $strError . PHP_EOL;
+    file_put_contents("exception-log.txt", $strLog,FILE_APPEND);
+    throwError404();
+}
+
+set_exception_handler('globalExceptionHandler');
 
 session_start();
 

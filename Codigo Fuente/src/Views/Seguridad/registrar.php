@@ -3,6 +3,8 @@
 <script>
     const pathGetPartidosByProvinciaId = "<?php echo getBaseAddress() . "Seguridad/getPartidosByProvinciaId"; ?>";
     const pathGetLocalidadesByPartidoId = "<?php echo getBaseAddress() . "Seguridad/getLocalidadesByPartidoId"; ?>";
+    const pathValidarRegistrar = "<?php echo getBaseAddress() . "Seguridad/validarRegistrar"; ?>";
+    const pathHome = "<?php echo getBaseAddress() . "Home/inicio"; ?>";
 </script>
 <div class="container-fluid mt-4">
     <div class="border shadow rounded mx-auto w-50 p-4 my-5 bg-white">
@@ -241,6 +243,27 @@
 
         <div class="d-flex justify-content-center align-items-center my-3">
             <button type="button" name="btnRegistrar" id="btnRegistrar" class="btn btn-primary">Registrar</button>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="registrarModal" tabindex="-1" role="dialog" aria-labelledby="registrarModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="registrarModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <form action="<?php echo getBaseAddress() . "Home/inicio"; ?>" method="post">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Continuar</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>

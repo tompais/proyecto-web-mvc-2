@@ -59,4 +59,17 @@ class Provincia extends Model
 
         return $provincias;
     }
+
+    public function getById($id)
+    {
+        $row = $this->selectByPk($id);
+
+        if($row)
+        {
+            $this->setId($row["Id"]);
+            $this->setNombre($row["Nombre"]);
+        }
+
+        return $row;
+    }
 }
