@@ -4,6 +4,8 @@ define('ROOT', str_replace("Webroot/index.php", "", $_SERVER["SCRIPT_FILENAME"])
 
 require_once ROOT . 'Config/core.php';
 require_once ROOT . 'Helpers/Constantes.php';
+require_once ROOT . 'Enums/CodigoError.php';
+require_once ROOT . 'Exceptions/ShopLineException.php';
 require_once ROOT . 'Utils/FuncionesUtiles.php';
 require_once ROOT . 'router.php';
 require_once ROOT . 'request.php';
