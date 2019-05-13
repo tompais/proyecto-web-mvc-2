@@ -4,10 +4,8 @@
     var pathGetPartidosByProvinciaId = "<?php echo getBaseAddress() . "Seguridad/getPartidosByProvinciaId"; ?>";
     var pathGetLocalidadesByPartidoId = "<?php echo getBaseAddress() . "Seguridad/getLocalidadesByPartidoId"; ?>";
 </script>
-
-<div class="container-fluid">
-    <form action="registrar.php" method="post" class="border shadow rounded mx-auto w-50 p-4 my-5">
-        <h4 class="mb-4 text-center">Regístrese</h4>
+<div class="container-fluid mt-4">
+    <form action="registrar.php" method="post" class="border shadow rounded mx-auto w-50 p-4 my-5 bg-white ">        <h4 class="mb-4 text-center">Regístrese</h4>
 
         <div class="form-row">
             <div class="col-md">

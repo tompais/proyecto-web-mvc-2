@@ -8,6 +8,7 @@ require_once ROOT . 'Utils/FuncionesUtiles.php';
 require_once ROOT . 'router.php';
 require_once ROOT . 'request.php';
 require_once ROOT . 'dispatcher.php';
+require_once ROOT . 'Models/Session.php';
 
 function getBaseAddress()
 {

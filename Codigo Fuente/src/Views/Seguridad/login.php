@@ -1,6 +1,7 @@
 <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/seguridad/login.css" ?>">
-    <div class="container-fluid">
-        <form action="<?php echo getBaseAddress() . "Seguridad/validarLogin" ?>" method="post" class="border rounded shadow w-25 mx-auto p-4 mt-5">
+
+    <div class="container-fluid mt-4 w-50" >
+        <form action="<?php echo getBaseAddress() . "Seguridad/validarLogin" ?>" method="post" class="border rounded shadow mx-auto p-4 mt-5 bg-white mb-5">
 
             <h4 class="mb-4 text-center">Login de Usuario</h4>
 

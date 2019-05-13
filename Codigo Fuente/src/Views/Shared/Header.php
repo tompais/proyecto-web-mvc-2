@@ -17,14 +17,33 @@
                             <!-- Barra con Inicico de Sesion -->
 
                             <li class="account w-25">
-                                <a href="#">
-                                    Mi Cuenta <i class="ml-1 fa fa-angle-down"></i>
-                                </a>
-                                <ul class="account_selection">
-                                    <li><a href="<?php echo getBaseAddress() . "Seguridad/login"?>"><i class="fas fa-sign-in-alt mr-1"></i>Iniciar Sesion</a></li>
-                                    <li><a href="<?php echo getBaseAddress() . "Seguridad/registrar"?>"><i class="fas fa-sign-out-alt mr-1"></i>Registrarse</a></li>
-                                </ul>
-                                src="<?php echo getBaseAddress() . "Webroot/img/home/product_1.png" ?>"
+                                <?php
+
+                                $sessionManejada = isset($_SESSION["session"]) ? unserialize($_SESSION["session"]) : null;
+
+                                if (!$sessionManejada){
+                                    echo "<a href='#'>
+                                            Mi Cuenta <i class='ml-1 fa fa-angle-down'></i>
+                                        </a>
+                                        <ul class='account_selection'>
+                                            <li><a href='" . getBaseAddress().'Seguridad/login' . "'><i class='fas fa-sign-in-alt mr-1'></i>Iniciar Sesion</a></li>
+                                            <li><a href='" . getBaseAddress().'Seguridad/registrar' . "'><i class='fas fa-registered mr-1'></i>Registrarse</a></li>
+                                        </ul>";
+                                }
+                                else{
+                                    echo"
+                                        <a href='#'>
+                                           <i class='fas fa-user mr-1'></i> ". $sessionManejada->getUserName() . "<i class='ml-1 fa fa-angle-down'></i>
+                                        </a>
+                                        <ul class='account_selection'>
+                                            <li><a href='#'><i class='far fa-id-badge mr-1'></i></i>Mi Perfil</a></li>
+                                            <li><a href='#exampleModal' data-toggle='modal' data-target='#exampleModal'><i class='fas fa-sign-in-alt mr-1'></i>Cerrar Sesion</a></li>
+                                        </ul>
+                                    ";
+                                }
+
+                                ?>
+
                             </li>
                         </ul>
                     </div>
@@ -33,22 +52,20 @@
         </div>
     </div>
 
-
-
     <!-- Barra de navegacion -->
 
     <div class="main_nav_container">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-right">
-                    <div class="logo_container">
-                        <img class="img-fluid" src="<?php echo getBaseAddress() . "Webroot/img/home/logo.png" ?>">
+                    <div class="logo_container" >
+                        <img class="img-fluid" id="logo" src="<?php echo getBaseAddress() . "Webroot/img/home/logo.png" ?>">
                     </div>
                     <nav class="navbar">
 
                         <form class='navbar-form mt-1'>
                             <div class='input-group'>
-                                <input class='form-control' type='text' name='search' placeholder='Buscar' />
+                                <input class='form-control' type='text' name='search' id="search" placeholder='Buscar' />
 
                                 <span class="input-group-btn">
                                           <button type='submit' class='btn btn-default'>
@@ -88,14 +105,29 @@
     <div class="hamburger_menu_content text-right">
         <ul class="menu_top_nav">
             <li class="menu_item has-children">
-                <a href="#">
-                    Mi Cuenta
-                    <i class="fa fa-angle-down"></i>
-                </a>
-                <ul class="menu_selection">
-                    <li><a href="../../Views/Seguridad/login.php"><i class="fa fa-sign-in mr-1" aria-hidden="true"></i>Iniciar Sesion</a></li>
-                    <li><a href="../../Views/Seguridad/registrar.php"><i class="fa fa-user-plus mr-1" aria-hidden="true"></i>Registrarse</a></li>
-                </ul>
+                <?php
+
+                if (!$sessionManejada){
+                    echo "<a href='#'>
+                             Mi Cuenta <i class='ml-1 fa fa-angle-down'></i>
+                          </a>
+                          <ul class='menu_selection'>
+                              <li><a href='" . getBaseAddress().'Seguridad/login' . "'><i class='fas fa-sign-in-alt mr-1'></i>Iniciar Sesion</a></li>
+                              <li><a href='" . getBaseAddress().'Seguridad/registrar' . "'><i class='fas fa-registered mr-1'></i>Registrarse</a></li>
+                          </ul>";
+                }
+                else{
+                    echo"
+                         <a href='#'>
+                            <i class='fas fa-user mr-1'></i> ". $sessionManejada->getUserName() . "<i class='ml-1 fa fa-angle-down'></i>
+                         </a>
+                         <ul class='menu_selection'>
+                            <li><a href='#'><i class='far fa-id-badge mr-1'></i></i>Mi Perfil</a></li>
+                            <li><a href='#exampleModal' data-toggle='modal' data-target='#exampleModal'><i class='fas fa-sign-in-alt mr-1'></i>Cerrar Sesion</a></li>
+                         </ul>";
+                }
+
+                ?>
             </li>
             <li class="menu_item"><a href="#">Inicio</a></li>
             <li class="menu_item"><a href="#">Categorias</a></li>
