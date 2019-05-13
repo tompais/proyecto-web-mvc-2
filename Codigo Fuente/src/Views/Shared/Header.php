@@ -58,14 +58,14 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-right">
-                    <div class="logo_container">
-                        <img class="img-fluid" src="<?php echo getBaseAddress() . "Webroot/img/home/logo.png" ?>">
+                    <div class="logo_container" >
+                        <img class="img-fluid" id="logo" src="<?php echo getBaseAddress() . "Webroot/img/home/logo.png" ?>">
                     </div>
                     <nav class="navbar">
 
                         <form class='navbar-form mt-1'>
                             <div class='input-group'>
-                                <input class='form-control' type='text' name='search' placeholder='Buscar' />
+                                <input class='form-control' type='text' name='search' id="search" placeholder='Buscar' />
 
                                 <span class="input-group-btn">
                                           <button type='submit' class='btn btn-default'>
