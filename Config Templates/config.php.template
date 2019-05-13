@@ -6,8 +6,8 @@
  * Time: 23:41
  */
 
-$host = "127.0.0.1";
-$user = "ezequiel";
-$password = "ezequiel";
+$host = "localhost";
+$user = "root";
+$password = "";
 $dbname = "pw";
 $port = "3306";

@@ -31,9 +31,25 @@
                                         </ul>";
                                 }
                                 else{
+
+                                    $rolId = $sessionManejada->getRolId();
+                                    $rol = "";
+                                    
+                                    if($rolId == Roles::ADMINISTRADOR)
+                                        $rol = "Guantelete del infinito";
+                                    else
+                                    if($rolId == Roles::COADMINISTRADOR)
+                                        $rol = "Thor";
+                                    else
+                                    if($rolId == Roles::MODERADOR)
+                                        $rol = "Liebre"; 
+                                    else
+                                    if($rolId == Roles::USUARIO)
+                                        $rol = "Mortal";                                       
+
                                     echo"
                                         <a href='#'>
-                                           <i class='fas fa-user mr-1'></i> ". $sessionManejada->getUserName() . "<i class='ml-1 fa fa-angle-down'></i>
+                                           <i class='fas fa-user mr-1'></i> ". $sessionManejada->getUserName() . " " . $rol . "<i class='ml-1 fa fa-angle-down'></i>
                                         </a>
                                         <ul class='account_selection'>
                                             <li><a href='#'><i class='far fa-id-badge mr-1'></i></i>Mi Perfil</a></li>

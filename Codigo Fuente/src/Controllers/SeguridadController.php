@@ -133,6 +133,7 @@ class SeguridadController extends Controller
        if ($arrayUsurio){
             $session->setId($arrayUsurio[0]["Id"]);
             $session->setUserName($arrayUsurio[0]["Username"]);
+            $session->setRolId($arrayUsurio[0]["RolId"]);
             $_SESSION["session"] = serialize($session);
             header("location: " . getBaseAddress() . "Home/inicio");
         }

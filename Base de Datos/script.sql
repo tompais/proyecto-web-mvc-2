@@ -6186,4 +6186,4 @@ VALUES ("Ezequiel", "Allio", '1996-05-07', "ezequiel", "eb6a2f962bb597f98b2c2b9c
 		("Tomás", "Pais", "1995-11-15", "tpais", "c720f95d7b12b6fd252b432853bf8c0a118dd4a1", "tomas.j.pais@gmail.com", 2, 1132075813, 1, 1),
         ("Alejo", "Martínez", "1998-12-23", "alejovoley14", "3de5110c9559591d0178269408ecdd6d57131818", "pupe893@gmail.com", 2, 1144188686, 1, 2),
         ("Sebastián", "Reales", "1989-12-12", "falsoalexis", "bfa643708c7876c74d5088ea7bdf50de7c56e6b6", "falso.alexis@gmail.com", 2, 1128232503, 1, 3),
-        ("Super", "User", "1810-05-25", "superuser", "ba2e09db98ee61790c5055b8f643c5e9b1c3f3f8", "super.user@gmail.com", 1, 111234567, 3, 4);
+        ("Super", "User", "1810-05-25", "superuser", "8e67bb26b358e2ed20fe552ed6fb832f397a507d", "super.user@gmail.com", 1, 111234567, 3, 4);
