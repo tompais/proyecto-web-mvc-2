@@ -1,4 +1,7 @@
 <?php
+
+date_default_timezone_set('America/Argentina/Buenos_Aires');
+
 define('WEBROOT', str_replace("Webroot/index.php", "", $_SERVER["SCRIPT_NAME"]));
 define('ROOT', str_replace("Webroot/index.php", "", $_SERVER["SCRIPT_FILENAME"]));
 
