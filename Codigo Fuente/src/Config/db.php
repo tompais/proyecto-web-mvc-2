@@ -24,9 +24,9 @@ class Database
 
         // Escribo statement en el log
 
-        $str = $sql . "  [". date("Y-m-d H:i:s") ."]" . PHP_EOL;
+        $str = "[". date("Y-m-d H:i:s") ."]  " . $sql . PHP_EOL;
 
-        file_put_contents("log.txt", $str,FILE_APPEND);
+        file_put_contents("sql-log.txt", $str,FILE_APPEND);
 
         $result = mysqli_query($this->conn, $this->stmt);
 
@@ -100,7 +100,7 @@ class Database
 
      * @param $sql
 
-     * @return array asociativo o bool
+     * @return mixed
 
      */
 

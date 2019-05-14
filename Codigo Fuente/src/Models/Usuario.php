@@ -1,6 +1,7 @@
 <?php
 
-class Usuario extends  Model {
+class Usuario extends Model
+{
 
     private $id;
     private $nombre;
@@ -9,12 +10,63 @@ class Usuario extends  Model {
     private $upassword;
     private $email;
     private $telefono;
-    private $domicilioId;
+    private $direccionId;
+    private $direccion;
     private $sexoId;
+    private $sexo;
     private $rolId;
+    private $rol;
     private $fechaNacimiento;
     private $fechaBaneo;
     private $fechaBaja;
+
+    /**
+     * @return mixed
+     */
+    public function getDireccion()
+    {
+        return $this->direccion;
+    }
+
+    /**
+     * @param mixed $direccion
+     */
+    public function setDireccion($direccion)
+    {
+        $this->direccion = $direccion;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSexo()
+    {
+        return $this->sexo;
+    }
+
+    /**
+     * @param mixed $sexo
+     */
+    public function setSexo($sexo)
+    {
+        $this->sexo = $sexo;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRol()
+    {
+        return $this->rol;
+    }
+
+    /**
+     * @param mixed $rol
+     */
+    public function setRol($rol)
+    {
+        $this->rol = $rol;
+    }
 
     /**
      * @return mixed
@@ -147,17 +199,17 @@ class Usuario extends  Model {
     /**
      * @return mixed
      */
-    public function getDomicilioId()
+    public function getDireccionId()
     {
-        return $this->domicilioId;
+        return $this->direccionId;
     }
 
     /**
-     * @param mixed $domicilioId
+     * @param mixed $direccionId
      */
-    public function setDomicilioId($domicilioId)
+    public function setDireccionId($direccionId)
     {
-        $this->domicilioId = $domicilioId;
+        $this->direccionId = $direccionId;
     }
 
     /**
@@ -224,42 +276,78 @@ class Usuario extends  Model {
         $this->fechaBaja = $fechaBaja;
     }
 
-    public function validarNombre() {
+    public function validarNombre()
+    {
         return FuncionesUtiles::esOracion($this->nombre)
             && ($cantLetras = strlen($this->nombre)) <= 15
             && $cantLetras >= 3;
     }
 
-    public function validarApellido() {
+    public function validarApellido()
+    {
         return FuncionesUtiles::esOracion($this->apellido)
             && ($cantLetras = strlen($this->apellido)) <= 15
             && $cantLetras >= 3;
     }
 
-    public function validarUsername() {
+    public function validarUsername()
+    {
         return FuncionesUtiles::esPalabraConNumeros($this->username)
             && ($cantLetras = strlen($this->username)) <= 10
             && $cantLetras >= 3;
     }
 
-    public function validarEmail() {
+    public function validarEmail()
+    {
         return FuncionesUtiles::validarEmail($this->email);
     }
 
-    public function validarTelefono() {
+    public function validarTelefono()
+    {
         return (FuncionesUtiles::esEntero($this->telefono)
-            || FuncionesUtiles::esCadenaNumerica($this->telefono))
+                || FuncionesUtiles::esCadenaNumerica($this->telefono))
             && strlen($this->telefono) === 10;
     }
 
-    public function validarRol() {
+    public function validarRol()
+    {
         return (FuncionesUtiles::esEntero($this->rolId) || FuncionesUtiles::esCadenaNumerica($this->rolId))
-            && (Roles::ADMINISTRADOR === $this->rolId || Roles::MODERADOR === $this->rolId || Roles::USUARIO === $this->rolId);
+            && (Roles::ADMINISTRADOR === $this->rolId || Roles::COADMINISTRADOR == $this->rolId || Roles::MODERADOR === $this->rolId || Roles::USUARIO === $this->rolId);
     }
 
-    public function validarSexo() {
+    public function validarSexo()
+    {
+        require_once ROOT . "Enums/Sexos.php";
         return (FuncionesUtiles::esEntero($this->sexoId) || FuncionesUtiles::esCadenaNumerica($this->sexoId))
-            && (Sexos::MASCULINO == $this->sexoId || Sexos::FEMENINO == $this->sexoId || Sexos::OTRO == $this->sexoId);
+            && (Sexos::Masculino == $this->sexoId || Sexos::Femenino == $this->sexoId || Sexos::Otro == $this->sexoId);
+    }
+
+    public function existeUsuarioDB (){
+        return $this->pageRows(0, 1, "(Username LIKE '$this->username' OR Email LIKE '$this->email') AND UPassword LIKE '$this->upassword'");
+    }
+
+    public function validarUsuario()
+    {
+        return $this->validarNombre() && $this->validarApellido() && $this->validarUsername()
+            && $this->validarEmail() && $this->validarRol() && $this->validarSexo() && $this->validarTelefono();
+    }
+
+    public function insertarUsuario()
+    {
+        $array = [
+            "Nombre" => $this->getNombre(),
+            "Apellido" => $this->getApellido(),
+            "Username" => $this->getUsername(),
+            "UPassword" => $this->getUpassword(),
+            "Email" => $this->getEmail(),
+            "Telefono" => $this->getTelefono(),
+            "DireccionId" => $this->getDireccionId(),
+            "SexoId" => $this->getSexoId(),
+            "RolId" => $this->getRolId(),
+            "FechaNacimiento" => $this->getFechaNacimiento()
+        ];
+        $this->setId($this->insert($array));
+        return $this->getId();
     }
 
 }

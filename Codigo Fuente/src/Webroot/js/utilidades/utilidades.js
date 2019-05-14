@@ -14,8 +14,8 @@
 // Retornno: devuelve un booleano indicando si hubo errores
 // --------------------------------------------------------------------------------------------------------------------------
 function llamadaAjax(urlServicioWeb, datosServicioWeb, esAsincronico,
-                     funcionEscenarioExitoso, funcionEscenarioErroneo, parametrosExtra,
-                     noMostrarLoading, mensajeLoading) {
+    funcionEscenarioExitoso, funcionEscenarioErroneo, parametrosExtra,
+    noMostrarLoading, mensajeLoading) {
 
     var respuesta;
 
@@ -25,8 +25,9 @@ function llamadaAjax(urlServicioWeb, datosServicioWeb, esAsincronico,
     $.ajax({
         type: "POST",
         url: urlServicioWeb,
-        data: datosServicioWeb,
-        contentType: "application/json; charset=utf-8",
+        data: {
+            data: datosServicioWeb
+        },
         async: esAsincronico,
         dataType: "json",
         traditional: true,
@@ -39,9 +40,7 @@ function llamadaAjax(urlServicioWeb, datosServicioWeb, esAsincronico,
                 res = window[funcionEscenarioExitoso](jsDeRetorno,
                     parametrosExtra);
                 return res;
-            }
-
-            else {
+            } else {
                 res = window[funcionEscenarioErroneo](jsDeRetorno.error,
                     parametrosExtra, true);
                 return res;
@@ -53,22 +52,21 @@ function llamadaAjax(urlServicioWeb, datosServicioWeb, esAsincronico,
             if (e.status == 300) {
                 window.location = e.responseText;
                 return;
-            }
-            else if (e.readyState == 0) {
+            } else if (e.readyState == 0) {
                 // Network error
                 var err =
                     "No se pudo conectar al servidor. Revise si tiene acceso a internet y vuelva a intentar nuevamente";
                 if (window[funcionEscenarioErroneo])
                     return window[funcionEscenarioErroneo](err, parametrosExtra, true);
                 else
-                    return alert(err);
+                    return alertify.alert(err).setting('modal', true);
             }
 
             if (window[funcionEscenarioErroneo])
                 return window[funcionEscenarioErroneo](e.responseText,
                     parametrosExtra);
             else
-                alert(e.responseText);
+                alertify.alert(e.responseText).setting('modal', true);
         }
     });
 

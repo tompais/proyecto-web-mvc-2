@@ -9,10 +9,14 @@
 abstract class Constantes
 {
     //Vistas
-    const HOMEVIEW = "home";
+    const INICIOVIEW = "inicio";
+    const REGISTRARVIEW = "registrar";
+    const LOGINVIEW =  "login";
 
     //Títulos
     const MAINTITLE = "ShopLine";
+    const REGISTRARTITLE = "Registrar";
+    const LOGINTITLE = "Iniciar Sesion";
 
     //Regex
     const REGEXLETRASYNUMEROS = "/^[0-9a-zA-Z]+$/";
@@ -20,4 +24,11 @@ abstract class Constantes
     const REGEXSOLOLETRAS = "/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/";
     const REGEXLETRASYESPACIO = "/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/";
     const REGEXSOLONUMEROS = "/^[0-9]+$/";
+
+    //Comparadores
+    const CMPBYID = "FuncionesUtiles::cmpById";
+    const CMPBYNOMBRE = "FuncionesUtiles::cmpByNombre";
+
+    //Propiedades
+    const ID = "Id";
 }
