@@ -59,14 +59,14 @@ function llamadaAjax(urlServicioWeb, datosServicioWeb, esAsincronico,
                 if (window[funcionEscenarioErroneo])
                     return window[funcionEscenarioErroneo](err, parametrosExtra, true);
                 else
-                    return alert(err);
+                    return alertify.alert(err).setting('modal', true);
             }
 
             if (window[funcionEscenarioErroneo])
                 return window[funcionEscenarioErroneo](e.responseText,
                     parametrosExtra);
             else
-                alert(e.responseText);
+                alertify.alert(e.responseText).setting('modal', true);
         }
     });
 

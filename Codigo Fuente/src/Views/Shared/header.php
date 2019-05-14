@@ -75,7 +75,7 @@
             <div class="row">
                 <div class="col-lg-12 text-right">
                     <div class="logo_container" >
-                        <img class="img-fluid" id="logo" src="<?php echo getBaseAddress() . "Webroot/img/home/logo.png" ?>">
+                        <img class="img-fluid logo_container" id="logo" src="<?php echo getBaseAddress() . "Webroot/img/home/logo.png" ?>">
                     </div>
                     <nav class="navbar">
 

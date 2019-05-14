@@ -96,4 +96,18 @@ class Partido extends Model
 
         return $partidos;
     }
+
+    public function getById($id)
+    {
+        $row = $this->selectByPk($id);
+
+        if($row)
+        {
+            $this->setId($row["Id"]);
+            $this->setNombre($row["Nombre"]);
+            $this->setProvinciaId($row["ProvinciaId"]);
+        }
+
+        return $row;
+    }
 }

@@ -1556,18 +1556,6 @@ section
 /*********************************
 5.1 logo
 *********************************/
-#search{
-	width: 330px;
-}
-@media only screen and (max-width: 981px) {
-	/* Changes mobile logo to specified image */
-	#logo {
-		content: url("../../img/home/logoResponsive3.png");
-	}
 
-	#search{
-		width: 200px;
-	}
-}
 
 
