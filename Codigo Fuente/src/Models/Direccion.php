@@ -210,19 +210,23 @@ class Direccion extends Model
         && $this->partido->getById($this->getPartidoId())
         && $this->localidad->getById($this->getLocalidadId())
         && $this->provincia->getId() == $this->partido->getProvinciaId()
-        && $this->partido->getId() == $this->localidad->getPartido()
-        && FuncionesUtiles::esPalabra($this->getCalle())
+        && $this->partido->getId() == $this->localidad->getPartidoId()
+        && FuncionesUtiles::esOracion($this->getCalle())
         && (FuncionesUtiles::esEntero($this->getAltura()) || FuncionesUtiles::esCadenaNumerica($this->getAltura()))
         && (!FuncionesUtiles::esCadenaNoNulaOVacia($this->getPiso()) && !FuncionesUtiles::esCadenaNoNulaOVacia($this->getDepartamento())
             || ((FuncionesUtiles::esEntero($this->getPiso()) || FuncionesUtiles::esCadenaNumerica($this->getPiso())) && FuncionesUtiles::esPalabra($this->getDepartamento())));
 
         return $validacion;
-
     }
 
     public function existeDireccion()
     {
-        $row = $this->pageRows(0, 1, "Nombre LIKE '$this->calle' AND Altura = $this->altura AND Piso = $this->piso AND Departamento LIKE '$this->departamento' AND ProvinciaId = $this->provinciaId AND PartidoId = $this->partidoId AND LocalidadId = $this->localidadId");
+        $where = "Calle LIKE '$this->calle' AND Altura = $this->altura AND ProvinciaId = $this->provinciaId AND PartidoId = $this->partidoId AND LocalidadId = $this->localidadId";
+
+        if(FuncionesUtiles::esCadenaNoNulaOVacia($this->getPiso()) && FuncionesUtiles::esCadenaNoNulaOVacia($this->getDepartamento()))
+            $where .= "AND Piso = $this->piso AND Departamento LIKE '$this->departamento'";
+
+        $row = $this->pageRows(0, 1, $where);
 
         if($row)
             $this->setId($row[0]['Id']);

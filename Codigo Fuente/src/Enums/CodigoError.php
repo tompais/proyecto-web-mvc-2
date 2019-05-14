@@ -12,5 +12,6 @@ abstract class CodigoError
     const ErrorInsertSQL = 2;
     const UsuarioInvalido = 3;
     const EntidadDuplicada = 4;
+    const PasswordInvalida = 5;
 
 }

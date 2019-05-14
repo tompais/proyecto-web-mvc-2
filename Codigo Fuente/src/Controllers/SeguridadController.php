@@ -4,11 +4,6 @@ class SeguridadController extends Controller
 {
     function registrar()
     {
-        require_once ROOT . "Models/Sexo.php";
-        require_once ROOT . "Models/Provincia.php";
-        require_once ROOT . "Models/Partido.php";
-        require_once ROOT . "Models/Localidad.php";
-
         $this->layout = "layoutSeguridad";
 
         $sexo = new Sexo();
@@ -38,8 +33,6 @@ class SeguridadController extends Controller
 
     function getPartidosByProvinciaId($json)
     {
-        require_once ROOT . "Models/Partido.php";
-        require_once ROOT . "Dto/PartidoDto.php";
         header("Content-type: application/json");
 
         $data = json_decode(utf8_decode($json['data']));
@@ -65,8 +58,6 @@ class SeguridadController extends Controller
 
     function getLocalidadesByPartidoId($json)
     {
-        require_once ROOT . "Models/Localidad.php";
-        require_once ROOT . "Dto/LocalidadDto.php";
         header("Content-type: application/json");
 
         $data = json_decode(utf8_decode($json['data']));
@@ -103,7 +94,6 @@ class SeguridadController extends Controller
 
     function validarLogin ($usuario) {
         $this->layout = "layoutSeguridad";
-        require_once ROOT . "Models/Usuario.php";
 
         $user = new Usuario();
         $session = new Session();
@@ -132,6 +122,7 @@ class SeguridadController extends Controller
        if ($arrayUsurio){
             $session->setId($arrayUsurio[0]["Id"]);
             $session->setUserName($arrayUsurio[0]["Username"]);
+            $session->setRolId($arrayUsurio[0]["RolId"]);
             $_SESSION["session"] = serialize($session);
             header("location: " . getBaseAddress() . "Home/inicio");
         }
@@ -143,17 +134,9 @@ class SeguridadController extends Controller
 
     function validarRegistrar($json)
     {
-        require_once ROOT . "Models/Usuario.php";
-        require_once ROOT . "Dto/UsuarioDto.php";
-        require_once ROOT . "Models/Direccion.php";
-        require_once ROOT . "Exceptions/DireccionInvaliaException";
-        require_once ROOT . "Exceptions/SQLInsertException";
-        require_once ROOT . "Enums/Roles.php";
-        require_once ROOT . "Exceptions/UsuarioInvalidoException";
-        require_once ROOT . "Exceptions/EntidadDuplicadaException.php";
         header("Content-type: application/json");
 
-        $data = json_decode(utf8_decode($json['data']));
+        $data = json_decode($json['data']);
 
         $usuario = new Usuario();
         $direccion = new Direccion();
@@ -167,44 +150,46 @@ class SeguridadController extends Controller
         $direccion->setLocalidadId($data->localidadId);
 
         if(!$direccion->validarDireccion())
-            throw new DireccionInvalidaException(CodigoError::DireccionInvalida, "La dirección insertada es inválida");
+            throw new DireccionInvalidaException("La dirección insertada es inválida", CodigoError::DireccionInvalida);
 
         if(!$direccion->existeDireccion())
         {
             if(!$direccion->insertarDireccion())
-                throw new SQLInsertException(CodigoError::ErrorInsertSQL, "Error al Insertar la Dirección");
+                throw new SQLInsertException("Error al Insertar la Dirección", CodigoError::ErrorInsertSQL);
         }
+
+        if(!FuncionesUtiles::validarPassword($data->password))
+            throw new PasswordInvalidaException("El formato de la contraseña no es válido", CodigoError::PasswordInvalida);
 
         $usuario->setNombre($data->nombre);
         $usuario->setApellido($data->apellido);
         $usuario->setUsername($data->nickname);
-        $usuario->setUpassword($data->password);
+        $usuario->setUpassword(strtoupper(sha1($data->password)));
         $usuario->setEmail($data->email);
         $usuario->setTelefono($data->telefono);
         $usuario->setDireccionId($direccion->getId());
         $usuario->setSexoId($data->sexoId);
-        $usuario->setRolId(Roles::Usuario);
+        $usuario->setRolId(Roles::USUARIO);
         $usuario->setFechaNacimiento($data->fechaNacimiento);
 
         if(!$usuario->validarUsuario())
-            throw new UsuarioInvalidoException(CodigoError::UsuarioInvalido, "Los datos de Usuario son inválidos");
+            throw new UsuarioInvalidoException( "Los datos de Usuario son inválidos", CodigoError::UsuarioInvalido);
 
-        if(!$usuario->existeUsuarioDB())
-            throw new EntidadDuplicadaException(CodigoError::EntidadDuplicada, "Usuario Duplicado");
+        if($usuario->existeUsuarioDB())
+            throw new EntidadDuplicadaException("Usuario Duplicado", CodigoError::EntidadDuplicada);
 
         if(!$usuario->insertarUsuario())
-            throw new SQLInsertException(CodigoError::ErrorInsertSQL, "Error al insertar al usuario");
+            throw new SQLInsertException("Error al insertar al usuario", CodigoError::ErrorInsertSQL);
 
         $session = new Session();
 
         $session->setId($usuario->getId());
-        $session->setUserName($usuario->)
+        $session->setUserName(mb_convert_encoding($usuario->getUsername(), 'UTF-8', 'UTF-8'));
+        $session->setRolId($usuario->getRolId());
 
-        //$usuarioDto->username = mb_convert_encoding($usuario->getUsername(), 'UTF-8', 'UTF-8');
+        $_SESSION['session'] = serialize($session);
 
-
-
-        //echo json_encode($usuarioDto);
+        echo json_encode($_SESSION['session']);
     }
 
     function cerrarSession()

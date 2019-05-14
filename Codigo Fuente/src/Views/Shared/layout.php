@@ -15,8 +15,8 @@
     <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/lib/bootstrap/css/bootstrap.min.css"; ?>">
     <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/lib/fontawesome/css/all.min.css"; ?>">
     <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/lib/alertifyjs/css/alertify.min.css"; ?>">
-    <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/lib/alertifyjs/theme/default.min.css"; ?>">
-    <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/lib/alertifyjs/theme/semantic.min.css"; ?>">
+    <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/lib/alertifyjs/css/themes/default.min.css"; ?>">
+    <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/lib/alertifyjs/css/themes/semantic.min.css"; ?>">
     <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/lib/daterangepicker/daterangepicker.css"; ?>">
     <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/lib/OwlCarousel2-2.2.1/animate.css"; ?>">
     <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/lib/OwlCarousel2-2.2.1/owl.carousel.css"; ?>">

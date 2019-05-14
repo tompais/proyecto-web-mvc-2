@@ -10,6 +10,7 @@ class Session
 {
     private $id;
     private $userName;
+    private $rolId;
 
     /**
      * @return mixed
@@ -44,6 +45,14 @@ class Session
     }
 
 
+    public function getRolId()
+    {
+        return $this->rolId;
+    }
 
+    public function setRolId($rolId)
+    {
+        $this->rolId = $rolId;
+    }
 
 }

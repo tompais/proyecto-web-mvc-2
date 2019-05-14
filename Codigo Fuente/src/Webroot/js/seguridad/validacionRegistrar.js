@@ -241,24 +241,26 @@ btnRegistrar.click(function () {
         obj.fechaNacimiento = inputFechaNacimiento.val();
         obj.telefono = inputTelefono.val();
         obj.sexoId = $("#selectSexo").val();
-        obj.provinciaId = $("#selectProvincia");
-        obj.partidoId = $("#selectPartido");
-        obj.localidadId = $("#selectLocalidad");
+        obj.provinciaId = $("#selectProvincia").val();
+        obj.partidoId = $("#selectPartido").val();
+        obj.localidadId = $("#selectLocalidad").val();
         obj.calle = inputCalle.val();
         obj.altura = inputAltura.val();
         obj.piso = inputPiso.val();
-        obj.departamento = inputDepartamento.val();
+        obj.departamento = inputDepartamento.val()
+        console.log(JSON.stringify(obj));
         llamadaAjax(pathValidarRegistrar, JSON.stringify(obj), true, "mostrarModalRegistracionExitosa", "mostrarModalError");
     }
 
     return validacion;
+
 });
 
-function mostrarModalRegistracionExitosa() {
+function mostrarModalRegistracionExitosa($dummy) {
     registrarModalLabel.text("¡Registración Exitosa!");
     registrarModal.find(".btn-secondary").addClass('d-none');
     registrarModal.find(".btn-primary").removeClass('d-none');
-    registrarModal.find(".moda-body").addClass('text-center').append('Presione Continuar, o espere y en unos minutos será redirigido');
+    registrarModal.find(".modal-body").text("Presione Continuar, o espere unos instantes y será redirigido");
     registrarModal.modal('show');
     setTimeout(function() {
         window.location.href = pathHome;
@@ -269,6 +271,8 @@ function mostrarModalError() {
     registrarModalLabel.text("Error de Registración");
     registrarModal.find(".btn-secondary").removeClass('d-none');
     registrarModal.find(".btn-primary").addClass('d-none');
-    registrarModal.find(".moda-body").addClass('text-center').append('Ha ocurrido un error y no se ha podido registrar el usuario. Revise sus datos y vuelva a intentarlo');
+    registrarModal.find(".moda-body").text('Ha ocurrido un error y no se ha podido registrar el usuario. Revise sus datos y vuelva a intentarlo');
     registrarModal.modal('show');
+    $("input").prop('disabled', false);
+    btnRegistrar.prop('disabled', false);
 }

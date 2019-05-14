@@ -6,10 +6,10 @@
  * Time: 17:22
  */
 
-class SQLInsertException extends ShopLineException
+class SQLInsertException extends Exception
 {
-    public function __construct($codigoError, $mensaje)
+    public function __construct($message = "", $code = 0, Throwable $previous = null)
     {
-        parent::__construct($codigoError, $mensaje);
+        parent::__construct($message, $code, $previous);
     }
 }

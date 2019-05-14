@@ -312,7 +312,7 @@ class Usuario extends Model
     public function validarRol()
     {
         return (FuncionesUtiles::esEntero($this->rolId) || FuncionesUtiles::esCadenaNumerica($this->rolId))
-            && (Roles::ADMINISTRADOR === $this->rolId || Roles::MODERADOR === $this->rolId || Roles::USUARIO === $this->rolId);
+            && (Roles::ADMINISTRADOR === $this->rolId || Roles::COADMINISTRADOR == $this->rolId || Roles::MODERADOR === $this->rolId || Roles::USUARIO === $this->rolId);
     }
 
     public function validarSexo()

@@ -3,14 +3,25 @@ define('WEBROOT', str_replace("Webroot/index.php", "", $_SERVER["SCRIPT_NAME"]))
 define('ROOT', str_replace("Webroot/index.php", "", $_SERVER["SCRIPT_FILENAME"]));
 
 require_once ROOT . 'Config/core.php';
-require_once ROOT . 'Helpers/Constantes.php';
-require_once ROOT . 'Enums/CodigoError.php';
-require_once ROOT . 'Exceptions/ShopLineException.php';
-require_once ROOT . 'Utils/FuncionesUtiles.php';
 require_once ROOT . 'router.php';
 require_once ROOT . 'request.php';
 require_once ROOT . 'dispatcher.php';
-require_once ROOT . 'Helpers/Session.php';
+
+massiveImport('Helpers');
+massiveImport('Enums');
+massiveImport('Utils');
+massiveImport('Exceptions');
+massiveImport('Dto');
+massiveImport('Models');
+
+function massiveImport($folder)
+{
+    $path = ROOT . $folder . "/*.php";
+    foreach (glob($path) as $filename)
+    {
+        require_once "$filename";
+    }
+}
 
 function getBaseAddress()
 {
@@ -31,7 +42,7 @@ function globalExceptionHandler($exception)
 {
     $strError = "Error " . $exception->getCode() . ":" . $exception->getMessage();
     echo $strError;
-    $strLog = "[". date("Y-m-d H:i:s") ."]" . $strError . PHP_EOL;
+    $strLog = "[". date("Y-m-d H:i:s") ."]  " . $strError . PHP_EOL;
     file_put_contents("exception-log.txt", $strLog,FILE_APPEND);
     throwError404();
 }
