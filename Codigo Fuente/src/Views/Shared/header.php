@@ -34,24 +34,25 @@
 
                                     $rolId = $sessionManejada->getRolId();
                                     $rol = "";
-                                    
+
                                     if($rolId == Roles::ADMINISTRADOR)
-                                        $rol = "Guantelete del infinito";
+                                        $rol = "Thanos";
                                     else
                                     if($rolId == Roles::COADMINISTRADOR)
                                         $rol = "Thor";
                                     else
                                     if($rolId == Roles::MODERADOR)
-                                        $rol = "Liebre"; 
+                                        $rol = "Groot";
                                     else
                                     if($rolId == Roles::USUARIO)
-                                        $rol = "Mortal";                                       
+                                        $rol = "Howard";
 
                                     echo"
                                         <a href='#'>
-                                           <i class='fas fa-user mr-1'></i> ". $sessionManejada->getUserName() . " " . $rol . "<i class='ml-1 fa fa-angle-down'></i>
+                                           <i class='fas fa-user mr-1'></i> ". $sessionManejada->getUserName() ."<i class='ml-1 fa fa-angle-down'></i>
                                         </a>
                                         <ul class='account_selection'>
+                                            <li><i class='fas fa-user-tag mr-1'></i>". $rol ."</li>
                                             <li><a href='#'><i class='far fa-id-badge mr-1'></i></i>Mi Perfil</a></li>
                                             <li><a href='#exampleModal' data-toggle='modal' data-target='#exampleModal'><i class='fas fa-sign-in-alt mr-1'></i>Cerrar Sesion</a></li>
                                         </ul>
@@ -75,7 +76,8 @@
             <div class="row">
                 <div class="col-lg-12 text-right">
                     <div class="logo_container" >
-                        <img class="img-fluid logo_container" id="logo" src="<?php echo getBaseAddress() . "Webroot/img/home/logo.png" ?>">
+                        <img class="img-fluid" id="logo" src="<?php echo getBaseAddress() . "Webroot/img/home/logo.png" ?>">
+                        <img class="img-fluid" id="logoResponsive" src="<?php echo getBaseAddress() . "Webroot/img/home/logoResponsive3.png" ?>">
                     </div>
                     <nav class="navbar">
 
