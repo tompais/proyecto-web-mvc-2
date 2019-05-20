@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/lib/OwlCarousel2-2.2.1/animate.css"; ?>">
     <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/lib/OwlCarousel2-2.2.1/owl.carousel.css"; ?>">
     <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/lib/OwlCarousel2-2.2.1/owl.theme.default.css"; ?>">
+    <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/home/Inicio.css" ?>">
+    <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/home/responsive.css" ?>">
     <link rel="shortcut icon" href="<?php echo getBaseAddress() . "Webroot/img/favicon.ico"; ?>" type="image/x-icon">
     <link rel="icon" href="<?php echo getBaseAddress() . "Webroot/img/favicon.ico"; ?>" type="image/x-icon">
 </head>
@@ -44,6 +46,7 @@
     <script src="<?php echo getBaseAddress() . "Webroot/lib/OwlCarousel2-2.2.1/owl.carousel.js"; ?>"></script>
     <script src="<?php echo getBaseAddress() . "Webroot/js/utilidades/constantes.js"; ?>"></script>
     <script src="<?php echo getBaseAddress() . "Webroot/js/utilidades/utilidades.js"; ?>"></script>
+    <script src="<?php echo getBaseAddress() . "Webroot/js/home/Home.js" ?>"></script>
 
     <main role="main">
 

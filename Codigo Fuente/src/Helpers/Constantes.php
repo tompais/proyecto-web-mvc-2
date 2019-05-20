@@ -12,11 +12,13 @@ abstract class Constantes
     const INICIOVIEW = "inicio";
     const REGISTRARVIEW = "registrar";
     const LOGINVIEW =  "login";
+    const PRODUCTOSVIEW = "misProductos";
 
     //Títulos
     const MAINTITLE = "ShopLine";
     const REGISTRARTITLE = "Registrar";
     const LOGINTITLE = "Iniciar Sesion";
+    const PRODUTOSTITLE = "Ventas";
 
     //Regex
     const REGEXLETRASYNUMEROS = "/^[0-9a-zA-Z]+$/";
