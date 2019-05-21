@@ -4,3 +4,5 @@
 /Codigo Fuente/src/Webroot/sql-log.txt
 /Codigo Fuente/src/Webroot/exception-log.txt
 desktop.ini
+desktop*
+*.ini
