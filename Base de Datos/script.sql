@@ -6133,12 +6133,27 @@ CREATE TABLE Categoria(
     constraint PK_Categoria primary key (Id)
 );
 
-CREATE TABLE SubCategoria(
-    Id integer auto_increment not null unique,
+
+CREATE TABLE Producto (
+	Id integer auto_increment not null unique,
+    Nombre varchar(30) not null,
+    Precio int not null,
+    CategoriaId int not null,
+    UsuarioId int not null,
+    Descripcion varchar (200),
+    FechaBaja datetime,
+    FechaAlta datetime not null,
+    constraint PK_Producto primary key (Id),
+    constraint FK_Producto_Categoria foreign key (CategoriaId) references Categoria (Id),
+    constraint FK_Producto_Usuario foreign key (UsuarioId) references Usuario (Id)
+);
+
+CREATE TABLE Imagen (
+	Id integer auto_increment not null unique,
     Nombre varchar(30) not null unique,
-    CategoriaId integer not null,
-    constraint PK_SubCategoria primary key (Id),
-    constraint FK_SubCategoria_Categoria foreign key (CategoriaId) references Categoria (Id)
+    ProductoId int not null, 
+    constraint PK_Imagen primary key (Id),
+    constraint FK_Imagen_Producto foreign key (ProductoId) references Producto (Id) 
 );
 
 INSERT INTO Rol (Nombre) VALUES ("Administrador"),
