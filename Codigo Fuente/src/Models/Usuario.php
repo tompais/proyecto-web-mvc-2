@@ -350,6 +350,26 @@ class Usuario extends Model
         return $this->getId();
     }
 
+    public function obtenerRegistro($pk)
+    {
+        if($registro = $this->selectByPk($pk))
+        {
+            $this->setId($registro["Id"]);
+            $this->setNombre($registro["Nombre"]);
+            $this->setApellido($registro["Apellido"]);
+            $this->setFechaNacimiento($registro["FechaNacimiento"]);
+            $this->setUsername($registro["Username"]);
+            $this->setUpassword($registro["UPassword"]);
+            $this->setTelefono($registro["Telefono"]);
+            $this->setDireccionId($registro["DireccionId"]);
+            $this->setRolId($registro["RolId"]);
+            $this->setSexoId($registro["SexoId"]);
+            $this->setEmail($registro["Email"]);
+            $this->setFechaBaneo($registro["FechaBaneo"]);
+            $this->setFechaBaja($registro["FechaBaja"]);
+        }
+    }
+
 }
 
 
