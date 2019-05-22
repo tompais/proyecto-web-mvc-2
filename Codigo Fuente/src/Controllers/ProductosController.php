@@ -27,7 +27,7 @@ class ProductosController extends Controller
         $producto->setUsuarioId($sesion->getId());
         $producto->setUsuario($usuario);
         $producto->setDescripcion($publicacion["descripcionProducto"]);
-        $producto->setFechaAlta(date("Y-m-d"));
+        $producto->setFechaAlta(date("Y-m-d H:i:s"));
 
         $idProducto = $producto->insertarProducto();
 
@@ -40,10 +40,14 @@ class ProductosController extends Controller
             {
                 $ruta = ROOT . "Webroot/img/productos/";
                 $nombreImg = $_FILES["imagenProducto"]["name"][$id];
-                $ruta .= basename($nombreImg);
+
+                $temp = explode(".", $nombreImg);
+                $newNombre = microtime(true) . '.' . end($temp);
+
+                $ruta .= basename($newNombre);
                 $tmp = $_FILES["imagenProducto"]["tmp_name"][$id];
                 move_uploaded_file($tmp, $ruta);
-                $imagen->setNombre($nombreImg);
+                $imagen->setNombre($newNombre);
                 $imagen->setProductoId($idProducto);
                 $imagen->setProducto($producto);
                 $imagen->insertarImagen();
