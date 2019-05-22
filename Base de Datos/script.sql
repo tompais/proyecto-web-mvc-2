@@ -6133,12 +6133,27 @@ CREATE TABLE Categoria(
     constraint PK_Categoria primary key (Id)
 );
 
-CREATE TABLE SubCategoria(
-    Id integer auto_increment not null unique,
+
+CREATE TABLE Producto (
+	Id integer auto_increment not null unique,
+    Nombre varchar(30) not null,
+    Precio int not null,
+    CategoriaId int not null,
+    UsuarioId int not null,
+    Descripcion varchar (200),
+    FechaBaja datetime,
+    FechaAlta datetime not null,
+    constraint PK_Producto primary key (Id),
+    constraint FK_Producto_Categoria foreign key (CategoriaId) references Categoria (Id),
+    constraint FK_Producto_Usuario foreign key (UsuarioId) references Usuario (Id)
+);
+
+CREATE TABLE Imagen (
+	Id integer auto_increment not null unique,
     Nombre varchar(30) not null unique,
-    CategoriaId integer not null,
-    constraint PK_SubCategoria primary key (Id),
-    constraint FK_SubCategoria_Categoria foreign key (CategoriaId) references Categoria (Id)
+    ProductoId int not null, 
+    constraint PK_Imagen primary key (Id),
+    constraint FK_Imagen_Producto foreign key (ProductoId) references Producto (Id) 
 );
 
 INSERT INTO Rol (Nombre) VALUES ("Administrador"),
@@ -6187,3 +6202,11 @@ VALUES ("Ezequiel", "Allio", '1996-05-07', "ezequiel", "eb6a2f962bb597f98b2c2b9c
         ("Alejo", "Martínez", "1998-12-23", "alejovoley14", "3de5110c9559591d0178269408ecdd6d57131818", "pupe893@gmail.com", 2, 1144188686, 1, 2),
         ("Sebastián", "Reales", "1989-12-12", "falsoalexis", "bfa643708c7876c74d5088ea7bdf50de7c56e6b6", "falso.alexis@gmail.com", 2, 1128232503, 1, 3),
         ("Super", "User", "1810-05-25", "superuser", "8e67bb26b358e2ed20fe552ed6fb832f397a507d", "super.user@gmail.com", 1, 111234567, 3, 4);
+
+INSERT INTO Categoria (Nombre)
+VALUES ("Tecnología"),
+        ("Hogar"),
+        ("Ropa"),
+        ("Librería"),
+        ("Iluminación"),
+        ("Comestibles");

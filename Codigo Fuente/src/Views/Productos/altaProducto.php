@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <form action="../Shared/Index.php" method="post" class="mx-auto p-4 bg-white text-left" enctype="multipart/form-data">
+    <form action="<?php echo getBaseAddress() . "Productos/alta" ?>" method="post" class="mx-auto p-4 bg-white text-left" enctype="multipart/form-data">
 
         <div class="form-group">
             <label for="inputNombreProducto">Nombre</label>
@@ -11,11 +11,14 @@
         </div>
 
         <div class="form-group">
-            <label for="selectCategoriaPokemon">Categoria</label>
-            <select name="categoriaProducto" id="selectCategoriaPokemon" class="form-control">
-                <option>Categoria 1</option>
-                <option>Categoria 2</option>
-                <option>Categoria 3</option>
+            <label for="selectCategoriaProducto">Categoria</label>
+            <select name="categoriaProducto" id="selectCategoriaProducto" class="form-control">
+                <option>Tecnologia</option>
+                <option>Hogar</option>
+                <option>Ropa</option>
+                <option>Libreria</option>
+                <option>Iluminacion</option>
+                <option>Comestibles</option>
             </select>
         </div>
 
@@ -26,7 +29,7 @@
 
         <div class="form-group">
             <label for="inputImagenProducto">Imagen</label>
-            <input type="file" class="form-control-file" name="imagenProducto" id="inputImagenProducto">
+            <input type="file" class="form-control-file" name="imagenProducto[]" id="inputImagenProducto" multiple>
         </div>
 
         <br>
