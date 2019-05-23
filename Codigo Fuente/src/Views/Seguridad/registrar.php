@@ -6,11 +6,12 @@
     const pathValidarRegistrar = "<?php echo getBaseAddress() . "Seguridad/validarRegistrar"; ?>";
     const pathHome = "<?php echo getBaseAddress() . "Home/inicio"; ?>";
 </script>
-<div class="container-fluid mt-4">
-    <div class="border shadow rounded mx-auto w-50 p-4 my-5 bg-white">
+<div class="d-flex mt-4">
+    <div class="col-lg-6 col-md-8 mx-auto">
+        <div class="border shadow rounded p-4 my-5 bg-white">
             <h4 class="mb-4 text-center">Regístrese</h4>
             <div class="form-row">
-                <div class="col-md">
+                <div class="col-sm">
                     <div class="form-group">
                         <label for="inputNombre">Nombre</label>
                         <input type="text" name="nombre" id="inputNombre" class="form-control" placeholder="Ej: Pepe" maxlength="15">
@@ -25,7 +26,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md">
+                <div class="col-sm">
                     <div class="form-group">
                         <label for="inputApellido">Apellido</label>
                         <input type="text" name="apellido" id="inputApellido" class="form-control" placeholder="Ej: González">
@@ -44,7 +45,7 @@
             </div>
 
             <div class="form-row">
-                <div class="col-md">
+                <div class="col-sm">
                     <div class="form-group">
                         <label for="inputNickname">Nickname</label>
                         <input type="text" name="nickname" id="inputNickname" class="form-control" placeholder="Ej: pgonzalez">
@@ -60,7 +61,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md">
+                <div class="col-sm">
                     <div class="form-group">
                         <label for="inputEmail">Email</label>
                         <input type="email" name="email" id="inputEmail" class="form-control" placeholder="ejemplo@correo.com">
@@ -74,7 +75,7 @@
             </div>
 
             <div class="form-row">
-                <div class="col-md">
+                <div class="col-sm">
                     <div class="form-group">
                         <label for="inputPassword">Contraseña</label>
                         <div class="input-group">
@@ -94,7 +95,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md">
+                <div class="col-sm">
                     <div class="form-group">
                         <label for="inputRePassword">Confirmar Contraseña</label>
                         <div class="input-group">
@@ -115,7 +116,7 @@
             </div>
 
             <div class="form-row">
-                <div class="col-md">
+                <div class="col-sm">
                     <div class="form-group">
                         <label for="selectSexo">Sexo</label>
                         <select class="form-control" name="sexo" id="selectSexo">
@@ -126,7 +127,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-md">
+                <div class="col-sm">
                     <div class="form-group">
                         <label for="inputFechaNacimiento">Fecha de Nacimiento</label>
                         <div class="input-group">
@@ -144,7 +145,7 @@
             </div>
 
             <div class="form-row">
-                <div class="col-md">
+                <div class="col-sm">
                     <div class="form-group">
                         <label for="inputTelefono">Teléfono</label>
                         <input type="number" class="form-control" name="telefono" id="inputTelefono" aria-describedby="helpIdInputTelefono" placeholder="111234567">
@@ -155,7 +156,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md">
+                <div class="col-sm">
                     <div class="form-group">
                         <label for="selectProvincia">Provincia</label>
                         <select class="form-control" name="provincia" id="selectProvincia">
@@ -169,7 +170,7 @@
             </div>
 
             <div class="form-row">
-                <div class="col-md">
+                <div class="col-sm">
                     <div class="form-group">
                         <label for="selectPartido">Partido</label>
                         <select class="form-control" name="partido" id="selectPartido">
@@ -180,7 +181,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-md">
+                <div class="col-sm">
                     <div class="form-group">
                         <label for="selectLocalidad">Localidad</label>
                         <select class="form-control" name="localidad" id="selectLocalidad">
@@ -194,7 +195,7 @@
             </div>
 
             <div class="form-row">
-                <div class="col-md">
+                <div class="col-sm">
                     <div class="form-group">
                         <label for="inputCalle">Calle</label>
                         <input type="text" class="form-control" name="calle" id="inputCalle" placeholder="Ej: Av. Rivadavia">
@@ -204,7 +205,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md">
+                <div class="col-sm">
                     <div class="form-group">
                         <label for="inputAltura">Altura</label>
                         <input type="number" class="form-control" name="altura" id="inputAltura" placeholder="Ej: 13200">
@@ -217,7 +218,7 @@
             </div>
 
             <div class="form-row">
-                <div class="col-md">
+                <div class="col-sm">
                     <div class="form-group">
                         <label for="inputPiso">Piso</label>
                         <input type="number" class="form-control" name="piso" id="inputPiso" aria-describedby="helpIdInputPiso" placeholder="Ej: 13">
@@ -228,7 +229,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md">
+                <div class="col-sm">
                     <div class="form-group">
                         <label for="inputDepartamento">Departamento</label>
                         <input type="text" class="form-control" name="departamento" id="inputDepartamento" aria-describedby="helpIdInputDepartamento" placeholder="Ej: A">
@@ -244,7 +245,7 @@
             <div class="d-flex justify-content-center align-items-center my-3">
                 <button type="button" name="btnRegistrar" id="btnRegistrar" class="btn btn-primary">Registrar</button>
             </div>
-
+        </div>
     </div>
 </div>
 

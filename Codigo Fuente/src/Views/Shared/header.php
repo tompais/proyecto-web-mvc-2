@@ -141,6 +141,7 @@
                             <i class='fas fa-user mr-1'></i> ". $sessionManejada->getUserName() . "<i class='ml-1 fa fa-angle-down'></i>
                          </a>
                          <ul class='menu_selection'>
+                            <li><a href='#'><i class='fas fa-user-tag mr-1'></i></i>". $rol ."</a></li>
                             <li><a href='#'><i class='far fa-id-badge mr-1'></i></i>Mi Perfil</a></li>
                             <li><a href='#'><i class='fas fa-cash-register mr-1'></i></i></i>Compras</a></li>
                             <li><a href='". getBaseAddress() . 'Productos/misProductos' . "'><i class='fas fa-piggy-bank mr-1'></i></i></i>Ventas</a></li>
