@@ -32,8 +32,8 @@
                 </div>
 
                 <div class="d-flex flex-column">
-                    <small>¿Olvidaste tu contraseña? <a href="forgotPassword.php">Click aquí</a></small>
-                    <small>¿Primera vez aquí? <a href="registrar.php">Regístrate</a></small>
+                    <small>¿Olvidaste tu contraseña? <a href="#">Click aquí</a></small>
+                    <small>¿Primera vez aquí? <a href="<?php echo getBaseAddress() . "Seguridad/registrar"; ?>">Regístrate</a></small>
                 </div>
 
             </form>
