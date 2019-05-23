@@ -4,6 +4,17 @@ class ProductosController extends Controller
 {
     function misProductos()
     {
+        $sesion = unserialize($_SESSION["session"]);
+    
+        $producto = new Producto();
+        $imagen = new Imagen();
+
+        $productos = $producto->traerListaProductos($sesion->getId());
+        $imagenes = $imagen->traerListaImagenes($sesion->getId());
+
+        $_SESSION["productos"] = $productos;
+        $_SESSION["imagenes"] = $imagenes;
+
         $d["title"] = Constantes::PRODUTOSTITLE;
         $this->set($d);
         $this->render(Constantes::PRODUCTOSVIEW);

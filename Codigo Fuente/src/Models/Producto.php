@@ -126,6 +126,11 @@ class Producto extends Model
         $this->setId($this->insert($array));
         return $this->getId();
     }
+
+    public function traerListaProductos($pk)
+    {
+        return $this->pageRows(0, PHP_INT_MAX, "UsuarioId = $pk");
+    }
 }
 
 ?>
