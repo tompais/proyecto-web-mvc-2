@@ -1,6 +1,5 @@
 
-$(document).ready(function() {
-
+//$(document).ready(function() {
 
     $("#btnAgregar").click(function(){
 
@@ -58,12 +57,15 @@ $(document).ready(function() {
             $("#errorImagenProducto").fadeOut();
         }    
         return true; 
+    
     });                    
 
     
-});
+//});
 
-
+/*
 function ErrorFormulario () {
     $("#errorForm").fadeIn("slow");
 }
+
+*/
