@@ -4,6 +4,30 @@ class ProductosController extends Controller
 {
     function misProductos()
     {
+        $sesion = unserialize($_SESSION["session"]);
+    
+        $producto = new Producto();
+
+        $productos = "";
+        
+        if($productos = $producto->traerListaProductos($sesion->getId()))
+        {
+            $imagen = new Imagen();
+
+            $imagenes = [];
+            
+            for($i = 0; $i < count($productos); $i++)
+            {
+                $imgProduc = $imagen->traerListaImagenes($productos[$i]["Id"]);
+
+                for($j = 0; $j < count($imgProduc); $j++)
+                    array_push($imagenes, $imgProduc[$j]);
+            }
+            
+            $_SESSION["productos"] = $productos;
+            $_SESSION["imagenes"] = $imagenes;
+        }
+
         $d["title"] = Constantes::PRODUTOSTITLE;
         $this->set($d);
         $this->render(Constantes::PRODUCTOSVIEW);

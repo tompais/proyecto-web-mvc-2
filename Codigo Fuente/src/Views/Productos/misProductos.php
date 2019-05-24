@@ -52,6 +52,40 @@
             </ul>
             <p>$60000.00</p>
         </li>
+        
+        <?php
+            $productos = isset($_SESSION["productos"])?$_SESSION["productos"]:[];
+            $imagenes = isset($_SESSION["imagenes"])?$_SESSION["imagenes"]:[];
+
+            $j = 0;
+
+            for($i = 0; $i < count($productos); $i++)
+            {
+                $imagen = $imagenes[$j]['Nombre'];
+                $id = $productos[$i]['Id'];
+
+                $rutaImg = getBaseAddress() . 'Webroot/img/productos/' . $imagen;
+                $producNomb = $productos[$i]['Nombre'];
+                $precio = $productos[$i]['Precio'];
+
+                echo "<li class='card mt-3'>
+                        <div class='card__inner'>
+                            <img class='img-fluid' src='$rutaImg'>
+                        </div>
+                        <h3 class='card__tagline mt-2'>$producNomb</h3>
+                        <ul class='card__icons mt-2'>
+                            <li><a href='#'><i class='fas fa-eye'></i></a></li>
+                            <li><a href='#'><i class='fas fa-edit'></i></a></li>
+                            <li><a href='#'><i class='fas fa-times'></i></a></li>
+                        </ul>
+                        <p>$$precio.00</p>
+                    </li>";
+
+                while($j < count($imagenes) && $id == $imagenes[$j]['ProductoId'])
+                    $j++;
+            }
+        ?>
+
     </ul>
 </div>
 
