@@ -10,7 +10,7 @@
         var descripcionProducto = $('#textareaDescripcionProducto').val();
         
         //var imagenProducto = $('#inputImagenProducto')[0].val();
-        var imagenProducto = $('#inputImagenProducto').files[0];
+        var imagenProducto = $('#inputImagenProducto').files;
 
         //nombre de producto
         if(nombreProducto == null || nombreProducto.length < 5 || nombreProducto === ""){
@@ -18,6 +18,7 @@
             return false;        
         }
         else{
+            console.log('type is - ' + typeof(nombreProducto));
             $("#errorNombreProducto").fadeOut();
         }
       
