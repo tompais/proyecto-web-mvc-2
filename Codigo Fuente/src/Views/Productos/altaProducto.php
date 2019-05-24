@@ -35,7 +35,7 @@
 
         <div class="form-group">
             <label for="inputImagenProducto">Imagen</label>
-            <input type="file" class="form-control-file" name="imagenProducto[]" id="inputImagenProducto" multiple>
+            <input type="file" class="form-control-file" name="imagenProducto[]" id="inputImagenProducto" multiple required>
             <div id="errorImageProducto" class="error"> <i class="fas fa-exclamation-triangle"></i> Elija las fotos del productol</div>
         </div>
 
