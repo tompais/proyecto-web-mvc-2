@@ -198,6 +198,19 @@ class SeguridadController extends Controller
         header("location: " . getBaseAddress() . "Home/inicio");
     }
 
+     function inicio()
+    {
+        $d["title"] = Constantes::MAINTITLE;
+        $this->set($d);
+        $this->render(Constantes::INICIOVIEW);
+    }
+    
+      function forgotPASSWORD()
+    {
+        $d["title"] = Constantes::FORGOTPASS;
+        $this->set($d);
+        $this->render(Constantes::FORGOTPASSWORD);
+    }
 }
 
 ?>
