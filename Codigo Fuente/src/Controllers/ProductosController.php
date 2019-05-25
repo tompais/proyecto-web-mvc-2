@@ -42,7 +42,7 @@ class ProductosController extends Controller
 
         $sesion = unserialize($_SESSION["session"]);
 
-        $usuario->obtenerRegistro($sesion->getId());
+        $usuario->getUsuarioById($sesion->getId());
 
         $producto->setNombre($publicacion["nombreProducto"]);
         $producto->setPrecio($publicacion["precioProducto"]);

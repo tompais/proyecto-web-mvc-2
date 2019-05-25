@@ -10,9 +10,11 @@ function validarEmailOrNick() {
     var emailOrNick = inputEmailOrNick.val();
 
     if(emailOrNick === null || emailOrNick.length === 0 || emailOrNick === "") {
-        errorEmailOrNick.val("Ingrese su Nickname o Email").fadeIn("slow");
-    } else if(!regexEmail.test(emailOrNick) || !regexLetrasYNumeros.test(emailOrNick)) {
-        errorEmailOrNick.val("Email o Nickname inválido").fadeIn("slow");
+        errorEmailOrNick.find("span").text("Ingrese su Nickname o Email");
+        errorEmailOrNick.fadeIn("slow");
+    } else if(!regexEmail.test(emailOrNick) && !regexLetrasYNumeros.test(emailOrNick)) {
+        errorEmailOrNick.find("span").text("Email o Nickname inválido");
+        errorEmailOrNick.fadeIn("slow");
     } else {
         validacion = true;
     }
@@ -21,7 +23,10 @@ function validarEmailOrNick() {
 }
 
 btnRecuperarPassword.click(function () {
-    $(".error").fadeOut().val("");
+    $("input").prop('disabled', true);
+    btnRecuperarPassword.prop('disabled', true);
+    $(".error").fadeOut();
+    $(".error").find("span").text("");
 
     if(validarEmailOrNick()) {
         var obj = {};
@@ -31,24 +36,13 @@ btnRecuperarPassword.click(function () {
 });
 
 function mostrarModalRenovacionPasswordExitosa(dummy) {
-    alertify.defaults = {
-        // language resources
-        glossary:{
-            // dialogs default title
-            title:'¡Contraseña Renovada!'
-        }
-    };
-    alertify.confirm("Para continuar, debe permitir al navegador acceder a su ubicación").setting('modal', false);
+    $("input").prop('disabled', false);
+    btnRecuperarPassword.prop('disabled', false);
+    alertify.confirm('¡Contraseña Renovada!', "Para continuar, debe permitir al navegador acceder a su ubicación");
 }
 
 function mostrarModalRenovacionPasswordFallida(err) {
-    alertify.defaults = {
-        // language resources
-        glossary:{
-            // dialogs default title
-            title:'Error en Renovación de Password'
-        }
-    };
-
-    alertify.alert(err);
+    $("input").prop('disabled', false);
+    btnRecuperarPassword.prop('disabled', false);
+    alertify.alert('Error en Renovación de Password', err).setting("modal", false);
 }

@@ -426,12 +426,19 @@ class Usuario extends Model
             && (generos::Masculino == $this->generoId || generos::Femenino == $this->generoId || generos::Otro == $this->generoId);
     }
 
-    public function loguearUsuarioDB (){
+    public function loguearUsuarioDB ()
+    {
         return $this->pageRows(0, 1, "(Username LIKE '$this->username' OR Email LIKE '$this->email') AND UPassword LIKE '$this->upassword'");
     }
 
-    public function existeUsuarioDB () {
-        return $this->pageRows(0, 1, "Username LIKE '$this->username' OR Email LIKE '$this->email' OR CUIT = $this->CUIT");
+    public function existeUsuarioDB ()
+    {
+        $row = $this->pageRows(0, 1, "Username LIKE '$this->username' OR Email LIKE '$this->email' OR CUIT = $this->CUIT");
+
+        if($row)
+            $this->setId($row[0]["Id"]);
+
+        return $row;
     }
 
     public function validarUsuario()
@@ -462,7 +469,7 @@ class Usuario extends Model
         return $this->getId();
     }
 
-    public function obtenerRegistro($pk)
+    public function getUsuarioById($pk)
     {
         if($registro = $this->selectByPk($pk))
         {
@@ -482,6 +489,17 @@ class Usuario extends Model
             $this->setFechaBaneo($registro["FechaBaneo"]);
             $this->setFechaBaja($registro["FechaBaja"]);
         }
+
+        return $registro;
+    }
+
+    public function renovarPasword($newPass)
+    {
+        $array = [
+            "Id" => $this->getId(),
+            "UPassword" => strtoupper(sha1($newPass))
+        ];
+        return $this->update($array);
     }
 
 }
