@@ -16,6 +16,10 @@ class Database
         $this->conn = mysqli_connect($host, $user, $password) or die("Error en la conexión a la base de datos");
 
         mysqli_select_db($this->conn, $dbname) or die("Error en la selección de la base de datos");
+
+        /* change character set to utf8 */
+        if (!$this->conn->set_charset("utf8"))
+            die("Error cargando charset UTF-8");
     }
 
     public function query($sql){
