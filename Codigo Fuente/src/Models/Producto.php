@@ -141,14 +141,18 @@ class Producto extends Model
 
     public function validarPrecio()
     {
-        return (FuncionesUtiles::esEntero($this->precio)
-                || FuncionesUtiles::esDecimal($this->precio))
-            && strlen($this->precio) > 0;
+        return FuncionesUtiles::esEntero($this->precio)
+                || FuncionesUtiles::esMayorACero($this->precio);
     }
 
-    public function validaDescripcion()
+    public function validarCateoria()
     {
-        return FuncionesUtiles::esOracion($this->descripcion)
+        return FuncionesUtiles::esCadenaNoNulaOVacia($this->categoria);
+    }
+
+    public function validarDescripcion()
+    {
+        return FuncionesUtiles::esPalabraConNumeros($this->descripcion)
             && FuncionesUtiles::esCadenaNoNulaOVacia($this->descripcion);
     }
 

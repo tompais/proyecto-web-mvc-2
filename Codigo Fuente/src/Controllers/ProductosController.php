@@ -44,42 +44,53 @@ class ProductosController extends Controller
 
         $usuario->obtenerRegistro($sesion->getId());
 
-        $producto->setNombre($publicacion["nombreProducto"]);
-        $producto->setPrecio($publicacion["precioProducto"]);
-        $categoria->obtenerIdByNombre($publicacion["categoriaProducto"]);
-        $producto->setCategoriaId($categoria->getId());
-        $producto->setUsuarioId($sesion->getId());
-        $producto->setUsuario($usuario);
-        $producto->setDescripcion($publicacion["descripcionProducto"]);
-        $producto->setFechaAlta(date("Y-m-d H:i:s"));
+        if (!$producto->validarNombre($publicacion["nombreProducto"])){
+            throw new NombreInvalidoException("El nombre del producto es incorrecto", CodigoError::NombreProductoInvalido);}
 
-        $idProducto = $producto->insertarProducto();
+        else if (!$producto->validarPrecio($publicacion["precioProducto"]))
+            throw new PrecioInvalidoException("El precio del producto es incorrecto", CodigoError::PrecioProductoInvalido);
 
-        if(isset($_FILES["imagenProducto"]["name"]))
-        {
-            
-            $total = count($_FILES["imagenProducto"]["name"]);
-            
-            for($id = 0; $id < $total; $id++)
-            {
-                $ruta = ROOT . "Webroot/img/productos/";
-                $nombreImg = $_FILES["imagenProducto"]["name"][$id];
+        else if (!$producto->validarCateoria($publicacion["categoriaProducto"]))
+            throw new CategoriasInvalidoException("La categoria del producto es incorrecto", CodigoError::CategoriaProductoInvalido);
 
-                $temp = explode(".", $nombreImg);
-                $newNombre = microtime(true) . '.' . end($temp);
+        else if (!$producto->validarDescripcion($publicacion["descripcionProducto"]))
+            throw new DescripcionInvalidoException("La descripcion del producto es incorrecto", CodigoError::DescripcionProductoInvalido);
 
-                $ruta .= basename($newNombre);
-                $tmp = $_FILES["imagenProducto"]["tmp_name"][$id];
-                move_uploaded_file($tmp, $ruta);
-                $imagen->setNombre($newNombre);
-                $imagen->setProductoId($idProducto);
-                $imagen->setProducto($producto);
-                $imagen->insertarImagen();
+        else {
+            $producto->setNombre($publicacion["nombreProducto"]);
+            $producto->setPrecio($publicacion["precioProducto"]);
+            $categoria->obtenerIdByNombre($publicacion["categoriaProducto"]);
+            $producto->setCategoriaId($categoria->getId());
+            $producto->setUsuarioId($sesion->getId());
+            $producto->setUsuario($usuario);
+            $producto->setDescripcion($publicacion["descripcionProducto"]);
+            $producto->setFechaAlta(date("Y-m-d H:i:s"));
+
+            $idProducto = $producto->insertarProducto();
+
+            if (isset($_FILES["imagenProducto"]["name"])) {
+
+                $total = count($_FILES["imagenProducto"]["name"]);
+
+                for ($id = 0; $id < $total; $id++) {
+                    $ruta = ROOT . "Webroot/img/productos/";
+                    $nombreImg = $_FILES["imagenProducto"]["name"][$id];
+
+                    $temp = explode(".", $nombreImg);
+                    $newNombre = microtime(true) . '.' . end($temp);
+
+                    $ruta .= basename($newNombre);
+                    $tmp = $_FILES["imagenProducto"]["tmp_name"][$id];
+                    move_uploaded_file($tmp, $ruta);
+                    $imagen->setNombre($newNombre);
+                    $imagen->setProductoId($idProducto);
+                    $imagen->setProducto($producto);
+                    $imagen->insertarImagen();
+                }
             }
+
+            header("location: " . getBaseAddress() . "Productos/misProductos");
         }
-
-        header("location: " . getBaseAddress() . "Productos/misProductos");
-
     }
 
     function modificar($publicacion)
