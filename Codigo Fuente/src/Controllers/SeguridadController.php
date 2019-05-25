@@ -239,17 +239,17 @@ class SeguridadController extends Controller
             throw new EmailOrNickInvalidoException("El Email o Nickname insertado no son válidos", CodigoError::EmailOrNickInvalido);
         }
 
-        if(!$user->existeUsuarioDB()) {
+        if (!$user->existeUsuarioDB()) {
             throw new UsuarioInvalidoException("El usuario que intenta renovar la contraseña no existe");
         }
 
-     function inicio()
-    {
-        $d["title"] = Constantes::MAINTITLE;
-        $this->set($d);
-        $this->render(Constantes::INICIOVIEW);
+        function inicio()
+        {
+            $d["title"] = Constantes::MAINTITLE;
+            $this->set($d);
+            $this->render(Constantes::INICIOVIEW);
+        }
     }
-    
     
 }
 
