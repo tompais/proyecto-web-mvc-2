@@ -1,8 +1,8 @@
-<link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/seguridad/login.css" ?>">
+<link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/seguridad/login.css"; ?>">
 
     <div class="d-flex mt-4" id="login">
         <div class="col-md-5 col-sm-7 mx-auto">
-            <form action="<?php echo getBaseAddress() . "Seguridad/validarLogin" ?>" method="post" class="border rounded shadow p-4 my-5 bg-white">
+            <form action="<?php echo getBaseAddress() . "Seguridad/validarLogin"; ?>" method="post" class="border rounded shadow p-4 my-5 bg-white">
 
                 <h4 class="mb-4 text-center">Login de Usuario</h4>
 

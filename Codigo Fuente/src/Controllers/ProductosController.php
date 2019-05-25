@@ -42,7 +42,7 @@ class ProductosController extends Controller
 
         $sesion = unserialize($_SESSION["session"]);
 
-        $usuario->obtenerRegistro($sesion->getId());
+        $usuario->getUsuarioById($sesion->getId());
 
         if (!$producto->validarNombre($publicacion["nombreProducto"])){
             throw new NombreInvalidoException("El nombre del producto es incorrecto", CodigoError::NombreProductoInvalido);}

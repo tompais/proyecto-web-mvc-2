@@ -274,14 +274,7 @@ function saveGeolocationOnMemory(position) {
 }
 
 function showGeolocationMessageError() {
-    alertify.defaults = {
-        // language resources
-        glossary:{
-            // dialogs default title
-            title:'Error en Geolocalización'
-        }
-    };
-    alertify.alert("Para continuar, debe permitir al navegador acceder a su ubicación");
+    alertify.alert('Error en Geolocalización', "Para continuar, debe permitir al navegador acceder a su ubicación");
     geolocalizacion = null;
     return geolocalizacion;
 }
