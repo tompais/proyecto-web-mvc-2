@@ -49,6 +49,10 @@
     <script src="<?php echo getBaseAddress() . "Webroot/js/utilidades/utilidades.js"; ?>"></script>
     <script src="<?php echo getBaseAddress() . "Webroot/js/home/Home.js" ?>"></script>
 
+    <script>
+        const pathHome = "<?php echo getBaseAddress(); ?>";
+    </script>
+
     <main role="main">
         
         <div class="starter-template super_container">

@@ -48,6 +48,10 @@
     <script src="<?php echo getBaseAddress() . "Webroot/lib/OwlCarousel2-2.2.1/owl.carousel.js"; ?>"></script>
     <script src="<?php echo getBaseAddress() . "Webroot/js/utilidades/utilidades.js"; ?>"></script>
 
+    <script>
+        const pathHome = "<?php echo getBaseAddress(); ?>";
+    </script>
+
     <main role="main">
 
         <nav class="navbar fixed-top float-left">
