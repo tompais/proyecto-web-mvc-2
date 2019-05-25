@@ -90,43 +90,41 @@ class SeguridadController extends Controller
         $this->render(Constantes::LOGINVIEW);
     }
 
-    function validarLogin($usuario)
+    function validarLogin($json)
     {
-        $this->layout = "layoutSeguridad";
+        header("Content-type: application/json");
+
+        $data = json_decode(utf8_decode($json['data']));
 
         $user = new Usuario();
         $session = new Session();
 
-        $user->setCUIT(0);
-        if (FuncionesUtiles::esPalabraConNumeros($usuario["emailOrNick"])) {
-            $user->setUsername($usuario["emailOrNick"]);
+        if (FuncionesUtiles::esPalabraConNumeros($data->emailOrNick)) {
+            $user->setUsername($data->emailOrNick);
             $user->setEmail(null);
-        } else if (FuncionesUtiles::esEmailValido($usuario["emailOrNick"])) {
-            $user->setEmail($usuario["emailOrNick"]);
+        } else if (FuncionesUtiles::esEmailValido($data->emailOrNick)) {
+            $user->setEmail($data->emailOrNick);
             $user->setUsername(null);
         } else {
-            throwError404();
+            throw new EmailOrNickInvalidoException("El Email o Nickname insertado no son válidos", CodigoError::EmailOrNickInvalido);
         }
 
-        if (FuncionesUtiles::esPalabraConNumeros($usuario["password"])) {
-            $user->setUpassword(strtoupper(sha1($usuario["password"])));
+        if (PasswordHelper::validarPassword($data->password)) {
+            $user->setUpassword(strtoupper(sha1($data->password)));
         } else {
-            throwError404();
+            throw new PasswordInvalidaException("Formato de password ingresado inválido", CodigoError::PasswordInvalida);
         }
 
-        $arrayUsurio = $user->loguearUsuarioDB();
-
-
-        if ($arrayUsurio) {
-            $session->setId($arrayUsurio[0]["Id"]);
-            $session->setUserName($arrayUsurio[0]["Username"]);
-            $session->setRolId($arrayUsurio[0]["RolId"]);
+        if(!$user->loguearUsuarioDB()) {
+            throw new UsuarioInvalidoException("Usuario o contraseña inválido", CodigoError::UsuarioInvalido);
+        } else {
+            $session->setId($user->getId());
+            $session->setUserName($user->getUsername());
+            $session->setRolId($user->getRolId());
             $_SESSION["session"] = serialize($session);
-            header("location: " . getBaseAddress() . "Home/inicio");
-        } else {
-            header("location: " . getBaseAddress() . "Seguridad/login");
-            echo "<script> alert('Usuario incorrecto'); </script>";
         }
+
+        echo json_encode(true);
     }
 
     function validarRegistrar($json)
