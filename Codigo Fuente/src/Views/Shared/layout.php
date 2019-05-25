@@ -54,11 +54,15 @@
     </script>
 
     <main role="main">
-
+        
         <div class="starter-template super_container">
 
             <?php
             require_once ROOT . "Views/Shared/header.php";
+            ?>
+
+            <?php
+            require_once ROOT . "Views/Seguridad/cerrarSesion.php";
             ?>
 
             <?php
