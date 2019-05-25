@@ -58,6 +58,10 @@
             ?>
 
             <?php
+            require_once ROOT . "Views/Seguridad/cerrarSesion.php";
+            ?>
+
+            <?php
             echo $content_for_layout;
             ?>
 
