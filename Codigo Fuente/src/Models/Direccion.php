@@ -207,12 +207,37 @@ class Direccion extends Model
         && $this->localidad->getById($this->getLocalidadId())
         && $this->provincia->getId() == $this->partido->getProvinciaId()
         && $this->partido->getId() == $this->localidad->getPartidoId()
-        && FuncionesUtiles::esOracion($this->getCalle())
-        && (FuncionesUtiles::esEntero($this->getAltura()) || FuncionesUtiles::esCadenaNumerica($this->getAltura()))
-        && (!FuncionesUtiles::esCadenaNoNulaOVacia($this->getPiso()) && !FuncionesUtiles::esCadenaNoNulaOVacia($this->getDepartamento())
-            || ((FuncionesUtiles::esEntero($this->getPiso()) || FuncionesUtiles::esCadenaNumerica($this->getPiso())) && FuncionesUtiles::esPalabra($this->getDepartamento())));
+        && $this->validarCalle()
+        && $this->validarAltura()
+        && $this->validarPisoYDepartamento();
 
         return $validacion;
+    }
+
+    public function validarCalle()
+    {
+        return FuncionesUtiles::esOracion($this->getCalle());
+    }
+
+    public function validarAltura()
+    {
+        return FuncionesUtiles::esEntero($this->getAltura()) || FuncionesUtiles::esCadenaNumerica($this->getAltura());
+    }
+
+    public function validarPisoYDepartamento()
+    {
+        return !FuncionesUtiles::esCadenaNoNulaOVacia($this->getPiso()) && !FuncionesUtiles::esCadenaNoNulaOVacia($this->getDepartamento())
+            || ($this->validarPiso() && $this->validarDepartamento());
+    }
+
+    public function validarPiso()
+    {
+        return FuncionesUtiles::esEntero($this->getPiso()) || FuncionesUtiles::esCadenaNumerica($this->getPiso());
+    }
+
+    public function validarDepartamento()
+    {
+        return FuncionesUtiles::esPalabra($this->getDepartamento());
     }
 
     public function existeDireccion()
@@ -220,7 +245,7 @@ class Direccion extends Model
         $where = "Calle LIKE '$this->calle' AND Altura = $this->altura AND ProvinciaId = $this->provinciaId AND PartidoId = $this->partidoId AND LocalidadId = $this->localidadId";
 
         if(FuncionesUtiles::esCadenaNoNulaOVacia($this->getPiso()) && FuncionesUtiles::esCadenaNoNulaOVacia($this->getDepartamento()))
-            $where .= "AND Piso = $this->piso AND Departamento LIKE '$this->departamento'";
+            $where .= " AND Piso = $this->piso AND Departamento LIKE '$this->departamento'";
 
         $row = $this->pageRows(0, 1, $where);
 
