@@ -209,6 +209,7 @@ class SeguridadController extends Controller
         header("location: " . getBaseAddress() . "Home/inicio");
     }
 
+
     function olvidePassword()
     {
         $this->layout = "layoutSeguridad";
@@ -241,7 +242,15 @@ class SeguridadController extends Controller
         if(!$user->existeUsuarioDB()) {
             throw new UsuarioInvalidoException("El usuario que intenta renovar la contraseña no existe");
         }
+
+     function inicio()
+    {
+        $d["title"] = Constantes::MAINTITLE;
+        $this->set($d);
+        $this->render(Constantes::INICIOVIEW);
     }
+    
+    
 }
 
 ?>
