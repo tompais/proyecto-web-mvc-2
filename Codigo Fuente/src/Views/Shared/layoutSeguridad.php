@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/seguridad/login.css" ?>">
     <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/home/Inicio.css" ?>">
     <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/home/responsive.css" ?>">
-
+    <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/error/erorrValidaciones" ?>">
 
 </head>
 
