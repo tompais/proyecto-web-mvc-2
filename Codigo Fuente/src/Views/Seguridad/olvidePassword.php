@@ -1,4 +1,5 @@
-<link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/seguridad/login.css"; ?>">
+<link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/seguridad/olvidePassword.css"; ?>">
+
 <script>
     const pathRenovarPassword = "<?php echo getBaseAddress() . "Seguridad/renovarPassword"; ?>";
 </script>

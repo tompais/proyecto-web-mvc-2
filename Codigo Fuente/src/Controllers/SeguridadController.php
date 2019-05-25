@@ -209,6 +209,7 @@ class SeguridadController extends Controller
         header("location: " . getBaseAddress() . "Home/inicio");
     }
 
+
     function olvidePassword()
     {
         $this->layout = "layoutSeguridad";
