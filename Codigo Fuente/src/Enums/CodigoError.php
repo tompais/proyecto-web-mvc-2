@@ -13,5 +13,5 @@ abstract class CodigoError
     const UsuarioInvalido = 3;
     const EntidadDuplicada = 4;
     const PasswordInvalida = 5;
-
+    const GeolocalizacionInvalida = 6;
 }

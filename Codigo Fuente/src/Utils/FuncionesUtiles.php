@@ -38,7 +38,7 @@ class FuncionesUtiles
         return self::validarPassword($pass) && self::validarPassword($repass) && $pass === $repass;
     }
 
-    public static function validarEmail($email)
+    public static function esEmailValido($email)
     {
         return self::esCadenaNoNulaOVacia($email) && filter_var($email, FILTER_VALIDATE_EMAIL);
     }

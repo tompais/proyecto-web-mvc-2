@@ -6096,8 +6096,8 @@ CREATE TABLE Direccion (
 
 CREATE TABLE Geolocalizacion (
 	Id integer NOT NULL auto_increment,
-    Latitud double NOT NULL,
-    Longitud double NOT NULL,
+    Latitud decimal(12, 10) NOT NULL,
+    Longitud decimal(13, 10) NOT NULL,
     constraint PK_Geolocalizacion PRIMARY KEY (Id)
 );
 
