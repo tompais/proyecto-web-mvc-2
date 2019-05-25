@@ -13,6 +13,11 @@ class FuncionesUtiles
         return is_string($string) && $string && strlen($string) && strcmp($string, "");
     }
 
+    public static function esMayorACero($int)
+    {
+        return $int > 0;
+    }
+
     public static function esOracion($string)
     {
         return self::esCadenaNoNulaOVacia($string) && preg_match(Constantes::REGEXLETRASYESPACIO, $string);

@@ -15,4 +15,10 @@ abstract class CodigoError
     const PasswordInvalida = 5;
     const GeolocalizacionInvalida = 6;
     const EmailOrNickInvalido = 7;
+    const NombreProductoInvalido = 9;
+    const PrecioProductoInvalido = 10;
+    const CategoriaProductoInvalido = 11;
+    const DescripcionProductoInvalido = 12;
+
+
 }
