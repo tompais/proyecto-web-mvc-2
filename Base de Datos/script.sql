@@ -4,6 +4,8 @@ CREATE DATABASE pw;
 
 USE pw;
 
+ALTER DATABASE pw CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
 /*Tabla de Provincias y Localidades*/
 
 CREATE TABLE Provincia (
@@ -6071,10 +6073,10 @@ CREATE TABLE Rol(
     constraint PK_Rol primary key (Id)
 );
 
-CREATE TABLE Sexo (
+CREATE TABLE Genero (
 	Id integer NOT NULL AUTO_INCREMENT,
     Nombre varchar(30) UNIQUE NOT NULL,
-    constraint PK_Sexo primary key (Id)
+    constraint PK_Genero primary key (Id)
 );
 
 CREATE TABLE Direccion (
@@ -6092,24 +6094,35 @@ CREATE TABLE Direccion (
     constraint FK_Direccion_Localidad foreign key (LocalidadId) references Localidad (ID)
 );
 
+CREATE TABLE Geolocalizacion (
+	Id integer NOT NULL auto_increment,
+    Latitud decimal(12, 10) NOT NULL,
+    Longitud decimal(13, 10) NOT NULL,
+    constraint PK_Geolocalizacion PRIMARY KEY (Id)
+);
+
 CREATE TABLE Usuario(
     Id integer NOT NULL AUTO_INCREMENT,
     Nombre varchar(30) NOT NULL,
     Apellido varchar(30) NOT NULL,
+    CUIT bigint UNIQUE NOT NULL,
     FechaNacimiento date NOT NULL,
     Username varchar(30) UNIQUE NOT NULL,
     UPassword varchar(100) NOT NULL,
-    Telefono integer NOT NULL,
-    DireccionId integer, 
+    TelefonoCelular integer NOT NULL,
+    TelefonoFijo integer NOT NULL,
+    DireccionId integer NOT NULL, 
+    GeolocalizacionId integer NOT NULL,
     RolId integer NOT NULL,
-    SexoId integer NOT NULL,
+    GeneroId integer NOT NULL,
     Email varchar(30) UNIQUE NOT NULL,
     FechaBaneo date,
     FechaBaja date,
     constraint PK_Usuario primary key (Id),
     constraint FK_Usuario_Direccion foreign key (DireccionId) references Direccion (Id),
+    constraint FK_Usuario_Geolocalizacion foreign key (GeolocalizacionId) references Geolocalizacion (Id),
     constraint FK_Usuario_Rol foreign key (RolId) references Rol (Id),
-    constraint FK_Usuario_Sexo FOREIGN KEY (SexoId) REFERENCES Sexo (Id)
+    constraint FK_Usuario_Genero FOREIGN KEY (GeneroId) REFERENCES Genero (Id)
 );
 
 CREATE TABLE Permiso(
@@ -6186,7 +6199,7 @@ INSERT INTO PermisoRol (PermisoId, RolId) VALUES (1, 1),
                                                  (7, 3),
                                                  (7, 4);
 
-INSERT INTO Sexo (Nombre) VALUES ("Masculino"),
+INSERT INTO Genero (Nombre) VALUES ("Masculino"),
 								("Femenino"),
                                 ("Otro");
 
@@ -6196,12 +6209,14 @@ INSERT INTO Direccion (Calle, Altura, ProvinciaId, PartIdoId, LocalIdadId, Piso,
                                                                                                         ("El Infierno", 666, 1, 3, 764, null, null),
                                                                                                         ("Calle Falsa", 123, 1, 3, 764, null, null);
 
-INSERT INTO Usuario (Nombre, ApellIdo, FechaNacimiento, Username, UPassword, Email, RolId, Telefono, SexoId, DireccionId)
-VALUES ("Ezequiel", "Allio", '1996-05-07', "ezequiel", "eb6a2f962bb597f98b2c2b9c4698da19710ddfa3", "ezequiel.allio@gmail.com", 2, 1121563869, 1, 5),
-		("Tomás", "Pais", "1995-11-15", "tpais", "c720f95d7b12b6fd252b432853bf8c0a118dd4a1", "tomas.j.pais@gmail.com", 2, 1132075813, 1, 1),
-        ("Alejo", "Martínez", "1998-12-23", "alejovoley14", "3de5110c9559591d0178269408ecdd6d57131818", "pupe893@gmail.com", 2, 1144188686, 1, 2),
-        ("Sebastián", "Reales", "1989-12-12", "falsoalexis", "bfa643708c7876c74d5088ea7bdf50de7c56e6b6", "falso.alexis@gmail.com", 2, 1128232503, 1, 3),
-        ("Super", "User", "1810-05-25", "superuser", "8e67bb26b358e2ed20fe552ed6fb832f397a507d", "super.user@gmail.com", 1, 111234567, 3, 4);
+INSERT INTO Geolocalizacion (Latitud, Longitud) values (0,0);
+
+INSERT INTO Usuario (Nombre, Apellido, CUIT, FechaNacimiento, Username, UPassword, Email, RolId, TelefonoCelular, TelefonoFijo, GeneroId, DireccionId, GeolocalizacionId)
+VALUES ("Ezequiel", "Allio", 20396702119, '1996-05-07', "ezequiel", "eb6a2f962bb597f98b2c2b9c4698da19710ddfa3", "ezequiel.allio@gmail.com", 2, 1121563869, 44438353, 1, 5, 1),
+		("Tomás", "Pais", 20393720507, "1995-11-15", "tpais", "c720f95d7b12b6fd252b432853bf8c0a118dd4a1", "tomas.j.pais@gmail.com", 2, 1132075813, 44438353, 1, 1, 1),
+        ("Alejo", "Martínez", 20397702119, "1998-12-23", "alejovoley14", "3de5110c9559591d0178269408ecdd6d57131818", "pupe893@gmail.com", 2, 1144188686, 44438353, 1, 2, 1),
+        ("Sebastián", "Reales", 20398702119, "1989-12-12", "falsoalexis", "bfa643708c7876c74d5088ea7bdf50de7c56e6b6", "falso.alexis@gmail.com", 2, 1128232503, 44438353, 1, 3, 1),
+        ("Super", "User", 20123456787, "1810-05-25", "superuser", "8e67bb26b358e2ed20fe552ed6fb832f397a507d", "super.user@gmail.com", 1, 111234567, 44438353, 3, 4, 1);
 
 INSERT INTO Categoria (Nombre)
 VALUES ("Tecnología"),

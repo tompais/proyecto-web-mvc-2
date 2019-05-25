@@ -17,6 +17,8 @@ massiveImport('Exceptions');
 massiveImport('Dto');
 massiveImport('Models');
 
+header("Content-Type: text/html; charset=utf-8");
+
 function massiveImport($folder)
 {
     $path = ROOT . $folder . "/*.php";

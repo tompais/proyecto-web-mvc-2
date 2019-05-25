@@ -6,15 +6,15 @@ class SeguridadController extends Controller
     {
         $this->layout = "layoutSeguridad";
 
-        $sexo = new Sexo();
+        $genero = new Genero();
         $provincia = new Provincia();
         $partido = new Partido();
         $localidad = new Localidad();
 
-        $d['sexos'] = $sexo->getAllSexos();
+        $d['generos'] = $genero->getAllGeneros();
         $d['provincias'] = $provincia->getAllProvincias();
 
-        usort($d['sexos'], Constantes::CMPBYID);
+        usort($d['generos'], Constantes::CMPBYID);
         usort($d['provincias'], Constantes::CMPBYNOMBRE);
 
         $d['partidos'] = $partido->getPartidosByProvinciaId($d['provincias'][0]->getId());
@@ -102,7 +102,7 @@ class SeguridadController extends Controller
             $user->setUsername($usuario["emailOrNick"]);
             $user->setEmail(null);
         }
-        else if (FuncionesUtiles::validarEmail($usuario["emailOrNick"])) {
+        else if (FuncionesUtiles::esEmailValido($usuario["emailOrNick"])) {
             $user->setEmail($usuario["emailOrNick"]);
             $user->setUsername(null);
         }
@@ -140,6 +140,7 @@ class SeguridadController extends Controller
 
         $usuario = new Usuario();
         $direccion = new Direccion();
+        $geolocalizacion = new Geolocalizacion();
 
         $direccion->setCalle($data->calle);
         $direccion->setAltura($data->altura);
@@ -158,19 +159,34 @@ class SeguridadController extends Controller
                 throw new SQLInsertException("Error al Insertar la Dirección", CodigoError::ErrorInsertSQL);
         }
 
+        $geolocalizacion->setLatitud($data->geolocalizacion->latitud);
+        $geolocalizacion->setLongitud($data->geolocalizacion->longitud);
+
+        if(!$geolocalizacion->validarGeolocalizacion())
+            throw new GeolocalizacionInvalidaException("Ubicación geográfica inválida", CodigoError::GeolocalizacionInvalida);
+
+        if(!$geolocalizacion->existeGeolocalizacion())
+        {
+            if(!$geolocalizacion->insertarGeolocalizacion())
+                throw new SQLInsertException("Error al Insertar la Geolocalización", CodigoError::ErrorInsertSQL);
+        }
+
         if(!FuncionesUtiles::validarPassword($data->password))
             throw new PasswordInvalidaException("El formato de la contraseña no es válido", CodigoError::PasswordInvalida);
 
         $usuario->setNombre($data->nombre);
         $usuario->setApellido($data->apellido);
+        $usuario->setCUIT($data->CUIT);
         $usuario->setUsername($data->nickname);
         $usuario->setUpassword(strtoupper(sha1($data->password)));
         $usuario->setEmail($data->email);
-        $usuario->setTelefono($data->telefono);
+        $usuario->setTelefonoFijo($data->telefonoFijo);
+        $usuario->setTelefonoCelular($data->telefonoCelular);
         $usuario->setDireccionId($direccion->getId());
-        $usuario->setSexoId($data->sexoId);
+        $usuario->setGeneroId($data->generoId);
         $usuario->setRolId(Roles::USUARIO);
         $usuario->setFechaNacimiento($data->fechaNacimiento);
+        $usuario->setGeolocalizacionId($geolocalizacion->getId());
 
         if(!$usuario->validarUsuario())
             throw new UsuarioInvalidoException( "Los datos de Usuario son inválidos", CodigoError::UsuarioInvalido);
@@ -196,6 +212,16 @@ class SeguridadController extends Controller
     {
         session_destroy();
         header("location: " . getBaseAddress() . "Home/inicio");
+    }
+
+    function olvidePassword()
+    {
+        $this->layout = "layoutSeguridad";
+
+        $d['title'] = Constantes::OLVIDEPASSWORDTITLE;
+
+        $this->set($d);
+        $this->render(Constantes::OLVIDEPASSWORDVIEW);
     }
 
 }
