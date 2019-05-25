@@ -6118,6 +6118,7 @@ CREATE TABLE Usuario(
     FechaBaja date,
     constraint PK_Usuario primary key (Id),
     constraint FK_Usuario_Direccion foreign key (DireccionId) references Direccion (Id),
+    constraint FK_Usuario_Geolocalizacion foreign key (GeolocalizacionId) references Geolocalizacion (Id),
     constraint FK_Usuario_Rol foreign key (RolId) references Rol (Id),
     constraint FK_Usuario_Genero FOREIGN KEY (GeneroId) REFERENCES Genero (Id)
 );
