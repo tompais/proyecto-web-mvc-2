@@ -13,7 +13,6 @@ abstract class Constantes
     const REGISTRARVIEW = "registrar";
     const LOGINVIEW =  "login";
     const PRODUCTOSVIEW = "misProductos";
-
     const OLVIDEPASSWORDVIEW = "olvidePassword";
 
 

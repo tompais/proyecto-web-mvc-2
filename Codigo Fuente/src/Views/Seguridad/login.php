@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/seguridad/login.css" ?>">
+<link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/seguridad/login.css"; ?>">
 
     <div class="d-flex mt-4" id="login">
         <div class="col-md-5 col-sm-7 mx-auto">

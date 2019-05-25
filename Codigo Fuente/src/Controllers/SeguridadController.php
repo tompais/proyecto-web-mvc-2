@@ -166,7 +166,7 @@ class SeguridadController extends Controller
                 throw new SQLInsertException("Error al Insertar la Geolocalización", CodigoError::ErrorInsertSQL);
         }
 
-        if (!FuncionesUtiles::validarPassword($data->password))
+        if (!PasswordHelper::validarPassword($data->password))
             throw new PasswordInvalidaException("El formato de la contraseña no es válido", CodigoError::PasswordInvalida);
 
         $usuario->setNombre($data->nombre);
@@ -243,14 +243,19 @@ class SeguridadController extends Controller
             throw new UsuarioInvalidoException("El usuario que intenta renovar la contraseña no existe");
         }
 
-        function inicio()
-        {
-            $d["title"] = Constantes::MAINTITLE;
-            $this->set($d);
-            $this->render(Constantes::INICIOVIEW);
+        $newPass = PasswordHelper::generarNuevoPassRandom();
+        if (!$user->renovarPasword($newPass)) {
+            throw new SQLUpdateException("Ocurrió un error al actualizar la contraseña", CodigoError::ErrorUpdateSQL);
         }
+
+        $user->getUsuarioById($user->getId());
+
+        if (!MailHelper::enviarMailRenovacionPassword($user->getEmail(), $newPass)) {
+            throw new EnvioMailRenovacionPasswordFallidoException("No se ha podido enviar el mail para la renovación de password", CodigoError::EnvioMailRenovacionPasswordFallido);
+        }
+
+        echo json_encode(true);
     }
-    
 }
 
 ?>

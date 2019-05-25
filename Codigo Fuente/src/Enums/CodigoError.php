@@ -21,4 +21,6 @@ abstract class CodigoError
     const DescripcionProductoInvalido = 12;
 
 
+    const ErrorUpdateSQL = 8;
+    const EnvioMailRenovacionPasswordFallido = 9;
 }

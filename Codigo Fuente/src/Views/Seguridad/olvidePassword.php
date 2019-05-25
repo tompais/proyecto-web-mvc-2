@@ -1,4 +1,5 @@
-<link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/seguridad/login.css"; ?>">
+<link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/seguridad/olvidePassword.css"; ?>">
+
 <script>
     const pathRenovarPassword = "<?php echo getBaseAddress() . "Seguridad/renovarPassword"; ?>";
 </script>
@@ -6,7 +7,7 @@
     <div class="form-group">
         <label for="inputEmailOrNick">Nickname/Email</label>
         <input type="text" name="inputEmailOrNick" id="inputEmailOrNick" class="form-control" required>
-        <div id="errorEmailOrNick" class="error"><i class="fas fa-exclamation-triangle"></i>
+        <div id="errorEmailOrNick" class="error"><i class="fas fa-exclamation-triangle mr-2"></i><span></span>
         </div>
     </div>
     <a class="d-flex justify-content-center align-items-center mt-4">
