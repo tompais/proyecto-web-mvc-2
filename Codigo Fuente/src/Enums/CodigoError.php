@@ -14,8 +14,11 @@ abstract class CodigoError
     const EntidadDuplicada = 4;
     const PasswordInvalida = 5;
     const GeolocalizacionInvalida = 6;
-    const NombreProductoInvalido = 7;
-    const PrecioProductoInvalido = 8;
-    const CategoriaProductoInvalido = 9;
-    const DescripcionProductoInvalido = 10;
+    const EmailOrNickInvalido = 7;
+    const NombreProductoInvalido = 9;
+    const PrecioProductoInvalido = 10;
+    const CategoriaProductoInvalido = 11;
+    const DescripcionProductoInvalido = 12;
+
+
 }
