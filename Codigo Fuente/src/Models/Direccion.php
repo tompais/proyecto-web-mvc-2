@@ -198,10 +198,6 @@ class Direccion extends Model
 
     public function validarDireccion()
     {
-        require_once ROOT . "Models/Provincia.php";
-        require_once ROOT . "Models/Partido.php";
-        require_once ROOT . "Models/Localidad.php";
-
         $this->setProvincia(new Provincia());
         $this->setPartido(new Partido());
         $this->setLocalidad(new Localidad());
