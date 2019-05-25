@@ -12,8 +12,8 @@ class Usuario extends Model
     private $telefono;
     private $direccionId;
     private $direccion;
-    private $sexoId;
-    private $sexo;
+    private $generoId;
+    private $genero;
     private $rolId;
     private $rol;
     private $fechaNacimiento;
@@ -39,17 +39,17 @@ class Usuario extends Model
     /**
      * @return mixed
      */
-    public function getSexo()
+    public function getGenero()
     {
-        return $this->sexo;
+        return $this->genero;
     }
 
     /**
-     * @param mixed $sexo
+     * @param mixed $genero
      */
-    public function setSexo($sexo)
+    public function setGenero($genero)
     {
-        $this->sexo = $sexo;
+        $this->genero = $genero;
     }
 
     /**
@@ -71,17 +71,17 @@ class Usuario extends Model
     /**
      * @return mixed
      */
-    public function getSexoId()
+    public function getGeneroId()
     {
-        return $this->sexoId;
+        return $this->generoId;
     }
 
     /**
-     * @param mixed $sexoId
+     * @param mixed $generoId
      */
-    public function setSexoId($sexoId)
+    public function setGeneroId($generoId)
     {
-        $this->sexoId = $sexoId;
+        $this->generoId = $generoId;
     }
 
     /**
@@ -318,8 +318,8 @@ class Usuario extends Model
     public function validarSexo()
     {
         require_once ROOT . "Enums/Sexos.php";
-        return (FuncionesUtiles::esEntero($this->sexoId) || FuncionesUtiles::esCadenaNumerica($this->sexoId))
-            && (Sexos::Masculino == $this->sexoId || Sexos::Femenino == $this->sexoId || Sexos::Otro == $this->sexoId);
+        return (FuncionesUtiles::esEntero($this->generoId) || FuncionesUtiles::esCadenaNumerica($this->generoId))
+            && (generos::Masculino == $this->generoId || generos::Femenino == $this->generoId || generos::Otro == $this->generoId);
     }
 
     public function existeUsuarioDB (){
@@ -342,7 +342,7 @@ class Usuario extends Model
             "Email" => $this->getEmail(),
             "Telefono" => $this->getTelefono(),
             "DireccionId" => $this->getDireccionId(),
-            "SexoId" => $this->getSexoId(),
+            "SexoId" => $this->getGeneroId(),
             "RolId" => $this->getRolId(),
             "FechaNacimiento" => $this->getFechaNacimiento()
         ];
@@ -363,7 +363,7 @@ class Usuario extends Model
             $this->setTelefono($registro["Telefono"]);
             $this->setDireccionId($registro["DireccionId"]);
             $this->setRolId($registro["RolId"]);
-            $this->setSexoId($registro["SexoId"]);
+            $this->setGeneroId($registro["SexoId"]);
             $this->setEmail($registro["Email"]);
             $this->setFechaBaneo($registro["FechaBaneo"]);
             $this->setFechaBaja($registro["FechaBaja"]);

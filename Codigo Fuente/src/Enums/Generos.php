@@ -6,7 +6,7 @@
  * Time: 18:02
  */
 
-abstract class Sexos
+abstract class generos
 {
     const Masculino = 1;
     const Femenino = 2;

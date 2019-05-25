@@ -4,6 +4,8 @@ CREATE DATABASE pw;
 
 USE pw;
 
+ALTER DATABASE pw CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
 /*Tabla de Provincias y Localidades*/
 
 CREATE TABLE Provincia (
@@ -6071,10 +6073,10 @@ CREATE TABLE Rol(
     constraint PK_Rol primary key (Id)
 );
 
-CREATE TABLE Sexo (
+CREATE TABLE Genero (
 	Id integer NOT NULL AUTO_INCREMENT,
     Nombre varchar(30) UNIQUE NOT NULL,
-    constraint PK_Sexo primary key (Id)
+    constraint PK_Genero primary key (Id)
 );
 
 CREATE TABLE Direccion (
@@ -6092,6 +6094,13 @@ CREATE TABLE Direccion (
     constraint FK_Direccion_Localidad foreign key (LocalidadId) references Localidad (ID)
 );
 
+CREATE TABLE Geolocalizacion (
+	Id integer NOT NULL auto_increment,
+    Latitud double NOT NULL,
+    Longitud double NOT NULL,
+    constraint PK_Geolocalizacion PRIMARY KEY (Id)
+);
+
 CREATE TABLE Usuario(
     Id integer NOT NULL AUTO_INCREMENT,
     Nombre varchar(30) NOT NULL,
@@ -6100,16 +6109,17 @@ CREATE TABLE Usuario(
     Username varchar(30) UNIQUE NOT NULL,
     UPassword varchar(100) NOT NULL,
     Telefono integer NOT NULL,
-    DireccionId integer, 
+    DireccionId integer NOT NULL, 
+    GeolocalizacionId integer,
     RolId integer NOT NULL,
-    SexoId integer NOT NULL,
+    GeneroId integer NOT NULL,
     Email varchar(30) UNIQUE NOT NULL,
     FechaBaneo date,
     FechaBaja date,
     constraint PK_Usuario primary key (Id),
     constraint FK_Usuario_Direccion foreign key (DireccionId) references Direccion (Id),
     constraint FK_Usuario_Rol foreign key (RolId) references Rol (Id),
-    constraint FK_Usuario_Sexo FOREIGN KEY (SexoId) REFERENCES Sexo (Id)
+    constraint FK_Usuario_Genero FOREIGN KEY (GeneroId) REFERENCES Genero (Id)
 );
 
 CREATE TABLE Permiso(
@@ -6186,7 +6196,7 @@ INSERT INTO PermisoRol (PermisoId, RolId) VALUES (1, 1),
                                                  (7, 3),
                                                  (7, 4);
 
-INSERT INTO Sexo (Nombre) VALUES ("Masculino"),
+INSERT INTO Genero (Nombre) VALUES ("Masculino"),
 								("Femenino"),
                                 ("Otro");
 
@@ -6196,7 +6206,7 @@ INSERT INTO Direccion (Calle, Altura, ProvinciaId, PartIdoId, LocalIdadId, Piso,
                                                                                                         ("El Infierno", 666, 1, 3, 764, null, null),
                                                                                                         ("Calle Falsa", 123, 1, 3, 764, null, null);
 
-INSERT INTO Usuario (Nombre, ApellIdo, FechaNacimiento, Username, UPassword, Email, RolId, Telefono, SexoId, DireccionId)
+INSERT INTO Usuario (Nombre, ApellIdo, FechaNacimiento, Username, UPassword, Email, RolId, Telefono, GeneroId, DireccionId)
 VALUES ("Ezequiel", "Allio", '1996-05-07', "ezequiel", "eb6a2f962bb597f98b2c2b9c4698da19710ddfa3", "ezequiel.allio@gmail.com", 2, 1121563869, 1, 5),
 		("Tomás", "Pais", "1995-11-15", "tpais", "c720f95d7b12b6fd252b432853bf8c0a118dd4a1", "tomas.j.pais@gmail.com", 2, 1132075813, 1, 1),
         ("Alejo", "Martínez", "1998-12-23", "alejovoley14", "3de5110c9559591d0178269408ecdd6d57131818", "pupe893@gmail.com", 2, 1144188686, 1, 2),

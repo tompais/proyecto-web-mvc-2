@@ -118,11 +118,11 @@
             <div class="form-row">
                 <div class="col-sm">
                     <div class="form-group">
-                        <label for="selectSexo">Sexo</label>
-                        <select class="form-control" name="sexo" id="selectSexo">
+                        <label for="selectGenero">Genero</label>
+                        <select class="form-control" name="sexo" id="selectGenero">
                             <?php
-                            foreach ($sexos as $sexo)
-                                echo "<option value='" . $sexo->getId() . "'>" . $sexo->getNombre() . "</option>";
+                            foreach ($generos as $genero)
+                                echo "<option value='" . $genero->getId() . "'>" . $genero->getNombre() . "</option>";
                             ?>
                         </select>
                     </div>

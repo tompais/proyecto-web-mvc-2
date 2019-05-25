@@ -6,7 +6,7 @@
  * Time: 13:13
  */
 
-class Sexo extends Model
+class Genero extends Model
 {
     private $id;
     private $nombre;
@@ -43,20 +43,20 @@ class Sexo extends Model
         $this->nombre = $nombre;
     }
 
-    public function getAllSexos()
+    public function getAllGeneros()
     {
-        $sexos = array();
+        $generos = array();
 
         $rows = $this->pageRows(0, PHP_INT_MAX);
 
         foreach($rows as $row)
         {
-            $sexo = new Sexo();
-            $sexo->setId($row['Id']);
-            $sexo->setNombre($row['Nombre']);
-            $sexos[] = $sexo;
+            $genero = new Genero();
+            $genero->setId($row['Id']);
+            $genero->setNombre($row['Nombre']);
+            $generos[] = $genero;
         }
 
-        return $sexos;
+        return $generos;
     }
 }

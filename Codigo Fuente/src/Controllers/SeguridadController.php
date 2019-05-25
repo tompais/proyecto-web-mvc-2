@@ -6,15 +6,15 @@ class SeguridadController extends Controller
     {
         $this->layout = "layoutSeguridad";
 
-        $sexo = new Sexo();
+        $genero = new Genero();
         $provincia = new Provincia();
         $partido = new Partido();
         $localidad = new Localidad();
 
-        $d['sexos'] = $sexo->getAllSexos();
+        $d['generos'] = $genero->getAllGeneros();
         $d['provincias'] = $provincia->getAllProvincias();
 
-        usort($d['sexos'], Constantes::CMPBYID);
+        usort($d['generos'], Constantes::CMPBYID);
         usort($d['provincias'], Constantes::CMPBYNOMBRE);
 
         $d['partidos'] = $partido->getPartidosByProvinciaId($d['provincias'][0]->getId());
@@ -168,7 +168,7 @@ class SeguridadController extends Controller
         $usuario->setEmail($data->email);
         $usuario->setTelefono($data->telefono);
         $usuario->setDireccionId($direccion->getId());
-        $usuario->setSexoId($data->sexoId);
+        $usuario->setGeneroId($data->sexoId);
         $usuario->setRolId(Roles::USUARIO);
         $usuario->setFechaNacimiento($data->fechaNacimiento);
 
