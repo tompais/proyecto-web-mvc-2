@@ -114,7 +114,7 @@ class SeguridadController extends Controller
             throwError404();
         }
 
-        $arrayUsurio = $user->existeUsuarioDB();
+        $arrayUsurio = $user->loguearUsuarioDB();
 
 
         if ($arrayUsurio) {
@@ -219,9 +219,28 @@ class SeguridadController extends Controller
         $this->render(Constantes::OLVIDEPASSWORDVIEW);
     }
 
-    function renovarPassword()
+    function renovarPassword($json)
     {
-        return;
+        header("Content-type: application/json");
+
+        $data = json_decode($json['data']);
+
+        $user = new Usuario();
+
+        $user->setCUIT(0);
+        if (FuncionesUtiles::esPalabraConNumeros($data->emailOrNick)) {
+            $user->setUsername($data->emailOrNick);
+            $user->setEmail(null);
+        } else if (FuncionesUtiles::esEmailValido($data->emailOrNick)) {
+            $user->setEmail($data->emailOrNick);
+            $user->setUsername(null);
+        } else {
+            throw new EmailOrNickInvalidoException("El Email o Nickname insertado no son válidos", CodigoError::EmailOrNickInvalido);
+        }
+
+        if(!$user->existeUsuarioDB()) {
+            throw new UsuarioInvalidoException("El usuario que intenta renovar la contraseña no existe");
+        }
     }
 }
 
