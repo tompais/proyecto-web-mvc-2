@@ -131,6 +131,27 @@ class Producto extends Model
     {
         return $this->pageRows(0, PHP_INT_MAX, "UsuarioId = $pk");
     }
+
+    public function validarNombre()
+    {
+        return FuncionesUtiles::esOracion($this->nombre)
+            && ($cantLetras = strlen($this->nombre)) <= 15
+            && $cantLetras >= 3;
+    }
+
+    public function validarPrecio()
+    {
+        return (FuncionesUtiles::esEntero($this->precio)
+                || FuncionesUtiles::esDecimal($this->precio))
+            && strlen($this->precio) > 0;
+    }
+
+    public function validaDescripcion()
+    {
+        return FuncionesUtiles::esOracion($this->descripcion)
+            && FuncionesUtiles::esCadenaNoNulaOVacia($this->descripcion);
+    }
+
 }
 
 ?>
