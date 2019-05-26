@@ -6219,9 +6219,9 @@ VALUES ("Ezequiel", "Allio", 20396702119, '1996-05-07', "ezequiel", "eb6a2f962bb
         ("Super", "User", 20123456787, "1810-05-25", "superuser", "8e67bb26b358e2ed20fe552ed6fb832f397a507d", "super.user@gmail.com", 1, 111234567, 44438353, 3, 4, 1);
 
 INSERT INTO Categoria (Nombre)
-VALUES ("Tecnología"),
+VALUES ("Comestibles"),
         ("Hogar"),
-        ("Ropa"),
-        ("Librería"),
         ("Iluminación"),
-        ("Comestibles");
+        ("Librería"),
+        ("Ropa"),
+        ("Tecnología");

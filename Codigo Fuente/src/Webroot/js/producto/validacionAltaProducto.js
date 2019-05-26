@@ -12,7 +12,7 @@ $(document).ready(function() {
         var imagenProducto = $('#inputImagenProducto')[0].files;
 
         //nombre de producto
-        if(nombreProducto === null || nombreProducto.length <= 3 && nombreProducto.length >= 15  || nombreProducto === ""){
+        if(nombreProducto === null || nombreProducto.length <= 3 || nombreProducto.length >= 15  || nombreProducto === ""){
             $("#errorNombreProducto").fadeIn("slow");
             return false;        
         }
