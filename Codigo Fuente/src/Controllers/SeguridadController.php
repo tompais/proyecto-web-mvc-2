@@ -90,43 +90,41 @@ class SeguridadController extends Controller
         $this->render(Constantes::LOGINVIEW);
     }
 
-    function validarLogin($usuario)
+    function validarLogin($json)
     {
-        $this->layout = "layoutSeguridad";
+        header("Content-type: application/json");
+
+        $data = json_decode(utf8_decode($json['data']));
 
         $user = new Usuario();
         $session = new Session();
 
-        $user->setCUIT(0);
-        if (FuncionesUtiles::esPalabraConNumeros($usuario["emailOrNick"])) {
-            $user->setUsername($usuario["emailOrNick"]);
+        if (FuncionesUtiles::esPalabraConNumeros($data->emailOrNick)) {
+            $user->setUsername($data->emailOrNick);
             $user->setEmail(null);
-        } else if (FuncionesUtiles::esEmailValido($usuario["emailOrNick"])) {
-            $user->setEmail($usuario["emailOrNick"]);
+        } else if (FuncionesUtiles::esEmailValido($data->emailOrNick)) {
+            $user->setEmail($data->emailOrNick);
             $user->setUsername(null);
         } else {
-            throwError404();
+            throw new EmailOrNickInvalidoException("El Email o Nickname insertado no son válidos", CodigoError::EmailOrNickInvalido);
         }
 
-        if (FuncionesUtiles::esPalabraConNumeros($usuario["password"])) {
-            $user->setUpassword(strtoupper(sha1($usuario["password"])));
+        if (PasswordHelper::validarPassword($data->password)) {
+            $user->setUpassword(strtoupper(sha1($data->password)));
         } else {
-            throwError404();
+            throw new PasswordInvalidaException("Formato de password ingresado inválido", CodigoError::PasswordInvalida);
         }
 
-        $arrayUsurio = $user->existeUsuarioDB();
-
-
-        if ($arrayUsurio) {
-            $session->setId($arrayUsurio[0]["Id"]);
-            $session->setUserName($arrayUsurio[0]["Username"]);
-            $session->setRolId($arrayUsurio[0]["RolId"]);
+        if(!$user->loguearUsuarioDB()) {
+            throw new UsuarioNoEncontradoException("Usuario o contraseña inválido. Revise sus datos y vuelva a intentarlo", CodigoError::UsuarioNoEncontrado);
+        } else {
+            $session->setId($user->getId());
+            $session->setUserName($user->getUsername());
+            $session->setRolId($user->getRolId());
             $_SESSION["session"] = serialize($session);
-            header("location: " . getBaseAddress() . "Home/inicio");
-        } else {
-            header("location: " . getBaseAddress() . "Seguridad/login");
-            echo "<script> alert('Usuario incorrecto'); </script>";
         }
+
+        echo json_encode(true);
     }
 
     function validarRegistrar($json)
@@ -166,7 +164,7 @@ class SeguridadController extends Controller
                 throw new SQLInsertException("Error al Insertar la Geolocalización", CodigoError::ErrorInsertSQL);
         }
 
-        if (!FuncionesUtiles::validarPassword($data->password))
+        if (!PasswordHelper::validarPassword($data->password))
             throw new PasswordInvalidaException("El formato de la contraseña no es válido", CodigoError::PasswordInvalida);
 
         $usuario->setNombre($data->nombre);
@@ -184,7 +182,7 @@ class SeguridadController extends Controller
         $usuario->setGeolocalizacionId($geolocalizacion->getId());
 
         if (!$usuario->validarUsuario())
-            throw new UsuarioInvalidoException("Los datos de Usuario son inválidos", CodigoError::UsuarioInvalido);
+            throw new UsuarioInvalidoException("Los datos de Usuario ingresados son inválidos", CodigoError::UsuarioInvalido);
 
         if ($usuario->existeUsuarioDB())
             throw new EntidadDuplicadaException("Usuario Duplicado", CodigoError::EntidadDuplicada);
@@ -209,6 +207,7 @@ class SeguridadController extends Controller
         header("location: " . getBaseAddress() . "Home/inicio");
     }
 
+
     function olvidePassword()
     {
         $this->layout = "layoutSeguridad";
@@ -219,9 +218,41 @@ class SeguridadController extends Controller
         $this->render(Constantes::OLVIDEPASSWORDVIEW);
     }
 
-    function renovarPassword()
+    function renovarPassword($json)
     {
-        return;
+        header("Content-type: application/json");
+
+        $data = json_decode($json['data']);
+
+        $user = new Usuario();
+
+        $user->setCUIT(0);
+        if (FuncionesUtiles::esPalabraConNumeros($data->emailOrNick)) {
+            $user->setUsername($data->emailOrNick);
+            $user->setEmail(null);
+        } else if (FuncionesUtiles::esEmailValido($data->emailOrNick)) {
+            $user->setEmail($data->emailOrNick);
+            $user->setUsername(null);
+        } else {
+            throw new EmailOrNickInvalidoException("El Email o Nickname insertado no son válidos", CodigoError::EmailOrNickInvalido);
+        }
+
+        if (!$user->existeUsuarioDB()) {
+            throw new UsuarioNoEncontradoException("El usuario que intenta renovar la contraseña no existe", CodigoError::UsuarioNoEncontrado);
+        }
+
+        $newPass = PasswordHelper::generarNuevoPassRandom();
+        if (!$user->renovarPasword($newPass)) {
+            throw new SQLUpdateException("Ocurrió un error al actualizar la contraseña", CodigoError::ErrorUpdateSQL);
+        }
+
+        $user->getUsuarioById($user->getId());
+
+        if (!MailHelper::enviarMailRenovacionPassword($user->getEmail(), $newPass)) {
+            throw new EnvioMailRenovacionPasswordFallidoException("No se ha podido enviar el mail para la renovación de password", CodigoError::EnvioMailRenovacionPasswordFallido);
+        }
+
+        echo json_encode(true);
     }
 }
 

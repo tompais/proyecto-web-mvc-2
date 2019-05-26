@@ -4,7 +4,6 @@
     const pathGetPartidosByProvinciaId = "<?php echo getBaseAddress() . "Seguridad/getPartidosByProvinciaId"; ?>";
     const pathGetLocalidadesByPartidoId = "<?php echo getBaseAddress() . "Seguridad/getLocalidadesByPartidoId"; ?>";
     const pathValidarRegistrar = "<?php echo getBaseAddress() . "Seguridad/validarRegistrar"; ?>";
-    const pathHome = "<?php echo getBaseAddress() . "Home/inicio"; ?>";
 </script>
 <div class="d-flex mt-4">
     <div class="col-lg-6 col-md-8 mx-auto">

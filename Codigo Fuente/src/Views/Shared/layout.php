@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/lib/OwlCarousel2-2.2.1/owl.theme.default.css"; ?>">
     <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/home/Inicio.css" ?>">
     <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/home/responsive.css" ?>">
+    <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/error/errorValidaciones.css" ?>">
     <link rel="shortcut icon" href="<?php echo getBaseAddress() . "Webroot/img/favicon.ico"; ?>" type="image/x-icon">
     <link rel="icon" href="<?php echo getBaseAddress() . "Webroot/img/favicon.ico"; ?>" type="image/x-icon">
 </head>
@@ -48,12 +49,20 @@
     <script src="<?php echo getBaseAddress() . "Webroot/js/utilidades/utilidades.js"; ?>"></script>
     <script src="<?php echo getBaseAddress() . "Webroot/js/home/Home.js" ?>"></script>
 
-    <main role="main">
+    <script>
+        const pathHome = "<?php echo getBaseAddress(); ?>";
+    </script>
 
+    <main role="main">
+        
         <div class="starter-template super_container">
 
             <?php
             require_once ROOT . "Views/Shared/header.php";
+            ?>
+
+            <?php
+            require_once ROOT . "Views/Seguridad/cerrarSesion.php";
             ?>
 
             <?php

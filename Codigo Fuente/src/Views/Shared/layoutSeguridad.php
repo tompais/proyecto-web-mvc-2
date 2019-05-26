@@ -23,11 +23,10 @@
     <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/lib/OwlCarousel2-2.2.1/owl.theme.default.css" ?>">
     <link rel="shortcut icon" href="<?php echo getBaseAddress() . "Webroot/img/favicon.ico" ?>" type="image/x-icon">
     <link rel="icon" href="<?php echo getBaseAddress() . "Webroot/img/favicon.ico" ?>" type="image/x-icon">
-    <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/seguridad/login.css" ?>">
-    <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/home/Inicio.css" ?>">
+    <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/home/inicio.css" ?>">
     <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/home/responsive.css" ?>">
-
-
+    <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/error/errorValidaciones.css" ?>">
+    <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/shared/layoutSeguridad.css" ?>">
 </head>
 
 <body>
@@ -49,7 +48,18 @@
     <script src="<?php echo getBaseAddress() . "Webroot/lib/OwlCarousel2-2.2.1/owl.carousel.js"; ?>"></script>
     <script src="<?php echo getBaseAddress() . "Webroot/js/utilidades/utilidades.js"; ?>"></script>
 
+    <script>
+        const pathHome = "<?php echo getBaseAddress(); ?>";
+    </script>
+
     <main role="main">
+
+        <nav class="navbar fixed-top float-left">
+            <a href="<?php echo getBaseAddress(); ?>" class="navbar-brand pl-5 mb-5">
+                <img class="img-fluid" id="logo" src="<?php echo getBaseAddress() . "Webroot/img/home/logo.png" ?>">
+                <img class="img-fluid" id="logoResponsive" src="<?php echo getBaseAddress() . "Webroot/img/home/logoResponsive3.png" ?>">
+            </a>
+        </nav>
 
         <div class="starter-template">
 
