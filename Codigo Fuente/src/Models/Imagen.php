@@ -56,6 +56,11 @@ class Imagen extends Model
         $this->setId($this->insert($array));
         return $this->getId();
     }
+
+    public function traerListaImagenes($pk)
+    {
+        return $this->pageRows(0, PHP_INT_MAX, "ProductoId = $pk");
+    }
 }
 
 ?>

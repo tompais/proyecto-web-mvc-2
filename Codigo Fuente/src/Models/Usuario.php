@@ -6,19 +6,87 @@ class Usuario extends Model
     private $id;
     private $nombre;
     private $apellido;
+    private $CUIT;
     private $username;
     private $upassword;
     private $email;
-    private $telefono;
+    private $telefonoCelular;
+    private $telefonoFijo;
+    private $geolocalizacionId;
+    private $geolocalizacion;
     private $direccionId;
     private $direccion;
-    private $sexoId;
-    private $sexo;
+    private $generoId;
+    private $genero;
     private $rolId;
     private $rol;
     private $fechaNacimiento;
     private $fechaBaneo;
     private $fechaBaja;
+
+    /**
+     * @return mixed
+     */
+    public function getGeolocalizacionId()
+    {
+        return $this->geolocalizacionId;
+    }
+
+    /**
+     * @param mixed $geolocalizacionId
+     */
+    public function setGeolocalizacionId($geolocalizacionId)
+    {
+        $this->geolocalizacionId = $geolocalizacionId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGeolocalizacion()
+    {
+        return $this->geolocalizacion;
+    }
+
+    /**
+     * @param mixed $geolocalizacion
+     */
+    public function setGeolocalizacion($geolocalizacion)
+    {
+        $this->geolocalizacion = $geolocalizacion;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTelefonoFijo()
+    {
+        return $this->telefonoFijo;
+    }
+
+    /**
+     * @param mixed $telefonoFijo
+     */
+    public function setTelefonoFijo($telefonoFijo)
+    {
+        $this->telefonoFijo = $telefonoFijo;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCUIT()
+    {
+        return $this->CUIT;
+    }
+
+    /**
+     * @param mixed $CUIT
+     */
+    public function setCUIT($CUIT)
+    {
+        $this->CUIT = $CUIT;
+    }
 
     /**
      * @return mixed
@@ -39,17 +107,17 @@ class Usuario extends Model
     /**
      * @return mixed
      */
-    public function getSexo()
+    public function getGenero()
     {
-        return $this->sexo;
+        return $this->genero;
     }
 
     /**
-     * @param mixed $sexo
+     * @param mixed $genero
      */
-    public function setSexo($sexo)
+    public function setGenero($genero)
     {
-        $this->sexo = $sexo;
+        $this->genero = $genero;
     }
 
     /**
@@ -71,17 +139,17 @@ class Usuario extends Model
     /**
      * @return mixed
      */
-    public function getSexoId()
+    public function getGeneroId()
     {
-        return $this->sexoId;
+        return $this->generoId;
     }
 
     /**
-     * @param mixed $sexoId
+     * @param mixed $generoId
      */
-    public function setSexoId($sexoId)
+    public function setGeneroId($generoId)
     {
-        $this->sexoId = $sexoId;
+        $this->generoId = $generoId;
     }
 
     /**
@@ -183,17 +251,17 @@ class Usuario extends Model
     /**
      * @return mixed
      */
-    public function getTelefono()
+    public function getTelefonoCelular()
     {
-        return $this->telefono;
+        return $this->telefonoCelular;
     }
 
     /**
-     * @param mixed $telefono
+     * @param mixed $telefonoCelular
      */
-    public function setTelefono($telefono)
+    public function setTelefonoCelular($telefonoCelular)
     {
-        $this->telefono = $telefono;
+        $this->telefonoCelular = $telefonoCelular;
     }
 
     /**
@@ -290,6 +358,36 @@ class Usuario extends Model
             && $cantLetras >= 3;
     }
 
+    public function validarCUIT()
+    {
+        $cuit = preg_replace('/[^\d]/', '', (string) $this->getCUIT());
+        $cuit_tipos = [20, 23, 24, 27, 30, 33, 34];
+
+        if (strlen($cuit) != 11)
+            return FALSE;
+
+        $tipo = (int) substr($cuit, 0, 2);
+
+        if (!in_array($tipo, $cuit_tipos, TRUE))
+            return FALSE;
+
+        $acumulado = 0;
+        $digitos = str_split($cuit); // Convertir en un array
+        $digito = array_pop($digitos); // Extraer último elemento del array
+        $contador = count($digitos);
+
+        for ($i = 0; $i < $contador; $i++)
+            $acumulado += $digitos[ 9 - $i ] * (2 + ($i % 6));
+
+        $verif = 11 - ($acumulado % 11);
+
+        // Si el resultado es 11, el dígito verificador será 0
+        // Sino, será el dígito verificador
+        $verif = $verif == 11 ? 0 : $verif;
+
+        return $digito == $verif;
+    }
+
     public function validarUsername()
     {
         return FuncionesUtiles::esPalabraConNumeros($this->username)
@@ -299,14 +397,21 @@ class Usuario extends Model
 
     public function validarEmail()
     {
-        return FuncionesUtiles::validarEmail($this->email);
+        return FuncionesUtiles::esEmailValido($this->email);
     }
 
-    public function validarTelefono()
+    public function validarTelefonoCelular()
     {
-        return (FuncionesUtiles::esEntero($this->telefono)
-                || FuncionesUtiles::esCadenaNumerica($this->telefono))
-            && strlen($this->telefono) === 10;
+        return (FuncionesUtiles::esEntero($this->telefonoCelular)
+                || FuncionesUtiles::esCadenaNumerica($this->telefonoCelular))
+            && strlen($this->telefonoCelular) === 10;
+    }
+
+    public function validarTelefonoFijo()
+    {
+        return (FuncionesUtiles::esEntero($this->telefonoFijo)
+                || FuncionesUtiles::esCadenaNumerica($this->telefonoFijo))
+            && strlen($this->telefonoFijo) === 8;
     }
 
     public function validarRol()
@@ -315,21 +420,41 @@ class Usuario extends Model
             && (Roles::ADMINISTRADOR === $this->rolId || Roles::COADMINISTRADOR == $this->rolId || Roles::MODERADOR === $this->rolId || Roles::USUARIO === $this->rolId);
     }
 
-    public function validarSexo()
+    public function validarGenero()
     {
-        require_once ROOT . "Enums/Sexos.php";
-        return (FuncionesUtiles::esEntero($this->sexoId) || FuncionesUtiles::esCadenaNumerica($this->sexoId))
-            && (Sexos::Masculino == $this->sexoId || Sexos::Femenino == $this->sexoId || Sexos::Otro == $this->sexoId);
+        return (FuncionesUtiles::esEntero($this->generoId) || FuncionesUtiles::esCadenaNumerica($this->generoId))
+            && (generos::Masculino == $this->generoId || generos::Femenino == $this->generoId || generos::Otro == $this->generoId);
     }
 
-    public function existeUsuarioDB (){
-        return $this->pageRows(0, 1, "(Username LIKE '$this->username' OR Email LIKE '$this->email') AND UPassword LIKE '$this->upassword'");
+    public function loguearUsuarioDB ()
+    {
+        $row = $this->pageRows(0, 1, "(Username LIKE '$this->username' OR Email LIKE '$this->email') AND UPassword LIKE '$this->upassword'");
+
+        if($row) {
+            $this->setId($row[0]["Id"]);
+            $this->setEmail($row[0]["Email"]);
+            $this->setUsername($row[0]["Username"]);
+            $this->setRolId($row[0]["RolId"]);
+        }
+
+        return $row;
+    }
+
+    public function existeUsuarioDB ()
+    {
+        $row = $this->pageRows(0, 1, "Username LIKE '$this->username' OR Email LIKE '$this->email' OR CUIT = $this->CUIT");
+
+        if($row)
+            $this->setId($row[0]["Id"]);
+
+        return $row;
     }
 
     public function validarUsuario()
     {
-        return $this->validarNombre() && $this->validarApellido() && $this->validarUsername()
-            && $this->validarEmail() && $this->validarRol() && $this->validarSexo() && $this->validarTelefono();
+        return $this->validarNombre() && $this->validarApellido() && $this->validarCUIT()
+            && $this->validarUsername() && $this->validarEmail() && $this->validarRol()
+            && $this->validarGenero() && $this->validarTelefonoFijo() && $this->validarTelefonoCelular();
     }
 
     public function insertarUsuario()
@@ -337,37 +462,53 @@ class Usuario extends Model
         $array = [
             "Nombre" => $this->getNombre(),
             "Apellido" => $this->getApellido(),
+            "CUIT" => $this->getCUIT(),
             "Username" => $this->getUsername(),
             "UPassword" => $this->getUpassword(),
             "Email" => $this->getEmail(),
-            "Telefono" => $this->getTelefono(),
+            "TelefonoFijo" => $this->getTelefonoFijo(),
+            "TelefonoCelular" => $this->getTelefonoCelular(),
             "DireccionId" => $this->getDireccionId(),
-            "SexoId" => $this->getSexoId(),
+            "GeneroId" => $this->getGeneroId(),
             "RolId" => $this->getRolId(),
-            "FechaNacimiento" => $this->getFechaNacimiento()
+            "FechaNacimiento" => date('Y-m-d', strtotime($this->getFechaNacimiento())),
+            "GeolocalizacionId" => $this->getGeolocalizacionId()
         ];
         $this->setId($this->insert($array));
         return $this->getId();
     }
 
-    public function obtenerRegistro($pk)
+    public function getUsuarioById($pk)
     {
         if($registro = $this->selectByPk($pk))
         {
             $this->setId($registro["Id"]);
             $this->setNombre($registro["Nombre"]);
             $this->setApellido($registro["Apellido"]);
+            $this->setCUIT($registro["CUIT"]);
             $this->setFechaNacimiento($registro["FechaNacimiento"]);
             $this->setUsername($registro["Username"]);
             $this->setUpassword($registro["UPassword"]);
-            $this->setTelefono($registro["Telefono"]);
+            $this->setTelefonoFijo($registro["TelefonoFijo"]);
+            $this->setTelefonoCelular($registro["TelefonoCelular"]);
             $this->setDireccionId($registro["DireccionId"]);
             $this->setRolId($registro["RolId"]);
-            $this->setSexoId($registro["SexoId"]);
+            $this->setGeneroId($registro["GeneroId"]);
             $this->setEmail($registro["Email"]);
             $this->setFechaBaneo($registro["FechaBaneo"]);
             $this->setFechaBaja($registro["FechaBaja"]);
         }
+
+        return $registro;
+    }
+
+    public function renovarPasword($newPass)
+    {
+        $array = [
+            "Id" => $this->getId(),
+            "UPassword" => strtoupper(sha1($newPass))
+        ];
+        return $this->update($array);
     }
 
 }

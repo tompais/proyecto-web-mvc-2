@@ -6,12 +6,14 @@ const regexLetrasYEspacio = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u
 
 var inputNombre = $('#inputNombre');
 var inputApellido = $('#inputApellido');
+var inputCUIT = $("#inputCUIT");
 var inputNickname = $('#inputNickname');
 var inputPassword = $('#inputPassword');
 var inputRePassword = $('#inputRePassword');
 var inputEmail = $('#inputEmail');
 var inputFechaNacimiento = $('#inputFechaNacimiento');
-var inputTelefono = $("#inputTelefono");
+var inputTelefonoFijo = $("#inputTelefonoFijo");
+var inputTelefonoCelular = $("#inputTelefonoCelular");
 var inputCalle = $("#inputCalle");
 var inputAltura = $("#inputAltura");
 var inputPiso = $("#inputPiso");
@@ -19,19 +21,20 @@ var inputDepartamento = $("#inputDepartamento");
 var btnRegistrar = $("#btnRegistrar");
 var registrarModal = $("#registrarModal");
 var registrarModalLabel = $("#registrarModalLabel");
+var geolocalizacion = null;
 
 function validarNombre() {
     var nombre = inputNombre.val();
 
     var validacion = false;
 
-    if(nombre == null || nombre.length === 0 || nombre === "") {
+    if (nombre == null || nombre.length === 0 || nombre === "") {
         $("#errorNombre").fadeIn("slow");
-    } else if(nombre.length < 3) {
+    } else if (nombre.length < 3) {
         $("#errorNombre2").fadeIn("slow");
-    } else if(nombre.length > 15) {
+    } else if (nombre.length > 15) {
         $("#errorNombre3").fadeIn("slow");
-    } else if(!regexSoloLetras.test(nombre)) {
+    } else if (!regexSoloLetras.test(nombre)) {
         $("#errorNombre4").fadeIn("slow");
     } else {
         validacion = true;
@@ -45,14 +48,47 @@ function validarApellido() {
 
     var validacion = false;
 
-    if(apellido == null || apellido.length === 0 || apellido === "") {
+    if (apellido == null || apellido.length === 0 || apellido === "") {
         $("#errorApellido").fadeIn("slow");
-    } else if(apellido.length < 3) {
+    } else if (apellido.length < 3) {
         $("#errorApellido2").fadeIn("slow");
-    } else if(apellido.length > 15) {
+    } else if (apellido.length > 15) {
         $("#errorApellido3").fadeIn("slow");
-    } else if(!regexSoloLetras.test(apellido)) {
+    } else if (!regexSoloLetras.test(apellido)) {
         $("#errorApellido4").fadeIn("slow");
+    } else {
+        validacion = true;
+    }
+
+    return validacion;
+}
+
+function validarCUIT() {
+
+    var cuit = inputCUIT.val();
+
+    if (cuit.length != 11) {
+        $("#errorCUIT").fadeIn("slow");
+        return false;
+    }
+
+    var acumulado = 0;
+    var digitos = cuit.split("");
+    var digito = digitos.pop();
+
+    for (var i = 0; i < digitos.length; i++) {
+        acumulado += digitos[9 - i] * (2 + (i % 6));
+    }
+
+    var verif = 11 - (acumulado % 11);
+    if (verif == 11) {
+        verif = 0;
+    }
+
+    var validacion = false;
+
+    if(digito != verif){
+        $("#errorCUIT").fadeIn("slow");
     } else {
         validacion = true;
     }
@@ -65,13 +101,13 @@ function validarNickname() {
 
     var validacion = false;
 
-    if(nickname == null || nickname.length === 0 || nickname === "") {
+    if (nickname == null || nickname.length === 0 || nickname === "") {
         $("#errorNickname").fadeIn("slow");
-    } else if(nickname.length < 5) {
+    } else if (nickname.length < 5) {
         $("#errorNickname2").fadeIn("slow");
-    } else if(nickname.length > 15) {
+    } else if (nickname.length > 15) {
         $("#errorNickname3").fadeIn("slow");
-    } else if(!regexLetrasYNumeros.test(nickname)) {
+    } else if (!regexLetrasYNumeros.test(nickname)) {
         $("#errorNickname4").fadeIn("slow");
     } else {
         validacion = true;
@@ -86,17 +122,17 @@ function validarPassword() {
 
     var validacion = false;
 
-    if(password == null || password.length === 0 || password === "") {
+    if (password == null || password.length === 0 || password === "") {
         $("#errorPassword").fadeIn("slow");
-    } else if(password.length < 6 || password.length > 15) {
+    } else if (password.length < 6 || password.length > 15) {
         $("#errorPassword2").fadeIn("slow");
-    } else if(!regexLetrasYNumeros.test(password)) {
+    } else if (!regexLetrasYNumeros.test(password)) {
         $("#errorPassword3").fadeIn("slow");
     }
 
-    if(rePassword == null || rePassword.length === 0 || rePassword === "") {
+    if (rePassword == null || rePassword.length === 0 || rePassword === "") {
         $("#errorRePassword").fadeIn("slow");
-    } else if(password !== rePassword) {
+    } else if (password !== rePassword) {
         $("#errorRePassword2").fadeIn("slow");
     } else {
         validacion = true;
@@ -110,9 +146,9 @@ function validarEmail() {
 
     var validacion = false;
 
-    if(email == null || email.length === 0 || email === "") {
+    if (email == null || email.length === 0 || email === "") {
         $("#errorEmail").fadeIn("slow");
-    } else if(!regexEmail.test(email)) {
+    } else if (!regexEmail.test(email)) {
         $("#errorEmail2").fadeIn("slow");
     } else {
         validacion = true;
@@ -126,9 +162,9 @@ function validarFechaNacimiento() {
 
     var validacion = false;
 
-    if(!moment(fechaNacimiento, "DD/MM/YYYY").isValid()) {
+    if (!moment(fechaNacimiento, "DD/MM/YYYY").isValid()) {
         $("#errorFechaNacimiento").fadeIn("slow");
-    } else if(Math.round(moment.duration(moment().diff(moment(fechaNacimiento, "DD/MM/YYYY"))).asYears()) < 18) {
+    } else if (Math.round(moment.duration(moment().diff(moment(fechaNacimiento, "DD/MM/YYYY"))).asYears()) < 18) {
         $("#errorFechaNacimiento2").fadeIn("slow");
     } else {
         validacion = true;
@@ -137,15 +173,31 @@ function validarFechaNacimiento() {
     return validacion;
 }
 
-function validarTelefono() {
-    var telefono = inputTelefono.val();
+function validarTelefonoCelular() {
+    var telefonoCelular = inputTelefonoCelular.val();
 
     var validacion = false;
 
-    if(telefono == null || telefono.length === 0 || telefono === "") {
-        $("#errorTelfono").fadeIn("slow");
-    } else if(telefono.length !== 10 || !regexSoloNumeros.test(telefono)) {
-        $("#errorTelfono2").fadeIn("slow");
+    if (telefonoCelular == null || telefonoCelular.length === 0 || telefonoCelular === "") {
+        $("#errorTelfonoCelular").fadeIn("slow");
+    } else if (telefonoCelular.length !== 10 || !regexSoloNumeros.test(telefonoCelular)) {
+        $("#errorTelfonoCelular2").fadeIn("slow");
+    } else {
+        validacion = true;
+    }
+
+    return validacion;
+}
+
+function validarTelefonoFijo() {
+    var telefonoFijo = inputTelefonoFijo.val();
+
+    var validacion = false;
+
+    if (telefonoFijo == null || telefonoFijo.length === 0 || telefonoFijo === "") {
+        $("#errorTelfonoFijo").fadeIn("slow");
+    } else if (telefonoFijo.length !== 8 || !regexSoloNumeros.test(telefonoFijo)) {
+        $("#errorTelfonoFijo2").fadeIn("slow");
     } else {
         validacion = true;
     }
@@ -158,9 +210,9 @@ function validarCalle() {
 
     var validacion = false;
 
-    if(calle == null || calle.length === 0 || calle === "") {
+    if (calle == null || calle.length === 0 || calle === "") {
         $("#errorCalle").fadeIn("slow");
-    } else if(!regexLetrasYEspacio.test(calle)) {
+    } else if (!regexLetrasYEspacio.test(calle)) {
         $("#errorCalle2").fadeIn("slow");
     } else {
         validacion = true;
@@ -174,9 +226,9 @@ function validarAltura() {
 
     var validacion = false;
 
-    if(altura == null || altura.length === 0 || altura === "") {
+    if (altura == null || altura.length === 0 || altura === "") {
         $("#errorAltura").fadeIn("slow");
-    } else if(altura.length > 5 || !regexSoloNumeros.test(altura)) {
+    } else if (altura.length > 5 || !regexSoloNumeros.test(altura)) {
         $("#errorAltura2").fadeIn("slow");
     } else {
         validacion = true;
@@ -191,17 +243,17 @@ function validarPisoYDepto() {
 
     var validacion = false;
 
-    if((piso == null || piso.length === 0 || piso === "") && (departamento != null && departamento.length > 0 && departamento !== "")) {
+    if ((piso == null || piso.length === 0 || piso === "") && (departamento != null && departamento.length > 0 && departamento !== "")) {
         $("#errorPiso").fadeIn("slow");
     } else if ((piso != null && piso.length > 0 && piso !== "") && (departamento == null || departamento.length === 0 || departamento === "")) {
         $("#errorDepartamento").fadeIn("slow");
-    } else if(
+    } else if (
         (piso != null && piso.length > 0 && piso !== "")
         && (departamento != null && departamento.length > 0 && departamento !== "")
         && !regexSoloNumeros.test(piso)
     ) {
         $("#errorPiso2").fadeIn("slow");
-    } else if(
+    } else if (
         (piso != null && piso.length > 0 && piso !== "")
         && (departamento != null && departamento.length > 0 && departamento !== "")
         && !regexSoloLetras.test(departamento)
@@ -214,64 +266,109 @@ function validarPisoYDepto() {
     return validacion;
 }
 
+function saveGeolocationOnMemory(position) {
+    geolocalizacion = {};
+    geolocalizacion.latitud = position.coords.latitude;
+    geolocalizacion.longitud = position.coords.longitude;
+    return geolocalizacion;
+}
+
+function showGeolocationMessageError() {
+    alertify.alert('Error en Geolocalización', "Para continuar, debe permitir al navegador acceder a su ubicación");
+    geolocalizacion = null;
+    return geolocalizacion;
+}
+
+function getLocation() {
+
+    return new Promise(function (resolve, reject) {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                resolve(saveGeolocationOnMemory(position));
+            }, function () {
+                reject(showGeolocationMessageError());
+            });
+        } else {
+            reject(showGeolocationMessageError());
+        }
+    });
+}
+
+function validarGeolocalizacion(geo) {
+    return geo != null;
+}
+
+function validarFormularioRegistracion() {
+    return validarNombre()
+        && validarApellido()
+        && validarCUIT()
+        && validarFechaNacimiento()
+        && validarNickname()
+        && validarEmail()
+        && validarPassword()
+        && validarTelefonoFijo()
+        && validarTelefonoCelular()
+        && validarCalle()
+        && validarAltura()
+        && validarPisoYDepto();
+}
+
+function realizarRegistracion() {
+    $("input").prop('disabled', true);
+    btnRegistrar.prop('disabled', true);
+    var obj = {};
+    obj.geolocalizacion = geolocalizacion;
+    obj.nombre = inputNombre.val();
+    obj.apellido = inputApellido.val();
+    obj.CUIT = inputCUIT.val();
+    obj.nickname = inputNickname.val();
+    obj.email = inputEmail.val();
+    obj.password = inputPassword.val();
+    obj.fechaNacimiento = inputFechaNacimiento.val();
+    obj.telefonoFijo = inputTelefonoFijo.val();
+    obj.telefonoCelular = inputTelefonoCelular.val();
+    obj.generoId = $("#selectGenero").val();
+    obj.provinciaId = $("#selectProvincia").val();
+    obj.partidoId = $("#selectPartido").val();
+    obj.localidadId = $("#selectLocalidad").val();
+    obj.calle = inputCalle.val();
+    obj.altura = inputAltura.val();
+    obj.piso = inputPiso.val();
+    obj.departamento = inputDepartamento.val();
+    llamadaAjax(pathValidarRegistrar, JSON.stringify(obj), true, "mostrarModalRegistracionExitosa", "mostrarModalError");
+}
+
 btnRegistrar.click(function () {
 
     $(".error").fadeOut();
 
-    var validacion = validarNombre()
-        && validarApellido()
-        && validarNickname()
-        && validarEmail()
-        && validarPassword()
-        && validarFechaNacimiento()
-        && validarTelefono()
-        && validarCalle()
-        && validarAltura()
-        && validarPisoYDepto();
+    getLocation().then(function (res) {
+        var validacion = validarGeolocalizacion(res) && validarFormularioRegistracion();
 
-    if(validacion) {
-        $("input").prop('disabled', true);
-        btnRegistrar.prop('disabled', true);
-        var obj = {};
-        obj.nombre = inputNombre.val();
-        obj.apellido = inputApellido.val();
-        obj.nickname = inputNickname.val();
-        obj.email = inputEmail.val();
-        obj.password = inputPassword.val();
-        obj.fechaNacimiento = inputFechaNacimiento.val();
-        obj.telefono = inputTelefono.val();
-        obj.sexoId = $("#selectSexo").val();
-        obj.provinciaId = $("#selectProvincia").val();
-        obj.partidoId = $("#selectPartido").val();
-        obj.localidadId = $("#selectLocalidad").val();
-        obj.calle = inputCalle.val();
-        obj.altura = inputAltura.val();
-        obj.piso = inputPiso.val();
-        obj.departamento = inputDepartamento.val()
-        console.log(JSON.stringify(obj));
-        llamadaAjax(pathValidarRegistrar, JSON.stringify(obj), true, "mostrarModalRegistracionExitosa", "mostrarModalError");
-    }
-
-    return validacion;
-
+        if (validacion) {
+            realizarRegistracion();
+        }
+    }).catch(function (err) {
+        alertify.alert('Error en Geolocalización', "Ha ocurrido un error y no se ha podido registrar su ubicación. Por favor, dé permisos a su navegador y vuelva a intentar")
+    });
 });
 
-function mostrarModalRegistracionExitosa($dummy) {
+function mostrarModalRegistracionExitosa(dummy) {
     registrarModalLabel.text("¡Registración Exitosa!");
     registrarModal.find(".btn-secondary").addClass('d-none');
     registrarModal.find(".btn-primary").removeClass('d-none');
     registrarModal.find(".modal-body").text("Presione Continuar, o espere unos instantes y será redirigido");
     registrarModal.modal('show');
-    setTimeout(function() {
+    setTimeout(function () {
         window.location.href = pathHome;
     }, 5000);
 }
 
-function mostrarModalError() {
+function mostrarModalError(err) {
     registrarModalLabel.text("Error de Registración");
     registrarModal.find(".btn-secondary").removeClass('d-none');
     registrarModal.find(".btn-primary").addClass('d-none');
-    registrarModal.find(".moda-body").text('Ha ocurrido un error y no se ha podido registrar el usuario. Revise sus datos y vuelva a intentarlo');
+    registrarModal.find(".modal-body").text(err);
     registrarModal.modal('show');
     $("input").prop('disabled', false);
     btnRegistrar.prop('disabled', false);

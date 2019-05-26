@@ -126,6 +126,36 @@ class Producto extends Model
         $this->setId($this->insert($array));
         return $this->getId();
     }
+
+    public function traerListaProductos($pk)
+    {
+        return $this->pageRows(0, PHP_INT_MAX, "UsuarioId = $pk");
+    }
+
+    public function validarNombre()
+    {
+        return FuncionesUtiles::esOracion($this->nombre)
+            && ($cantLetras = strlen($this->nombre)) <= 15
+            && $cantLetras >= 3;
+    }
+
+    public function validarPrecio()
+    {
+        return FuncionesUtiles::esEntero($this->precio)
+                || FuncionesUtiles::esMayorACero($this->precio);
+    }
+
+    public function validarCateoria()
+    {
+        return FuncionesUtiles::esCadenaNoNulaOVacia($this->categoria);
+    }
+
+    public function validarDescripcion()
+    {
+        return FuncionesUtiles::esPalabraConNumeros($this->descripcion)
+            && FuncionesUtiles::esCadenaNoNulaOVacia($this->descripcion);
+    }
+
 }
 
 ?>

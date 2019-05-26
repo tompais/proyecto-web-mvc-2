@@ -1,42 +1,64 @@
-$(document).ready(function() {
+const regexEmail = /^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+$/;
+const regexLetrasYNumeros = /^[0-9a-zA-Z]+$/;
 
-    $("#btnIngresar").click(function() {
+var inputEmailOrNick = $('#inputEmailOrNick');
+var inputPassword = $('#inputPassword');
+var btnIngresar = $("#btnIngresar");
+var errorNick = $("#errorNick");
 
-        var nick = $('#inputEmailOrNick').val();
-        var pass = $('#inputPassword').val();
+function validarEmailOrNick() {
+    var validacion = false;
+    var emailOrNick = inputEmailOrNick.val();
 
-        /* Nombre */
+    if(emailOrNick === null || emailOrNick.length === 0 || emailOrNick === "") {
+        errorNick.fadeIn("slow");
+    } else if(!regexEmail.test(emailOrNick) && !regexLetrasYNumeros.test(emailOrNick)) {
+        errorNick.fadeIn("slow");
+    } else {
+        validacion = true;
+    }
 
-        if (nick.length === 0){
-            $("#errorNick").fadeIn("slow");
-            return false;
-        }
-        else{
-            $("#errorNick").fadeOut();
-        }
+    return validacion;
+}
 
-        /* Password */
+function validarPassword() {
+    var validacion = false;
+    var pass = inputPassword.val();
 
-        if (pass.length === 0){
-            $("#errorPass").fadeIn("slow");
-            return false;
-        }
-        else{
-            $("#errorPass").fadeOut();
-        }
+    if (pass === null || pass.length === 0 || pass === "") {
+        $("#errorPass").fadeIn("slow");
+        return false;
+    } else if(pass.length < 6 || pass.length > 15 || !regexLetrasYNumeros.test(pass)) {
+        $("#errorPass2").fadeIn("slow");
+    } else {
+        validacion = true;
+    }
 
-        if (pass.length < 6 && pass.length < 15) {
-            $("#errorPass2").fadeIn("slow");
-            return false;
-        }
-        else{
-            $("#errorPass2").fadeOut();
-        }
+    return validacion;
+}
 
-    });
+btnIngresar.click(function () {
 
+    $(".error").fadeOut();
+
+    var validacion = validarEmailOrNick() && validarPassword();
+
+    if(validacion) {
+        $("input").prop("disabled", true);
+        btnIngresar.prop("disabled", true);
+        var obj = {};
+        obj.emailOrNick = inputEmailOrNick.val();
+        obj.password = inputPassword.val();
+        llamadaAjax(pathAccionLoguear, JSON.stringify(obj), true, "loginExitoso", "loginFallido");
+    }
 });
 
-function ErrorFormulario () {
-    $("#errorForm").fadeIn("slow");
+function loginExitoso(dummy) {
+    window.location.href = pathHome;
+}
+
+function loginFallido(err) {
+    $("input").prop("disabled", false);
+    btnIngresar.prop("disabled", false);
+    alertify.alert("Error de Logueo", err);
 }

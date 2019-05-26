@@ -13,6 +13,11 @@ class FuncionesUtiles
         return is_string($string) && $string && strlen($string) && strcmp($string, "");
     }
 
+    public static function esMayorACero($int)
+    {
+        return $int > 0;
+    }
+
     public static function esOracion($string)
     {
         return self::esCadenaNoNulaOVacia($string) && preg_match(Constantes::REGEXLETRASYESPACIO, $string);
@@ -28,17 +33,7 @@ class FuncionesUtiles
         return self::esCadenaNoNulaOVacia($string) && preg_match(Constantes::REGEXLETRASYNUMEROS, $string);
     }
 
-    public static function validarPassword($pass)
-    {
-        return self::esPalabraConNumeros($pass) && ($cantLetras = strlen($pass)) <= 15 && $cantLetras >= 6;
-    }
-
-    public static function confirmarPassword($pass, $repass)
-    {
-        return self::validarPassword($pass) && self::validarPassword($repass) && $pass === $repass;
-    }
-
-    public static function validarEmail($email)
+    public static function esEmailValido($email)
     {
         return self::esCadenaNoNulaOVacia($email) && filter_var($email, FILTER_VALIDATE_EMAIL);
     }

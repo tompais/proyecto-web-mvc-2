@@ -4,12 +4,12 @@
     const pathGetPartidosByProvinciaId = "<?php echo getBaseAddress() . "Seguridad/getPartidosByProvinciaId"; ?>";
     const pathGetLocalidadesByPartidoId = "<?php echo getBaseAddress() . "Seguridad/getLocalidadesByPartidoId"; ?>";
     const pathValidarRegistrar = "<?php echo getBaseAddress() . "Seguridad/validarRegistrar"; ?>";
-    const pathHome = "<?php echo getBaseAddress() . "Home/inicio"; ?>";
 </script>
 <div class="d-flex mt-4">
     <div class="col-lg-6 col-md-8 mx-auto">
-        <div class="border shadow rounded p-4 my-5 bg-white">
+        <div class="border shadow rounded p-4 my-1 bg-white">
             <h4 class="mb-4 text-center">Regístrese</h4>
+
             <div class="form-row">
                 <div class="col-sm">
                     <div class="form-group">
@@ -39,6 +39,32 @@
                         </div>
                         <div id="errorApellido4" class="error"><i class="fas fa-exclamation-triangle"></i> Solo letras por
                             favor
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-sm">
+                    <div class="form-group">
+                        <label for="">CUIT</label>
+                        <input type="number" class="form-control" name="CUIT" id="inputCUIT" placeholder="Ej: ##-12345678-X">
+                        <div id="errorCUIT" class="error"><i class="fas fa-exclamation-triangle"></i> CUIT Inválido
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <div class="form-group">
+                        <label for="inputFechaNacimiento">Fecha de Nacimiento</label>
+                        <div class="input-group">
+                            <input type="text" name="fechaNacimiento" id="inputFechaNacimiento" class="form-control">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" id="btnInputFechaNacimiento" type="button"><i class="fas fa-calendar-alt"></i></button>
+                            </div>
+                        </div>
+                        <div id="errorFechaNacimiento" class="error"><i class="fas fa-exclamation-triangle"></i> Formato de Fecha Inválido
+                        </div>
+                        <div id="errorFechaNacimiento2" class="error"><i class="fas fa-exclamation-triangle"></i> Debe ser mayor de 18 años
                         </div>
                     </div>
                 </div>
@@ -118,27 +144,23 @@
             <div class="form-row">
                 <div class="col-sm">
                     <div class="form-group">
-                        <label for="selectSexo">Sexo</label>
-                        <select class="form-control" name="sexo" id="selectSexo">
-                            <?php
-                            foreach ($sexos as $sexo)
-                                echo "<option value='" . $sexo->getId() . "'>" . $sexo->getNombre() . "</option>";
-                            ?>
-                        </select>
+                        <label for="inputTelefonoFijo">Teléfono Fijo</label>
+                        <input type="number" class="form-control" name="telefonoFijo" id="inputTelefonoFijo" aria-describedby="helpIdInputTelefono" placeholder="44448888">
+                        <small id="helpIdInputTelefono" class="form-text text-muted">Sin código de área</small>
+                        <div id="errorTelfonoFijo" class="error"><i class="fas fa-exclamation-triangle"></i> Debe ingresar su telefono
+                        </div>
+                        <div id="errorTelfonoFijo2" class="error"><i class="fas fa-exclamation-triangle"></i> Formato de teléfono fijo inválido
+                        </div>
                     </div>
                 </div>
                 <div class="col-sm">
                     <div class="form-group">
-                        <label for="inputFechaNacimiento">Fecha de Nacimiento</label>
-                        <div class="input-group">
-                            <input type="text" name="fechaNacimiento" id="inputFechaNacimiento" class="form-control">
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" id="btnInputFechaNacimiento" type="button"><i class="fas fa-calendar-alt"></i></button>
-                            </div>
+                        <label for="inputTelefonoCelular">Teléfono Celular</label>
+                        <input type="number" class="form-control" name="telefonoCelular" id="inputTelefonoCelular" aria-describedby="helpIdInputTelefonoCelular" placeholder="111234567">
+                        <small id="helpIdInputTelefonoCelular" class="form-text text-muted">Sin código de área</small>
+                        <div id="errorTelfonoCelular" class="error"><i class="fas fa-exclamation-triangle"></i> Debe ingresar su telefono
                         </div>
-                        <div id="errorFechaNacimiento" class="error"><i class="fas fa-exclamation-triangle"></i> Formato de Fecha Inválido
-                        </div>
-                        <div id="errorFechaNacimiento2" class="error"><i class="fas fa-exclamation-triangle"></i> Debe ser mayor de 18 años
+                        <div id="errorTelfonoCelular2" class="error"><i class="fas fa-exclamation-triangle"></i> Formato de teléfono móvil inválido
                         </div>
                     </div>
                 </div>
@@ -147,13 +169,13 @@
             <div class="form-row">
                 <div class="col-sm">
                     <div class="form-group">
-                        <label for="inputTelefono">Teléfono</label>
-                        <input type="number" class="form-control" name="telefono" id="inputTelefono" aria-describedby="helpIdInputTelefono" placeholder="111234567">
-                        <small id="helpIdInputTelefono" class="form-text text-muted">Sin código de área</small>
-                        <div id="errorTelfono" class="error"><i class="fas fa-exclamation-triangle"></i> Debe ingresar su telefono
-                        </div>
-                        <div id="errorTelfono2" class="error"><i class="fas fa-exclamation-triangle"></i> Formato de teléfono móvil inválido
-                        </div>
+                        <label for="selectGenero">Género</label>
+                        <select class="form-control" name="sexo" id="selectGenero">
+                            <?php
+                            foreach ($generos as $genero)
+                                echo "<option value='" . $genero->getId() . "'>" . $genero->getNombre() . "</option>";
+                            ?>
+                        </select>
                     </div>
                 </div>
                 <div class="col-sm">

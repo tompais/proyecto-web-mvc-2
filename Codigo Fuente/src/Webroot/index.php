@@ -17,6 +17,8 @@ massiveImport('Exceptions');
 massiveImport('Dto');
 massiveImport('Models');
 
+header("Content-Type: text/html; charset=utf-8");
+
 function massiveImport($folder)
 {
     $path = ROOT . $folder . "/*.php";
@@ -43,7 +45,7 @@ function throwError404()
 
 function globalExceptionHandler($exception)
 {
-    $strError = "Error " . $exception->getCode() . ":" . $exception->getMessage();
+    $strError = "Error " . $exception->getCode() . ": " . $exception->getMessage();
     echo $strError;
     $strLog = "[". date("Y-m-d H:i:s") ."]  " . $strError . PHP_EOL;
     file_put_contents("exception-log.txt", $strLog,FILE_APPEND);

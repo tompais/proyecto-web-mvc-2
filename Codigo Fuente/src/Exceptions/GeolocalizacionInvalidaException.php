@@ -2,11 +2,11 @@
 /**
  * Created by PhpStorm.
  * User: Globons
- * Date: 26/5/2019
- * Time: 11:26
+ * Date: 25/5/2019
+ * Time: 00:12
  */
 
-class UsuarioInvalidoException extends Exception
+class GeolocalizacionInvalidaException extends Exception
 {
     public function __construct($message = "", $code = 0, Throwable $previous = null)
     {

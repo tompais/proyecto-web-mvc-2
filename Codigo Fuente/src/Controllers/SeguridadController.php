@@ -6,15 +6,15 @@ class SeguridadController extends Controller
     {
         $this->layout = "layoutSeguridad";
 
-        $sexo = new Sexo();
+        $genero = new Genero();
         $provincia = new Provincia();
         $partido = new Partido();
         $localidad = new Localidad();
 
-        $d['sexos'] = $sexo->getAllSexos();
+        $d['generos'] = $genero->getAllGeneros();
         $d['provincias'] = $provincia->getAllProvincias();
 
-        usort($d['sexos'], Constantes::CMPBYID);
+        usort($d['generos'], Constantes::CMPBYID);
         usort($d['provincias'], Constantes::CMPBYNOMBRE);
 
         $d['partidos'] = $partido->getPartidosByProvinciaId($d['provincias'][0]->getId());
@@ -44,8 +44,7 @@ class SeguridadController extends Controller
 
         $partidosDto = array();
 
-        foreach ($partidos as $partido)
-        {
+        foreach ($partidos as $partido) {
             $partidoDto = new PartidoDto();
             $partidoDto->id = $partido->getId();
             $partidoDto->nombre = mb_convert_encoding($partido->getNombre(), 'UTF-8', 'UTF-8');
@@ -70,8 +69,7 @@ class SeguridadController extends Controller
 
         $localidadesDto = array();
 
-        foreach ($localidades as $localidad)
-        {
+        foreach ($localidades as $localidad) {
             $localidadDto = new LocalidadDto();
 
             $localidadDto->id = $localidad->getId();
@@ -92,44 +90,41 @@ class SeguridadController extends Controller
         $this->render(Constantes::LOGINVIEW);
     }
 
-    function validarLogin ($usuario) {
-        $this->layout = "layoutSeguridad";
+    function validarLogin($json)
+    {
+        header("Content-type: application/json");
+
+        $data = json_decode(utf8_decode($json['data']));
 
         $user = new Usuario();
         $session = new Session();
 
-        if (FuncionesUtiles::esPalabraConNumeros($usuario["emailOrNick"])) {
-            $user->setUsername($usuario["emailOrNick"]);
+        if (FuncionesUtiles::esPalabraConNumeros($data->emailOrNick)) {
+            $user->setUsername($data->emailOrNick);
             $user->setEmail(null);
-        }
-        else if (FuncionesUtiles::validarEmail($usuario["emailOrNick"])) {
-            $user->setEmail($usuario["emailOrNick"]);
+        } else if (FuncionesUtiles::esEmailValido($data->emailOrNick)) {
+            $user->setEmail($data->emailOrNick);
             $user->setUsername(null);
-        }
-        else{
-            throwError404();
-        }
-
-        if (FuncionesUtiles::esPalabraConNumeros($usuario["password"])) {
-            $user->setUpassword(strtoupper(sha1($usuario["password"])));
         } else {
-            throwError404();
+            throw new EmailOrNickInvalidoException("El Email o Nickname insertado no son válidos", CodigoError::EmailOrNickInvalido);
         }
 
-        $arrayUsurio = $user->existeUsuarioDB();
+        if (PasswordHelper::validarPassword($data->password)) {
+            $user->setUpassword(strtoupper(sha1($data->password)));
+        } else {
+            throw new PasswordInvalidaException("Formato de password ingresado inválido", CodigoError::PasswordInvalida);
+        }
 
-
-       if ($arrayUsurio){
-            $session->setId($arrayUsurio[0]["Id"]);
-            $session->setUserName($arrayUsurio[0]["Username"]);
-            $session->setRolId($arrayUsurio[0]["RolId"]);
+        if(!$user->loguearUsuarioDB()) {
+            throw new UsuarioNoEncontradoException("Usuario o contraseña inválido. Revise sus datos y vuelva a intentarlo", CodigoError::UsuarioNoEncontrado);
+        } else {
+            $session->setId($user->getId());
+            $session->setUserName($user->getUsername());
+            $session->setRolId($user->getRolId());
             $_SESSION["session"] = serialize($session);
-            header("location: " . getBaseAddress() . "Home/inicio");
         }
-        else{
-            header("location: " . getBaseAddress() . "Seguridad/login");
-            echo "<script> alert('Usuario incorrecto'); </script>";
-        }
+
+        echo json_encode(true);
     }
 
     function validarRegistrar($json)
@@ -140,6 +135,7 @@ class SeguridadController extends Controller
 
         $usuario = new Usuario();
         $direccion = new Direccion();
+        $geolocalizacion = new Geolocalizacion();
 
         $direccion->setCalle($data->calle);
         $direccion->setAltura($data->altura);
@@ -149,36 +145,49 @@ class SeguridadController extends Controller
         $direccion->setPartidoId($data->partidoId);
         $direccion->setLocalidadId($data->localidadId);
 
-        if(!$direccion->validarDireccion())
+        if (!$direccion->validarDireccion())
             throw new DireccionInvalidaException("La dirección insertada es inválida", CodigoError::DireccionInvalida);
 
-        if(!$direccion->existeDireccion())
-        {
-            if(!$direccion->insertarDireccion())
+        if (!$direccion->existeDireccion()) {
+            if (!$direccion->insertarDireccion())
                 throw new SQLInsertException("Error al Insertar la Dirección", CodigoError::ErrorInsertSQL);
         }
 
-        if(!FuncionesUtiles::validarPassword($data->password))
+        $geolocalizacion->setLatitud($data->geolocalizacion->latitud);
+        $geolocalizacion->setLongitud($data->geolocalizacion->longitud);
+
+        if (!$geolocalizacion->validarGeolocalizacion())
+            throw new GeolocalizacionInvalidaException("Ubicación geográfica inválida", CodigoError::GeolocalizacionInvalida);
+
+        if (!$geolocalizacion->existeGeolocalizacion()) {
+            if (!$geolocalizacion->insertarGeolocalizacion())
+                throw new SQLInsertException("Error al Insertar la Geolocalización", CodigoError::ErrorInsertSQL);
+        }
+
+        if (!PasswordHelper::validarPassword($data->password))
             throw new PasswordInvalidaException("El formato de la contraseña no es válido", CodigoError::PasswordInvalida);
 
         $usuario->setNombre($data->nombre);
         $usuario->setApellido($data->apellido);
+        $usuario->setCUIT($data->CUIT);
         $usuario->setUsername($data->nickname);
         $usuario->setUpassword(strtoupper(sha1($data->password)));
         $usuario->setEmail($data->email);
-        $usuario->setTelefono($data->telefono);
+        $usuario->setTelefonoFijo($data->telefonoFijo);
+        $usuario->setTelefonoCelular($data->telefonoCelular);
         $usuario->setDireccionId($direccion->getId());
-        $usuario->setSexoId($data->sexoId);
+        $usuario->setGeneroId($data->generoId);
         $usuario->setRolId(Roles::USUARIO);
         $usuario->setFechaNacimiento($data->fechaNacimiento);
+        $usuario->setGeolocalizacionId($geolocalizacion->getId());
 
-        if(!$usuario->validarUsuario())
-            throw new UsuarioInvalidoException( "Los datos de Usuario son inválidos", CodigoError::UsuarioInvalido);
+        if (!$usuario->validarUsuario())
+            throw new UsuarioInvalidoException("Los datos de Usuario ingresados son inválidos", CodigoError::UsuarioInvalido);
 
-        if($usuario->existeUsuarioDB())
+        if ($usuario->existeUsuarioDB())
             throw new EntidadDuplicadaException("Usuario Duplicado", CodigoError::EntidadDuplicada);
 
-        if(!$usuario->insertarUsuario())
+        if (!$usuario->insertarUsuario())
             throw new SQLInsertException("Error al insertar al usuario", CodigoError::ErrorInsertSQL);
 
         $session = new Session();
@@ -198,6 +207,53 @@ class SeguridadController extends Controller
         header("location: " . getBaseAddress() . "Home/inicio");
     }
 
+
+    function olvidePassword()
+    {
+        $this->layout = "layoutSeguridad";
+
+        $d['title'] = Constantes::OLVIDEPASSWORDTITLE;
+
+        $this->set($d);
+        $this->render(Constantes::OLVIDEPASSWORDVIEW);
+    }
+
+    function renovarPassword($json)
+    {
+        header("Content-type: application/json");
+
+        $data = json_decode($json['data']);
+
+        $user = new Usuario();
+
+        $user->setCUIT(0);
+        if (FuncionesUtiles::esPalabraConNumeros($data->emailOrNick)) {
+            $user->setUsername($data->emailOrNick);
+            $user->setEmail(null);
+        } else if (FuncionesUtiles::esEmailValido($data->emailOrNick)) {
+            $user->setEmail($data->emailOrNick);
+            $user->setUsername(null);
+        } else {
+            throw new EmailOrNickInvalidoException("El Email o Nickname insertado no son válidos", CodigoError::EmailOrNickInvalido);
+        }
+
+        if (!$user->existeUsuarioDB()) {
+            throw new UsuarioNoEncontradoException("El usuario que intenta renovar la contraseña no existe", CodigoError::UsuarioNoEncontrado);
+        }
+
+        $newPass = PasswordHelper::generarNuevoPassRandom();
+        if (!$user->renovarPasword($newPass)) {
+            throw new SQLUpdateException("Ocurrió un error al actualizar la contraseña", CodigoError::ErrorUpdateSQL);
+        }
+
+        $user->getUsuarioById($user->getId());
+
+        if (!MailHelper::enviarMailRenovacionPassword($user->getEmail(), $newPass)) {
+            throw new EnvioMailRenovacionPasswordFallidoException("No se ha podido enviar el mail para la renovación de password", CodigoError::EnvioMailRenovacionPasswordFallido);
+        }
+
+        echo json_encode(true);
+    }
 }
 
 ?>
