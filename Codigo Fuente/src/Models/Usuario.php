@@ -432,6 +432,7 @@ class Usuario extends Model
 
         if($row) {
             $this->setId($row[0]["Id"]);
+            $this->setEmail($row[0]["Email"]);
             $this->setUsername($row[0]["Username"]);
             $this->setRolId($row[0]["RolId"]);
         }

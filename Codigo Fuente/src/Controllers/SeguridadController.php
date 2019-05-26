@@ -116,7 +116,7 @@ class SeguridadController extends Controller
         }
 
         if(!$user->loguearUsuarioDB()) {
-            throw new UsuarioInvalidoException("Usuario o contraseña inválido", CodigoError::UsuarioInvalido);
+            throw new UsuarioNoEncontradoException("Usuario o contraseña inválido. Revise sus datos y vuelva a intentarlo", CodigoError::UsuarioNoEncontrado);
         } else {
             $session->setId($user->getId());
             $session->setUserName($user->getUsername());
@@ -182,7 +182,7 @@ class SeguridadController extends Controller
         $usuario->setGeolocalizacionId($geolocalizacion->getId());
 
         if (!$usuario->validarUsuario())
-            throw new UsuarioInvalidoException("Los datos de Usuario son inválidos", CodigoError::UsuarioInvalido);
+            throw new UsuarioInvalidoException("Los datos de Usuario ingresados son inválidos", CodigoError::UsuarioInvalido);
 
         if ($usuario->existeUsuarioDB())
             throw new EntidadDuplicadaException("Usuario Duplicado", CodigoError::EntidadDuplicada);
@@ -238,7 +238,7 @@ class SeguridadController extends Controller
         }
 
         if (!$user->existeUsuarioDB()) {
-            throw new UsuarioInvalidoException("El usuario que intenta renovar la contraseña no existe");
+            throw new UsuarioNoEncontradoException("El usuario que intenta renovar la contraseña no existe", CodigoError::UsuarioNoEncontrado);
         }
 
         $newPass = PasswordHelper::generarNuevoPassRandom();

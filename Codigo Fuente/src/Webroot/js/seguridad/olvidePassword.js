@@ -23,12 +23,12 @@ function validarEmailOrNick() {
 }
 
 btnRecuperarPassword.click(function () {
-    $("input").prop('disabled', true);
-    btnRecuperarPassword.prop('disabled', true);
     $(".error").fadeOut();
     $(".error").find("span").text("");
 
     if(validarEmailOrNick()) {
+        $("input").prop('disabled', true);
+        btnRecuperarPassword.prop('disabled', true);
         var obj = {};
         obj.emailOrNick = inputEmailOrNick.val();
         llamadaAjax(pathRenovarPassword, JSON.stringify(obj), true, "mostrarModalRenovacionPasswordExitosa", "mostrarModalRenovacionPasswordFallida");
@@ -38,7 +38,7 @@ btnRecuperarPassword.click(function () {
 function mostrarModalRenovacionPasswordExitosa(dummy) {
     $("input").prop('disabled', false);
     btnRecuperarPassword.prop('disabled', false);
-    alertify.confirm('¡Contraseña Renovada!', "Para continuar, debe permitir al navegador acceder a su ubicación");
+    alertify.alert("¡Contraseña Renovada!", "Se ha enviado un mensaje a su casilla de mail con su nueva contraseña").setting("modal", false);
 }
 
 function mostrarModalRenovacionPasswordFallida(err) {
