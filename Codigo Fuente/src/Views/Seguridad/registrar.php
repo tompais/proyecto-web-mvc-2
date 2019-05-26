@@ -7,7 +7,7 @@
 </script>
 <div class="d-flex mt-4">
     <div class="col-lg-6 col-md-8 mx-auto">
-        <div class="border shadow rounded p-4 my-5 bg-white">
+        <div class="border shadow rounded p-4 my-1 bg-white">
             <h4 class="mb-4 text-center">Regístrese</h4>
 
             <div class="form-row">
