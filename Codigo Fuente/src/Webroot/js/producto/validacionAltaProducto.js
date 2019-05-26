@@ -1,5 +1,4 @@
-
-//$(document).ready(function() {
+$(document).ready(function() {
 
     $("#btnAgregar").click(function(){
 
@@ -10,38 +9,37 @@
         var descripcionProducto = $('#textareaDescripcionProducto').val();
         
         //var imagenProducto = $('#inputImagenProducto')[0].val();
-        var imagenProducto = $('#inputImagenProducto').files;
+        var imagenProducto = $('#inputImagenProducto')[0].files;
 
         //nombre de producto
-        if(nombreProducto == null || nombreProducto.length < 5 || nombreProducto === ""){
+        if(nombreProducto === null || nombreProducto.length <= 3 && nombreProducto.length >= 15  || nombreProducto === ""){
             $("#errorNombreProducto").fadeIn("slow");
             return false;        
         }
         else{
-            console.log('type is - ' + typeof(nombreProducto));
             $("#errorNombreProducto").fadeOut();
         }
       
         //precio
-        if(precioProducto == null || precioProducto.length === 0 || precioProducto === "" || !regexSoloNumeros.test(precioProducto) ){
+        if(precioProducto === null || precioProducto.length == 0 || precioProducto === ""){
             $("#errorPrecioProducto").fadeIn("slow");
-            return false;        
+            return false;
         }
         else{
             $("#errorPrecioProducto").fadeOut();
         }
-        
+
         //categoria
-        if(categoriaProducto == null || categoriaProducto.length === 0 || categoriaProducto === ""){
+        if(categoriaProducto === null || categoriaProducto == 0){
             $("#errorCategoriaProducto").fadeIn("slow");
-            return false;        
+            return false;
         }
         else{
             $("#errorCategoriaProducto").fadeOut();
         }
-    
+
         //descripcion
-        if(descripcionProducto == null || descripcionProducto.length === 0 || descripcionProducto === ""){
+        if(descripcionProducto === null || descripcionProducto.length == 0 || descripcionProducto === ""){
             $("#errorDescripcionProducto").fadeIn("slow");
             return false;        
         }
@@ -49,24 +47,15 @@
             $("#errorDescripcionProducto").fadeOut();
         }
         
-        //archjivos
-        if(imagenProducto == null || imagenProducto.length === 0 || imagenProducto === ""){
+        //archivos
+        if(imagenProducto === null || imagenProducto.length == 0 || imagenProducto === ""){
             $("#errorImagenProducto").fadeIn("slow");
             return false;        
         }
         else{
             $("#errorImagenProducto").fadeOut();
         }    
-        return true; 
-    
-    });                    
 
-    
-//});
+    });
 
-/*
-function ErrorFormulario () {
-    $("#errorForm").fadeIn("slow");
-}
-
-*/
+});

@@ -48,19 +48,23 @@ class ProductosController extends Controller
 
         $usuario->getUsuarioById($sesion->getId());
 
-        if (!$producto->validarNombre($publicacion["nombreProducto"]))
+        if ($producto->validarNombre($publicacion["nombreProducto"])){
+
             throw new NombreInvalidoException("El nombre del producto es incorrecto", CodigoError::NombreProductoInvalido);
 
-        else if (!$producto->validarPrecio($publicacion["precioProducto"]))
+        } else if ($producto->validarPrecio($publicacion["precioProducto"])){
+
             throw new PrecioInvalidoException("El precio del producto es incorrecto", CodigoError::PrecioProductoInvalido);
 
-        else if (!$producto->validarCateoria($publicacion["categoriaProducto"]))
+        } else if ($producto->validarCateoria($publicacion["categoriaProducto"])) {
+
             throw new CategoriasInvalidoException("La categoria del producto es incorrecto", CodigoError::CategoriaProductoInvalido);
 
-        else if (!$producto->validarDescripcion($publicacion["descripcionProducto"]))
+        } else if ($producto->validarDescripcion($publicacion["descripcionProducto"])){
+
             throw new DescripcionInvalidoException("La descripcion del producto es incorrecto", CodigoError::DescripcionProductoInvalido);
 
-        else {
+        } else {
             $producto->setNombre($publicacion["nombreProducto"]);
             $producto->setPrecio($publicacion["precioProducto"]);
             $categoria->obtenerIdByNombre($publicacion["categoriaProducto"]);
