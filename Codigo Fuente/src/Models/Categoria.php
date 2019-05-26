@@ -30,6 +30,11 @@ class Categoria extends Model
         $resultado = $this->pageRows(0, 1, "Nombre LIKE '$nombre'");
         $this->setId($resultado[0]["Id"]);
     }
+
+    public function traerListaCategorias()
+    {
+        return $this->pageRows(0, PHP_INT_MAX);
+    }
 }
 
 ?>

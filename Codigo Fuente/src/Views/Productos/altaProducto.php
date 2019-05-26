@@ -16,12 +16,14 @@
             <label for="selectCategoriaProducto">Categoria</label>
             <select name="categoriaProducto" id="selectCategoriaProducto" class="form-control" >
                 <option value="0">Categoria</option>
-                <option>Tecnologia</option>
-                <option>Hogar</option>
-                <option>Ropa</option>
-                <option>Libreria</option>
-                <option>Iluminacion</option>
-                <option>Comestibles</option>
+                
+                <?php
+                    $categorias = $_SESSION["categorias"];
+
+                    for($i = 0; $i < count($categorias); $i++)
+                        echo "<option>" . $categorias[$i]["Nombre"] . "</option>";
+                ?>
+
             </select>
             <div id="errorCategoriaProducto" class="error"> <i class="fas fa-exclamation-triangle"></i> Elija la categoria del producto</div>
         </div>

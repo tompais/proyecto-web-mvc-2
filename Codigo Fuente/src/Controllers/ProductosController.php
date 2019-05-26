@@ -4,6 +4,10 @@ class ProductosController extends Controller
 {
     function misProductos()
     {
+        $categoria = new Categoria();
+
+        $_SESSION["categorias"] = $categoria->traerListaCategorias();
+
         $sesion = unserialize($_SESSION["session"]);
     
         $producto = new Producto();
