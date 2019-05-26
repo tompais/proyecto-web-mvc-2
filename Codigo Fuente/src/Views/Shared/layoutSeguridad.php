@@ -55,7 +55,7 @@
     <main role="main">
 
         <nav class="navbar fixed-top float-left">
-            <a href="<?php echo getBaseAddress() . 'Home/inicio' ?>" class="navbar-brand pl-5 mb-5">
+            <a href="<?php echo getBaseAddress(); ?>" class="navbar-brand pl-5 mb-5">
                 <img class="img-fluid" id="logo" src="<?php echo getBaseAddress() . "Webroot/img/home/logo.png" ?>">
                 <img class="img-fluid" id="logoResponsive" src="<?php echo getBaseAddress() . "Webroot/img/home/logoResponsive3.png" ?>">
             </a>

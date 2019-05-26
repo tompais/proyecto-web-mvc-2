@@ -349,7 +349,7 @@ btnRegistrar.click(function () {
             realizarRegistracion();
         }
     }).catch(function (err) {
-        alertify.alert("Ha ocurrido un error y no se ha podido registrar su ubicación. Por favor, dé permisos a su navegador y vuelva a intentar")
+        alertify.alert('Error en Geolocalización', "Ha ocurrido un error y no se ha podido registrar su ubicación. Por favor, dé permisos a su navegador y vuelva a intentar")
     });
 });
 
