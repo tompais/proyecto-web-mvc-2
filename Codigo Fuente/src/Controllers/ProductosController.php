@@ -48,8 +48,8 @@ class ProductosController extends Controller
 
         $usuario->getUsuarioById($sesion->getId());
 
-        if (!$producto->validarNombre($publicacion["nombreProducto"])){
-            throw new NombreInvalidoException("El nombre del producto es incorrecto", CodigoError::NombreProductoInvalido);}
+        if (!$producto->validarNombre($publicacion["nombreProducto"]))
+            throw new NombreInvalidoException("El nombre del producto es incorrecto", CodigoError::NombreProductoInvalido);
 
         else if (!$producto->validarPrecio($publicacion["precioProducto"]))
             throw new PrecioInvalidoException("El precio del producto es incorrecto", CodigoError::PrecioProductoInvalido);
