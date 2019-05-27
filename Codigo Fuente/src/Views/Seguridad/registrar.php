@@ -6,8 +6,8 @@
     const pathValidarRegistrar = "<?php echo getBaseAddress() . "Seguridad/validarRegistrar"; ?>";
 </script>
 <div class="d-flex mt-4">
-    <div class="col-lg-6 col-md-8 mx-auto">
-        <div class="border shadow rounded p-4 my-1 bg-white">
+    <div class="col-lg-6 col-md-8 mx-auto mt-1">
+        <div class="border shadow rounded p-4 my-5 bg-white">
             <h4 class="mb-4 text-center">Regístrese</h4>
 
             <div class="form-row">
@@ -19,8 +19,7 @@
                         </div>
                         <div id="errorNombre2" class="error"><i class="fas fa-exclamation-triangle"></i> Su nombre debe tener mínimo 3 letras
                         </div>
-                        <div id="errorNombre3" class="error"><i class="fas fa-exclamation-triangle"></i> Su nombre no debe
-                            tener mas de 15 caracteres
+                        <div id="errorNombre3" class="error"><i class="fas fa-exclamation-triangle"></i> Su nombre no debe tener mas de 15 caracteres
                         </div>
                         <div id="errorNombre4" class="error"><i class="fas fa-exclamation-triangle"></i> Formato de nombre incorrecto
                         </div>

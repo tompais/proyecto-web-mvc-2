@@ -3,6 +3,20 @@
         display: none;
     }
     #logoResponsive {
-        display: block;
+        margin-right: auto;
+        display: flex;
     }
+    #logos{
+        justify-content: center;
+        align-items: center;
+    }
+
+    #logos div a {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+.footer a, .cr {
+    color: white !important;
 }

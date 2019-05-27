@@ -3,7 +3,7 @@
 <div class="container mt-5">
 
     <div class="panel-heading mt-5">
-        <div class="panel-title">
+        <div class="panel-title pt-3">
             <div class="row">
                 <div class="col">
                     <h2>Mis Ventas</h2>
