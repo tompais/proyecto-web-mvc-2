@@ -428,7 +428,7 @@ class Usuario extends Model
 
     public function loguearUsuarioDB ()
     {
-        $row = $this->pageRows(0, 1, "(Username LIKE '$this->username' OR Email LIKE '$this->email') AND UPassword LIKE '$this->upassword'");
+        $row = $this->pageRows(0, 1, "(Username LIKE '$this->username' OR Email LIKE '$this->email') AND FechaBaneo IS NULL AND FechaBaja IS NULL AND UPassword LIKE '$this->upassword'");
 
         if($row) {
             $this->setId($row[0]["Id"]);
@@ -443,6 +443,16 @@ class Usuario extends Model
     public function existeUsuarioDB ()
     {
         $row = $this->pageRows(0, 1, "Username LIKE '$this->username' OR Email LIKE '$this->email' OR CUIT = $this->CUIT");
+
+        if($row)
+            $this->setId($row[0]["Id"]);
+
+        return $row;
+    }
+
+    public function existeUsuarioActivoDB ()
+    {
+        $row = $this->pageRows(0, 1, "(Username LIKE '$this->username' OR Email LIKE '$this->email' OR CUIT = $this->CUIT) AND FechaBaja IS NULL AND FechaBaneo IS NULL");
 
         if($row)
             $this->setId($row[0]["Id"]);
