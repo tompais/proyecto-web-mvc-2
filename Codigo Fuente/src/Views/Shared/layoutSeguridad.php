@@ -52,11 +52,13 @@
         const pathHome = "<?php echo getBaseAddress(); ?>";
     </script>
 
-    <div class="container d-inline ">
-        <a href="<?php echo getBaseAddress(); ?>">
-            <img class="img-fluid" id="logo" src="<?php echo getBaseAddress() . "Webroot/img/home/logoSeguridad.png" ?>">
-            <img class="img-fluid m-auto" id="logoResponsive" src="<?php echo getBaseAddress() . "Webroot/img/home/logoResponsive3.png" ?>">
-        </a>
+    <div class="bg-white d-flex justify-content-center px-5 py-3" id="logos">
+        <div class="row w-75">
+            <a href="<?php echo getBaseAddress();?>">
+                <img class="img-fluid" id="logo" src="<?php echo getBaseAddress() . "Webroot/img/home/logoSeguridad.png" ?>">
+                <img class="img-fluid" id="logoResponsive" src="<?php echo getBaseAddress() . "Webroot/img/home/logoResponsive3.png" ?>">
+            </a>
+        </div>
     </div>
 
     <main role="main">

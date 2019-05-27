@@ -18,9 +18,9 @@ abstract class Constantes
 
     //Títulos
     const MAINTITLE = "ShopLine";
-    const REGISTRARTITLE = "Registrar";
-    const LOGINTITLE = "Iniciar Sesion";
-    const PRODUTOSTITLE = "Ventas";
+    const REGISTRARTITLE = "Registrar en ShopLine";
+    const LOGINTITLE = "Iniciar Sesion en ShopLine";
+    const PRODUTOSTITLE = "Mis Ventas";
 
     const OLVIDEPASSWORDTITLE = "Olvidé Mi Contraseña";
 

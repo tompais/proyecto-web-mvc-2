@@ -23,7 +23,7 @@
 
                                 if (!$sessionManejada){
                                     echo "<a href='#'>
-                                            Mi Cuenta <i class='ml-1 fa fa-angle-down'></i>
+                                            Cuenta <i class='ml-1 fa fa-angle-down'></i>
                                         </a>
                                         <ul class='account_selection'>
                                             <li><a href='" . getBaseAddress().'Seguridad/login' . "'><i class='fas fa-sign-in-alt mr-1'></i>Iniciar Sesion</a></li>

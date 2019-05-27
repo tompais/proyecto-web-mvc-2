@@ -1,6 +1,6 @@
 <!-- Footer -->
 
-<footer class="footer">
+<footer class="footer mb-2">
     <div class="container position-relative">
         <div class="row">
             <div class="col-lg-6">
