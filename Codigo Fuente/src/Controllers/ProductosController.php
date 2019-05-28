@@ -48,9 +48,6 @@ class ProductosController extends Controller
 
         $producto->setDescripcion($publicacion["descripcionProducto"]);
 
-        if(!$producto->validarDescripcion())
-            throw new Exception("Rompo en descripción");
-
         if(!$producto->validarProducto())
             throw new ProductoInvalidoException("Los datos del producto no son válidos", CodigoError::ProductoInvalido);
 
