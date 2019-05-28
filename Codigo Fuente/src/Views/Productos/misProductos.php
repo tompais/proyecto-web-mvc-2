@@ -32,6 +32,7 @@
                 $precio = $productos[$i]['Precio'];
 
                 echo "<li class='card mt-3'>
+                        <input type='hidden' value='". $productos->ge ."'>
                         <div class='card__inner'>
                             <img class='img-fluid' src='$rutaImg'>
                         </div>
@@ -86,7 +87,9 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Eliminar</button>
+                    <form action="<?php echo getBaseAddress() . "Productos/eliminar" ?>" method="post">
+                        <button type="submit" class="btn btn-primary">Eliminar</button>
+                    </form>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                 </div>
 
