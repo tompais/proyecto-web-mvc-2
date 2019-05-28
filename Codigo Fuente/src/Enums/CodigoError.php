@@ -15,6 +15,8 @@ abstract class CodigoError
     const PasswordInvalida = 5;
     const GeolocalizacionInvalida = 6;
     const EmailOrNickInvalido = 7;
+    const ProductoInvalido = 8;
+    const ImagenNoInsertada = 9;
     const ErrorUpdateSQL = 13;
     const EnvioMailRenovacionPasswordFallido = 14;
     const UsuarioNoEncontrado = 15;
