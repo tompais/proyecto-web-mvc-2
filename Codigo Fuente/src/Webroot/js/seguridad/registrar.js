@@ -34,6 +34,7 @@ function cargarSelectLocalidad(localidades) {
         selectLocalidad.append(option);
     });
     selectLocalidad.prop('disabled', false);
+    btnRegistrar.prop('disabled', false);
 }
 
 function cargarSelectPartido(partidos) {
@@ -49,6 +50,7 @@ function cargarSelectPartido(partidos) {
 }
 
 selectPartido.change(function() {
+    btnRegistrar.prop('disabled', true);
     selectLocalidad.prop('disabled', true);
     inicializarSelectLocalidad($(this).val());
 });
@@ -58,6 +60,7 @@ function limpiarSelect(select) {
 }
 
 selectProvincia.change(function() {
+    btnRegistrar.prop('disabled', true);
     selectPartido.prop('disabled', true);
     selectLocalidad.prop('disabled', true);
     inicializarSelectPartido($(this).val());
