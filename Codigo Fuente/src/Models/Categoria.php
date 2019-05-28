@@ -41,6 +41,11 @@ class Categoria extends Model
 
         return $categorias;
     }
+
+    public function existeCategoriaDB()
+    {
+        return $this->selectByPk($this->getId());
+    }
 }
 
 ?>
