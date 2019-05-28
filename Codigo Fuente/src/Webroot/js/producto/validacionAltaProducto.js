@@ -12,7 +12,7 @@ $(document).ready(function() {
         var imagenProducto = $('#inputImagenProducto')[0].files;
 
         //nombre de producto
-        if(nombreProducto === null || nombreProducto.length <= 3 || nombreProducto.length >= 15  || nombreProducto === ""){
+        if(nombreProducto === null || nombreProducto === "" || nombreProducto.length < 5 || nombreProducto.length > 50 ){
             $("#errorNombreProducto").fadeIn("slow");
             return false;        
         }
@@ -21,7 +21,7 @@ $(document).ready(function() {
         }
       
         //precio
-        if(precioProducto === null || precioProducto.length == 0 || precioProducto === ""){
+        if(precioProducto === null || precioProducto.length === 0 || precioProducto === ""){
             $("#errorPrecioProducto").fadeIn("slow");
             return false;
         }
@@ -30,7 +30,7 @@ $(document).ready(function() {
         }
 
         //categoria
-        if(categoriaProducto === null || categoriaProducto == 0){
+        if(categoriaProducto === null || categoriaProducto === 0){
             $("#errorCategoriaProducto").fadeIn("slow");
             return false;
         }
@@ -39,7 +39,7 @@ $(document).ready(function() {
         }
 
         //descripcion
-        if(descripcionProducto === null || descripcionProducto.length == 0 || descripcionProducto === ""){
+        if(descripcionProducto === null || descripcionProducto === "" || descripcionProducto.length < 0 || descripcionProducto.length > 200){
             $("#errorDescripcionProducto").fadeIn("slow");
             return false;        
         }
@@ -48,7 +48,7 @@ $(document).ready(function() {
         }
         
         //archivos
-        if(imagenProducto === null || imagenProducto.length == 0 || imagenProducto === ""){
+        if(imagenProducto === null || imagenProducto.length === 0 || imagenProducto === ""){
             $("#errorImagenProducto").fadeIn("slow");
             return false;        
         }

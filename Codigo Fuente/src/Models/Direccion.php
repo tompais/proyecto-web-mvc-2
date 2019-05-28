@@ -216,7 +216,7 @@ class Direccion extends Model
 
     public function validarCalle()
     {
-        return FuncionesUtiles::esOracionSoloLetras($this->getCalle());
+        return FuncionesUtiles::esOracion($this->getCalle());
     }
 
     public function validarAltura()

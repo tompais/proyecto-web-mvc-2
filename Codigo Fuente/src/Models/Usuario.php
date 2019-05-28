@@ -346,14 +346,14 @@ class Usuario extends Model
 
     public function validarNombre()
     {
-        return FuncionesUtiles::esOracionSoloLetras($this->nombre)
+        return FuncionesUtiles::esOracion($this->nombre)
             && ($cantLetras = strlen($this->nombre)) <= 15
             && $cantLetras >= 3;
     }
 
     public function validarApellido()
     {
-        return FuncionesUtiles::esOracionSoloLetras($this->apellido)
+        return FuncionesUtiles::esOracion($this->apellido)
             && ($cantLetras = strlen($this->apellido)) <= 15
             && $cantLetras >= 3;
     }
