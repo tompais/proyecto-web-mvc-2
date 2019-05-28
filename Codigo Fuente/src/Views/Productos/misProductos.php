@@ -17,26 +17,22 @@
 
     <ul class="cards">
         <?php
-            $productos = isset($_SESSION["productos"])?$_SESSION["productos"]:[];
-            $imagenes = isset($_SESSION["imagenes"])?$_SESSION["imagenes"]:[];
-
             $j = 0;
 
-            for($i = 0; $i < count($productos); $i++)
+            foreach($productos as $producto)
             {
-                $imagen = $imagenes[$j]['Nombre'];
-                $id = $productos[$i]['Id'];
+                $imagen = $imagenes[$j]->getNombre();
+                $id = $producto->getId();
 
                 $rutaImg = getBaseAddress() . 'Webroot/img/productos/' . $imagen;
-                $producNomb = $productos[$i]['Nombre'];
-                $precio = $productos[$i]['Precio'];
+                $precio = $producto->getPrecio();
 
                 echo "<li class='card mt-3'>
-                        <input type='hidden' value='". $productos->ge ."'>
+                        <input type='hidden' value='". $producto->getId() ."'>
                         <div class='card__inner'>
                             <img class='img-fluid' src='$rutaImg'>
                         </div>
-                        <h3 class='card__tagline mt-2'>$producNomb</h3>
+                        <h3 class='card__tagline mt-2'>". $producto->getNombre() ."</h3>
                         <ul class='card__icons mt-2'>
                             <li><a href='#'><i class='fas fa-eye'></i></a></li>
                             <li><a href='#'><i class='fas fa-edit'></i></a></li>
@@ -45,7 +41,7 @@
                         <p>$$precio.00</p>
                     </li>";
 
-                while($j < count($imagenes) && $id == $imagenes[$j]['ProductoId'])
+                while($j < count($imagenes) && $id == $imagenes[$j]->getProductoId())
                     $j++;
             }
         ?>

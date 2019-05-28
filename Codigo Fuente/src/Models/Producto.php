@@ -129,7 +129,24 @@ class Producto extends Model
 
     public function traerListaProductos($pk)
     {
-        return $this->pageRows(0, PHP_INT_MAX, "UsuarioId = $pk");
+        $productos = array();
+
+        $rows = $this->pageRows(0, PHP_INT_MAX, "UsuarioId = $pk");
+
+        foreach($rows as $row)
+        {
+            $producto = new Producto();
+            $producto->setId($row["Id"]);
+            $producto->setNombre($row["Nombre"]);
+            $producto->setPrecio($row["Precio"]);
+            $producto->setCategoriaId($row["CategoriaId"]);
+            $producto->setUsuarioId($row["UsuarioId"]);
+            $producto->setDescripcion($row["Descripcion"]);
+            $producto->setFechaAlta($row["FechaAlta"]);
+            $productos[] = $producto;
+        }
+
+        return $productos;
     }
 
     public function validarNombre()
@@ -147,7 +164,8 @@ class Producto extends Model
 
     public function validarCateoria()
     {
-        return FuncionesUtiles::esCadenaNoNulaOVacia($this->categoria);
+        return FuncionesUtiles::esEntero($this->categoria)
+            && FuncionesUtiles::esMayorACero($this->categoria);
     }
 
     public function validarDescripcion()

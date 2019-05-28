@@ -25,15 +25,21 @@ class Categoria extends Model
         $this->nombre = $nombre;
     }
 
-    public function obtenerIdByNombre($nombre)
-    {
-        $resultado = $this->pageRows(0, 1, "Nombre LIKE '$nombre'");
-        $this->setId($resultado[0]["Id"]);
-    }
-
     public function traerListaCategorias()
     {
-        return $this->pageRows(0, PHP_INT_MAX);
+        $categorias = array();
+
+        $rows = $this->pageRows(0, PHP_INT_MAX);
+
+        foreach($rows as $row)
+        {
+            $categoria = new Categoria();
+            $categoria->setId($row["Id"]);
+            $categoria->setNombre($row["Nombre"]);
+            $categorias[] = $categoria;
+        }
+
+        return $categorias;
     }
 }
 
