@@ -19,10 +19,8 @@
                 <option value="0">Categoria</option>
                 
                 <?php
-                    $categorias = $_SESSION["categorias"];
-
-                    for($i = 0; $i < count($categorias); $i++)
-                        echo "<option>" . $categorias[$i]["Nombre"] . "</option>";
+                    foreach($categorias as $categoria)
+                        echo "<option value='". $categoria->getId() ."'>" . $categoria->getNombre() . "</option>";
                 ?>
 
             </select>
