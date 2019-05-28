@@ -16,43 +16,6 @@
     </div>
 
     <ul class="cards">
-        <li class="card mt-3">
-            <div class="card__inner">
-                <img class="img-fluid" src="<?php echo getBaseAddress() .'Webroot/img/home/product_3.png' ?>">
-            </div>
-            <h3 class="card__tagline mt-2">Nike Airmax 97</h3>
-            <ul class="card__icons mt-2">
-                <li><a href="#"><i class="fas fa-eye"></i></a></li>
-                <li><a href="#"><i class="fas fa-edit"></i></a></li>
-                <li><a href="#"><i class="fas fa-times"></i></a></li>
-            </ul>
-            <p>$2500.00</p>
-        </li>
-        <li class="card mt-3">
-            <div class="card__inner">
-                <img class="img-fluid" src="<?php echo getBaseAddress() .'Webroot/img/home/product_2.png' ?>">
-            </div>
-            <h3 class="card__tagline mt-2">Samsung S8 Plus</h3>
-            <ul class="card__icons mt-2">
-                <li><a href="#"><i class="fas fa-eye"></i></a></li>
-                <li><a href="#"><i class="fas fa-edit"></i></a></li>
-                <li><a href="#"><i class="fas fa-times"></i></a></li>
-            </ul>
-            <p>$50000.00</p>
-        </li>
-        <li class="card mt-3">
-            <div class="card__inner">
-                <img class="img-fluid" src="<?php echo getBaseAddress() .'Webroot/img/home/product_4.png' ?>">
-            </div>
-            <h3 class="card__tagline mt-2">Moto G5 Plus</h3>
-            <ul class="card__icons mt-2">
-                <li><a href="#"><i class="fas fa-eye"></i></a></li>
-                <li><a href="#"><i class="fas fa-edit"></i></a></li>
-                <li><a href="#"><i class="fas fa-times"></i></a></li>
-            </ul>
-            <p>$60000.00</p>
-        </li>
-        
         <?php
             $productos = isset($_SESSION["productos"])?$_SESSION["productos"]:[];
             $imagenes = isset($_SESSION["imagenes"])?$_SESSION["imagenes"]:[];
@@ -76,7 +39,7 @@
                         <ul class='card__icons mt-2'>
                             <li><a href='#'><i class='fas fa-eye'></i></a></li>
                             <li><a href='#'><i class='fas fa-edit'></i></a></li>
-                            <li><a href='#'><i class='fas fa-times'></i></a></li>
+                            <li><a href='#' data-toggle='modal' data-target='#eliminarModal'><i class='fas fa-times'></i></a></li>
                         </ul>
                         <p>$$precio.00</p>
                     </li>";
@@ -103,6 +66,28 @@
                     <?php
                     include_once "altaProducto.php";
                     ?>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="eliminarModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h4 class="modal-title">Eliminar Producto</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <div class="modal-body">
+                    <p>¿Estas seguro de eliminar este producto?</p>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Eliminar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                 </div>
 
             </div>
