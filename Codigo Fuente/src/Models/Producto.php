@@ -152,28 +152,43 @@ class Producto extends Model
     public function validarNombre()
     {
         return FuncionesUtiles::esOracion($this->nombre)
-            && ($cantLetras = strlen($this->nombre)) <= 15
-            && $cantLetras >= 3;
+            && ($cantLetras = strlen($this->nombre)) <= 50
+            && $cantLetras >= 5;
     }
 
     public function validarPrecio()
     {
-        return FuncionesUtiles::esEntero($this->precio)
-                || FuncionesUtiles::esMayorACero($this->precio);
+        return (FuncionesUtiles::esEntero($this->precio) || FuncionesUtiles::esCadenaNumerica($this->precio))
+                && FuncionesUtiles::esMayorACero($this->precio);
     }
 
-    public function validarCateoria()
+    public function validarCategoria()
     {
-        return FuncionesUtiles::esEntero($this->categoria)
-            && FuncionesUtiles::esMayorACero($this->categoria);
+        $this->categoria = new Categoria();
+
+        $validacion = (FuncionesUtiles::esEntero($this->categoriaId) || FuncionesUtiles::esCadenaNumerica($this->categoriaId))
+            && FuncionesUtiles::esMayorACero($this->categoriaId);
+
+        if($validacion)
+        {
+            $this->categoria->setId($this->getCategoriaId());
+
+            $validacion = $this->categoria->existeCategoriaDB();
+        }
+
+        return $validacion;
     }
 
     public function validarDescripcion()
     {
-        return FuncionesUtiles::esPalabraConNumeros($this->descripcion)
-            && FuncionesUtiles::esCadenaNoNulaOVacia($this->descripcion);
+        return ($cantLetras = strlen($this->descripcion)) <= 200
+            && $cantLetras >= 0;
     }
 
+    public function validarProducto()
+    {
+        return $this->validarNombre() && $this->validarDescripcion() && $this->validarPrecio() && $this->validarCategoria();
+    }
 }
 
 ?>
