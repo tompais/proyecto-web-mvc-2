@@ -39,7 +39,7 @@ $(document).ready(function() {
         }
 
         //descripcion
-        if(descripcionProducto === null || descripcionProducto === "" || descripcionProducto.length < 0 || descripcionProducto.length > 200){
+        if(descripcionProducto === null || descripcionProducto.length < 0 || descripcionProducto.length > 200){
             $("#errorDescripcionProducto").fadeIn("slow");
             return false;        
         }
