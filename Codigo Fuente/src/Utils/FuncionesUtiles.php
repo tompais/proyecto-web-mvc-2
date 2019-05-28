@@ -18,9 +18,14 @@ class FuncionesUtiles
         return $int > 0;
     }
 
-    public static function esOracion($string)
+    public static function esOracionSoloLetras($string)
     {
         return self::esCadenaNoNulaOVacia($string) && preg_match(Constantes::REGEXLETRASYESPACIO, $string);
+    }
+
+    public static function esOracionCompuesta($string)
+    {
+        return self::esCadenaNoNulaOVacia($string) && preg_match(Constantes::REGEXLETRASNUMEROSYESPACIO, $string);
     }
 
     public static function esPalabra($string)
