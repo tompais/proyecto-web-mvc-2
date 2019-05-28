@@ -204,7 +204,7 @@ class SeguridadController extends Controller
     function cerrarSession()
     {
         session_destroy();
-        header("location: " . getBaseAddress() . "Home/inicio");
+        header("location: " . getBaseAddress());
     }
 
 
@@ -237,7 +237,7 @@ class SeguridadController extends Controller
             throw new EmailOrNickInvalidoException("El Email o Nickname insertado no son válidos", CodigoError::EmailOrNickInvalido);
         }
 
-        if (!$user->existeUsuarioDB()) {
+        if (!$user->existeUsuarioActivoDB()) {
             throw new UsuarioNoEncontradoException("El usuario que intenta renovar la contraseña no existe", CodigoError::UsuarioNoEncontrado);
         }
 

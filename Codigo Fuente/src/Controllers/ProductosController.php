@@ -106,7 +106,7 @@ class ProductosController extends Controller
 
     }
 
-    function baja($publicacion)
+    function eliminar($publicacion)
     {
 
     }
