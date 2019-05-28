@@ -19,31 +19,36 @@
         <?php
             $j = 0;
 
-            foreach($productos as $producto)
+            if(isset($productos))
             {
-                $imagen = $imagenes[$j]->getNombre();
-                $id = $producto->getId();
-
-                $rutaImg = getBaseAddress() . 'Webroot/img/productos/' . $imagen;
-                $precio = $producto->getPrecio();
-
-                echo "<li class='card mt-3'>
-                        <input type='hidden' value='". $producto->getId() ."'>
-                        <div class='card__inner'>
-                            <img class='img-fluid' src='$rutaImg'>
-                        </div>
-                        <h3 class='card__tagline mt-2'>". $producto->getNombre() ."</h3>
-                        <ul class='card__icons mt-2'>
-                            <li><a href='#'><i class='fas fa-eye'></i></a></li>
-                            <li><a href='#'><i class='fas fa-edit'></i></a></li>
-                            <li><a href='#' data-toggle='modal' data-target='#eliminarModal'><i class='fas fa-times'></i></a></li>
-                        </ul>
-                        <p>$$precio.00</p>
-                    </li>";
-
-                while($j < count($imagenes) && $id == $imagenes[$j]->getProductoId())
-                    $j++;
+                foreach($productos as $producto)
+                {
+                    $imagen = $imagenes[$j]->getNombre();
+                    $id = $producto->getId();
+    
+                    $rutaImg = getBaseAddress() . 'Webroot/img/productos/' . $imagen;
+                    $precio = $producto->getPrecio();
+    
+                    echo "<li class='card mt-3'>
+                            <input type='hidden' value='". $producto->getId() ."'>
+                            <div class='card__inner'>
+                                <img class='img-fluid' src='$rutaImg'>
+                            </div>
+                            <h3 class='card__tagline mt-2'>". $producto->getNombre() ."</h3>
+                            <ul class='card__icons mt-2'>
+                                <li><a href='#'><i class='fas fa-eye'></i></a></li>
+                                <li><a href='#'><i class='fas fa-edit'></i></a></li>
+                                <li><a href='#' data-toggle='modal' data-target='#eliminarModal'><i class='fas fa-times'></i></a></li>
+                            </ul>
+                            <p>$$precio.00</p>
+                        </li>";
+    
+                    while($j < count($imagenes) && $id == $imagenes[$j]->getProductoId())
+                        $j++;
+                }
             }
+            else
+                echo "No tiene productos en venta";
         ?>
 
     </ul>
