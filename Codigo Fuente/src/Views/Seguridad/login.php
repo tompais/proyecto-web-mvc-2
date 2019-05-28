@@ -5,7 +5,7 @@
 </script>
 
 <div class="d-flex" id="login">
-    <div class="col-md-5 col-sm-7 mx-auto border rounded shadow p-4 my-1 bg-white">
+    <div class="col-md-5 col-sm-7 mx-auto border rounded shadow p-4 my-5 bg-white">
         <h4 class="mb-4 text-center">Login de Usuario</h4>
 
         <div class="form-group">

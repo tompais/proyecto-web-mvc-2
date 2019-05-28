@@ -6,7 +6,7 @@ class ProductosController extends Controller
     {
         $categoria = new Categoria();
 
-        $_SESSION["categorias"] = $categoria->traerListaCategorias();
+        $d["categorias"] = $categoria->traerListaCategorias();
 
         $sesion = unserialize($_SESSION["session"]);
     
@@ -20,16 +20,16 @@ class ProductosController extends Controller
 
             $imagenes = [];
             
-            for($i = 0; $i < count($productos); $i++)
+            foreach($productos as $producto)
             {
-                $imgProduc = $imagen->traerListaImagenes($productos[$i]["Id"]);
+                $imgProduc = $imagen->traerListaImagenes($producto->getId());
 
-                for($j = 0; $j < count($imgProduc); $j++)
-                    array_push($imagenes, $imgProduc[$j]);
+                foreach($imgProduc as $imgP)
+                    array_push($imagenes, $imgP);
             }
             
-            $_SESSION["productos"] = $productos;
-            $_SESSION["imagenes"] = $imagenes;
+            $d["productos"] = $productos;
+            $d["imagenes"] = $imagenes;
         }
 
         $d["title"] = Constantes::PRODUTOSTITLE;
@@ -42,7 +42,6 @@ class ProductosController extends Controller
         $producto = new Producto();
         $imagen = new Imagen();
         $usuario = new Usuario();
-        $categoria = new Categoria();
 
         $sesion = unserialize($_SESSION["session"]);
 
@@ -67,10 +66,8 @@ class ProductosController extends Controller
         } else {
             $producto->setNombre($publicacion["nombreProducto"]);
             $producto->setPrecio($publicacion["precioProducto"]);
-            $categoria->obtenerIdByNombre($publicacion["categoriaProducto"]);
-            $producto->setCategoriaId($categoria->getId());
+            $producto->setCategoriaId($publicacion["categoriaProducto"]);
             $producto->setUsuarioId($sesion->getId());
-            $producto->setUsuario($usuario);
             $producto->setDescripcion($publicacion["descripcionProducto"]);
             $producto->setFechaAlta(date("Y-m-d H:i:s"));
 
@@ -92,7 +89,6 @@ class ProductosController extends Controller
                     move_uploaded_file($tmp, $ruta);
                     $imagen->setNombre($newNombre);
                     $imagen->setProductoId($idProducto);
-                    $imagen->setProducto($producto);
                     $imagen->insertarImagen();
                 }
             }
@@ -106,7 +102,7 @@ class ProductosController extends Controller
 
     }
 
-    function baja($publicacion)
+    function eliminar($publicacion)
     {
 
     }

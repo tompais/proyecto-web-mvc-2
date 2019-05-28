@@ -59,7 +59,20 @@ class Imagen extends Model
 
     public function traerListaImagenes($pk)
     {
-        return $this->pageRows(0, PHP_INT_MAX, "ProductoId = $pk");
+        $imagenes = array();
+
+        $rows = $this->pageRows(0, PHP_INT_MAX, "ProductoId = $pk");
+
+        foreach($rows as $row)
+        {
+            $imagen = new Imagen();
+            $imagen->setId($row["Id"]);
+            $imagen->setNombre($row["Nombre"]);
+            $imagen->setProductoId($row["ProductoId"]);
+            $imagenes[] = $imagen;
+        }
+
+        return $imagenes;
     }
 }
 
