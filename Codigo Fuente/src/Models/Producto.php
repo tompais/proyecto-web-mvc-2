@@ -131,7 +131,7 @@ class Producto extends Model
     {
         $productos = array();
 
-        $rows = $this->pageRows(0, PHP_INT_MAX, "UsuarioId = $pk");
+        $rows = $this->pageRows(0, PHP_INT_MAX, "UsuarioId = $pk AND FechaBaja IS NULL");
 
         foreach($rows as $row)
         {
@@ -147,6 +147,15 @@ class Producto extends Model
         }
 
         return $productos;
+    }
+
+    public function eliminarProducto($pk)
+    {
+        $producto = $this->selectByPk($pk);
+
+        $producto["FechaBaja"] = date("Y-m-d H:i:s");
+
+        return $this->update($producto);
     }
 
     public function validarNombre()

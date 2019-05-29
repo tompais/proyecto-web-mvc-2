@@ -74,6 +74,11 @@ class Imagen extends Model
 
         return $imagenes;
     }
+
+    public function eliminarImagen()
+    {
+        return $this->delete($this->getId());
+    }
 }
 
 ?>
