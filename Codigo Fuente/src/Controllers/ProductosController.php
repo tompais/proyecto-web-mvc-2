@@ -88,6 +88,19 @@ class ProductosController extends Controller
 
     function eliminar($publicacion)
     {
+        $imagen = new Imagen();
+        $producto = new Producto();
 
+        $imagenes = $imagen->traerListaImagenes($publicacion["idProducto"]);
+
+        foreach($imagenes as $img)
+        {
+            unlink(ROOT . "Webroot/img/productos/" . $img->getNombre());
+            $img->eliminarImagen();
+        }
+
+        $producto->eliminarProducto($publicacion["idProducto"]);
+
+        header("location: " . getBaseAddress() . "Productos/misProductos");
     }
 }

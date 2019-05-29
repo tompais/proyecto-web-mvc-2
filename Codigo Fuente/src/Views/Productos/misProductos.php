@@ -30,7 +30,6 @@
                     $precio = $producto->getPrecio();
     
                     echo "<li class='card mt-3'>
-                            <input type='hidden' value='". $producto->getId() ."'>
                             <div class='card__inner'>
                                 <img class='img-fluid' src='$rutaImg'>
                             </div>
@@ -38,7 +37,7 @@
                             <ul class='card__icons mt-2'>
                                 <li><a href='#'><i class='fas fa-eye'></i></a></li>
                                 <li><a href='#'><i class='fas fa-edit'></i></a></li>
-                                <li><a href='#' data-toggle='modal' data-target='#eliminarModal'><i class='fas fa-times'></i></a></li>
+                                <li><a href='#' onclick='insertarIdProducto($id)' data-toggle='modal' data-target='#eliminarModal'><i class='fas fa-times'></i></a></li>
                             </ul>
                             <p>$$precio.00</p>
                         </li>";
@@ -88,7 +87,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <form action="<?php echo getBaseAddress() . "Productos/eliminar" ?>" method="post">
+                    <form action="<?php echo getBaseAddress() . "Productos/eliminar" ?>" method="post" id="confirmarEliminar">
                         <button type="submit" class="btn btn-primary">Eliminar</button>
                     </form>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -99,3 +98,5 @@
     </div>
     
 </div>
+
+<script src="<?php echo getBaseAddress() . "Webroot/js/producto/eliminarProducto.js" ?>"></script>
