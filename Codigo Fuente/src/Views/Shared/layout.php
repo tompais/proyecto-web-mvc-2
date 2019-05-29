@@ -21,6 +21,10 @@
     <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/lib/OwlCarousel2-2.2.1/animate.css"; ?>">
     <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/lib/OwlCarousel2-2.2.1/owl.carousel.css"; ?>">
     <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/lib/OwlCarousel2-2.2.1/owl.theme.default.css"; ?>">
+
+    <link rel="stylesheet" media="all" type="text/css" href="<?php echo getBaseAddress() . "Webroot/css/Krajee/css/fileinput.css" ?>">
+    <link rel="stylesheet" media="all" type="text/css"  href="<?php echo getBaseAddress() . "Webroot/css/Krajee/themes/explorer-fas/theme.css" ?>">
+
     <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/home/Inicio.css" ?>">
     <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/home/responsive.css" ?>">
     <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/error/errorValidaciones.css" ?>">
@@ -43,11 +47,23 @@
     <script src="<?php echo getBaseAddress() . "Webroot/lib/tooltip/tooltip.min.js"; ?>"></script>
     <script src="<?php echo getBaseAddress() . "Webroot/lib/validate/validate.min.js"; ?>"></script>
     <script src="<?php echo getBaseAddress() . "Webroot/lib/easing/easing.js"; ?>"></script>
+
+    <script src="<?php echo getBaseAddress() . "Webroot/lib/Krajee/js/fileinput.js"; ?>" type="text/javascript"></script>
+    <script src="<?php echo getBaseAddress() . "Webroot/lib/Krajee/js/plugins/piexif.js"; ?>" type="text/javascript"></script>
+    <script src="<?php echo getBaseAddress() . "Webroot/lib/Krajee/js/plugins/sortable.js"; ?>" type="text/javascript"></script>
+    <script src="<?php echo getBaseAddress() . "Webroot/lib/Krajee/js/locales/fr.js"; ?>" type="text/javascript"></script>
+    <script src="<?php echo getBaseAddress() . "Webroot/lib/Krajee/js/locales/es.js"; ?>" type="text/javascript"></script>
+    <script src="<?php echo getBaseAddress() . "Webroot/lib/Krajee/themes/fas/theme.js"; ?>" type="text/javascript"></script>
+    <script src="<?php echo getBaseAddress() . "Webroot/lib/Krajee/themes/explorer-fas/theme.js"; ?>" type="text/javascript"></script>
+
+
     <script src="<?php echo getBaseAddress() . "Webroot/lib/Isotope/isotope.pkgd.min.js"; ?>"></script>
     <script src="<?php echo getBaseAddress() . "Webroot/lib/OwlCarousel2-2.2.1/owl.carousel.js"; ?>"></script>
     <script src="<?php echo getBaseAddress() . "Webroot/js/utilidades/constantes.js"; ?>"></script>
     <script src="<?php echo getBaseAddress() . "Webroot/js/utilidades/utilidades.js"; ?>"></script>
     <script src="<?php echo getBaseAddress() . "Webroot/js/home/Home.js" ?>"></script>
+
+
 
     <script>
         const pathHome = "<?php echo getBaseAddress(); ?>";

@@ -1,5 +1,12 @@
 $(document).ready(function() {
 
+    $("#inputImagen").fileinput({
+        showUpload: false,
+        dropZoneEnabled: false,
+        maxFileCount: 10,
+        mainClass: "input-group-lg"
+    });
+
     $("#btnAgregar").click(function(){
 
         var nombreProducto = $('#inputNombreProducto').val();

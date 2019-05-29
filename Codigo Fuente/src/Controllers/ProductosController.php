@@ -35,6 +35,13 @@ class ProductosController extends Controller
         $this->render(Constantes::PRODUCTOSVIEW);
     }
 
+    function agregarProducto()
+    {
+        $d['title'] = Constantes::AGREGARPRODUCTOTITLE;
+        $this->set($d);
+        $this->render(Constantes::ALTAPRODUCTO);
+    }
+
     function alta($publicacion)
     {
         $producto = new Producto();

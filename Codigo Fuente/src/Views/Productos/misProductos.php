@@ -9,7 +9,7 @@
                     <h2>Mis Ventas</h2>
                 </div>
                 <div class="col-sm-">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#altaModal" ><i class="fas fa-plus mr-1"></i> Agregar un Producto</button>
+                    <a href="<?php echo getBaseAddress() . 'Productos/agregarProducto' ?>" class="btn btn-primary"><i class="fas fa-plus mr-1"></i> Agregar un Producto</a>
                 </div>
             </div>
         </div>
@@ -51,27 +51,6 @@
         ?>
 
     </ul>
-
-    <div class="modal" id="altaModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title">Agregar Producto</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-
-                <!-- Modal body -->
-                <div class="modal-body">
-                    <?php
-                    include_once "altaProducto.php";
-                    ?>
-                </div>
-
-            </div>
-        </div>
-    </div>
 
     <div class="modal" id="eliminarModal">
         <div class="modal-dialog">
