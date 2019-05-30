@@ -43,6 +43,7 @@
             <input type="file" class="form-control-file demo" name="imagenProducto[]" id="inputImagenProducto" multiple data-jpreview-container="#demo-1-container">
             <div id="errorImagenProducto" class="error"> <i class="fas fa-exclamation-triangle"></i> Elija las fotos del producto</div>
         </div>
+
         <div id="demo-1-container" class="jpreview-container"></div>
 
         <script>
