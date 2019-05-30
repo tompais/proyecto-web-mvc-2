@@ -4,9 +4,6 @@ class ProductosController extends Controller
 {
     function misProductos()
     {
-        $categoria = new Categoria();
-
-        $d["categorias"] = $categoria->traerListaCategorias();
 
         $sesion = unserialize($_SESSION["session"]);
 
@@ -33,6 +30,18 @@ class ProductosController extends Controller
         $d["title"] = Constantes::PRODUTOSTITLE;
         $this->set($d);
         $this->render(Constantes::PRODUCTOSVIEW);
+    }
+
+    function agregarProducto()
+    {
+        $d['title'] = Constantes::AGREGARPRODUCTOTITLE;
+
+        $categoria = new Categoria();
+
+        $d["categorias"] = $categoria->traerListaCategorias();
+
+        $this->set($d);
+        $this->render(Constantes::ALTAPRODUCTO);
     }
 
     function alta($publicacion)
