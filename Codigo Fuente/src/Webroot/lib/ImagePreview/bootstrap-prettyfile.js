@@ -9,7 +9,7 @@
 	$.fn.extend({
 		prettyFile: function( options ) {
 			var defaults = {
-				text : "Select Files"
+				text : "Seleccionar"
 			};
 
 			var options =  $.extend(defaults, options);
@@ -22,9 +22,9 @@
 				$el.after( '\
 				<div class="input-append input-group"">\
 					<span class="input-group-btn">\
-						<button class="btn btn-default" type="button">' + text + '</button>\
+						<button class="btn btn-primary" type="button">' + text + '</button>\
 					</span>\
-					<input class="input-large form-control" type="text">\
+					<input class="input-large form-control ml-2" type="text">\
 				</div>\
 				' );
 
@@ -45,7 +45,7 @@
 						info = path[path.length - 1];
 					} else if ( files.length > 1 ) {
 						// Display number of selected files instead of filenames
-						info = files.length + ' files selected';
+						info = files.length + ' imagenes seleccionadas';
 					}
 
 					$wrap.find('.input-append input').val( info );
