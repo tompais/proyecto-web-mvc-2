@@ -4,9 +4,6 @@ class ProductosController extends Controller
 {
     function misProductos()
     {
-        $categoria = new Categoria();
-
-        $d["categorias"] = $categoria->traerListaCategorias();
 
         $sesion = unserialize($_SESSION["session"]);
 
@@ -38,6 +35,11 @@ class ProductosController extends Controller
     function agregarProducto()
     {
         $d['title'] = Constantes::AGREGARPRODUCTOTITLE;
+
+        $categoria = new Categoria();
+
+        $d["categorias"] = $categoria->traerListaCategorias();
+
         $this->set($d);
         $this->render(Constantes::ALTAPRODUCTO);
     }

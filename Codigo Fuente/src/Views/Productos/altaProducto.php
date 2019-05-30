@@ -1,10 +1,12 @@
 <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/productos/altaProducto.css" ?>">
 
-<div class="container mt-5 w-75">
+<div class="container my-5 w-75">
+    
+        <h2>Mis Ventas</h2>
 
 <form action="<?php echo getBaseAddress() . "Productos/alta" ?>" method="post" class="mx-auto pt-5 bg-white text-left" enctype="multipart/form-data">
 
-        <div class="form-group">
+        <div class="form-group mt-5">
             <label for="inputNombreProducto">Nombre</label>
             <input type="text" name="nombreProducto" id="inputNombreProducto" class="form-control" placeholder="Ej: Bicicleta" >
             <div id="errorNombreProducto" class="error"> <i class="fas fa-exclamation-triangle"></i> Ingrese el nombre del producto</div>
@@ -19,7 +21,7 @@
         <div class="form-group">
             <label for="selectCategoriaProducto">Categoria</label>
             <select name="categoriaProducto" id="selectCategoriaProducto" class="form-control" >
-                <option value="0">Categoria</option>
+                <option value="0" disabled selected>Categoria</option>
 
                 <?php
                     foreach($categorias as $categoria)
@@ -56,4 +58,4 @@
 
 </div>
 
-<script src="<?php echo getBaseAddress() . "Webroot/js/producto/validacionAltaProducto.js" ?>"></script>
+<script src="<?php echo getBaseAddress() . "Webroot/js/producto/validacionAltaProducto.js"?>"></script>
