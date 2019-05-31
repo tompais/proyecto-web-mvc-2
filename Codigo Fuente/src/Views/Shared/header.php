@@ -95,7 +95,7 @@
                         </form>
 
                         <ul class="navbar_menu">
-                            <li><a href="<?php echo getBaseAddress() . 'Home/inicio' ?>">Inicio</a></li>
+                            <li><a href="<?php echo getBaseAddress() ?>">Inicio</a></li>
                             <li><a href="#">Categorias</a></li>
                             <li><a href="#">Productos</a></li>
                             <li><a href="#">Contacto</a></li>

@@ -4,9 +4,6 @@ class ProductosController extends Controller
 {
     function misProductos()
     {
-        $categoria = new Categoria();
-
-        $d["categorias"] = $categoria->traerListaCategorias();
 
         $sesion = unserialize($_SESSION["session"]);
 
@@ -33,6 +30,18 @@ class ProductosController extends Controller
         $d["title"] = Constantes::PRODUTOSTITLE;
         $this->set($d);
         $this->render(Constantes::PRODUCTOSVIEW);
+    }
+
+    function agregarProducto()
+    {
+        $d['title'] = Constantes::AGREGARPRODUCTOTITLE;
+
+        $categoria = new Categoria();
+
+        $d["categorias"] = $categoria->traerListaCategorias();
+
+        $this->set($d);
+        $this->render(Constantes::ALTAPRODUCTO);
     }
 
     function alta($publicacion)
@@ -88,6 +97,19 @@ class ProductosController extends Controller
 
     function eliminar($publicacion)
     {
+        $imagen = new Imagen();
+        $producto = new Producto();
 
+        $imagenes = $imagen->traerListaImagenes($publicacion["idProducto"]);
+
+        foreach($imagenes as $img)
+        {
+            unlink(ROOT . "Webroot/img/productos/" . $img->getNombre());
+            $img->eliminarImagen();
+        }
+
+        $producto->eliminarProducto($publicacion["idProducto"]);
+
+        header("location: " . getBaseAddress() . "Productos/misProductos");
     }
 }

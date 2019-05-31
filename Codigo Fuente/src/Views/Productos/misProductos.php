@@ -9,7 +9,7 @@
                     <h2>Mis Ventas</h2>
                 </div>
                 <div class="col-sm-">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#altaModal" ><i class="fas fa-plus mr-1"></i> Agregar un Producto</button>
+                    <a href="<?php echo getBaseAddress() . 'Productos/agregarProducto' ?>" class="btn btn-primary"><i class="fas fa-plus mr-1"></i> Agregar un Producto</a>
                 </div>
             </div>
         </div>
@@ -30,7 +30,6 @@
                     $precio = $producto->getPrecio();
     
                     echo "<li class='card mt-3'>
-                            <input type='hidden' value='". $producto->getId() ."'>
                             <div class='card__inner'>
                                 <img class='img-fluid' src='$rutaImg'>
                             </div>
@@ -38,7 +37,7 @@
                             <ul class='card__icons mt-2'>
                                 <li><a href='#'><i class='fas fa-eye'></i></a></li>
                                 <li><a href='#'><i class='fas fa-edit'></i></a></li>
-                                <li><a href='#' data-toggle='modal' data-target='#eliminarModal'><i class='fas fa-times'></i></a></li>
+                                <li><a href='#' onclick='insertarIdProducto($id)' data-toggle='modal' data-target='#eliminarModal'><i class='fas fa-times'></i></a></li>
                             </ul>
                             <p>$$precio.00</p>
                         </li>";
@@ -52,27 +51,6 @@
         ?>
 
     </ul>
-
-    <div class="modal" id="altaModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title">Agregar Producto</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-
-                <!-- Modal body -->
-                <div class="modal-body">
-                    <?php
-                    include_once "altaProducto.php";
-                    ?>
-                </div>
-
-            </div>
-        </div>
-    </div>
 
     <div class="modal" id="eliminarModal">
         <div class="modal-dialog">
@@ -88,7 +66,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <form action="<?php echo getBaseAddress() . "Productos/eliminar" ?>" method="post">
+                    <form action="<?php echo getBaseAddress() . "Productos/eliminar" ?>" method="post" id="confirmarEliminar">
                         <button type="submit" class="btn btn-primary">Eliminar</button>
                     </form>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -99,3 +77,5 @@
     </div>
     
 </div>
+
+<script src="<?php echo getBaseAddress() . "Webroot/js/producto/eliminarProducto.js" ?>"></script>
