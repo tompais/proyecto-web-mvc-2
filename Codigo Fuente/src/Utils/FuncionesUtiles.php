@@ -23,6 +23,11 @@ class FuncionesUtiles
         return self::esCadenaNoNulaOVacia($string) && preg_match(Constantes::REGEXLETRASYESPACIO, $string);
     }
 
+    public static function esOracionCompuesta($string)
+    {
+        return self::esCadenaNoNulaOVacia($string) && preg_match(Constantes::REGEXLETRASNUMEROSYESPACIO, $string);
+    }
+
     public static function esPalabra($string)
     {
         return self::esCadenaNoNulaOVacia($string) && preg_match(Constantes::REGEXSOLOLETRAS, $string);
