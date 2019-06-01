@@ -65,7 +65,7 @@ set_exception_handler('globalExceptionHandler');
 
 function recoverSessionByCookie()
 {
-    if(!isset($_SESSION["session"]) && isset($_COOKIE["session"]))
+    if(!isset($_SESSION["session"]) && isset($_COOKIE["session"]) && $_COOKIE["session"] != null)
         $_SESSION["session"] = $_COOKIE["session"];
 }
 
