@@ -18,6 +18,10 @@ var inputCalle = $("#inputCalle");
 var inputAltura = $("#inputAltura");
 var inputPiso = $("#inputPiso");
 var inputDepartamento = $("#inputDepartamento");
+var selectGenero = $("#selectGenero");
+var selectProvincia = $("#selectProvincia");
+var selectPartido = $("#selectPartido");
+var selectLocalidad = $("#selectLocalidad");
 var btnRegistrar = $("#btnRegistrar");
 var registrarModal = $("#registrarModal");
 var registrarModalLabel = $("#registrarModalLabel");
@@ -266,6 +270,58 @@ function validarPisoYDepto() {
     return validacion;
 }
 
+function validarProvincia() {
+    var provincia = selectProvincia.val();
+    var validacion = false;
+
+    if(provincia === null || provincia === 0) {
+        $("#errorProvincia").fadeIn("slow");
+    } else {
+        validacion = true;
+    }
+
+    return validacion;
+}
+
+function validarPartido() {
+    var partido = selectPartido.val();
+    var validacion = false;
+
+    if(partido === null || partido === 0) {
+        $("#errorPartido").fadeIn("slow");
+    } else {
+        validacion = true;
+    }
+
+    return validacion;
+}
+
+function validarLocalidad() {
+    var localidad = selectLocalidad.val();
+    var validacion = false;
+
+    if(localidad === null || localidad === 0) {
+        $("#errorLocalidad").fadeIn("slow");
+    } else {
+        validacion = true;
+    }
+
+    return validacion;
+}
+
+function validarGenero() {
+    var genero = selectGenero.val();
+    var validacion = false;
+
+    if(genero === null || genero === 0) {
+        $("#errorGenero").fadeIn("slow");
+    } else {
+        validacion = true;
+    }
+
+    return validacion;
+}
+
 function saveGeolocationOnMemory(position) {
     geolocalizacion = {};
     geolocalizacion.latitud = position.coords.latitude;
@@ -308,6 +364,10 @@ function validarFormularioRegistracion() {
         && validarPassword()
         && validarTelefonoFijo()
         && validarTelefonoCelular()
+        && validarGenero()
+        && validarProvincia()
+        && validarPartido()
+        && validarLocalidad()
         && validarCalle()
         && validarAltura()
         && validarPisoYDepto();

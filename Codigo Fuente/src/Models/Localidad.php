@@ -110,4 +110,17 @@ class Localidad extends Model
 
         return $row;
     }
+
+    public function existeLocalidadDBById()
+    {
+        $row = $this->selectByPk($this->getId());
+
+        if($row)
+        {
+            $this->setNombre($row["Nombre"]);
+            $this->setPartidoId($row["PartidoId"]);
+        }
+
+        return $row;
+    }
 }
