@@ -17,6 +17,9 @@ abstract class Constantes
     const EDITARPRODUCTO = "editarProducto";
     const OLVIDEPASSWORDVIEW = "olvidePassword";
 
+    //Acciones
+    const CERRARSESIONACTION = "cerrarSession";
+
 
     //Títulos
     const MAINTITLE = "ShopLine";
