@@ -53,8 +53,9 @@ set_error_handler("globalErrorHandler");
 function globalExceptionHandler($exception)
 {
     $isControlledException = $exception->getCode() != 0;
-    $strError = ($isControlledException ? ("Error " . $exception->getCode()) : ("Excepción no controlada")) . ": '" . $exception->getMessage() . ($isControlledException ? ("'") : ("' en el archivo " . substr($exception->getFile(), strripos($exception->getFile(), "\\") + 1)  . " en la línea " . $exception->getLine() . PHP_EOL . "Trace: " . $exception->getTraceAsString()));
+    $strError = $exception->getMessage();
     echo $strError;
+    $strError = ($isControlledException ? ("Error " . $exception->getCode()) : ("Excepción no controlada")) . ": '" . $strError . "' en el archivo " . substr($exception->getFile(), strripos($exception->getFile(), "\\") + 1)  . " en la línea " . $exception->getLine() . PHP_EOL . "StackTrace: " . $exception->getTraceAsString();
     $strLog = "[". date("Y-m-d H:i:s") ."]  " . $strError . PHP_EOL . PHP_EOL;
     file_put_contents("exception-log.txt", $strLog,FILE_APPEND);
     if(!$isControlledException)
