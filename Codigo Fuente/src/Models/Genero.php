@@ -52,6 +52,7 @@ class Genero extends Model
         foreach($rows as $row)
         {
             $genero = new Genero();
+            $genero->db->disconnect();
             $genero->setId($row['Id']);
             $genero->setNombre($row['Nombre']);
             $generos[] = $genero;

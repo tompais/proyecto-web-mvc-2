@@ -160,7 +160,7 @@ class Producto extends Model
 
     public function validarNombre()
     {
-        return FuncionesUtiles::esOracion($this->nombre)
+        return FuncionesUtiles::esOracionCompuesta($this->nombre)
             && ($cantLetras = strlen($this->nombre)) <= 50
             && $cantLetras >= 5;
     }

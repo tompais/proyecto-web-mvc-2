@@ -16,6 +16,9 @@ abstract class Constantes
     const ALTAPRODUCTO = "altaProducto";
     const OLVIDEPASSWORDVIEW = "olvidePassword";
 
+    //Acciones
+    const CERRARSESIONACTION = "cerrarSession";
+
 
     //Títulos
     const MAINTITLE = "ShopLine";

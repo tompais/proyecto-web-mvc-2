@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/seguridad/login.css"; ?>">
 
 <script>
-    const pathAccionLoguear = "<?php echo getBaseAddress() . "Seguridad/validarLogin"; ?>";
+    const pathAccionLoguear = "<?php echo getBaseAddress() . "Seguridad/loguearUsuario"; ?>";
 </script>
 
 <div class="d-flex" id="login">
@@ -32,7 +32,7 @@
 
         <div class="form-check">
             <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" name="checkboxRecordarme" id="checkboxRecordarme"
+                <input type="checkbox" class="form-check-input" name="recordarme" id="checkboxRecordarme"
                        value="1">
                 <small class="align-text-top">Recordarme</small>
             </label>
