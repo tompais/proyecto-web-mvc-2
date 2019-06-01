@@ -17,14 +17,6 @@ class SeguridadController extends Controller
         usort($d['generos'], Constantes::CMPBYID);
         usort($d['provincias'], Constantes::CMPBYNOMBRE);
 
-        $d['partidos'] = $partido->getPartidosByProvinciaId($d['provincias'][0]->getId());
-
-        usort($d['partidos'], Constantes::CMPBYNOMBRE);
-
-        $d['localidades'] = $localidad->getLocalidadesByPartidoId($d['partidos'][0]->getId());
-
-        usort($d['localidades'], Constantes::CMPBYNOMBRE);
-
         $d['title'] = Constantes::REGISTRARTITLE;
 
         $this->set($d);
@@ -129,7 +121,7 @@ class SeguridadController extends Controller
         echo json_encode(true);
     }
 
-    function validarRegistrar($json)
+    function registrarUsuario($json)
     {
         header("Content-type: application/json");
 

@@ -3,7 +3,7 @@
 <script>
     const pathGetPartidosByProvinciaId = "<?php echo getBaseAddress() . "Seguridad/getPartidosByProvinciaId"; ?>";
     const pathGetLocalidadesByPartidoId = "<?php echo getBaseAddress() . "Seguridad/getLocalidadesByPartidoId"; ?>";
-    const pathValidarRegistrar = "<?php echo getBaseAddress() . "Seguridad/validarRegistrar"; ?>";
+    const pathValidarRegistrar = "<?php echo getBaseAddress() . "Seguridad/registrarUsuario"; ?>";
 </script>
 <div class="d-flex mt-4">
     <div class="col-lg-6 col-md-8 mx-auto mt-1">
@@ -169,48 +169,50 @@
                 <div class="col-sm">
                     <div class="form-group">
                         <label for="selectGenero">Género</label>
-                        <select class="form-control" name="sexo" id="selectGenero">
+                        <select class="form-control" name="genero" id="selectGenero">
+                            <option value="0" disabled selected>Seleccione su Género</option>
                             <?php
                             foreach ($generos as $genero)
                                 echo "<option value='" . $genero->getId() . "'>" . $genero->getNombre() . "</option>";
                             ?>
                         </select>
+                        <div id="errorGenero" class="error"><i class="fas fa-exclamation-triangle"></i> Seleccione su Sexo
+                        </div>
                     </div>
                 </div>
                 <div class="col-sm">
                     <div class="form-group">
                         <label for="selectProvincia">Provincia</label>
                         <select class="form-control" name="provincia" id="selectProvincia">
+                            <option value="0" disabled selected>Seleccione una Provincia</option>
                             <?php
                             foreach ($provincias as $provincia)
                                 echo "<option value='" . $provincia->getId() . "'>" . $provincia->getNombre() . "</option>";
                             ?>
                         </select>
+                        <div id="errorProvincia" class="error"><i class="fas fa-exclamation-triangle"></i> Seleccione una Provincia
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="form-row">
+            <div id="rowPartidoLocalidadSelects" class="form-row d-none">
                 <div class="col-sm">
                     <div class="form-group">
                         <label for="selectPartido">Partido</label>
                         <select class="form-control" name="partido" id="selectPartido">
-                            <?php
-                            foreach ($partidos as $partido)
-                                echo "<option value='" . $partido->getId() . "'>" . $partido->getNombre() . "</option>";
-                            ?>
                         </select>
+                        <div id="errorPartido" class="error"><i class="fas fa-exclamation-triangle"></i> Seleccione un Partido
+                        </div>
                     </div>
                 </div>
                 <div class="col-sm">
                     <div class="form-group">
                         <label for="selectLocalidad">Localidad</label>
                         <select class="form-control" name="localidad" id="selectLocalidad">
-                            <?php
-                            foreach ($localidades as $localidad)
-                                echo "<option value='" . $localidad->getId() . "'>" . $localidad->getNombre() . "</option>";
-                            ?>
                         </select>
+                        <div id="errorLocalidad" class="error"><i class="fas fa-exclamation-triangle"></i> Seleccione una Localidad
+                        </div>
                     </div>
                 </div>
             </div>

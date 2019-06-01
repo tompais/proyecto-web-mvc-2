@@ -72,4 +72,14 @@ class Provincia extends Model
 
         return $row;
     }
+
+    public function existeProvinciaDBById()
+    {
+        $row = $this->selectByPk($this->getId());
+
+        if($row)
+            $this->setNombre($row["Nombre"]);
+
+        return $row;
+    }
 }
