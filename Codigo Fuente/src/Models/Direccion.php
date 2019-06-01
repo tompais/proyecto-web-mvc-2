@@ -199,12 +199,17 @@ class Direccion extends Model
     public function validarDireccion()
     {
         $this->setProvincia(new Provincia());
-        $this->setPartido(new Partido());
-        $this->setLocalidad(new Localidad());
+        $this->provincia->setId($this->getProvinciaId());
 
-        $validacion = $this->provincia->getById($this->getProvinciaId())
-        && $this->partido->getById($this->getPartidoId())
-        && $this->localidad->getById($this->getLocalidadId())
+        $this->setPartido(new Partido());
+        $this->partido->setId($this->getPartidoId());
+
+        $this->setLocalidad(new Localidad());
+        $this->localidad->setId($this->getLocalidadId());
+
+        $validacion = $this->provincia->existeProvinciaDBById()
+        && $this->partido->existePartidoDBById()
+        && $this->localidad->existeLocalidadDBById()
         && $this->provincia->getId() == $this->partido->getProvinciaId()
         && $this->partido->getId() == $this->localidad->getPartidoId()
         && $this->validarCalle()
