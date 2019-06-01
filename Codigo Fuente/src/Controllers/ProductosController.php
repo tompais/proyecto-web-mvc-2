@@ -90,7 +90,19 @@ class ProductosController extends Controller
         header("location: " . getBaseAddress() . "Productos/misProductos");
     }
 
-    function modificar($publicacion)
+    function editarProducto($publicacion)
+    {
+        $producto = new Producto();
+        $producto->traerProducto($publicacion["producto"]);
+
+        $d["producto"] = $producto;
+        $d['title'] = Constantes::EDITARPRODUCTOTITLE;
+        
+        $this->set($d);
+        $this->render(Constantes::EDITARPRODUCTO);
+    }
+
+    function editar($publicacion)
     {
 
     }
