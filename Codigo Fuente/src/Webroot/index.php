@@ -43,13 +43,21 @@ function throwError404()
     die();
 }
 
+function globalErrorHandler($errno, $errstr, $errfile, $errline)
+{
+    throw new ErrorException($errstr, 0, 0, $errfile, $errline);
+}
+
+set_error_handler("globalErrorHandler");
+
 function globalExceptionHandler($exception)
 {
-    $strError = "Error " . $exception->getCode() . ": " . $exception->getMessage();
+    $strError = ($exception->getCode() != 0 ? ("Error " . $exception->getCode()) : ("Excepción no controlada")) . ": '" . $exception->getMessage() . "' en el archivo " . substr($exception->getFile(), strripos($exception->getFile(), "\\") + 1)  . " en la línea " . $exception->getLine() . PHP_EOL . "Trace: " . $exception->getTraceAsString();
     echo $strError;
-    $strLog = "[". date("Y-m-d H:i:s") ."]  " . $strError . PHP_EOL;
+    $strLog = "[". date("Y-m-d H:i:s") ."]  " . $strError . PHP_EOL . PHP_EOL;
     file_put_contents("exception-log.txt", $strLog,FILE_APPEND);
-    throwError404();
+    if($exception->getCode() == 0)
+        throwError404();
 }
 
 set_exception_handler('globalExceptionHandler');
