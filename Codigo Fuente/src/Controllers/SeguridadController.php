@@ -90,7 +90,7 @@ class SeguridadController extends Controller
         $this->render(Constantes::LOGINVIEW);
     }
 
-    function validarLogin($json)
+    function loguearUsuario($json)
     {
         header("Content-type: application/json");
 
@@ -122,6 +122,8 @@ class SeguridadController extends Controller
             $session->setUserName($user->getUsername());
             $session->setRolId($user->getRolId());
             $_SESSION["session"] = serialize($session);
+            if($data->recordarme)
+                setcookie("session", $_SESSION["session"], time() + 60*2, "/", apache_request_headers()["Host"]); //60 segs = 1 min. Multiplicado por 2, son 2 minutos.
         }
 
         echo json_encode(true);
