@@ -52,17 +52,26 @@ set_error_handler("globalErrorHandler");
 
 function globalExceptionHandler($exception)
 {
-    $strError = ($exception->getCode() != 0 ? ("Error " . $exception->getCode()) : ("Excepción no controlada")) . ": '" . $exception->getMessage() . "' en el archivo " . substr($exception->getFile(), strripos($exception->getFile(), "\\") + 1)  . " en la línea " . $exception->getLine() . PHP_EOL . "Trace: " . $exception->getTraceAsString();
+    $isControlledException = $exception->getCode() != 0;
+    $strError = ($isControlledException ? ("Error " . $exception->getCode()) : ("Excepción no controlada")) . ": '" . $exception->getMessage() . ($isControlledException ? ("'") : ("' en el archivo " . substr($exception->getFile(), strripos($exception->getFile(), "\\") + 1)  . " en la línea " . $exception->getLine() . PHP_EOL . "Trace: " . $exception->getTraceAsString()));
     echo $strError;
     $strLog = "[". date("Y-m-d H:i:s") ."]  " . $strError . PHP_EOL . PHP_EOL;
     file_put_contents("exception-log.txt", $strLog,FILE_APPEND);
-    if($exception->getCode() == 0)
+    if(!$isControlledException)
         throwError404();
 }
 
 set_exception_handler('globalExceptionHandler');
 
+function recoverSessionByCookie()
+{
+    if(!isset($_SESSION["session"]) && isset($_COOKIE["session"]))
+        $_SESSION["session"] = $_COOKIE["session"];
+}
+
 session_start();
+
+recoverSessionByCookie();
 
 $dispatch = new Dispatcher();
 $dispatch->dispatch();
