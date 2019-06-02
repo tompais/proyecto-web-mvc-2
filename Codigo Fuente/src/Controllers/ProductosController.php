@@ -65,6 +65,10 @@ class ProductosController extends Controller
 
         $imagen = new Imagen();
 
+        if(!is_dir(ROOT . "Webroot/img/productos")) {
+            mkdir(ROOT . "Webroot/img/productos", 0777, true);
+        }
+
         if (isset($_FILES["imagenProducto"]["name"])) {
 
             $total = count($_FILES["imagenProducto"]["name"]);
