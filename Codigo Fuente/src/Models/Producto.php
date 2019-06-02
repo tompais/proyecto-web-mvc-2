@@ -149,6 +149,32 @@ class Producto extends Model
         return $productos;
     }
 
+    public function traerProducto($pk)
+    {
+        $producto = $this->selectByPk($pk);
+
+        $this->setId($producto["Id"]);
+        $this->setNombre($producto["Nombre"]);
+        $this->setPrecio($producto["Precio"]);
+        $this->setCategoriaId($producto["CategoriaId"]);
+        $this->setUsuarioId($producto["UsuarioId"]);
+        $this->setDescripcion($producto["Descripcion"]);
+        $this->setFechaAlta($producto["FechaAlta"]);
+    }
+
+    public function actualizarProducto($publicacion)
+    {
+        $array = [
+            "Id" => $publicacion["idProducto"],
+            "Nombre" => $publicacion["nombreProducto"],
+            "Precio" => $publicacion["precioProducto"],
+            "CategoriaId" => $publicacion["categoriaProducto"],
+            "Descripcion" => $publicacion["descripcionProducto"]
+        ];
+
+        return $this->update($array);
+    }
+
     public function eliminarProducto($pk)
     {
         $producto = $this->selectByPk($pk);
