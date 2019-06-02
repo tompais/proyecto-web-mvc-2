@@ -31,22 +31,6 @@
                                         </ul>";
                                 }
                                 else{
-
-                                    $rolId = $sessionManejada->getRolId();
-                                    $rol = "";
-
-                                    if($rolId == Roles::ADMINISTRADOR)
-                                        $rol = "Thanos";
-                                    else
-                                    if($rolId == Roles::COADMINISTRADOR)
-                                        $rol = "Thor";
-                                    else
-                                    if($rolId == Roles::MODERADOR)
-                                        $rol = "Groot";
-                                    else
-                                    if($rolId == Roles::USUARIO)
-                                        $rol = "Howard";
-
                                     echo"
                                         <a href='#'>
                                            <i class='fas fa-user mr-1'></i> ". $sessionManejada->getUserName() ."<i class='ml-1 fa fa-angle-down'></i>
@@ -141,7 +125,6 @@
                             <i class='fas fa-user mr-1'></i> ". $sessionManejada->getUserName() . "<i class='ml-1 fa fa-angle-down'></i>
                          </a>
                          <ul class='menu_selection'>
-                            <li><a href='#'><i class='fas fa-user-tag mr-1'></i></i>". $rol ."</a></li>
                             <li><a href='#'><i class='far fa-id-badge mr-1'></i></i>Mi Perfil</a></li>
                             <li><a href='#'><i class='fas fa-cash-register mr-1'></i></i></i>Compras</a></li>
                             <li><a href='". getBaseAddress() . 'Productos/misProductos' . "'><i class='fas fa-piggy-bank mr-1'></i></i></i>Ventas</a></li>
@@ -151,7 +134,7 @@
 
                 ?>
             </li>
-            <li class="menu_item"><a href="#">Inicio</a></li>
+            <li class="menu_item"><a href="<?php echo getBaseAddress() ?>">Inicio</a></li>
             <li class="menu_item"><a href="#">Categorias</a></li>
             <li class="menu_item"><a href="#">Productos</a></li>
             <li class="menu_item"><a href="#">Contacto</a></li>
