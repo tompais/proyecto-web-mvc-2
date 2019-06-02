@@ -14,6 +14,7 @@ abstract class Constantes
     const LOGINVIEW =  "login";
     const PRODUCTOSVIEW = "misProductos";
     const ALTAPRODUCTO = "altaProducto";
+    const EDITARPRODUCTO = "editarProducto";
     const OLVIDEPASSWORDVIEW = "olvidePassword";
 
     //Acciones
@@ -26,6 +27,7 @@ abstract class Constantes
     const LOGINTITLE = "Iniciar Sesion en ShopLine";
     const PRODUTOSTITLE = "Mis Ventas";
     const AGREGARPRODUCTOTITLE = "Agregar Producto";
+    const EDITARPRODUCTOTITLE = "Editar Producto";
 
     const OLVIDEPASSWORDTITLE = "Olvidé Mi Contraseña";
 

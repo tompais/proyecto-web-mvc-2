@@ -90,9 +90,72 @@ class ProductosController extends Controller
         header("location: " . getBaseAddress() . "Productos/misProductos");
     }
 
-    function modificar($publicacion)
+    function editarProducto($publicacion)
     {
+        $producto = new Producto();
+        $producto->traerProducto($publicacion["producto"]);
 
+        $categoria = new Categoria();
+
+        $d["categorias"] = $categoria->traerListaCategorias();
+        $d["producto"] = $producto;
+        $d['title'] = Constantes::EDITARPRODUCTOTITLE;
+        
+        $this->set($d);
+        $this->render(Constantes::EDITARPRODUCTO);
+    }
+
+    function editar($publicacion)
+    {
+        $producto = new Producto();
+        
+        $producto->actualizarProducto($publicacion);
+        
+        
+        if (isset($_FILES["imagenProducto"]["name"])) {
+            
+            $imagen = new Imagen();
+
+            $imagenes = $imagen->traerListaImagenes($publicacion["idProducto"]);
+            
+            foreach($imagenes as $img)
+                unlink(ROOT . "Webroot/img/productos/" . $img->getNombre());
+
+            $total = count($_FILES["imagenProducto"]["name"]);
+    
+            for ($id = 0; $id < $total; $id++) {
+                $ruta = ROOT . "Webroot/img/productos/";
+                $nombreImg = $_FILES["imagenProducto"]["name"][$id];
+    
+                $temp = explode(".", $nombreImg);
+                $newNombre = microtime(true) . '.' . end($temp);
+    
+                $ruta .= basename($newNombre);
+                $tmp = $_FILES["imagenProducto"]["tmp_name"][$id];
+                move_uploaded_file($tmp, $ruta);
+
+                if($id < count($imagenes))
+                {
+                    $imagen->setNombre($newNombre);
+                    $imagen->cambiarImagen($imagenes[$id]->getId());
+                }
+                else
+                {
+                    $imagen->setNombre($newNombre);
+                    $imagen->setProductoId($publicacion["idProducto"]);
+                    $imagen->insertarImagen();
+                }
+            }
+
+            if(count($imagenes) > $total)
+            {
+                for($i = $total; $i < count($imagenes); $i++)
+                    $imagenes[$i]->eliminarImagen();
+            }
+
+        }
+
+        header("location: " . getBaseAddress() . "Productos/misProductos");
     }
 
     function eliminar($publicacion)
