@@ -162,6 +162,19 @@ class Producto extends Model
         $this->setFechaAlta($producto["FechaAlta"]);
     }
 
+    public function actualizarProducto($publicacion)
+    {
+        $array = [
+            "Id" => $publicacion["idProducto"],
+            "Nombre" => $publicacion["nombreProducto"],
+            "Precio" => $publicacion["precioProducto"],
+            "CategoriaId" => $publicacion["categoriaProducto"],
+            "Descripcion" => $publicacion["descripcionProducto"]
+        ];
+
+        return $this->update($array);
+    }
+
     public function eliminarProducto($pk)
     {
         $producto = $this->selectByPk($pk);

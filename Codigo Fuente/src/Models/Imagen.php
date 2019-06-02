@@ -75,6 +75,15 @@ class Imagen extends Model
         return $imagenes;
     }
 
+    public function cambiarImagen($pk)
+    {
+        $imagen = $this->selectByPk($pk);
+
+        $imagen["Nombre"] = $this->getNombre();
+
+        return $this->update($imagen);
+    }
+
     public function eliminarImagen()
     {
         return $this->delete($this->getId());
