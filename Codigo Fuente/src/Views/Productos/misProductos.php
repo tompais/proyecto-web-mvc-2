@@ -21,6 +21,9 @@
 
             if(isset($productos))
             {
+
+                $editar = getBaseAddress() . "Productos/editarProducto";
+
                 foreach($productos as $producto)
                 {
                     $imagen = $imagenes[$j]->getNombre();
@@ -36,7 +39,7 @@
                             <h3 class='card__tagline mt-2'>". $producto->getNombre() ."</h3>
                             <ul class='card__icons mt-2'>
                                 <li><a href='#'><i class='fas fa-eye'></i></a></li>
-                                <li><a href='#'><i class='fas fa-edit'></i></a></li>
+                                <li><a href='#' onclick='irEditar($id)'><i class='fas fa-edit'></i></a></li>
                                 <li><a href='#' onclick='insertarIdProducto($id)' data-toggle='modal' data-target='#eliminarModal'><i class='fas fa-times'></i></a></li>
                             </ul>
                             <p>$$precio.00</p>
@@ -45,12 +48,18 @@
                     while($j < count($imagenes) && $id == $imagenes[$j]->getProductoId())
                         $j++;
                 }
+
+                echo "<form method='post', action='$editar' id='editar'>
+                    <input type='hidden' id='idProducto' name='producto' />
+                    </form>";
+
             }
             else
                 echo "No tiene productos en venta";
         ?>
 
     </ul>
+
 
     <div class="modal" id="eliminarModal">
         <div class="modal-dialog">
@@ -79,3 +88,4 @@
 </div>
 
 <script src="<?php echo getBaseAddress() . "Webroot/js/producto/eliminarProducto.js" ?>"></script>
+<script src="<?php echo getBaseAddress() . "Webroot/js/producto/editarProducto.js" ?>"></script>
