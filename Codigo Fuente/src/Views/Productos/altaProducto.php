@@ -9,13 +9,13 @@
         <div class="form-group mt-5">
             <label for="inputNombreProducto">Nombre</label>
             <input type="text" name="nombreProducto" id="inputNombreProducto" class="form-control" placeholder="Ej: Bicicleta" >
-            <div id="errorNombreProducto" class="error"> <i class="fas fa-exclamation-triangle"></i> Ingrese el nombre del producto</div>
+            <div id="errorNombreProducto" class="error"> <i class="fas fa-exclamation-triangle mr-2"></i><span></span></div>
         </div>
 
         <div class="form-group">
             <label for="inputPrecioProducto">Precio</label>
             <input type="number" name="precioProducto" id="inputPrecioProducto" class="form-control" >
-            <div id="errorPrecioProducto" class="error"> <i class="fas fa-exclamation-triangle"></i> Ingrese el precio del producto</div>
+            <div id="errorPrecioProducto" class="error"> <i class="fas fa-exclamation-triangle mr-2"></i><span></span></div>
         </div>
 
         <div class="form-group">
@@ -29,19 +29,20 @@
                 ?>
 
             </select>
-            <div id="errorCategoriaProducto" class="error"> <i class="fas fa-exclamation-triangle"></i> Elija una de las categorias disponibles </div>
+            <div id="errorCategoriaProducto" class="error"> <i class="fas fa-exclamation-triangle mr-2"></i><span></span></div>
         </div>
 
         <div class="form-group">
             <label for="textareaDescripcionProducto">Descripcion</label>
-            <textarea class="form-control" rows="5" id="textareaDescripcionProducto" name="descripcionProducto" ></textarea>
-            <div id="errorDescripcionProducto" class="error"> <i class="fas fa-exclamation-triangle"></i> Ingrese la descripción del producto</div>
+            <textarea class="form-control" rows="5" placeholder="¿Que vendes?" id="textareaDescripcionProducto" name="descripcionProducto" ></textarea>
+            <div><span id='caracteres'>200</span>&nbsp;</div>
+            <div id="errorDescripcionProducto" class="error"> <i class="fas fa-exclamation-triangle mr-2"></i><span></span></div>
         </div>
 
         <div class="form-group" style="margin:50px auto;">
             <label for="inputImagenProducto">Imagenes</label>
             <input type="file" class="form-control-file demo" name="imagenProducto[]" id="inputImagenProducto" multiple data-jpreview-container="#demo-1-container">
-            <div id="errorImagenProducto" class="error"> <i class="fas fa-exclamation-triangle"></i> Elija las fotos del producto</div>
+            <div id="errorImagenProducto" class="error"> <i class="fas fa-exclamation-triangle mr-2"></i><span></span></div>
         </div>
 
         <div id="demo-1-container" class="jpreview-container"></div>
