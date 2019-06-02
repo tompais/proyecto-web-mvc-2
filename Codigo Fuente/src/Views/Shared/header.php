@@ -1,6 +1,6 @@
-<!-- Header -->
+        <!-- Header -->
 
-<header class="header trans_300">
+<header class="header trans_300" id="layoutHeader">
 
     <!-- Top Navigation -->
 
@@ -158,3 +158,4 @@
         </ul>
     </div>
 </div>
+

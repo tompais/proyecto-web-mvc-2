@@ -10,6 +10,7 @@
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
 
+
     const regexLetrasYNumerosYEspacios = /^[0-9a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[0-9a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[0-9a-zA-ZÀ-ÿ\u00f1\u00d1]+$/;
     const regexSOLONumeros = /^[0-9]+$/;
 
@@ -122,4 +123,31 @@
 
         $(".error").fadeOut();
         return validarAltaProducto();
+    });
+
+    var maxlen = 200;
+
+    $("#textareaDescripcionProducto").keyup(function(e){
+
+        var txtLen = $(this).val().length;
+
+        if(txtLen <= maxlen){
+            var remain = 0 + txtLen;
+
+            $("#caracteres").text(remain);
+        }
+    });
+
+
+    $("#textareaDescripcionProducto").keydown(function(e){
+        var keycode = e.keyCode;
+
+        var txtLen = $(this).val().length;
+
+        if(txtLen >= maxlen){
+
+            if(keycode != 8){
+                return false;
+            }
+        }
     });
