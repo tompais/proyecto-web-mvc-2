@@ -35,6 +35,7 @@
         <div class="form-group">
             <label for="textareaDescripcionProducto">Descripcion</label>
             <textarea class="form-control" rows="5" placeholder="¿Que vendes?" id="textareaDescripcionProducto" name="descripcionProducto" ></textarea>
+            <small class="form-text text-muted float-left">Opcional</small>
             <div class="mt-2 float-right"><span id='caracteres'>0</span>/200<span></div>
             <div id="errorDescripcionProducto" class="error"> <i class="fas fa-exclamation-triangle mr-2"></i><span></span></div>
         </div>
@@ -60,4 +61,4 @@
 
 </div>
 
-<script src="<?php echo getBaseAddress() . "Webroot/js/producto/validacionAltaProducto.js"?>"></script>
+<script src="<?php echo getBaseAddress() . "Webroot/js/producto/validacionAMProducto.js"?>"></script>
