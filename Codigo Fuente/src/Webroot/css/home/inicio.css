@@ -696,7 +696,6 @@ section
 	height: 500px;
 	display: block;
 	max-width: 100%;
-	margin-top: 150px;
 }
 .main_slider_content
 {
@@ -758,7 +757,6 @@ section
 .banner
 {
 	width: 100%;
-	margin-top: 30px;
 }
 .banner_item
 {

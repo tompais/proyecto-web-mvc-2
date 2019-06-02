@@ -1,8 +1,8 @@
 <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/productos/misProductos.css" ?>">
 
-<div class="container mt-5">
+<div class="container mt-3">
 
-    <div class="panel-heading mt-5">
+    <div class="panel-heading">
         <div class="panel-title pt-3">
             <div class="row">
                 <div class="col">
