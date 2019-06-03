@@ -1,21 +1,21 @@
 <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/productos/altaProducto.css" ?>">
 
-<div class="container my-5 w-75">
+<div class="container col-xl-7 col-sm-5 mt-3">
     
-        <h2>Mis Ventas</h2>
+        <h2>Agregar Producto <i class="fas fa-1x fa-plus mr-1"></i></h2>
 
-<form action="<?php echo getBaseAddress() . "Productos/alta" ?>" method="post" class="mx-auto pt-5 bg-white text-left" enctype="multipart/form-data">
+<form action="<?php echo getBaseAddress() . "Productos/alta" ?>" method="post" class="mx-auto bg-white text-left" enctype="multipart/form-data">
 
         <div class="form-group mt-5">
             <label for="inputNombreProducto">Nombre</label>
             <input type="text" name="nombreProducto" id="inputNombreProducto" class="form-control" placeholder="Ej: Bicicleta" >
-            <div id="errorNombreProducto" class="error"> <i class="fas fa-exclamation-triangle"></i> Ingrese el nombre del producto</div>
+            <div id="errorNombreProducto" class="error"> <i class="fas fa-exclamation-triangle mr-2"></i><span></span></div>
         </div>
 
         <div class="form-group">
             <label for="inputPrecioProducto">Precio</label>
-            <input type="number" name="precioProducto" id="inputPrecioProducto" class="form-control" >
-            <div id="errorPrecioProducto" class="error"> <i class="fas fa-exclamation-triangle"></i> Ingrese el precio del producto</div>
+            <input type="number" name="precioProducto" placeholder="Ej: 1300" id="inputPrecioProducto" class="form-control" >
+            <div id="errorPrecioProducto" class="error"> <i class="fas fa-exclamation-triangle mr-2"></i><span></span></div>
         </div>
 
         <div class="form-group">
@@ -29,19 +29,21 @@
                 ?>
 
             </select>
-            <div id="errorCategoriaProducto" class="error"> <i class="fas fa-exclamation-triangle"></i> Elija una de las categorias disponibles </div>
+            <div id="errorCategoriaProducto" class="error"> <i class="fas fa-exclamation-triangle mr-2"></i><span></span></div>
         </div>
 
         <div class="form-group">
             <label for="textareaDescripcionProducto">Descripcion</label>
-            <textarea class="form-control" rows="5" id="textareaDescripcionProducto" name="descripcionProducto" ></textarea>
-            <div id="errorDescripcionProducto" class="error"> <i class="fas fa-exclamation-triangle"></i> Ingrese la descripción del producto</div>
+            <textarea class="form-control" rows="5" placeholder="¿Que vendes?" id="textareaDescripcionProducto" name="descripcionProducto" ></textarea>
+            <small class="form-text text-muted float-left">Opcional</small>
+            <div class="mt-2 float-right"><span id='caracteres'>0</span>/200<span></div>
+            <div id="errorDescripcionProducto" class="error"> <i class="fas fa-exclamation-triangle mr-2"></i><span></span></div>
         </div>
 
         <div class="form-group" style="margin:50px auto;">
             <label for="inputImagenProducto">Imagenes</label>
             <input type="file" class="form-control-file demo" name="imagenProducto[]" id="inputImagenProducto" multiple data-jpreview-container="#demo-1-container">
-            <div id="errorImagenProducto" class="error"> <i class="fas fa-exclamation-triangle"></i> Elija las fotos del producto</div>
+            <div id="errorImagenProducto" class="error"> <i class="fas fa-exclamation-triangle mr-2"></i><span></span></div>
         </div>
 
         <div id="demo-1-container" class="jpreview-container"></div>
@@ -59,4 +61,4 @@
 
 </div>
 
-<script src="<?php echo getBaseAddress() . "Webroot/js/producto/validacionAltaProducto.js"?>"></script>
+<script src="<?php echo getBaseAddress() . "Webroot/js/producto/validacionAMProducto.js"?>"></script>
