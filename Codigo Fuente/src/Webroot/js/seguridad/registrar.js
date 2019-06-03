@@ -10,6 +10,7 @@ var btnInputFechaNacimiento = $("#btnInputFechaNacimiento");
 var selectProvincia = $("#selectProvincia");
 var selectPartido = $("#selectPartido");
 var selectLocalidad = $("#selectLocalidad");
+var rowPartidoLocalidadSelects = $("#rowPartidoLocalidadSelects");
 
 inicializarDatePicker();
 
@@ -34,6 +35,7 @@ function cargarSelectLocalidad(localidades) {
         selectLocalidad.append(option);
     });
     selectLocalidad.prop('disabled', false);
+    rowPartidoLocalidadSelects.removeClass("d-none");
     btnRegistrar.prop('disabled', false);
 }
 

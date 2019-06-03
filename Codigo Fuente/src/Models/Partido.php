@@ -110,4 +110,17 @@ class Partido extends Model
 
         return $row;
     }
+
+    public function existePartidoDBById()
+    {
+        $row = $this->selectByPk($this->getId());
+
+        if($row)
+        {
+            $this->setNombre($row["Nombre"]);
+            $this->setProvinciaId($row["ProvinciaId"]);
+        }
+
+        return $row;
+    }
 }

@@ -1,31 +1,36 @@
 <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/productos/altaProducto.css" ?>">
 
-<div class="container col-xl-7 col-sm-5 mt-3">
+<div class="container my-5 w-75">
     
-        <h2>Agregar Producto <i class="fas fa-1x fa-plus mr-1"></i></h2>
+        <h2>Editar Producto <i class='fas fa-1x fa-edit'></i></h2>
 
-<form action="<?php echo getBaseAddress() . "Productos/alta" ?>" method="post" class="mx-auto bg-white text-left" enctype="multipart/form-data">
+<form action="<?php echo getBaseAddress() . "Productos/editar" ?>" method="post" class="mx-auto bg-white text-left" enctype="multipart/form-data">
 
         <div class="form-group mt-5">
             <label for="inputNombreProducto">Nombre</label>
-            <input type="text" name="nombreProducto" id="inputNombreProducto" class="form-control" placeholder="Ej: Bicicleta" >
+            <input type="text" name="nombreProducto" value="<?php echo $producto->getNombre() ?>" id="inputNombreProducto" class="form-control" placeholder="Ej: Bicicleta" >
             <div id="errorNombreProducto" class="error"> <i class="fas fa-exclamation-triangle mr-2"></i><span></span></div>
         </div>
 
         <div class="form-group">
             <label for="inputPrecioProducto">Precio</label>
-            <input type="number" name="precioProducto" placeholder="Ej: 1300" id="inputPrecioProducto" class="form-control" >
+            <input type="number" name="precioProducto" value="<?php echo $producto->getPrecio() ?>" placeholder="Ej: 1300" id="inputPrecioProducto" class="form-control" >
             <div id="errorPrecioProducto" class="error"> <i class="fas fa-exclamation-triangle mr-2"></i><span></span></div>
         </div>
 
         <div class="form-group">
             <label for="selectCategoriaProducto">Categoria</label>
             <select name="categoriaProducto" id="selectCategoriaProducto" class="form-control" >
-                <option value="0" disabled selected>Categoria</option>
+                <option value="0" disabled>Categoria</option>
 
                 <?php
                     foreach($categorias as $categoria)
-                        echo "<option value='". $categoria->getId() ."'>" . $categoria->getNombre() . "</option>";
+                    {
+                        if($producto->getCategoriaId() == $categoria->getId())
+                            echo "<option selected value='". $categoria->getId() ."'>" . $categoria->getNombre() . "</option>";
+                        else
+                            echo "<option value='". $categoria->getId() ."'>" . $categoria->getNombre() . "</option>";
+                    }
                 ?>
 
             </select>
@@ -34,7 +39,7 @@
 
         <div class="form-group">
             <label for="textareaDescripcionProducto">Descripcion</label>
-            <textarea class="form-control" rows="5" placeholder="¿Que vendes?" id="textareaDescripcionProducto" name="descripcionProducto" ></textarea>
+            <textarea class="form-control" rows="5" id="textareaDescripcionProducto" name="descripcionProducto" > <?php echo $producto->getDescripcion() ?> </textarea>
             <small class="form-text text-muted float-left">Opcional</small>
             <div class="mt-2 float-right"><span id='caracteres'>0</span>/200<span></div>
             <div id="errorDescripcionProducto" class="error"> <i class="fas fa-exclamation-triangle mr-2"></i><span></span></div>
@@ -53,8 +58,10 @@
             $('.demo').jPreview();
         </script>
 
+        <input type="hidden" name="idProducto" value="<?php echo $producto->getId() ?>"/>
+
         <div class="d-flex justify-content-center align-items-center my-3">
-            <button type="submit" name="btnAgregar" id="btnAgregar" class="btn btn-primary">Agregar</button>
+            <button type="submit" name="btnAgregar" id="btnAgregar" class="btn btn-primary">Guardar cambios</button>
         </div>
 
 </form>

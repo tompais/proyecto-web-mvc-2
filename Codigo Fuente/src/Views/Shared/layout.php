@@ -49,7 +49,6 @@
     <script src="<?php echo getBaseAddress() . "Webroot/js/utilidades/constantes.js"; ?>"></script>
     <script src="<?php echo getBaseAddress() . "Webroot/js/utilidades/utilidades.js"; ?>"></script>
     <script src="<?php echo getBaseAddress() . "Webroot/js/home/Home.js" ?>"></script>
-
     <script src="<?php echo getBaseAddress() . "Webroot/lib/ImagePreview/bootstrap-prettyfile.js" ?>"></script>
     <script src="<?php echo getBaseAddress() . "Webroot/lib/ImagePreview/jpreview.js" ?>"></script>
 
@@ -69,6 +68,8 @@
             require_once ROOT . "Views/Seguridad/cerrarSesion.php";
             ?>
 
+            <div id="espaciador"></div>
+
             <?php
             echo $content_for_layout;
             ?>
@@ -80,6 +81,9 @@
         </div>
 
     </main>
+
+    <script src="<?php echo getBaseAddress() . "Webroot/js/Shared/layout.js" ?>"></script>
+
 </body>
 
 </html>

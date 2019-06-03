@@ -5,6 +5,7 @@ var inputEmailOrNick = $('#inputEmailOrNick');
 var inputPassword = $('#inputPassword');
 var btnIngresar = $("#btnIngresar");
 var errorNick = $("#errorNick");
+var checkboxRecordarme = $("#checkboxRecordarme");
 
 function validarEmailOrNick() {
     var validacion = false;
@@ -49,6 +50,7 @@ btnIngresar.click(function () {
         var obj = {};
         obj.emailOrNick = inputEmailOrNick.val();
         obj.password = inputPassword.val();
+        obj.recordarme = !!checkboxRecordarme.prop("checked");
         llamadaAjax(pathAccionLoguear, JSON.stringify(obj), true, "loginExitoso", "loginFallido");
     }
 });

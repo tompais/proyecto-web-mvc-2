@@ -17,14 +17,6 @@ class SeguridadController extends Controller
         usort($d['generos'], Constantes::CMPBYID);
         usort($d['provincias'], Constantes::CMPBYNOMBRE);
 
-        $d['partidos'] = $partido->getPartidosByProvinciaId($d['provincias'][0]->getId());
-
-        usort($d['partidos'], Constantes::CMPBYNOMBRE);
-
-        $d['localidades'] = $localidad->getLocalidadesByPartidoId($d['partidos'][0]->getId());
-
-        usort($d['localidades'], Constantes::CMPBYNOMBRE);
-
         $d['title'] = Constantes::REGISTRARTITLE;
 
         $this->set($d);
@@ -90,7 +82,7 @@ class SeguridadController extends Controller
         $this->render(Constantes::LOGINVIEW);
     }
 
-    function validarLogin($json)
+    function loguearUsuario($json)
     {
         header("Content-type: application/json");
 
@@ -122,12 +114,14 @@ class SeguridadController extends Controller
             $session->setUserName($user->getUsername());
             $session->setRolId($user->getRolId());
             $_SESSION["session"] = serialize($session);
+            if($data->recordarme)
+                setcookie("session", $_SESSION["session"], time() + 60*2, "/", apache_request_headers()["Host"]); //60 segs = 1 min. Multiplicado por 2, son 2 minutos.
         }
 
         echo json_encode(true);
     }
 
-    function validarRegistrar($json)
+    function registrarUsuario($json)
     {
         header("Content-type: application/json");
 
@@ -204,6 +198,11 @@ class SeguridadController extends Controller
     function cerrarSession()
     {
         session_destroy();
+        if(isset($_COOKIE["session"])) {
+            unset($_COOKIE["session"]);
+            setcookie("session", null, -1, "/", apache_request_headers()["Host"]);
+        }
+        setcookie("session", "", time()-3600);
         header("location: " . getBaseAddress());
     }
 
