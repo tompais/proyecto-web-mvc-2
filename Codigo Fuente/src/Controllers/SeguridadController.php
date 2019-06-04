@@ -8,8 +8,6 @@ class SeguridadController extends Controller
 
         $genero = new Genero();
         $provincia = new Provincia();
-        $partido = new Partido();
-        $localidad = new Localidad();
 
         $d['generos'] = $genero->getAllGeneros();
         $d['provincias'] = $provincia->getAllProvincias();
@@ -202,7 +200,6 @@ class SeguridadController extends Controller
             unset($_COOKIE["session"]);
             setcookie("session", null, -1, "/", apache_request_headers()["Host"]);
         }
-        setcookie("session", "", time()-3600);
         header("location: " . getBaseAddress());
     }
 
