@@ -8,8 +8,6 @@ class SeguridadController extends Controller
 
         $genero = new Genero();
         $provincia = new Provincia();
-        $partido = new Partido();
-        $localidad = new Localidad();
 
         $d['generos'] = $genero->getAllGeneros();
         $d['provincias'] = $provincia->getAllProvincias();
