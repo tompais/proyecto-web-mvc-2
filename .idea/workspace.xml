@@ -2,11 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3fe62c9f-49bd-49f3-a5d0-f2ed3e37bec3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Codigo Fuente/src/Views/Productos/altaProducto.php" beforeDir="false" afterPath="$PROJECT_DIR$/Codigo Fuente/src/Views/Productos/altaProducto.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Codigo Fuente/src/Webroot/js/producto/validacionAMProducto.js" beforeDir="false" afterPath="$PROJECT_DIR$/Codigo Fuente/src/Webroot/js/producto/validacionAMProducto.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Codigo Fuente/src/Webroot/lib/ImageUpload/css/main.2680b2521d08e92a174b.css" beforeDir="false" afterPath="$PROJECT_DIR$/Codigo Fuente/src/Webroot/lib/ImageUpload/css/main.2680b2521d08e92a174b.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Codigo Fuente/src/Webroot/lib/ImageUpload/js/main.f7f7894738fb01e41d2e.js" beforeDir="false" afterPath="$PROJECT_DIR$/Codigo Fuente/src/Webroot/lib/ImageUpload/js/main.f7f7894738fb01e41d2e.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Codigo Fuente/src/Helpers/Constantes.php" beforeDir="false" afterPath="$PROJECT_DIR$/Codigo Fuente/src/Helpers/Constantes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Codigo Fuente/src/Models/Categoria.php" beforeDir="false" afterPath="$PROJECT_DIR$/Codigo Fuente/src/Models/Categoria.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Codigo Fuente/src/Models/Direccion.php" beforeDir="false" afterPath="$PROJECT_DIR$/Codigo Fuente/src/Models/Direccion.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Codigo Fuente/src/Models/Usuario.php" beforeDir="false" afterPath="$PROJECT_DIR$/Codigo Fuente/src/Models/Usuario.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Codigo Fuente/src/Views/Home/inicio.php" beforeDir="false" afterPath="$PROJECT_DIR$/Codigo Fuente/src/Views/Home/inicio.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Codigo Fuente/src/Views/Productos/misProductos.php" beforeDir="false" afterPath="$PROJECT_DIR$/Codigo Fuente/src/Views/Productos/misProductos.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Codigo Fuente/src/Webroot/js/producto/editarProducto.js" beforeDir="false" afterPath="$PROJECT_DIR$/Codigo Fuente/src/Webroot/js/producto/editarProducto.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -24,50 +26,74 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Views/Productos/altaProducto.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="472">
-              <caret line="50" column="32" selection-start-line="50" selection-start-column="32" selection-end-line="50" selection-end-column="32" />
+            <state relative-caret-position="648">
+              <caret line="27" column="54" lean-forward="true" selection-start-line="27" selection-start-column="54" selection-end-line="27" selection-end-column="54" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Webroot/js/producto/validacionAMProducto.js">
+        <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Views/Publicacion/publicacionProducto.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="295">
-              <caret line="100" column="97" selection-start-line="100" selection-start-column="97" selection-end-line="100" selection-end-column="97" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Webroot/lib/ImageUpload/css/main.2680b2521d08e92a174b.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="305">
-              <caret line="129" column="24" selection-start-line="129" selection-start-column="24" selection-end-line="129" selection-end-column="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Webroot/lib/ImageUpload/js/main.f7f7894738fb01e41d2e.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="470">
-              <caret line="305" column="4" selection-start-line="305" selection-start-column="4" selection-end-line="305" selection-end-column="4" />
+            <state relative-caret-position="264">
+              <caret line="95" column="35" lean-forward="true" selection-start-line="95" selection-start-column="35" selection-end-line="95" selection-end-column="35" />
               <folding>
-                <element signature="e#40#47#0" expanded="true" />
-                <element signature="e#40#47#0" expanded="true" />
-                <element signature="e#40#47#0" expanded="true" />
-                <element signature="e#40#47#0" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#li#0;n#ul#0;n#div#2;n#div#0;n#div#1;n#div#1;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#li#1;n#ul#0;n#div#2;n#div#0;n#div#1;n#div#1;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#li#2;n#ul#0;n#div#2;n#div#0;n#div#1;n#div#1;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#h2#0;n#li#0;n#ul#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#i#0;n#p#0;n#li#0;n#ul#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#i#0;n#p#0;n#li#1;n#ul#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#i#0;n#p#0;n#li#2;n#ul#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#i#0;n#p#0;n#li#3;n#ul#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Webroot/lib/ImageUpload/js/vendor.e990ab0e5e609130e9c2.js">
+        <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Views/Home/inicio.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2016">
-              <caret line="84" column="38" selection-start-line="84" selection-start-column="38" selection-end-line="84" selection-end-column="38" />
+            <state relative-caret-position="250">
+              <caret line="88" column="115" selection-start-line="88" selection-start-column="50" selection-end-line="88" selection-end-column="115" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Controllers/PublicacionController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="528">
+              <caret line="27" column="10" selection-start-line="27" selection-start-column="10" selection-end-line="27" selection-end-column="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Models/Categoria.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="299">
+              <caret line="48" column="35" lean-forward="true" selection-start-line="48" selection-start-column="35" selection-end-line="48" selection-end-column="45" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Models/Usuario.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="384">
+              <caret line="352" column="7" lean-forward="true" selection-start-line="352" selection-start-column="7" selection-end-line="352" selection-end-column="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Models/Direccion.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="432">
+              <caret line="200" column="43" lean-forward="true" selection-start-line="200" selection-start-column="43" selection-end-line="200" selection-end-column="43" />
             </state>
           </provider>
         </entry>
@@ -96,6 +122,14 @@
       <find>f</find>
       <find>_image-pre</find>
       <find>fileUpload</find>
+      <find>foot</find>
+      <find>cont</find>
+      <find>traer</find>
+      <find>container</find>
+      <find>editar</find>
+      <find>sin</find>
+      <find>product_pr</find>
+      <find>product_d</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -106,7 +140,6 @@
       <list>
         <option value="$PROJECT_DIR$/Codigo Fuente/src/Controllers/ProductosController.php" />
         <option value="$PROJECT_DIR$/Codigo Fuente/src/Webroot/lib/ImagePreview/bootstrap-prettyfile.js" />
-        <option value="$PROJECT_DIR$/Codigo Fuente/src/Models/Producto.php" />
         <option value="$PROJECT_DIR$/Codigo Fuente/src/Webroot/js/seguridad/olvidePassword.js" />
         <option value="$PROJECT_DIR$/Codigo Fuente/src/Webroot/css/productos/altaProducto.css" />
         <option value="$PROJECT_DIR$/Codigo Fuente/src/Webroot/css/productos/misProductos.css" />
@@ -115,34 +148,35 @@
         <option value="$PROJECT_DIR$/Codigo Fuente/src/Webroot/js/producto/validacionAltaProducto.js" />
         <option value="$PROJECT_DIR$/Codigo Fuente/src/Views/Productos/editarProducto.php" />
         <option value="$PROJECT_DIR$/Codigo Fuente/src/Views/Shared/header.php" />
-        <option value="$PROJECT_DIR$/Codigo Fuente/src/Views/Productos/misProductos.php" />
         <option value="$PROJECT_DIR$/Codigo Fuente/src/Webroot/lib/ImageUpload/index.html" />
         <option value="$PROJECT_DIR$/Codigo Fuente/src/Views/Shared/layout.php" />
         <option value="$PROJECT_DIR$/Codigo Fuente/src/Webroot/lib/ImageUpload/js/vendor.e990ab0e5e609130e9c2.js" />
-        <option value="$PROJECT_DIR$/Codigo Fuente/src/Views/Productos/altaProducto.php" />
         <option value="$PROJECT_DIR$/Codigo Fuente/src/Webroot/js/producto/validacionAMProducto.js" />
         <option value="$PROJECT_DIR$/Codigo Fuente/src/Webroot/lib/ImageUpload/css/main.2680b2521d08e92a174b.css" />
         <option value="$PROJECT_DIR$/Codigo Fuente/src/Webroot/lib/ImageUpload/js/main.f7f7894738fb01e41d2e.js" />
+        <option value="$PROJECT_DIR$/Codigo Fuente/src/Helpers/Constantes.php" />
+        <option value="$PROJECT_DIR$/Codigo Fuente/src/Webroot/js/producto/editarProducto.js" />
+        <option value="$PROJECT_DIR$/Codigo Fuente/src/Views/Productos/misProductos.php" />
+        <option value="$PROJECT_DIR$/Codigo Fuente/src/Views/Productos/altaProducto.php" />
+        <option value="$PROJECT_DIR$/Codigo Fuente/src/Webroot/css/publicacion/publicacionProducto.css" />
+        <option value="$PROJECT_DIR$/Codigo Fuente/src/Models/Categoria.php" />
+        <option value="$PROJECT_DIR$/Codigo Fuente/src/Models/Producto.php" />
+        <option value="$PROJECT_DIR$/Codigo Fuente/src/Models/Usuario.php" />
+        <option value="$PROJECT_DIR$/Codigo Fuente/src/Views/Home/inicio.php" />
+        <option value="$PROJECT_DIR$/Codigo Fuente/src/Views/Publicacion/publicacionProducto.php" />
+        <option value="$PROJECT_DIR$/Codigo Fuente/src/Models/Direccion.php" />
+        <option value="$PROJECT_DIR$/Codigo Fuente/src/Controllers/PublicacionController.php" />
       </list>
     </option>
   </component>
-  <component name="ProjectConfigurationFiles">
-    <option name="files">
-      <list>
-        <option value="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
-        <option value="$PROJECT_DIR$/.idea/proyecto-web-mvc-2.iml" />
-        <option value="$PROJECT_DIR$/.idea/misc.xml" />
-        <option value="$PROJECT_DIR$/.idea/vcs.xml" />
-        <option value="$PROJECT_DIR$/.idea/modules.xml" />
-        <option value="$PROJECT_DIR$/.idea/jsLinters/jshint.xml" />
-      </list>
-    </option>
-  </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="15" />
     <option name="y" value="30" />
     <option name="width" value="1890" />
     <option name="height" value="1020" />
+  </component>
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -173,6 +207,27 @@
               <item name="proyecto-web-mvc-2" type="462c0819:PsiDirectoryNode" />
               <item name="Codigo Fuente" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="proyecto-web-mvc-2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="proyecto-web-mvc-2" type="462c0819:PsiDirectoryNode" />
+              <item name="Codigo Fuente" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Helpers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="proyecto-web-mvc-2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="proyecto-web-mvc-2" type="462c0819:PsiDirectoryNode" />
+              <item name="Codigo Fuente" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Models" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="proyecto-web-mvc-2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="proyecto-web-mvc-2" type="462c0819:PsiDirectoryNode" />
+              <item name="Codigo Fuente" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Views" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -180,7 +235,55 @@
               <item name="proyecto-web-mvc-2" type="462c0819:PsiDirectoryNode" />
               <item name="Codigo Fuente" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Views" type="462c0819:PsiDirectoryNode" />
+              <item name="Home" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="proyecto-web-mvc-2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="proyecto-web-mvc-2" type="462c0819:PsiDirectoryNode" />
+              <item name="Codigo Fuente" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Views" type="462c0819:PsiDirectoryNode" />
+              <item name="Productos" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="proyecto-web-mvc-2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="proyecto-web-mvc-2" type="462c0819:PsiDirectoryNode" />
+              <item name="Codigo Fuente" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Views" type="462c0819:PsiDirectoryNode" />
+              <item name="Publicacion" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="proyecto-web-mvc-2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="proyecto-web-mvc-2" type="462c0819:PsiDirectoryNode" />
+              <item name="Codigo Fuente" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Views" type="462c0819:PsiDirectoryNode" />
+              <item name="Shared" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="proyecto-web-mvc-2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="proyecto-web-mvc-2" type="462c0819:PsiDirectoryNode" />
+              <item name="Codigo Fuente" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Webroot" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="proyecto-web-mvc-2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="proyecto-web-mvc-2" type="462c0819:PsiDirectoryNode" />
+              <item name="Codigo Fuente" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Webroot" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="proyecto-web-mvc-2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="proyecto-web-mvc-2" type="462c0819:PsiDirectoryNode" />
+              <item name="Codigo Fuente" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Webroot" type="462c0819:PsiDirectoryNode" />
+              <item name="img" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="proyecto-web-mvc-2" type="b2602c69:ProjectViewProjectNode" />
@@ -205,7 +308,8 @@
               <item name="Codigo Fuente" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Webroot" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="publicacion" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -216,7 +320,14 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Codigo Fuente/src/Controllers" />
     <property name="nodejs_package_manager_path" value="npm" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\DELL\Desktop\Proyectos Unlam\proyecto-web-mvc-2\Codigo Fuente\src\Controllers" />
+      <recent name="C:\Users\DELL\Desktop\Proyectos Unlam\proyecto-web-mvc-2\Codigo Fuente\src\Views\Publicacion" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -250,17 +361,18 @@
       <workItem from="1559664044924" duration="3758000" />
       <workItem from="1559682630827" duration="3495000" />
       <workItem from="1559692487575" duration="1793000" />
+      <workItem from="1559745865659" duration="19125000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29213000" />
+    <option name="totallyTimeSpent" value="48338000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24295302" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24630873" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -313,13 +425,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Controllers/ProductosController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="984">
-          <caret line="41" selection-start-line="41" selection-end-line="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Webroot/lib/ImagePreview/jpreview.css">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -337,20 +442,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="275">
           <caret line="37" column="72" selection-start-line="37" selection-start-column="72" selection-end-line="37" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Helpers/Constantes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="792">
-          <caret line="38" column="30" lean-forward="true" selection-start-line="38" selection-start-column="30" selection-end-line="38" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Models/Producto.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-200">
-          <caret line="163" column="55" lean-forward="true" selection-start-line="163" selection-start-column="55" selection-end-line="163" selection-end-column="55" />
         </state>
       </provider>
     </entry>
@@ -414,26 +505,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Webroot/js/producto/eliminarProducto.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Webroot/js/producto/editarProducto.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Views/Shared/header.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1032">
-          <caret line="136" column="73" selection-start-line="136" selection-start-column="73" selection-end-line="136" selection-end-column="73" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Views/Productos/editarProducto.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
-          <caret line="54" selection-start-line="54" selection-end-line="54" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Views/Seguridad/registrar.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="312">
@@ -442,13 +513,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Webroot/lib/ImageUpload/docs/index.html" />
-    <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Controllers/HomeController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="8" column="6" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Controllers/SeguridadController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2928">
@@ -474,31 +538,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Views/Productos/misProductos.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1323">
-          <caret line="14" column="14" selection-start-line="14" selection-start-column="14" selection-end-line="14" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Views/Shared/layout.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="381">
           <caret line="50" column="111" selection-start-line="50" selection-start-column="111" selection-end-line="50" selection-end-column="111" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Webroot/lib/ImageUpload/js/vendor.e990ab0e5e609130e9c2.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2016">
-          <caret line="84" column="38" selection-start-line="84" selection-start-column="38" selection-end-line="84" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Views/Productos/altaProducto.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="472">
-          <caret line="50" column="32" selection-start-line="50" selection-start-column="32" selection-end-line="50" selection-end-column="32" />
         </state>
       </provider>
     </entry>
@@ -511,21 +554,184 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Webroot/lib/ImageUpload/js/main.f7f7894738fb01e41d2e.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="470">
+        <state relative-caret-position="501">
           <caret line="305" column="4" selection-start-line="305" selection-start-column="4" selection-end-line="305" selection-end-column="4" />
-          <folding>
-            <element signature="e#40#47#0" expanded="true" />
-            <element signature="e#40#47#0" expanded="true" />
-            <element signature="e#40#47#0" expanded="true" />
-            <element signature="e#40#47#0" expanded="true" />
-          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Webroot/lib/ImageUpload/js/vendor.e990ab0e5e609130e9c2.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="611">
+          <caret line="84" column="38" selection-start-line="84" selection-start-column="38" selection-end-line="84" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Views/Publicacion/single.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Views/Publicacion/single.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="534" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Views/Shared/header.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="178">
+          <caret line="117" column="34" lean-forward="true" selection-start-line="117" selection-start-column="34" selection-end-line="117" selection-end-column="87" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/dispatcher.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="22" column="23" lean-forward="true" selection-start-line="22" selection-start-column="23" selection-end-line="22" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Controllers/HomeController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="8" column="6" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Helpers/Constantes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="587">
+          <caret line="31" column="43" selection-start-line="31" selection-start-column="43" selection-end-line="31" selection-end-column="43" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Webroot/js/producto/validacionAMProducto.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
+        <state relative-caret-position="2400">
           <caret line="100" column="97" selection-start-line="100" selection-start-column="97" selection-end-line="100" selection-end-column="97" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Webroot/js/producto/eliminarProducto.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="9" selection-start-column="9" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Webroot/js/producto/editarProducto.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="8" column="19" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Views/Productos/misProductos.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1440">
+          <caret line="60" lean-forward="true" selection-start-line="60" selection-end-line="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Views/Productos/editarProducto.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="511">
+          <caret line="41" column="114" lean-forward="true" selection-start-line="41" selection-start-column="114" selection-end-line="41" selection-end-column="155" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Core/Model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-349">
+          <caret line="245" column="20" selection-start-line="245" selection-start-column="20" selection-end-line="245" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Models/Producto.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="186" column="35" lean-forward="true" selection-start-line="186" selection-start-column="35" selection-end-line="186" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Models/Imagen.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="81" column="26" lean-forward="true" selection-start-line="81" selection-start-column="26" selection-end-line="81" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Controllers/ProductosController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="684">
+          <caret line="115" column="30" lean-forward="true" selection-start-line="115" selection-start-column="30" selection-end-line="115" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Webroot/css/publicacion/publicacionProducto.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="308" selection-start-line="308" selection-end-line="308" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Models/Categoria.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="48" column="35" lean-forward="true" selection-start-line="48" selection-start-column="35" selection-end-line="48" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Models/Usuario.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="384">
+          <caret line="352" column="7" lean-forward="true" selection-start-line="352" selection-start-column="7" selection-end-line="352" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Views/Home/inicio.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="88" column="115" selection-start-line="88" selection-start-column="50" selection-end-line="88" selection-end-column="115" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Models/Direccion.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="200" column="43" lean-forward="true" selection-start-line="200" selection-start-column="43" selection-end-line="200" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Controllers/PublicacionController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="27" column="10" selection-start-line="27" selection-start-column="10" selection-end-line="27" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Views/Productos/altaProducto.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="648">
+          <caret line="27" column="54" lean-forward="true" selection-start-line="27" selection-start-column="54" selection-end-line="27" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Views/Publicacion/publicacionProducto.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="95" column="35" lean-forward="true" selection-start-line="95" selection-start-column="35" selection-end-line="95" selection-end-column="35" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#li#0;n#ul#0;n#div#2;n#div#0;n#div#1;n#div#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#li#1;n#ul#0;n#div#2;n#div#0;n#div#1;n#div#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#li#2;n#ul#0;n#div#2;n#div#0;n#div#1;n#div#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#h2#0;n#li#0;n#ul#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#i#0;n#p#0;n#li#0;n#ul#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#i#0;n#p#0;n#li#1;n#ul#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#i#0;n#p#0;n#li#2;n#ul#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#i#0;n#p#0;n#li#3;n#ul#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
