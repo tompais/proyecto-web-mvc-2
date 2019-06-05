@@ -98,7 +98,12 @@
         var imagenProducto = $('#inputImagenProducto')[0].files;
 
         if(imagenProducto === null || imagenProducto.length === 0 || imagenProducto === ""){
-            $("#errorImagenProducto").find("span").text("Elija al menos una foto para su productos");
+            $("#errorImagenProducto").find("span").text("Elija al menos una foto para su producto");
+            $("#errorImagenProducto").fadeIn("slow");
+            return false;
+        }
+        else if (imagenProducto.length < 1 || imagenProducto.length > 5) {
+            $("#errorImagenProducto").find("span").text("Elija una cantidad de minimo una foto y maximo cinco");
             $("#errorImagenProducto").fadeIn("slow");
             return false;
         }
@@ -151,3 +156,5 @@
             }
         }
     });
+
+
