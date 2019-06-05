@@ -118,7 +118,7 @@
                             <div class="product-item accessories">
                                 <div class="product">
                                     <div class="product_image">
-                                        <img src="<?php echo getBaseAddress() . "Webroot/img/home/product_4.png" ?>"" alt="">
+                                        <img src="<?php echo getBaseAddress() . "Webroot/img/home/product_4.png" ?>" alt="">
                                     </div>
                                     <div class="product_info">
                                         <h6 class="product_name"><a href="#">Moto G5 Plus</a></h6>
@@ -134,7 +134,7 @@
                             <div class="product-item women men">
                                 <div class="product">
                                     <div class="product_image">
-                                        <img src="<?php echo getBaseAddress() . "Webroot/img/home/product_5.png" ?>"" alt="">
+                                        <img src="<?php echo getBaseAddress() . "Webroot/img/home/product_5.png" ?>"s alt="">
                                     </div>
                                     <div class="product_info">
                                         <h6 class="product_name"><a href="#">Puma Active 600</a></h6>
