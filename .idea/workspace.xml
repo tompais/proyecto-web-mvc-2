@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3fe62c9f-49bd-49f3-a5d0-f2ed3e37bec3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Codigo Fuente/src/Controllers/PublicacionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Codigo Fuente/src/Controllers/PublicacionController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Codigo Fuente/src/Views/Publicacion/publicacionProducto.php" beforeDir="false" afterPath="$PROJECT_DIR$/Codigo Fuente/src/Views/Publicacion/publicacionProducto.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Codigo Fuente/src/Webroot/css/publicacion/publicacionProducto.css" beforeDir="false" afterPath="$PROJECT_DIR$/Codigo Fuente/src/Webroot/css/publicacion/publicacionProducto.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Codigo Fuente/src/Views/Shared/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/Codigo Fuente/src/Views/Shared/header.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,15 +17,15 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Views/Publicacion/publicacionProducto.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="528">
-              <caret line="81" column="100" selection-start-line="81" selection-start-column="100" selection-end-line="81" selection-end-column="100" />
+            <state relative-caret-position="576">
+              <caret line="83" column="20" selection-start-line="83" selection-start-column="20" selection-end-line="83" selection-end-column="20" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#i#0;n#button#0;n#div#3;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#i#0;n#button#0;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#h2#0;n#li#0;n#ul#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#i#0;n#p#0;n#li#0;n#ul#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#!!top" expanded="true" />
@@ -35,6 +33,15 @@
                 <element signature="n#style#0;n#i#0;n#p#0;n#li#2;n#ul#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#i#0;n#p#0;n#li#3;n#ul#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#!!top" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Views/Shared/header.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="466">
+              <caret line="63" column="76" selection-start-line="63" selection-start-column="76" selection-end-line="63" selection-end-column="76" />
             </state>
           </provider>
         </entry>
@@ -52,7 +59,7 @@
         <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Webroot/css/publicacion/publicacionProducto.css">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="436">
-              <caret line="320" lean-forward="true" selection-start-line="320" selection-end-line="320" />
+              <caret line="320" selection-start-line="320" selection-end-line="320" />
             </state>
           </provider>
         </entry>
@@ -61,7 +68,7 @@
         <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Models/Usuario.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="528">
-              <caret line="352" column="7" lean-forward="true" selection-start-line="352" selection-start-column="7" selection-end-line="352" selection-end-column="7" />
+              <caret line="352" column="7" selection-start-line="352" selection-start-column="7" selection-end-line="352" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -79,7 +86,7 @@
         <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Views/Productos/misProductos.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="442">
-              <caret line="49" column="29" lean-forward="true" selection-start-line="49" selection-start-column="29" selection-end-line="49" selection-end-column="29" />
+              <caret line="49" column="29" selection-start-line="49" selection-start-column="29" selection-end-line="49" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -137,7 +144,6 @@
         <option value="$PROJECT_DIR$/Codigo Fuente/src/Webroot/js/Shared/layout.js" />
         <option value="$PROJECT_DIR$/Codigo Fuente/src/Webroot/js/producto/validacionAltaProducto.js" />
         <option value="$PROJECT_DIR$/Codigo Fuente/src/Views/Productos/editarProducto.php" />
-        <option value="$PROJECT_DIR$/Codigo Fuente/src/Views/Shared/header.php" />
         <option value="$PROJECT_DIR$/Codigo Fuente/src/Webroot/lib/ImageUpload/index.html" />
         <option value="$PROJECT_DIR$/Codigo Fuente/src/Views/Shared/layout.php" />
         <option value="$PROJECT_DIR$/Codigo Fuente/src/Webroot/lib/ImageUpload/js/vendor.e990ab0e5e609130e9c2.js" />
@@ -156,10 +162,11 @@
         <option value="$PROJECT_DIR$/Codigo Fuente/src/Controllers/PublicacionController.php" />
         <option value="$PROJECT_DIR$/Codigo Fuente/src/Webroot/css/publicacion/publicacionProducto.css" />
         <option value="$PROJECT_DIR$/Codigo Fuente/src/Views/Publicacion/publicacionProducto.php" />
+        <option value="$PROJECT_DIR$/Codigo Fuente/src/Views/Shared/header.php" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="15" />
     <option name="y" value="30" />
     <option name="width" value="1890" />
@@ -197,13 +204,6 @@
               <item name="proyecto-web-mvc-2" type="462c0819:PsiDirectoryNode" />
               <item name="Codigo Fuente" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="proyecto-web-mvc-2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="proyecto-web-mvc-2" type="462c0819:PsiDirectoryNode" />
-              <item name="Codigo Fuente" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Helpers" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -226,7 +226,7 @@
               <item name="Codigo Fuente" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Views" type="462c0819:PsiDirectoryNode" />
-              <item name="Productos" type="462c0819:PsiDirectoryNode" />
+              <item name="Shared" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="proyecto-web-mvc-2" type="b2602c69:ProjectViewProjectNode" />
@@ -234,57 +234,6 @@
               <item name="Codigo Fuente" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Webroot" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="proyecto-web-mvc-2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="proyecto-web-mvc-2" type="462c0819:PsiDirectoryNode" />
-              <item name="Codigo Fuente" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Webroot" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="proyecto-web-mvc-2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="proyecto-web-mvc-2" type="462c0819:PsiDirectoryNode" />
-              <item name="Codigo Fuente" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Webroot" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-              <item name="publicacion" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="proyecto-web-mvc-2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="proyecto-web-mvc-2" type="462c0819:PsiDirectoryNode" />
-              <item name="Codigo Fuente" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Webroot" type="462c0819:PsiDirectoryNode" />
-              <item name="img" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="proyecto-web-mvc-2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="proyecto-web-mvc-2" type="462c0819:PsiDirectoryNode" />
-              <item name="Codigo Fuente" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Webroot" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="proyecto-web-mvc-2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="proyecto-web-mvc-2" type="462c0819:PsiDirectoryNode" />
-              <item name="Codigo Fuente" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Webroot" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-              <item name="producto" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="proyecto-web-mvc-2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="proyecto-web-mvc-2" type="462c0819:PsiDirectoryNode" />
-              <item name="Codigo Fuente" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Webroot" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-              <item name="publicacion" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -336,12 +285,12 @@
       <workItem from="1559664044924" duration="3758000" />
       <workItem from="1559682630827" duration="3495000" />
       <workItem from="1559692487575" duration="1793000" />
-      <workItem from="1559745865659" duration="26603000" />
+      <workItem from="1559745865659" duration="27335000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="55816000" />
+    <option name="totallyTimeSpent" value="56548000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
@@ -649,17 +598,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Views/Shared/header.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="634">
-          <caret line="139" column="63" lean-forward="true" selection-start-line="139" selection-start-column="63" selection-end-line="139" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Views/Productos/misProductos.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
-          <caret line="49" column="29" lean-forward="true" selection-start-line="49" selection-start-column="29" selection-end-line="49" selection-end-column="29" />
+          <caret line="49" column="29" selection-start-line="49" selection-start-column="29" selection-end-line="49" selection-end-column="29" />
         </state>
       </provider>
     </entry>
@@ -673,7 +615,7 @@
     <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Models/Usuario.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="528">
-          <caret line="352" column="7" lean-forward="true" selection-start-line="352" selection-start-column="7" selection-end-line="352" selection-end-column="7" />
+          <caret line="352" column="7" selection-start-line="352" selection-start-column="7" selection-end-line="352" selection-end-column="7" />
         </state>
       </provider>
     </entry>
@@ -687,18 +629,18 @@
     <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Webroot/css/publicacion/publicacionProducto.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="436">
-          <caret line="320" lean-forward="true" selection-start-line="320" selection-end-line="320" />
+          <caret line="320" selection-start-line="320" selection-end-line="320" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Views/Publicacion/publicacionProducto.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="81" column="100" selection-start-line="81" selection-start-column="100" selection-end-line="81" selection-end-column="100" />
+        <state relative-caret-position="576">
+          <caret line="83" column="20" selection-start-line="83" selection-start-column="20" selection-end-line="83" selection-end-column="20" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#i#0;n#button#0;n#div#3;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#i#0;n#button#0;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#h2#0;n#li#0;n#ul#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#!!top" expanded="true" />
             <element signature="n#style#0;n#i#0;n#p#0;n#li#0;n#ul#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#!!top" expanded="true" />
@@ -706,6 +648,13 @@
             <element signature="n#style#0;n#i#0;n#p#0;n#li#2;n#ul#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#!!top" expanded="true" />
             <element signature="n#style#0;n#i#0;n#p#0;n#li#3;n#ul#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Views/Shared/header.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="466">
+          <caret line="63" column="76" selection-start-line="63" selection-start-column="76" selection-end-line="63" selection-end-column="76" />
         </state>
       </provider>
     </entry>
