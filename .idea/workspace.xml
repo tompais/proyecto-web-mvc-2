@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3fe62c9f-49bd-49f3-a5d0-f2ed3e37bec3" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Codigo Fuente/src/Views/Productos/altaProducto.php" beforeDir="false" afterPath="$PROJECT_DIR$/Codigo Fuente/src/Views/Productos/altaProducto.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Codigo Fuente/src/Views/Shared/layout.php" beforeDir="false" afterPath="$PROJECT_DIR$/Codigo Fuente/src/Views/Shared/layout.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Codigo Fuente/src/Webroot/js/producto/validacionAMProducto.js" beforeDir="false" afterPath="$PROJECT_DIR$/Codigo Fuente/src/Webroot/js/producto/validacionAMProducto.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Codigo Fuente/src/Webroot/lib/ImageUpload/css/main.2680b2521d08e92a174b.css" beforeDir="false" afterPath="$PROJECT_DIR$/Codigo Fuente/src/Webroot/lib/ImageUpload/css/main.2680b2521d08e92a174b.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Codigo Fuente/src/Webroot/lib/ImageUpload/js/main.f7f7894738fb01e41d2e.js" beforeDir="false" afterPath="$PROJECT_DIR$/Codigo Fuente/src/Webroot/lib/ImageUpload/js/main.f7f7894738fb01e41d2e.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,11 +21,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Views/Productos/altaProducto.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="525">
-              <caret line="60" lean-forward="true" selection-start-line="60" selection-end-line="60" />
+            <state relative-caret-position="472">
+              <caret line="50" column="32" selection-start-line="50" selection-start-column="32" selection-end-line="50" selection-end-column="32" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Webroot/js/producto/validacionAMProducto.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="295">
+              <caret line="100" column="97" selection-start-line="100" selection-start-column="97" selection-end-line="100" selection-end-column="97" />
             </state>
           </provider>
         </entry>
@@ -30,8 +42,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Webroot/lib/ImageUpload/css/main.2680b2521d08e92a174b.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="377">
-              <caret line="157" column="25" selection-start-line="157" selection-start-column="25" selection-end-line="157" selection-end-column="25" />
+            <state relative-caret-position="305">
+              <caret line="129" column="24" selection-start-line="129" selection-start-column="24" selection-end-line="129" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -39,8 +51,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Webroot/lib/ImageUpload/js/main.f7f7894738fb01e41d2e.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="129" column="1695" selection-start-line="129" selection-start-column="1692" selection-end-line="129" selection-end-column="1695" />
+            <state relative-caret-position="470">
+              <caret line="305" column="4" selection-start-line="305" selection-start-column="4" selection-end-line="305" selection-end-column="4" />
               <folding>
                 <element signature="e#40#47#0" expanded="true" />
                 <element signature="e#40#47#0" expanded="true" />
@@ -54,7 +66,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Webroot/lib/ImageUpload/js/vendor.e990ab0e5e609130e9c2.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
+            <state relative-caret-position="2016">
               <caret line="84" column="38" selection-start-line="84" selection-start-column="38" selection-end-line="84" selection-end-column="38" />
             </state>
           </provider>
@@ -78,6 +90,12 @@
       <find>MAX</find>
       <find>control</find>
       <find>image-c</find>
+      <find>files selected</find>
+      <find>custom-file-container</find>
+      <find>_image</find>
+      <find>f</find>
+      <find>_image-pre</find>
+      <find>fileUpload</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -101,9 +119,10 @@
         <option value="$PROJECT_DIR$/Codigo Fuente/src/Webroot/lib/ImageUpload/index.html" />
         <option value="$PROJECT_DIR$/Codigo Fuente/src/Views/Shared/layout.php" />
         <option value="$PROJECT_DIR$/Codigo Fuente/src/Webroot/lib/ImageUpload/js/vendor.e990ab0e5e609130e9c2.js" />
-        <option value="$PROJECT_DIR$/Codigo Fuente/src/Webroot/lib/ImageUpload/js/main.f7f7894738fb01e41d2e.js" />
-        <option value="$PROJECT_DIR$/Codigo Fuente/src/Webroot/lib/ImageUpload/css/main.2680b2521d08e92a174b.css" />
         <option value="$PROJECT_DIR$/Codigo Fuente/src/Views/Productos/altaProducto.php" />
+        <option value="$PROJECT_DIR$/Codigo Fuente/src/Webroot/js/producto/validacionAMProducto.js" />
+        <option value="$PROJECT_DIR$/Codigo Fuente/src/Webroot/lib/ImageUpload/css/main.2680b2521d08e92a174b.css" />
+        <option value="$PROJECT_DIR$/Codigo Fuente/src/Webroot/lib/ImageUpload/js/main.f7f7894738fb01e41d2e.js" />
       </list>
     </option>
   </component>
@@ -119,7 +138,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="15" />
     <option name="y" value="30" />
     <option name="width" value="1890" />
@@ -130,6 +149,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -168,45 +188,33 @@
               <item name="Codigo Fuente" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Webroot" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="proyecto-web-mvc-2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="proyecto-web-mvc-2" type="462c0819:PsiDirectoryNode" />
-              <item name="Codigo Fuente" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Webroot" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-              <item name="ImageUpload" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="proyecto-web-mvc-2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="proyecto-web-mvc-2" type="462c0819:PsiDirectoryNode" />
-              <item name="Codigo Fuente" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Webroot" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-              <item name="ImageUpload" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="proyecto-web-mvc-2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="proyecto-web-mvc-2" type="462c0819:PsiDirectoryNode" />
-              <item name="Codigo Fuente" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Webroot" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-              <item name="ImageUpload" type="462c0819:PsiDirectoryNode" />
               <item name="js" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="proyecto-web-mvc-2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="proyecto-web-mvc-2" type="462c0819:PsiDirectoryNode" />
+              <item name="Codigo Fuente" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Webroot" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="producto" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="proyecto-web-mvc-2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="proyecto-web-mvc-2" type="462c0819:PsiDirectoryNode" />
+              <item name="Codigo Fuente" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Webroot" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
@@ -241,17 +249,18 @@
       <workItem from="1559661661177" duration="1825000" />
       <workItem from="1559664044924" duration="3758000" />
       <workItem from="1559682630827" duration="3495000" />
+      <workItem from="1559692487575" duration="1793000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27420000" />
+    <option name="totallyTimeSpent" value="29213000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23959732" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24295302" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -432,13 +441,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Webroot/js/producto/validacionAMProducto.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="587">
-          <caret line="153" selection-start-line="153" selection-end-line="153" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Webroot/lib/ImageUpload/docs/index.html" />
     <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Controllers/HomeController.php">
       <provider selected="true" editor-type-id="text-editor">
@@ -486,10 +488,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Webroot/lib/ImageUpload/js/vendor.e990ab0e5e609130e9c2.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2016">
+          <caret line="84" column="38" selection-start-line="84" selection-start-column="38" selection-end-line="84" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Views/Productos/altaProducto.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="472">
+          <caret line="50" column="32" selection-start-line="50" selection-start-column="32" selection-end-line="50" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Webroot/lib/ImageUpload/css/main.2680b2521d08e92a174b.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="305">
+          <caret line="129" column="24" selection-start-line="129" selection-start-column="24" selection-end-line="129" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Webroot/lib/ImageUpload/js/main.f7f7894738fb01e41d2e.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="129" column="1695" selection-start-line="129" selection-start-column="1692" selection-end-line="129" selection-end-column="1695" />
+        <state relative-caret-position="470">
+          <caret line="305" column="4" selection-start-line="305" selection-start-column="4" selection-end-line="305" selection-end-column="4" />
           <folding>
             <element signature="e#40#47#0" expanded="true" />
             <element signature="e#40#47#0" expanded="true" />
@@ -499,24 +522,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Webroot/lib/ImageUpload/js/vendor.e990ab0e5e609130e9c2.js">
+    <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Webroot/js/producto/validacionAMProducto.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="84" column="38" selection-start-line="84" selection-start-column="38" selection-end-line="84" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Webroot/lib/ImageUpload/css/main.2680b2521d08e92a174b.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
-          <caret line="157" column="25" selection-start-line="157" selection-start-column="25" selection-end-line="157" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Codigo Fuente/src/Views/Productos/altaProducto.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="60" lean-forward="true" selection-start-line="60" selection-end-line="60" />
+        <state relative-caret-position="295">
+          <caret line="100" column="97" selection-start-line="100" selection-start-column="97" selection-end-line="100" selection-end-column="97" />
         </state>
       </provider>
     </entry>
