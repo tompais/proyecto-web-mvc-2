@@ -22,7 +22,7 @@ function validarEmailOrNick() {
     return validacion;
 }
 
-btnRecuperarPassword.click(function () {
+function recuperarPassword() {
     $(".error").fadeOut();
     $(".error").find("span").text("");
 
@@ -33,6 +33,10 @@ btnRecuperarPassword.click(function () {
         obj.emailOrNick = inputEmailOrNick.val();
         llamadaAjax(pathRenovarPassword, JSON.stringify(obj), true, "mostrarModalRenovacionPasswordExitosa", "mostrarModalRenovacionPasswordFallida");
     }
+}
+
+btnRecuperarPassword.click(function () {
+    recuperarPassword();
 });
 
 function mostrarModalRenovacionPasswordExitosa(dummy) {
@@ -46,3 +50,9 @@ function mostrarModalRenovacionPasswordFallida(err) {
     btnRecuperarPassword.prop('disabled', false);
     alertify.alert('Error en Renovación de Password', err).setting("modal", false);
 }
+
+$("input").keypress(function (e) {
+    if(e.keyCode === 13) {
+        recuperarPassword();
+    }
+});

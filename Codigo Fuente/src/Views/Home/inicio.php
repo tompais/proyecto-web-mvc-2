@@ -1,3 +1,7 @@
+<link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/lib/OwlCarousel2-2.2.1/animate.css"; ?>">
+<link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/lib/OwlCarousel2-2.2.1/owl.carousel.css"; ?>">
+<link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/lib/OwlCarousel2-2.2.1/owl.theme.default.css"; ?>">
+
 <!-- Slider -->
 
     <div class="main_slider"  style="background-image:url('<?php echo getBaseAddress() . "Webroot/img/home/bannerAlt.jpg" ?>')">
@@ -219,4 +223,7 @@
         </div>
     </div>
 
+<script src="<?php echo getBaseAddress() . "Webroot/lib/easing/easing.js"; ?>"></script>
+<script src="<?php echo getBaseAddress() . "Webroot/lib/Isotope/isotope.pkgd.min.js"; ?>"></script>
+<script src="<?php echo getBaseAddress() . "Webroot/lib/OwlCarousel2-2.2.1/owl.carousel.js"; ?>"></script>
 <script src="<?php echo getBaseAddress() . "Webroot/js/home/Home.js" ?>"></script>

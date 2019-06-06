@@ -373,7 +373,7 @@ function validarFormularioRegistracion() {
         && validarPisoYDepto();
 }
 
-function realizarRegistracion() {
+function registrarUsuario() {
     $("input").prop('disabled', true);
     btnRegistrar.prop('disabled', true);
     var obj = {};
@@ -398,19 +398,28 @@ function realizarRegistracion() {
     llamadaAjax(pathValidarRegistrar, JSON.stringify(obj), true, "mostrarModalRegistracionExitosa", "mostrarModalError");
 }
 
-btnRegistrar.click(function () {
-
+function realizarRegistracion() {
     $(".error").fadeOut();
 
     getLocation().then(function (res) {
         var validacion = validarGeolocalizacion(res) && validarFormularioRegistracion();
 
         if (validacion) {
-            realizarRegistracion();
+            registrarUsuario();
         }
     }).catch(function (err) {
         alertify.alert('Error en Geolocalización', "Ha ocurrido un error y no se ha podido registrar su ubicación. Por favor, dé permisos a su navegador y vuelva a intentar")
     });
+}
+
+btnRegistrar.click(function () {
+    realizarRegistracion();
+});
+
+$("input").keypress(function (e) {
+    if(e.keyCode === 13) {
+        realizarRegistracion();
+    }
 });
 
 function mostrarModalRegistracionExitosa(dummy) {
