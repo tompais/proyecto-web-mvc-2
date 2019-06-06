@@ -196,6 +196,14 @@ class Direccion extends Model
         $this->localidad = $localidad;
     }
 
+    public function traerDireccion($pk)
+    {
+       $direccion = $this->selectByPk($pk);
+
+       $this->setCalle($direccion["Calle"]);
+       $this->setAltura($direccion["Altura"]);
+    }
+
     public function validarDireccion()
     {
         $this->setProvincia(new Provincia());

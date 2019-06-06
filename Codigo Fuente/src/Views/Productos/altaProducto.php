@@ -45,9 +45,10 @@
         <div class="custom-file-container mt-5" data-upload-id=myFirstImage>
             <label for="inputFileImages">Imagenes<a href=javascript:void(0) class=custom-file-container__image-clear title="Clear Image"><i class="fas fa-times ml-2"></i></a></label>
             <label class="custom-file-container__custom-file">
-                    <input type=file class="custom-file-container__custom-file__custom-file-input" accept=* multiple=multiple aria-label="Seleccionar" name="imagenProducto[]" id="inputImagenProducto" >
+                    <input type=file class="custom-file-container__custom-file__custom-file-input" accept=".png,.jpg,.jpeg" multiple=multiple aria-label="Seleccionar" name="imagenProducto[]" id="inputImagenProducto" >
                     <input type=hidden name=MAX_FILE_SIZE value=10485760> <span class="custom-file-container__custom-file__custom-file-control"></span></label>
             <div class=custom-file-container__image-preview></div>
+            <div id="errorImagenProducto" class="error"> <i class="fas fa-exclamation-triangle mr-2"></i><span></span></div>
         </div>
 
 
