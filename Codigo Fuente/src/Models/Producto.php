@@ -198,7 +198,8 @@ class Producto extends Model
             "Nombre" => $publicacion["nombreProducto"],
             "Precio" => $publicacion["precioProducto"],
             "CategoriaId" => $publicacion["categoriaProducto"],
-            "Descripcion" => $publicacion["descripcionProducto"]
+            "Descripcion" => $publicacion["descripcionProducto"],
+            "EstadoId" => $publicacion["estadoProducto"]
         ];
 
         return $this->update($array);

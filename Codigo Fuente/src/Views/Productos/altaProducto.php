@@ -1,6 +1,5 @@
 <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/productos/altaProducto.css" ?>">
-<link rel="stylesheet"
-      href="<?php echo getBaseAddress() . "Webroot/lib/ImageUpload/css/main.2680b2521d08e92a174b.css" ?>">
+<link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/lib/ImageUpload/css/main.2680b2521d08e92a174b.css" ?>">
 
 <div class="container col-xl-7 col-sm-5 mt-3">
 
