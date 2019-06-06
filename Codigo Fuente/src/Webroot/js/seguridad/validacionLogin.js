@@ -38,8 +38,7 @@ function validarPassword() {
     return validacion;
 }
 
-btnIngresar.click(function () {
-
+function loguearUsuario() {
     $(".error").fadeOut();
 
     var validacion = validarEmailOrNick() && validarPassword();
@@ -53,6 +52,10 @@ btnIngresar.click(function () {
         obj.recordarme = !!checkboxRecordarme.prop("checked");
         llamadaAjax(pathAccionLoguear, JSON.stringify(obj), true, "loginExitoso", "loginFallido");
     }
+}
+
+btnIngresar.click(function () {
+    loguearUsuario();
 });
 
 function loginExitoso(dummy) {
@@ -64,3 +67,9 @@ function loginFallido(err) {
     btnIngresar.prop("disabled", false);
     alertify.alert("Error de Logueo", err);
 }
+
+$("input").keypress(function (e) {
+    if(e.keyCode === 13) {
+        loguearUsuario();
+    }
+});

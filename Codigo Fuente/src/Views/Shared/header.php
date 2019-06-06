@@ -61,7 +61,7 @@
             <div class="row">
                 <div class="col-lg-12 text-right">
                     <div class="logo_container" >
-                        <a href="<?php echo getBaseAddress(). "Home/inicio" ?>"><img class="img-fluid" id="logo" src="<?php echo getBaseAddress() . "Webroot/img/home/logo.png" ?>"></a>
+                        <a href="<?php echo getBaseAddress() ?>"><img class="img-fluid" id="logo" src="<?php echo getBaseAddress() . "Webroot/img/home/logo.png" ?>"></a>
                         <img class="img-fluid" id="logoResponsive" src="<?php echo getBaseAddress() . "Webroot/img/home/logoResponsive3.png" ?>">
                     </div>
                     <nav class="navbar">
