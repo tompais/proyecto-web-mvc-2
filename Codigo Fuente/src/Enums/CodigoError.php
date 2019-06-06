@@ -20,4 +20,5 @@ abstract class CodigoError
     const ErrorUpdateSQL = 13;
     const EnvioMailRenovacionPasswordFallido = 14;
     const UsuarioNoEncontrado = 15;
+    const ProductoNoEncontrado = 16;
 }
