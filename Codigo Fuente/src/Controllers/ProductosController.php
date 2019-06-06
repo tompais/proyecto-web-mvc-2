@@ -99,15 +99,18 @@ class ProductosController extends Controller
 
     function editarProducto($publicacion)
     {
-        $producto = new Producto();
-        $producto->traerProducto($publicacion["producto"]);
+        $d['title'] = Constantes::EDITARPRODUCTOTITLE;
 
         $categoria = new Categoria();
+        $estado = new Estado();
+        $producto = new Producto();
+
+        $producto->traerProducto($publicacion["producto"]);
 
         $d["categorias"] = $categoria->traerListaCategorias();
+        $d["estados"] = $estado->getAllEstados();
         $d["producto"] = $producto;
-        $d['title'] = Constantes::EDITARPRODUCTOTITLE;
-        
+
         $this->set($d);
         $this->render(Constantes::EDITARPRODUCTO);
     }
@@ -117,8 +120,7 @@ class ProductosController extends Controller
         $producto = new Producto();
         
         $producto->actualizarProducto($publicacion);
-        
-        
+
         if (isset($_FILES["imagenProducto"]["name"])) {
             
             $imagen = new Imagen();
