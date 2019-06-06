@@ -26,7 +26,6 @@
     <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/error/errorValidaciones.css" ?>">
     <link rel="shortcut icon" href="<?php echo getBaseAddress() . "Webroot/img/favicon.ico"; ?>" type="image/x-icon">
     <link rel="icon" href="<?php echo getBaseAddress() . "Webroot/img/favicon.ico"; ?>" type="image/x-icon">
-    <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/lib/ImagePreview/jpreview.css" ?>">
 </head>
 
 <body>
@@ -50,7 +49,6 @@
     <script src="<?php echo getBaseAddress() . "Webroot/js/utilidades/utilidades.js"; ?>"></script>
     <script src="<?php echo getBaseAddress() . "Webroot/js/home/Home.js" ?>"></script>
     <script src="<?php echo getBaseAddress() . "Webroot/lib/ImagePreview/bootstrap-prettyfile.js" ?>"></script>
-    <script src="<?php echo getBaseAddress() . "Webroot/lib/ImagePreview/jpreview.js" ?>"></script>
 
     <script>
         const pathHome = "<?php echo getBaseAddress(); ?>";
