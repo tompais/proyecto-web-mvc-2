@@ -369,6 +369,7 @@ jQuery(document).ready(function ($) {
 });
 
 $('.ui.search').search({
+    type : 'category',
     minCharacters : 3,
     searchFields   : [
         'title'
@@ -377,21 +378,36 @@ $('.ui.search').search({
         onResponse: function(productos) {
             const maxResults = 5;
             var response = {
-                    results : []
+                    results : [
+                        {
+                            name: "Nuevo",
+                            results: []
+                        },
+                        {
+                            name: "Usado",
+                            results: []
+                        },
+                        {
+                            name: "Refabricado",
+                            results: []
+                        }
+                    ]
                 };
             $.each(productos, function(index, producto) {
                 if(index >= maxResults) {
                     return false;
                 }
-                response.results.push({
-                   title : producto.nombre
+                response.results[producto.estado.id - 1].results.push({
+                   title : producto.nombre,
+                    description: "$" + producto.precio,
+                    url: pathHome
                 });
             });
             return response;
         },
         url: pathHome + "Buscar/buscarProductoPorNombre/{query}"
     },
-    fullTextSearch: true,
+    fullTextSearch: false,
     error : {
         source      : 'Cannot search. No source used, and Semantic API module was not included',
         noResults   : 'No se han encontrado resultados asociados a su búsqueda',

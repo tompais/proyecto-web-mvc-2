@@ -16,7 +16,8 @@ abstract class Constantes
     const ALTAPRODUCTO = "altaProducto";
     const EDITARPRODUCTO = "editarProducto";
     const OLVIDEPASSWORDVIEW = "olvidePassword";
-    const PUBLICACIONVIEW = "publicacionProducto";
+    const PUBLICACIONVIEW = "publicacion";
+    const BUSQUEDAVIEW = "busqueda";
 
     //Acciones
     const CERRARSESIONACTION = "cerrarSession";

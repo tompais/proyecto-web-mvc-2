@@ -14,6 +14,7 @@ class ProductoDto
     public $categoriaId;
     public $usuarioId;
     public $estadoId;
+    public $estado;
     public $descripcion;
     public $fechaBaja;
     public $fechaAlta;
