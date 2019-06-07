@@ -400,7 +400,7 @@ $('.ui.search').search({
                 response.results[producto.estado.id - 1].results.push({
                    title : producto.nombre,
                     description: "$" + producto.precio,
-                    url: pathHome
+                    url: pathHome + "Productos/publicacion/" + producto.id
                 });
             });
             return response;
