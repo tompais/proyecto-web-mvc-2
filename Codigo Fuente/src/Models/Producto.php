@@ -191,6 +191,23 @@ class Producto extends Model
         $this->setFechaAlta($producto["FechaAlta"]);
     }
 
+    public function traerProductosPorNombre($nombre)
+    {
+        $rows = $this->pageRows(0, 5, "Nombre like '%$nombre%' ORDER BY Precio AND EstadoId");
+
+        $productos = [];
+
+        foreach ($rows as $row) {
+            $producto = new Producto();
+            $producto->db->disconnect();
+
+            $producto->setNombre($row["Nombre"]);
+
+            $productos[] = $producto;
+        }
+
+        return $productos;
+    }
     public function actualizarProducto($publicacion)
     {
         $array = [
