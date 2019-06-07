@@ -21,6 +21,7 @@ class BuscarController extends Controller
         foreach ($productos as $p) {
             $productoDto = new ProductoDto();
 
+            $productoDto->id = $p->getId();
             $productoDto->nombre = $p->getNombre();
             $productoDto->precio = $p->getPrecio();
             $productoDto->estado = new EstadoDto();

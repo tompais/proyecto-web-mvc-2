@@ -210,6 +210,7 @@ class Producto extends Model
 
             $estado->db->disconnect();
 
+            $producto->setId($row["Id"]);
             $producto->setNombre($row["Nombre"]);
             $producto->setPrecio($row["Precio"]);
             $producto->setEstado($estado);
