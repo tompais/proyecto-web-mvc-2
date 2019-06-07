@@ -9,9 +9,37 @@ class Producto extends Model
     private $categoria;
     private $usuarioId;
     private $usuario;
+    private $estado;
+    private $estadoId;
     private $descripcion;
     private $fechaBaja;
     private $fechaAlta;
+
+    /**
+     * @return mixed
+     */
+    public function getEstado()
+    {
+        return $this->estado;
+    }
+
+    /**
+     * @param mixed $estado
+     */
+    public function setEstado($estado)
+    {
+        $this->estado = $estado;
+    }
+
+    public function getEstadoId()
+    {
+        return $this->estadoId;
+    }
+
+    public function setEstadoId($estadoId)
+    {
+        $this->estadoId = $estadoId;
+    }
 
     public function getId()
     {
@@ -121,7 +149,8 @@ class Producto extends Model
             "CategoriaId" => $this->getCategoriaId(),
             "UsuarioId" => $this->getUsuarioId(),
             "Descripcion" => $this->getDescripcion(),
-            "FechaAlta" => $this->getFechaAlta()
+            "FechaAlta" => $this->getFechaAlta(),
+            "EstadoId" => $this->getEstadoId()
         ];
         $this->setId($this->insert($array));
         return $this->getId();
@@ -169,7 +198,8 @@ class Producto extends Model
             "Nombre" => $publicacion["nombreProducto"],
             "Precio" => $publicacion["precioProducto"],
             "CategoriaId" => $publicacion["categoriaProducto"],
-            "Descripcion" => $publicacion["descripcionProducto"]
+            "Descripcion" => $publicacion["descripcionProducto"],
+            "EstadoId" => $publicacion["estadoProducto"]
         ];
 
         return $this->update($array);
@@ -220,9 +250,21 @@ class Producto extends Model
             && $cantLetras >= 0;
     }
 
+    public function validarEstado()
+    {
+        return FuncionesUtiles::esMayorACero($this->getEstadoId()) &&
+            ($this->getEstadoId() == Estados::Nuevo || $this->getEstadoId() == Estados::Usado || $this->getEstadoId() == Estados::Reformado);
+    }
+
+    public function validarUsuario()
+    {
+        $this->setUsuario(new Usuario());
+        return $this->getUsuario()->getUsuarioById($this->getUsuarioId());
+    }
+
     public function validarProducto()
     {
-        return $this->validarNombre() && $this->validarDescripcion() && $this->validarPrecio() && $this->validarCategoria();
+        return $this->validarNombre() && $this->validarDescripcion() && $this->validarPrecio() && $this->validarCategoria() && $this->validarEstado() && $this->validarUsuario();
     }
 }
 

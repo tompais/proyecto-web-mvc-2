@@ -42,6 +42,14 @@ class Categoria extends Model
         return $categorias;
     }
 
+    public function traerCategoria($pk)
+    {
+        $categoria = $this->selectByPk($pk);
+
+        $this->setNombre($categoria["Nombre"]);
+
+    }
+
     public function existeCategoriaDB()
     {
         return $this->selectByPk($this->getId());
