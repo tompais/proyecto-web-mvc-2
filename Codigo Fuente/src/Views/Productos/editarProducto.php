@@ -47,7 +47,7 @@
                 <?php
                 foreach($estados as $estado)
                 {
-                    if($producto->getCategoriaId() == $estado->getId())
+                    if($producto->getEstadoId() == $estado->getId())
                         echo "<option selected value='". $estado->getId() ."'>" . $estado->getNombre() . "</option>";
                     else
                         echo "<option value='". $estado->getId() ."'>" . $estado->getNombre() . "</option>";
