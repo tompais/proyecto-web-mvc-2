@@ -18,9 +18,10 @@
     <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/lib/alertifyjs/css/themes/default.min.css"; ?>">
     <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/lib/alertifyjs/css/themes/semantic.min.css"; ?>">
     <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/lib/daterangepicker/daterangepicker.css"; ?>">
-    <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/home/Inicio.css" ?>">
-    <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/home/responsive.css" ?>">
-    <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/error/errorValidaciones.css" ?>">
+    <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/home/Inicio.css"; ?>">
+    <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/home/responsive.css"; ?>">
+    <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/error/errorValidaciones.css"; ?>">
+    <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/lib/Semantic-UI/dist/semantic.min.css"; ?>">
     <link rel="shortcut icon" href="<?php echo getBaseAddress() . "Webroot/img/favicon.ico"; ?>" type="image/x-icon">
     <link rel="icon" href="<?php echo getBaseAddress() . "Webroot/img/favicon.ico"; ?>" type="image/x-icon">
 </head>
@@ -30,18 +31,18 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
     <script src="<?php echo getBaseAddress() . "Webroot/lib/jquery/jquery-3.4.0.min.js"; ?>"></script>
+    <script src="<?php echo getBaseAddress() . "Webroot/lib/popper/popper.min.js"; ?>"></script>
+    <script src="<?php echo getBaseAddress() . "Webroot/lib/tooltip/tooltip.min.js"; ?>"></script>
     <script src="<?php echo getBaseAddress() . "Webroot/lib/bootstrap/js/bootstrap.min.js"; ?>"></script>
     <script src="<?php echo getBaseAddress() . "Webroot/lib/fontawesome/js/all.min.js"; ?>"></script>
     <script src="<?php echo getBaseAddress() . "Webroot/lib/moment/moment-with-locales.min.js"; ?>"></script>
     <script src="<?php echo getBaseAddress() . "Webroot/lib/jQuery-Mask-Plugin/dist/jquery.mask.min.js"; ?>"></script>
     <script src="<?php echo getBaseAddress() . "Webroot/lib/daterangepicker/daterangepicker.js"; ?>"></script>
     <script src="<?php echo getBaseAddress() . "Webroot/lib/alertifyjs/alertify.min.js"; ?>"></script>
-    <script src="<?php echo getBaseAddress() . "Webroot/lib/popper/popper.min.js"; ?>"></script>
-    <script src="<?php echo getBaseAddress() . "Webroot/lib/tooltip/tooltip.min.js"; ?>"></script>
     <script src="<?php echo getBaseAddress() . "Webroot/lib/validate/validate.min.js"; ?>"></script>
+    <script src="<?php echo getBaseAddress() . "Webroot/lib/Semantic-UI/dist/semantic.min.js"; ?>"></script>
     <script src="<?php echo getBaseAddress() . "Webroot/js/utilidades/constantes.js"; ?>"></script>
     <script src="<?php echo getBaseAddress() . "Webroot/js/utilidades/utilidades.js"; ?>"></script>
-    <script src="<?php echo getBaseAddress() . "Webroot/js/home/Home.js" ?>"></script>
     <script src="<?php echo getBaseAddress() . "Webroot/lib/ImagePreview/bootstrap-prettyfile.js" ?>"></script>
 
     <script>
