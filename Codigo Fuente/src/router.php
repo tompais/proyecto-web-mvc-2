@@ -15,11 +15,11 @@ class Router
             $request->action = "inicio";
             $request->params = [];
         }
-        else if(self::isPublicController($explode_url[0]) && !self::isCloseSessionAction($explode_url[1]) && isset($_SESSION["session"]))
+        else if(self::isSecurityController($explode_url[0]) && !self::isCloseSessionAction($explode_url[1]) && isset($_SESSION["session"]))
         {
             header("Location: " . getBaseAddress());
         }
-        else if (!self::isPublicController($explode_url[0]) && !isset($_SESSION["session"]))
+        else if (self::isProductController($explode_url[0]) && !isset($_SESSION["session"]))
         {
             header("Location: " . getBaseAddress() . "Seguridad/login");
         }
@@ -33,7 +33,12 @@ class Router
         }
     }
 
-    private static function isPublicController($controller)
+    private static function isProductController($controller)
+    {
+        return !strcasecmp($controller, 'Producto');
+    }
+
+    private static function isSecurityController($controller)
     {
         return !strcasecmp($controller, 'Seguridad');
     }

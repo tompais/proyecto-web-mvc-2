@@ -226,4 +226,3 @@
 <script src="<?php echo getBaseAddress() . "Webroot/lib/easing/easing.js"; ?>"></script>
 <script src="<?php echo getBaseAddress() . "Webroot/lib/Isotope/isotope.pkgd.min.js"; ?>"></script>
 <script src="<?php echo getBaseAddress() . "Webroot/lib/OwlCarousel2-2.2.1/owl.carousel.js"; ?>"></script>
-<script src="<?php echo getBaseAddress() . "Webroot/js/home/Home.js" ?>"></script>

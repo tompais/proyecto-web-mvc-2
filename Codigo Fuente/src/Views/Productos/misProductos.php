@@ -23,7 +23,7 @@
             {
 
                 $editar = getBaseAddress() . "Productos/editarProducto";
-                $publicacion = getBaseAddress() . "Publicacion/publicacion";
+                $pathAccionPublicacion = getBaseAddress() . "Productos/publicacion/";
 
                 foreach($productos as $producto)
                 {
@@ -39,7 +39,7 @@
                             </div>
                             <h3 class='card__tagline mt-2'>". $producto->getNombre() ."</h3>
                             <ul class='card__icons mt-2'>
-                                <li><a href='#' onclick='irPublicacion($id)'><i class='fas fa-eye'></i></a></li>
+                                <li><a href='" . $pathAccionPublicacion . $id . "'><i class='fas fa-eye'></i></a></li>
                                 <li><a href='#' onclick='irEditar($id)'><i class='fas fa-edit'></i></a></li>
                                 <li><a href='#' onclick='insertarIdProducto($id)' data-toggle='modal' data-target='#eliminarModal'><i class='fas fa-times'></i></a></li>
                             </ul>
@@ -52,10 +52,6 @@
 
                 echo "<form method='post', action='$editar' id='editar'>
                     <input type='hidden' id='idProducto' name='producto' />
-                    </form>";
-
-                echo "<form method='post', action='$publicacion' id='publicacion'>
-                    <input type='hidden' id='idProducto2' name='producto' />
                     </form>";
 
 

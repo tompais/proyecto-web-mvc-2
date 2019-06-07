@@ -192,6 +192,33 @@ class Producto extends Model
         $this->setEstadoId($producto["EstadoId"]);
     }
 
+    public function buscarMejoresProductosPorNombre($nombre)
+    {
+        $rows = $this->pageRows(0, 5, "Nombre like '%$nombre%' ORDER BY Precio AND EstadoId");
+
+        $productos = [];
+
+        foreach ($rows as $row) {
+            $producto = new Producto();
+            $estado = new Estado();
+
+
+            $producto->db->disconnect();
+
+            if(!$estado->getById($row["EstadoId"]))
+                throw new EstadoInvalidoException("No se ha encontrado el estado con el Id " . $row["EstadoId"], CodigoError::EstadoInvalido);
+
+            $estado->db->disconnect();
+
+            $producto->setNombre($row["Nombre"]);
+            $producto->setPrecio($row["Precio"]);
+            $producto->setEstado($estado);
+
+            $productos[] = $producto;
+        }
+
+        return $productos;
+    }
     public function actualizarProducto()
     {
         $array = [
