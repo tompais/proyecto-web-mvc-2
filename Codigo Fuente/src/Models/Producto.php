@@ -189,17 +189,18 @@ class Producto extends Model
         $this->setUsuarioId($producto["UsuarioId"]);
         $this->setDescripcion($producto["Descripcion"]);
         $this->setFechaAlta($producto["FechaAlta"]);
+        $this->setEstadoId($producto["EstadoId"]);
     }
 
-    public function actualizarProducto($publicacion)
+    public function actualizarProducto()
     {
         $array = [
-            "Id" => $publicacion["idProducto"],
-            "Nombre" => $publicacion["nombreProducto"],
-            "Precio" => $publicacion["precioProducto"],
-            "CategoriaId" => $publicacion["categoriaProducto"],
-            "Descripcion" => $publicacion["descripcionProducto"],
-            "EstadoId" => $publicacion["estadoProducto"]
+            "Id" => $this->getId(),
+            "Nombre" => $this->getNombre(),
+            "Precio" => $this->getPrecio(),
+            "CategoriaId" => $this->getCategoriaId(),
+            "Descripcion" => $this->getDescripcion(),
+            "EstadoId" => $this->getEstadoId()
         ];
 
         return $this->update($array);

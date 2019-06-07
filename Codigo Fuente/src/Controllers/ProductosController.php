@@ -117,9 +117,24 @@ class ProductosController extends Controller
 
     function editar($publicacion)
     {
+
+        $sesion = unserialize($_SESSION["session"]);
+
         $producto = new Producto();
+
+        $producto->setId($publicacion["idProducto"]);
+        $producto->setNombre($publicacion["nombreProducto"]);
+        $producto->setPrecio($publicacion["precioProducto"]);
+        $producto->setEstadoId($publicacion["estadoProducto"]);
+        $producto->setCategoriaId($publicacion["categoriaProducto"]);
+        $producto->setDescripcion($publicacion["descripcionProducto"]);
+        $producto->setUsuarioId($sesion->getId());
         
-        $producto->actualizarProducto($publicacion);
+        if(!$producto->validarProducto())
+            throw new ProductoInvalidoException("Los datos del producto no son válidos", CodigoError::ProductoInvalido);
+
+        if(!$producto->actualizarProducto())
+            throw new SQLUpdateException("Error al realizar la actualizacion del producto", CodigoError::ErrorUpdateSQL);
 
         if (isset($_FILES["imagenProducto"]["name"])) {
             
