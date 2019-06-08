@@ -37,8 +37,10 @@ class ProductosController extends Controller
         $d['title'] = Constantes::AGREGARPRODUCTOTITLE;
 
         $categoria = new Categoria();
+        $estado = new Estado();
 
         $d["categorias"] = $categoria->traerListaCategorias();
+        $d["estados"] = $estado->getAllEstados();
 
         $this->set($d);
         $this->render(Constantes::ALTAPRODUCTO);
@@ -51,6 +53,7 @@ class ProductosController extends Controller
         $producto->setFechaAlta(date("Y-m-d H:i:s"));
         $producto->setNombre($publicacion["nombreProducto"]);
         $producto->setPrecio($publicacion["precioProducto"]);
+        $producto->setEstadoId($publicacion["estadoProducto"]);
         $producto->setCategoriaId($publicacion["categoriaProducto"]);
 
         $producto->setUsuarioId(unserialize($_SESSION["session"])->getId());
@@ -78,7 +81,7 @@ class ProductosController extends Controller
                 $nombreImg = $_FILES["imagenProducto"]["name"][$id];
 
                 $temp = explode(".", $nombreImg);
-                $newNombre = microtime(true) . '.' . end($temp);
+                $newNombre = TokenHelper::getToken() . '.' . end($temp);
 
                 $ruta .= basename($newNombre);
                 $tmp = $_FILES["imagenProducto"]["tmp_name"][$id];
@@ -96,26 +99,43 @@ class ProductosController extends Controller
 
     function editarProducto($publicacion)
     {
-        $producto = new Producto();
-        $producto->traerProducto($publicacion["producto"]);
+        $d['title'] = Constantes::EDITARPRODUCTOTITLE;
 
         $categoria = new Categoria();
+        $estado = new Estado();
+        $producto = new Producto();
+
+        $producto->traerProducto($publicacion["producto"]);
 
         $d["categorias"] = $categoria->traerListaCategorias();
+        $d["estados"] = $estado->getAllEstados();
         $d["producto"] = $producto;
-        $d['title'] = Constantes::EDITARPRODUCTOTITLE;
-        
+
         $this->set($d);
         $this->render(Constantes::EDITARPRODUCTO);
     }
 
     function editar($publicacion)
     {
+
+        $sesion = unserialize($_SESSION["session"]);
+
         $producto = new Producto();
+
+        $producto->setId($publicacion["idProducto"]);
+        $producto->setNombre($publicacion["nombreProducto"]);
+        $producto->setPrecio($publicacion["precioProducto"]);
+        $producto->setEstadoId($publicacion["estadoProducto"]);
+        $producto->setCategoriaId($publicacion["categoriaProducto"]);
+        $producto->setDescripcion($publicacion["descripcionProducto"]);
+        $producto->setUsuarioId($sesion->getId());
         
-        $producto->actualizarProducto($publicacion);
-        
-        
+        if(!$producto->validarProducto())
+            throw new ProductoInvalidoException("Los datos del producto no son válidos", CodigoError::ProductoInvalido);
+
+        if(!$producto->actualizarProducto())
+            throw new SQLUpdateException("Error al realizar la actualizacion del producto", CodigoError::ErrorUpdateSQL);
+
         if (isset($_FILES["imagenProducto"]["name"])) {
             
             $imagen = new Imagen();
@@ -178,5 +198,50 @@ class ProductosController extends Controller
         $producto->eliminarProducto($publicacion["idProducto"]);
 
         header("location: " . getBaseAddress() . "Productos/misProductos");
+    }
+
+    function publicacion($publicacion)
+    {
+        $d["title"] = Constantes::PUBLICACIONTITLE;
+
+        $producto = new Producto();
+        $categoria = new Categoria();
+        $usuario = new Usuario();
+        $direccion = new Direccion(); //TODO utilizar para agregar en los detalles de la publicación
+        $sesion = unserialize($_SESSION["session"]);
+
+
+        $producto->traerProducto($publicacion[0]);
+        $categoria->traerCategoria($producto->getCategoriaId());
+        $usuario->traerUsuario($producto->getUsuarioId());
+
+        $productos = "";
+
+        if ($productos = $producto->traerListaProductos($sesion->getId())) {
+            $imagen = new Imagen();
+
+            $imagenes = [];
+
+            foreach ($productos as $producto) {
+                $imgProduc = $imagen->traerListaImagenes($producto->getId());
+
+                foreach ($imgProduc as $imgP)
+                    array_push($imagenes, $imgP);
+            }
+
+            $d["productos"] = $productos;
+            $d["imagenes"] = $imagenes;
+        }
+
+        $d["productos"] = $productos;
+        $d["imagenes"] = $imagenes;
+
+        $d["producto"] = $producto;
+        $d["categoria"] = $categoria;
+        $d["usuario"] = $usuario;
+
+
+        $this->set($d);
+        $this->render(Constantes::PUBLICACIONVIEW);
     }
 }

@@ -9,9 +9,37 @@ class Producto extends Model
     private $categoria;
     private $usuarioId;
     private $usuario;
+    private $estado;
+    private $estadoId;
     private $descripcion;
     private $fechaBaja;
     private $fechaAlta;
+
+    /**
+     * @return mixed
+     */
+    public function getEstado()
+    {
+        return $this->estado;
+    }
+
+    /**
+     * @param mixed $estado
+     */
+    public function setEstado($estado)
+    {
+        $this->estado = $estado;
+    }
+
+    public function getEstadoId()
+    {
+        return $this->estadoId;
+    }
+
+    public function setEstadoId($estadoId)
+    {
+        $this->estadoId = $estadoId;
+    }
 
     public function getId()
     {
@@ -121,7 +149,8 @@ class Producto extends Model
             "CategoriaId" => $this->getCategoriaId(),
             "UsuarioId" => $this->getUsuarioId(),
             "Descripcion" => $this->getDescripcion(),
-            "FechaAlta" => $this->getFechaAlta()
+            "FechaAlta" => $this->getFechaAlta(),
+            "EstadoId" => $this->getEstadoId()
         ];
         $this->setId($this->insert($array));
         return $this->getId();
@@ -160,16 +189,46 @@ class Producto extends Model
         $this->setUsuarioId($producto["UsuarioId"]);
         $this->setDescripcion($producto["Descripcion"]);
         $this->setFechaAlta($producto["FechaAlta"]);
+        $this->setEstadoId($producto["EstadoId"]);
     }
 
-    public function actualizarProducto($publicacion)
+    public function buscarMejoresProductosPorNombre($nombre)
+    {
+        $rows = $this->pageRows(0, 5, "Nombre like '%$nombre%' ORDER BY Precio AND EstadoId");
+
+        $productos = [];
+
+        foreach ($rows as $row) {
+            $producto = new Producto();
+            $estado = new Estado();
+
+
+            $producto->db->disconnect();
+
+            if(!$estado->getById($row["EstadoId"]))
+                throw new EstadoInvalidoException("No se ha encontrado el estado con el Id " . $row["EstadoId"], CodigoError::EstadoInvalido);
+
+            $estado->db->disconnect();
+
+            $producto->setId($row["Id"]);
+            $producto->setNombre($row["Nombre"]);
+            $producto->setPrecio($row["Precio"]);
+            $producto->setEstado($estado);
+
+            $productos[] = $producto;
+        }
+
+        return $productos;
+    }
+    public function actualizarProducto()
     {
         $array = [
-            "Id" => $publicacion["idProducto"],
-            "Nombre" => $publicacion["nombreProducto"],
-            "Precio" => $publicacion["precioProducto"],
-            "CategoriaId" => $publicacion["categoriaProducto"],
-            "Descripcion" => $publicacion["descripcionProducto"]
+            "Id" => $this->getId(),
+            "Nombre" => $this->getNombre(),
+            "Precio" => $this->getPrecio(),
+            "CategoriaId" => $this->getCategoriaId(),
+            "Descripcion" => $this->getDescripcion(),
+            "EstadoId" => $this->getEstadoId()
         ];
 
         return $this->update($array);
@@ -220,9 +279,21 @@ class Producto extends Model
             && $cantLetras >= 0;
     }
 
+    public function validarEstado()
+    {
+        return FuncionesUtiles::esMayorACero($this->getEstadoId()) &&
+            ($this->getEstadoId() == Estados::Nuevo || $this->getEstadoId() == Estados::Usado || $this->getEstadoId() == Estados::Reformado);
+    }
+
+    public function validarUsuario()
+    {
+        $this->setUsuario(new Usuario());
+        return $this->getUsuario()->getUsuarioById($this->getUsuarioId());
+    }
+
     public function validarProducto()
     {
-        return $this->validarNombre() && $this->validarDescripcion() && $this->validarPrecio() && $this->validarCategoria();
+        return $this->validarNombre() && $this->validarDescripcion() && $this->validarPrecio() && $this->validarCategoria() && $this->validarEstado() && $this->validarUsuario();
     }
 }
 

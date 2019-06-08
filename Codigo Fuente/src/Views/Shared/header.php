@@ -1,6 +1,6 @@
-        <!-- Header -->
+<!-- Header -->
 
-<header class="header trans_300" id="layoutHeader">
+<header class="cebecera trans_300" id="layoutHeader">
 
     <!-- Top Navigation -->
 
@@ -21,24 +21,23 @@
 
                                 $sessionManejada = isset($_SESSION["session"]) ? unserialize($_SESSION["session"]) : null;
 
-                                if (!$sessionManejada){
+                                if (!$sessionManejada) {
                                     echo "<a href='#'>
                                             Cuenta <i class='ml-1 fa fa-angle-down'></i>
                                         </a>
                                         <ul class='account_selection'>
-                                            <li><a href='" . getBaseAddress().'Seguridad/login' . "'><i class='fas fa-sign-in-alt mr-1'></i>Iniciar Sesion</a></li>
-                                            <li><a href='" . getBaseAddress().'Seguridad/registrar' . "'><i class='fas fa-edit mr-1'></i></i>Registrarse</a></li>
+                                            <li><a href='" . getBaseAddress() . 'Seguridad/login' . "'><i class='fas fa-sign-in-alt mr-1'></i>Iniciar Sesion</a></li>
+                                            <li><a href='" . getBaseAddress() . 'Seguridad/registrar' . "'><i class='fas fa-edit mr-1'></i></i>Registrarse</a></li>
                                         </ul>";
-                                }
-                                else{
-                                    echo"
+                                } else {
+                                    echo "
                                         <a href='#'>
-                                           <i class='fas fa-user mr-1'></i> ". $sessionManejada->getUserName() ."<i class='ml-1 fa fa-angle-down'></i>
+                                           <i class='fas fa-user mr-1'></i> " . $sessionManejada->getUserName() . "<i class='ml-1 fa fa-angle-down'></i>
                                         </a>
                                         <ul class='account_selection'>
                                             <li><a href='#'><i class='far fa-id-badge mr-1'></i></i>Mi Perfil</a></li>
                                             <li><a href='#'><i class='fas fa-cash-register mr-1'></i></i></i>Compras</a></li>
-                                            <li><a href='". getBaseAddress() . 'Productos/misProductos' . "'><i class='fas fa-piggy-bank mr-1'></i></i></i>Ventas</a></li>
+                                            <li><a href='" . getBaseAddress() . 'Productos/misProductos' . "'><i class='fas fa-piggy-bank mr-1'></i></i></i>Ventas</a></li>
                                             <li><a href='#exampleModal' data-toggle='modal' data-target='#exampleModal'><i class='fas fa-sign-in-alt mr-1'></i>Cerrar Sesion</a></li>
                                         </ul>
                                     ";
@@ -60,23 +59,20 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-right">
-                    <div class="logo_container" >
-                        <img class="img-fluid" id="logo" src="<?php echo getBaseAddress() . "Webroot/img/home/logo.png" ?>">
-                        <img class="img-fluid" id="logoResponsive" src="<?php echo getBaseAddress() . "Webroot/img/home/logoResponsive3.png" ?>">
+                    <div class="logo_container">
+                        <a href="<?php echo getBaseAddress() ?>"><img class="img-fluid" id="logo"
+                                                                      src="<?php echo getBaseAddress() . "Webroot/img/home/logo.png" ?>"></a>
+                        <img class="img-fluid" id="logoResponsive"
+                             src="<?php echo getBaseAddress() . "Webroot/img/home/logoResponsive3.png" ?>">
                     </div>
                     <nav class="navbar">
 
-                        <form class='navbar-form mt-1'>
-                            <div class='input-group'>
-                                <input class='form-control' type='text' name='search' id="search" placeholder='Buscar' />
-
-                                <span class="input-group-btn">
-                                          <button type='submit' class='btn btn-default'>
-                                            <i class="fas fa-search"></i>
-                                          </button>
-                                    </span>
+                        <div class="ui fluid search">
+                            <div class="ui left icon input">
+                                <input class="prompt" type="text" placeholder="Buscar...">
+                                <i class="search icon"></i>
                             </div>
-                        </form>
+                        </div>
 
                         <ul class="navbar_menu">
                             <li><a href="<?php echo getBaseAddress() ?>">Inicio</a></li>
@@ -110,24 +106,23 @@
             <li class="menu_item has-children">
                 <?php
 
-                if (!$sessionManejada){
+                if (!$sessionManejada) {
                     echo "<a href='#'>
                              Mi Cuenta <i class='ml-1 fa fa-angle-down'></i>
                           </a>
                           <ul class='menu_selection'>
-                              <li><a href='" . getBaseAddress().'Seguridad/login' . "'><i class='fas fa-sign-in-alt mr-1'></i>Iniciar Sesion</a></li>
-                              <li><a href='" . getBaseAddress().'Seguridad/registrar' . "'><i class='fas fa-registered mr-1'></i>Registrarse</a></li>
+                              <li><a href='" . getBaseAddress() . 'Seguridad/login' . "'><i class='fas fa-sign-in-alt mr-1'></i>Iniciar Sesion</a></li>
+                              <li><a href='" . getBaseAddress() . 'Seguridad/registrar' . "'><i class='fas fa-registered mr-1'></i>Registrarse</a></li>
                           </ul>";
-                }
-                else{
-                    echo"
+                } else {
+                    echo "
                          <a href='#'>
-                            <i class='fas fa-user mr-1'></i> ". $sessionManejada->getUserName() . "<i class='ml-1 fa fa-angle-down'></i>
+                            <i class='fas fa-user mr-1'></i> " . $sessionManejada->getUserName() . "<i class='ml-1 fa fa-angle-down'></i>
                          </a>
                          <ul class='menu_selection'>
                             <li><a href='#'><i class='far fa-id-badge mr-1'></i></i>Mi Perfil</a></li>
                             <li><a href='#'><i class='fas fa-cash-register mr-1'></i></i></i>Compras</a></li>
-                            <li><a href='". getBaseAddress() . 'Productos/misProductos' . "'><i class='fas fa-piggy-bank mr-1'></i></i></i>Ventas</a></li>
+                            <li><a href='" . getBaseAddress() . 'Productos/misProductos' . "'><i class='fas fa-piggy-bank mr-1'></i></i></i>Ventas</a></li>
                             <li><a href='#exampleModal' data-toggle='modal' data-target='#exampleModal'><i class='fas fa-sign-in-alt mr-1'></i>Cerrar Sesion</a></li>
                          </ul>";
                 }
