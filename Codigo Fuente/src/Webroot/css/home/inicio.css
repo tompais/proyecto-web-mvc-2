@@ -17,7 +17,7 @@
 }
 body
 {
-	font-family: 'Poppins', sans-serif;
+	font-family: 'Poppins', sans-serif !important;
 	font-size: 14px;
 	line-height: 23px;
 	font-weight: 400;
@@ -39,7 +39,7 @@ ul
 }
 p
 {
-	font-family: 'Poppins', sans-serif;
+	font-family: 'Poppins', sans-serif !important;
 	font-size: 14px;
 	line-height: 1.7;
 	font-weight: 500;

@@ -36,7 +36,9 @@ class BuscarController extends Controller
 
     function productos($param)
     {
+        $d["title"] = Constantes::BUSQUEDATITLE;
 
+        $this->set($d);
         $this->render(Constantes::BUSQUEDAVIEW);
     }
 }
