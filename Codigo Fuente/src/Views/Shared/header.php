@@ -67,12 +67,14 @@
                     </div>
                     <nav class="navbar">
 
-                        <div class="ui fluid search">
-                            <div class="ui left icon input">
-                                <input class="prompt" type="text" placeholder="Buscar..." style="width: 226px;">
-                                <i class="search icon"></i>
+                        <!-- <form method="post" action='<?php echo getBaseAddress() . "Buscar/productos" ?>' > -->
+                            <div class="ui fluid search">
+                                <div class="ui left icon input">
+                                        <input class="prompt" type="text" placeholder="Buscar...">
+                                        <!-- <button type="submit"> -->  <i class="search icon"></i> <!-- </button> -->
+                                </div>
                             </div>
-                        </div>
+                        </form>
 
                         <ul class="navbar_menu">
                             <li><a href="<?php echo getBaseAddress() ?>">Inicio</a></li>

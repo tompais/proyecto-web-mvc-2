@@ -31,6 +31,7 @@ abstract class Constantes
     const AGREGARPRODUCTOTITLE = "Agregar Producto";
     const EDITARPRODUCTOTITLE = "Editar Producto";
     const PUBLICACIONTITLE = "Publicacion";
+    const BUSQUEDATITLE = "Producto Buscado";
 
     const OLVIDEPASSWORDTITLE = "Olvidé Mi Contraseña";
 
