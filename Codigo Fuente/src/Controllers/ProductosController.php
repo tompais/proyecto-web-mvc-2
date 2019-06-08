@@ -208,34 +208,16 @@ class ProductosController extends Controller
         $categoria = new Categoria();
         $usuario = new Usuario();
         $direccion = new Direccion(); //TODO utilizar para agregar en los detalles de la publicación
-        $sesion = unserialize($_SESSION["session"]);
-
 
         $producto->traerProducto($publicacion[0]);
         $categoria->traerCategoria($producto->getCategoriaId());
         $usuario->traerUsuario($producto->getUsuarioId());
 
-        $productos = "";
+        $imagen = new Imagen();
 
-        if ($productos = $producto->traerListaProductos($sesion->getId())) {
-            $imagen = new Imagen();
+        $imagenes = $imagen->traerListaImagenes($producto->getId());
 
-            $imagenes = [];
-
-            foreach ($productos as $producto) {
-                $imgProduc = $imagen->traerListaImagenes($producto->getId());
-
-                foreach ($imgProduc as $imgP)
-                    array_push($imagenes, $imgP);
-            }
-
-            $d["productos"] = $productos;
-            $d["imagenes"] = $imagenes;
-        }
-
-        $d["productos"] = $productos;
         $d["imagenes"] = $imagenes;
-
         $d["producto"] = $producto;
         $d["categoria"] = $categoria;
         $d["usuario"] = $usuario;

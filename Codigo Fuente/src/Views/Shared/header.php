@@ -69,7 +69,7 @@
 
                         <div class="ui fluid search">
                             <div class="ui left icon input">
-                                <input class="prompt" type="text" placeholder="Buscar...">
+                                <input class="prompt" type="text" placeholder="Buscar..." style="width: 226px;">
                                 <i class="search icon"></i>
                             </div>
                         </div>

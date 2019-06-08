@@ -16,11 +16,7 @@
 
     <div class="row">
         <?php
-        if(isset($productos))
-        {
 
-            foreach ($productos as $producto)
-            {
                 $imagen = $imagenes[0]->getNombre();
                 $rutaImgPrincipal = getBaseAddress() . 'Webroot/img/productos/' . $imagen;
 
@@ -50,8 +46,7 @@
                                 </div>
                             </div>
                         </div>";
-            }
-        }
+
         ?>
         <div class="col-lg-5">
             <div class="product_details">
