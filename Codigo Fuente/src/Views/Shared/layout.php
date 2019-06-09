@@ -43,7 +43,6 @@
     <script src="<?php echo getBaseAddress() . "Webroot/lib/Semantic-UI/dist/semantic.min.js"; ?>"></script>
     <script src="<?php echo getBaseAddress() . "Webroot/js/utilidades/constantes.js"; ?>"></script>
     <script src="<?php echo getBaseAddress() . "Webroot/js/utilidades/utilidades.js"; ?>"></script>
-    <script src="<?php echo getBaseAddress() . "Webroot/lib/ImagePreview/bootstrap-prettyfile.js" ?>"></script>
 
     <script>
         const pathHome = "<?php echo getBaseAddress(); ?>";
