@@ -6170,7 +6170,7 @@ CREATE TABLE Producto (
 
 CREATE TABLE Imagen (
 	Id integer auto_increment not null unique,
-    Nombre varchar(30) not null unique,
+    Nombre varchar(100) not null unique,
     ProductoId int not null, 
     constraint PK_Imagen primary key (Id),
     constraint FK_Imagen_Producto foreign key (ProductoId) references Producto (Id) 
@@ -6234,4 +6234,4 @@ VALUES ("Comestibles"),
         ("Tecnología");
         
 INSERT INTO Estado (Nombre)
-VALUES ("Nuevo"), ("Usado"), ("Reformado");
+VALUES ("Nuevo"), ("Usado"), ("Refabricado");

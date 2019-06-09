@@ -61,4 +61,16 @@ class Estado extends Model
 
         return $estados;
     }
+
+    public function getById($estadoId)
+    {
+        $row = $this->selectByPk((int) $estadoId);
+
+        if($row) {
+            $this->setId($row["Id"]);
+            $this->setNombre($row["Nombre"]);
+        }
+
+        return $row;
+    }
 }

@@ -81,7 +81,7 @@ class ProductosController extends Controller
                 $nombreImg = $_FILES["imagenProducto"]["name"][$id];
 
                 $temp = explode(".", $nombreImg);
-                $newNombre = microtime(true) . '.' . end($temp);
+                $newNombre = TokenHelper::getToken() . '.' . end($temp);
 
                 $ruta .= basename($newNombre);
                 $tmp = $_FILES["imagenProducto"]["tmp_name"][$id];
@@ -198,5 +198,32 @@ class ProductosController extends Controller
         $producto->eliminarProducto($publicacion["idProducto"]);
 
         header("location: " . getBaseAddress() . "Productos/misProductos");
+    }
+
+    function publicacion($publicacion)
+    {
+        $d["title"] = Constantes::PUBLICACIONTITLE;
+
+        $producto = new Producto();
+        $categoria = new Categoria();
+        $usuario = new Usuario();
+        $direccion = new Direccion(); //TODO utilizar para agregar en los detalles de la publicación
+
+        $producto->traerProducto($publicacion[0]);
+        $categoria->traerCategoria($producto->getCategoriaId());
+        $usuario->traerUsuario($producto->getUsuarioId());
+
+        $imagen = new Imagen();
+
+        $imagenes = $imagen->traerListaImagenes($producto->getId());
+
+        $d["imagenes"] = $imagenes;
+        $d["producto"] = $producto;
+        $d["categoria"] = $categoria;
+        $d["usuario"] = $usuario;
+
+
+        $this->set($d);
+        $this->render(Constantes::PUBLICACIONVIEW);
     }
 }
