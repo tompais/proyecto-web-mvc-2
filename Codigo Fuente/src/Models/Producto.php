@@ -162,8 +162,7 @@ class Producto extends Model
 
         $rows = $this->pageRows(0, PHP_INT_MAX, "UsuarioId = $pk AND FechaBaja IS NULL");
 
-        foreach($rows as $row)
-        {
+        foreach ($rows as $row) {
             $producto = new Producto();
             $producto->setId($row["Id"]);
             $producto->setNombre($row["Nombre"]);
@@ -194,7 +193,7 @@ class Producto extends Model
 
     public function buscarMejoresProductosPorNombre($nombre)
     {
-        $rows = $this->pageRows(0, 5, "Nombre like '%$nombre%' ORDER BY Precio AND EstadoId");
+        $rows = $this->pageRows(0, 5, "Nombre like '%$nombre%' ORDER BY Precio AND EstadoId AND FechaBaja IS NULL");
 
         $productos = [];
 
@@ -205,7 +204,7 @@ class Producto extends Model
 
             $producto->db->disconnect();
 
-            if(!$estado->getById($row["EstadoId"]))
+            if (!$estado->getById($row["EstadoId"]))
                 throw new EstadoInvalidoException("No se ha encontrado el estado con el Id " . $row["EstadoId"], CodigoError::EstadoInvalido);
 
             $estado->db->disconnect();
@@ -220,6 +219,7 @@ class Producto extends Model
 
         return $productos;
     }
+
     public function actualizarProducto()
     {
         $array = [
@@ -253,7 +253,7 @@ class Producto extends Model
     public function validarPrecio()
     {
         return (FuncionesUtiles::esEntero($this->precio) || FuncionesUtiles::esCadenaNumerica($this->precio))
-                && FuncionesUtiles::esMayorACero($this->precio);
+            && FuncionesUtiles::esMayorACero($this->precio);
     }
 
     public function validarCategoria()
@@ -263,8 +263,7 @@ class Producto extends Model
         $validacion = (FuncionesUtiles::esEntero($this->categoriaId) || FuncionesUtiles::esCadenaNumerica($this->categoriaId))
             && FuncionesUtiles::esMayorACero($this->categoriaId);
 
-        if($validacion)
-        {
+        if ($validacion) {
             $this->categoria->setId($this->getCategoriaId());
 
             $validacion = $this->categoria->existeCategoriaDB();
@@ -294,6 +293,25 @@ class Producto extends Model
     public function validarProducto()
     {
         return $this->validarNombre() && $this->validarDescripcion() && $this->validarPrecio() && $this->validarCategoria() && $this->validarEstado() && $this->validarUsuario();
+    }
+
+    public function listaProdutosPorNombre($nombre)
+    {
+        $productos = array();
+        $condicion = "Nombre like '%$nombre%' AND FechaBaja IS NULL";
+        $rows = $this->pageRows(0, 20, $condicion);
+        foreach ($rows as $row) {
+            $producto = new Producto();
+            $producto->db->disconnect();
+            $producto->setId($row["Id"]);
+            $producto->setNombre($row["Nombre"]);
+            $producto->setPrecio($row["Precio"]);
+            $producto->setCategoriaId($row["CategoriaId"]);
+            $producto->setFechaAlta($row["FechaAlta"]);
+            $productos[] = $producto;
+        }
+
+        return $productos;
     }
 }
 
