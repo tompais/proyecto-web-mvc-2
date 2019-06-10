@@ -1,5 +1,6 @@
 var espaciador = $("#espaciador");
 var layoutHeader = $("#layoutHeader");
+var inputSearch = $("#inputSearch");
 
 espaciador.height(layoutHeader.height());
 $(window).resize(function () {
@@ -369,36 +370,30 @@ jQuery(document).ready(function ($) {
 });
 
 $('.ui.search').search({
-    type : 'category',
-    minCharacters : 3,
-    searchFields   : [
+    type: 'category',
+    minCharacters: 3,
+    searchFields: [
         'title'
     ],
-    apiSettings   : {
-        onResponse: function(productos) {
+    apiSettings: {
+        onResponse: function (productos) {
             const maxResults = 5;
             var response = {
-                    results : [
-                        {
-                            name: "Nuevo",
-                            results: []
-                        },
-                        {
-                            name: "Usado",
-                            results: []
-                        },
-                        {
-                            name: "Refabricado",
-                            results: []
-                        }
-                    ]
-                };
-            $.each(productos, function(index, producto) {
-                if(index >= maxResults) {
+                results: {}
+            };
+            $.each(productos, function (index, producto) {
+                var estado = producto.estado.nombre || 'Desconocido';
+                if (index >= maxResults) {
                     return false;
                 }
-                response.results[producto.estado.id - 1].results.push({
-                   title : producto.nombre,
+                if (response.results[estado] === undefined) {
+                    response.results[estado] = {
+                        name: estado,
+                        results: []
+                    };
+                }
+                response.results[estado].results.push({
+                    title: producto.nombre,
                     description: "$" + producto.precio,
                     url: pathHome + "Productos/publicacion/" + producto.id
                 });
@@ -407,14 +402,20 @@ $('.ui.search').search({
         },
         url: pathHome + "Buscar/buscarProductoPorNombre/{query}"
     },
-    fullTextSearch: false,
-    error : {
-        source      : 'Cannot search. No source used, and Semantic API module was not included',
-        noResults   : 'No se han encontrado resultados asociados a su búsqueda',
-        logging     : 'Error in debug logging, exiting.',
-        noTemplate  : 'Nombre de template inválido.',
-        serverError : 'Hubo un error al enviar la query al server.',
-        maxResults  : 'Results must be an array to use maxResults setting',
-        method      : 'El método que llamó no está definido.'
+    fullTextSearch: true,
+    error: {
+        source: 'Cannot search. No source used, and Semantic API module was not included',
+        noResults: 'No se han encontrado resultados asociados a su búsqueda',
+        logging: 'Error in debug logging, exiting.',
+        noTemplate: 'Nombre de template inválido.',
+        serverError: 'Hubo un error al enviar la query al server.',
+        maxResults: 'Results must be an array to use maxResults setting',
+        method: 'El método que llamó no está definido.'
+    }
+});
+
+$('.ui.search').keyup(function (e) {
+    if(e.keyCode === 13) {
+        window.location.href = pathHome + "Buscar/productos/" + inputSearch.val();
     }
 });

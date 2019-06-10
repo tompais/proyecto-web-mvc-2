@@ -88,6 +88,19 @@ class Imagen extends Model
     {
         return $this->delete($this->getId());
     }
+
+    public function traerImagenPrincipal($productoId)
+    {
+        $row = $this->pageRows(0, 1, "ProductoId = $productoId");
+
+        if($row) {
+            $this->setId($row[0]["Id"]);
+            $this->setNombre($row[0]["Nombre"]);
+            $this->setProductoId($row[0]["ProductoId"]);
+        }
+
+        return $row;
+    }
 }
 
 ?>

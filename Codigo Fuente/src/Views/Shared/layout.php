@@ -18,12 +18,13 @@
     <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/lib/alertifyjs/css/themes/default.min.css"; ?>">
     <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/lib/alertifyjs/css/themes/semantic.min.css"; ?>">
     <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/lib/daterangepicker/daterangepicker.css"; ?>">
-    <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/home/Inicio.css"; ?>">
-    <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/home/responsive.css"; ?>">
+    <link href="<?php echo getBaseAddress() . "Webroot/css/shared/poppins.css"; ?>" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/error/errorValidaciones.css"; ?>">
     <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/lib/Semantic-UI/dist/semantic.min.css"; ?>">
     <link rel="shortcut icon" href="<?php echo getBaseAddress() . "Webroot/img/favicon.ico"; ?>" type="image/x-icon">
     <link rel="icon" href="<?php echo getBaseAddress() . "Webroot/img/favicon.ico"; ?>" type="image/x-icon">
+    <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/home/Inicio.css"; ?>">
+    <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/home/responsive.css"; ?>">
 </head>
 
 <body>
@@ -43,7 +44,6 @@
     <script src="<?php echo getBaseAddress() . "Webroot/lib/Semantic-UI/dist/semantic.min.js"; ?>"></script>
     <script src="<?php echo getBaseAddress() . "Webroot/js/utilidades/constantes.js"; ?>"></script>
     <script src="<?php echo getBaseAddress() . "Webroot/js/utilidades/utilidades.js"; ?>"></script>
-    <script src="<?php echo getBaseAddress() . "Webroot/lib/ImagePreview/bootstrap-prettyfile.js" ?>"></script>
 
     <script>
         const pathHome = "<?php echo getBaseAddress(); ?>";
