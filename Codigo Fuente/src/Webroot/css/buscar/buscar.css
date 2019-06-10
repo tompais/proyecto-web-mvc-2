@@ -3,10 +3,6 @@
 4. Products
 *********************************/
 
-.products_iso
-{
-	width: 100%;
-}
 .section_title
 {
 	display: inline-block;
@@ -432,7 +428,6 @@
 
 .product-item
 {
-	width: 25%;
 	height: 380px;
 	cursor: pointer;
 }
@@ -465,14 +460,7 @@
 	height: 340px;
 	border-right: solid 1px #e9e9e9;
 }
-.product_image
-{
-	width: 100%;
-}
-.product_image img
-{
-	width: 100%;
-}
+
 .product_info
 {
 	text-align: center;
@@ -490,7 +478,7 @@
 }
 .product_name:hover a
 {
-	color: #b5aec4;
+	color: #007bff;
 }
 .discount .product_info .product_price
 {
@@ -499,7 +487,7 @@
 .product_price
 {
 	font-size: 16px;
-	color: #fe4c50;
+	color: #007bff;
 	font-weight: 600;
 }
 .product_price span
