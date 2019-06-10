@@ -1,5 +1,6 @@
 var espaciador = $("#espaciador");
 var layoutHeader = $("#layoutHeader");
+var inputSearch = $("#inputSearch");
 
 espaciador.height(layoutHeader.height());
 $(window).resize(function () {
@@ -401,7 +402,7 @@ $('.ui.search').search({
         },
         url: pathHome + "Buscar/buscarProductoPorNombre/{query}"
     },
-    fullTextSearch: false,
+    fullTextSearch: true,
     error: {
         source: 'Cannot search. No source used, and Semantic API module was not included',
         noResults: 'No se han encontrado resultados asociados a su búsqueda',
@@ -410,5 +411,11 @@ $('.ui.search').search({
         serverError: 'Hubo un error al enviar la query al server.',
         maxResults: 'Results must be an array to use maxResults setting',
         method: 'El método que llamó no está definido.'
+    }
+});
+
+$('.ui.search').keyup(function (e) {
+    if(e.keyCode === 13) {
+        window.location.href = pathHome + "Buscar/productos/" + inputSearch.val();
     }
 });
