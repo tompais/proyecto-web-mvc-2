@@ -38,6 +38,28 @@ class BuscarController extends Controller
     {
         $d["title"] = Constantes::BUSQUEDATITLE;
 
+        $producto = new Producto();
+        $imagen = new Imagen();
+
+        $d["productos"] = $producto->listaProdutosPorNombre($param[0]);
+
+        $imagenes = [];
+        $d["imagenes"] = [];
+
+        foreach($d["productos"] as $p) {
+            if(!$imagen->traerImagenPrincipal($p->getId()))
+                throw new ImagenPrincipalNoEncontradaException("No se ha encontrado la Imagen Principal para el producto con Id " . $p->getId(), CodigoError::ImagenPrincipalNoEncontrada);
+
+            $imagenDto = new ImagenDto();
+
+            $imagenDto->id = $imagen->getId();
+            $imagenDto->nombre = $imagen->getNombre();
+
+            $imagenes[] = $imagenDto;
+        }
+
+        $d["imagenes"] = $imagenes;
+
         $this->set($d);
         $this->render(Constantes::BUSQUEDAVIEW);
     }
