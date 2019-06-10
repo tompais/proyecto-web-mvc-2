@@ -11,37 +11,45 @@
 
                 <!-- Products -->
 
-                <div class="products_iso">
-                    <div class="row">
-                        <div class="col">
+                <div class="d-flex flex-column justify-content-center align-items-center">
 
-                            <!-- Product Grid -->
+                    <?php
 
-                            <div class="row">
+                    $cantProductos = count($productos);
 
-                                <?php
+                    if (!$cantProductos) {
+                        echo '<h4 class="text-center text-black-50">No se ha encontrado ninguna coincidencia con su búsqueda</h4>';
+                    } else {
+                        $i = 0;
+                        while ($i < $cantProductos) {
+                            echo '<div class="row my-3">';
 
-                                $i = 0;
+                            do {
+                                echo '<div class="col-sm-4">
+                                            <a href="' . getBaseAddress() . 'Productos/publicacion/' . $productos[$i]->getId() . '">
+                                                <div class="product-item w-100">
+                                                    <div class="product product_filter">
+                                                        <div class="product_image h-75 justify-content-center align-items-center">
+                                                            <img class="h-100" src="' . getBaseAddress() . 'Webroot/img/productos/' . $imagenes[$i]->nombre . '">
+                                                        </div>
+                                                        <div class="product_info">
+                                                            <h6 class="product_name"><a href="' . getBaseAddress() . 'Productos/publicacion/' . $productos[$i]->getId() . '">' . $productos[$i]->getNombre() . '</a></h6>
+                                                            <div class="product_price">$' . $productos[$i]->getPrecio() . '</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="red_button add_to_cart_button"><a href="#"><i class="fab fa-opencart mr-2"></i>Agregar al Carrito</a></div>
+                                                </div>
+                                            </a>
+                                        </div>';
 
-                                foreach ($productos as $producto) {
-                                    echo '<div class="product-item men">
-                                        <div class="product product_filter">
-                                            <div class="product_image">
-                                                <img src="' . getBaseAddress() . 'Webroot/img/productos/' . $imagenes[$i++]->nombre . '" alt="">
-                                            </div>
-                                            <div class="product_info">
-                                                <h6 class="product_name"><a href="' . getBaseAddress() . 'Productos/publicacion/' . $producto->getId() . '">' . $producto->getNombre() . '</a></h6>
-                                                <div class="product_price">$' . $producto->getPrecio() . '</div>
-                                            </div>
-                                        </div>
-                                        <div class="red_button add_to_cart_button"><a href="#"><i class="fab fa-opencart mr-2"></i>Agregar al Carrito</a></div>
-                                    </div>';
-                                }
-                                ?>
-                            </div>
+                                $i++;
+                            } while ($i < $cantProductos && $i < 3);
 
-                        </div>
-                    </div>
+                            echo '</div>';
+                        }
+                    }
+                    ?>
+
                 </div>
             </div>
         </div>

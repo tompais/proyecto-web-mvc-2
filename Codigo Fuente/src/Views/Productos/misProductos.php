@@ -15,7 +15,7 @@
         </div>
     </div>
 
-    <ul class="cards">
+    <ul class="cards justify-content-start">
         <?php
             $j = 0;
 
@@ -34,8 +34,8 @@
                     $precio = $producto->getPrecio();
     
                     echo "<li class='card mt-3'>
-                            <div class='card__inner'>
-                                <img class='img-fluid' src='$rutaImg'>
+                            <div class='card__inner h-75 w-100'>
+                                <img class='img-fluid h-100 w-100' src='$rutaImg'>
                             </div>
                             <h3 class='card__tagline mt-2'>". $producto->getNombre() ."</h3>
                             <ul class='card__icons mt-2'>
