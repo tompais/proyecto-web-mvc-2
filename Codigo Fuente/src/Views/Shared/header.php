@@ -70,7 +70,7 @@
                         <!-- <form method="post" action='<?php echo getBaseAddress() . "Buscar/productos" ?>' > -->
                             <div class="ui fluid search">
                                 <div class="ui left icon input">
-                                        <input class="prompt" type="text" placeholder="Buscar...">
+                                        <input class="prompt" type="text" id="inputSearch" placeholder="Buscar...">
                                         <!-- <button type="submit"> -->  <i class="search icon"></i> <!-- </button> -->
                                 </div>
                             </div>
