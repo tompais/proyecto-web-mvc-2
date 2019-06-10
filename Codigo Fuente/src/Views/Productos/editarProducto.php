@@ -1,6 +1,7 @@
 <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/productos/altaProducto.css" ?>">
-<link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/lib/ImageUpload/css/main.2680b2521d08e92a174b.css" ?>">
+<link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/lib/ImageUpload/css/file-upload-with-preview.min.css" ?>">
 
+<script>const pathImagenes = "<?php echo getBaseAddress() . "Webroot/img/productos/"; ?>";</script>
 
 <div class="container my-5 w-75">
     
@@ -67,15 +68,24 @@
             <div id="errorDescripcionProducto" class="error"> <i class="fas fa-exclamation-triangle mr-2"></i><span></span></div>
         </div>
 
-        <div class="custom-file-container mt-5" data-upload-id=myFirstImage>
-            <label for="inputFileImages">Imagenes<a href=javascript:void(0) class=custom-file-container__image-clear
+        <?php
+            $imgNombres = array();
+
+            foreach($imagenes as $imagen)
+                $imgNombres[] = $imagen->getNombre();
+
+            echo "<input type='hidden' value='".json_encode($imgNombres)."' id='imgPrecargadas'>";
+        ?>
+
+        <div class="custom-file-container mt-5" data-upload-id="myFirstImage">
+            <label for="inputFileImages">Imagenes<a href="javascript:void(0)" class="custom-file-container__image-clear"
                                                     title="Clear Image"><i class="fas fa-times ml-2"></i></a></label>
             <label class="custom-file-container__custom-file">
-                <input type=file class="custom-file-container__custom-file__custom-file-input" accept=".png,.jpg,.jpeg"
-                       multiple=multiple aria-label="Seleccionar" name="imagenProducto[]" id="inputImagenProducto">
-                <input type=hidden name=MAX_FILE_SIZE value=10485760> <span
+                <input type="file" class="custom-file-container__custom-file__custom-file-input" accept=".png,.jpg,.jpeg"
+                       multiple="multiple" aria-label="Seleccionar" name="imagenProducto[]" id="inputImagenProducto">
+                <input type="hidden" name="MAX_FILE_SIZE" value="10485760"> <span
                         class="custom-file-container__custom-file__custom-file-control"></span></label>
-            <div class=custom-file-container__image-preview></div>
+            <div class="custom-file-container__image-preview"></div>
             <div id="errorImagenProducto" class="error"><i class="fas fa-exclamation-triangle mr-2"></i><span></span>
             </div>
         </div>
@@ -90,6 +100,6 @@
 
 </div>
 
+<script src="<?php echo getBaseAddress() . "Webroot/lib/ImageUpload/js/file-upload-with-preview.min.js" ?>"></script>
 <script src="<?php echo getBaseAddress() . "Webroot/js/producto/validacionAMProducto.js" ?>"></script>
-<script src="<?php echo getBaseAddress() . "Webroot/lib/ImageUpload/js/main.f7f7894738fb01e41d2e.js" ?>"></script>
-<script src="<?php echo getBaseAddress() . "Webroot/lib/ImageUpload/js/vendor.e990ab0e5e609130e9c2.js" ?>"></script>
+<script src="<?php echo getBaseAddress() . "Webroot/js/producto/precargaImagenes.js" ?>"></script>

@@ -104,12 +104,14 @@ class ProductosController extends Controller
         $categoria = new Categoria();
         $estado = new Estado();
         $producto = new Producto();
+        $imagen = new Imagen();
 
         $producto->traerProducto($publicacion["producto"]);
 
         $d["categorias"] = $categoria->traerListaCategorias();
         $d["estados"] = $estado->getAllEstados();
         $d["producto"] = $producto;
+        $d["imagenes"] = $imagen->traerListaImagenes($publicacion["producto"]);
 
         $this->set($d);
         $this->render(Constantes::EDITARPRODUCTO);
@@ -177,6 +179,8 @@ class ProductosController extends Controller
                     $imagenes[$i]->eliminarImagen();
             }
 
+        } else {
+            throw new ImagenNoInsertadaException("No se ha ingresado ninguna imagen para el producto", CodigoError::ImagenNoInsertada);
         }
 
         header("location: " . getBaseAddress() . "Productos/misProductos");
