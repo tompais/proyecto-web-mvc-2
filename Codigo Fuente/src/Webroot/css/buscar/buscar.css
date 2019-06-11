@@ -478,7 +478,7 @@
 }
 .product_name:hover a
 {
-	color: #007bff;
+	color: #0099df;
 }
 .discount .product_info .product_price
 {
@@ -487,7 +487,7 @@
 .product_price
 {
 	font-size: 16px;
-	color: #007bff;
+	color: #0099df;
 	font-weight: 600;
 }
 .product_price span

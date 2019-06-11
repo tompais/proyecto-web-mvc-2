@@ -9,6 +9,8 @@
 
             <div class="main_content">
 
+                <h3 class="pb-3" style="border-bottom: solid 1px">Busquedas por : <?php echo $palabra ?> </h3>
+
                 <!-- Products -->
 
                 <div class="d-flex flex-column justify-content-center align-items-center">
