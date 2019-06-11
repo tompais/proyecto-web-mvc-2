@@ -70,7 +70,7 @@
 
 
         <div class="d-flex justify-content-center align-items-center my-3">
-            <button type="submit" name="btnAgregar" id="btnAgregar" class="btn btn-primary">Agregar</button>
+            <button type="submit" name="btnAgregarEditar" id="btnAgregarEditar" class="btn btn-primary">Agregar</button>
         </div>
 
     </form>
@@ -78,5 +78,5 @@
 </div>
 
 <script src="<?php echo getBaseAddress() . "Webroot/lib/dropzonejs/min/dropzone.min.js"; ?>"></script>
-<script src="<?php echo getBaseAddress() . "Webroot/js/producto/altaProducto.js"; ?>"></script>
 <script src="<?php echo getBaseAddress() . "Webroot/js/producto/validacionAMProducto.js"; ?>"></script>
+<script src="<?php echo getBaseAddress() . "Webroot/js/producto/altaProducto.js"; ?>"></script>
