@@ -101,7 +101,7 @@ function validaDescripcionProducto() {
     return validacion;
 }
 
-function validarAltaProducto() {
+function validarAltaModificarProducto() {
 
     return validarNombreProducto() &&
         validarPrecioProducto() &&
@@ -109,13 +109,6 @@ function validarAltaProducto() {
         validarCategoriaProducto() &&
         validarEstadoProducto();
 }
-
-
-$("#btnAgregar").click(function () {
-
-    $(".error").fadeOut();
-    return validarAltaProducto();
-});
 
 var maxlen = 200;
 

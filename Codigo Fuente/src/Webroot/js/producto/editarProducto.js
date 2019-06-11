@@ -1,5 +1,5 @@
 var dzUpload = $('#dzUpload');
-var btnAgregar = $('#btnAgregar');
+var btnAgregarEditar = $('#btnAgregarEditar');
 var inputNombreProducto = $('#inputNombreProducto');
 var inputPrecioProducto = $('#inputPrecioProducto');
 var selectCategoriaProducto = $('#selectCategoriaProducto');
@@ -29,11 +29,14 @@ function inicializarDropzoneJs() {
             dzClosure = this; // Makes sure that 'this' is understood inside the functions below.
 
             // for Dropzone to process the queue (instead of default form behavior):
-            btnAgregar.click(function (e) {
+            btnAgregarEditar.click(function (e) {
                 // Make sure that the form isn't actually being sent.
+                $(".error").fadeOut();
                 e.preventDefault();
                 e.stopPropagation();
-                dzClosure.processQueue();
+                if(validarAltaModificarProducto()) {
+                    dzClosure.processQueue();
+                }
             });
 
             //send all the form data along with the files:
@@ -43,7 +46,7 @@ function inicializarDropzoneJs() {
                 formData.append("categoriaProducto", selectCategoriaProducto.val());
                 formData.append("estadoProducto", selectEstadoProducto.val());
                 formData.append("descripcionProducto", textareaDescripcionProducto.val());
-                btnAgregar.submit();
+                btnAgregarEditar.submit();
             });
         }
     });
