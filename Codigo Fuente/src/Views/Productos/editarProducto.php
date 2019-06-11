@@ -73,9 +73,10 @@
                         class="fas fa-exclamation-triangle mr-2"></i><span></span></div>
         </div>
 
-        <div id="dzUpload" class="dropzone mt-5">
+        <div class="form-group mb-4">
+            <label for="divImagenesProducto">Imagenes</label>
+            <div id="dzUpload" class="dropzone mt-2"></div>
         </div>
-
         <input type="hidden" name="idProducto" value="<?php echo $producto->getId() ?>"/>
 
         <div class="d-flex justify-content-center align-items-center my-3">

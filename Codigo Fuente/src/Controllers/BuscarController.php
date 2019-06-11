@@ -41,6 +41,7 @@ class BuscarController extends Controller
         $producto = new Producto();
         $imagen = new Imagen();
 
+        $d["palabra"] = $param[0];
         $d["productos"] = $producto->listaProdutosPorNombre($param[0]);
 
         $imagenes = [];
