@@ -11,4 +11,5 @@ class ImagenDto
     public $id;
     public $nombre;
     public $productoId;
+    public $fechaBaja;
 }

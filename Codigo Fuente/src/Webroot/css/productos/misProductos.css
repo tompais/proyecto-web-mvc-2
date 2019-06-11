@@ -9,7 +9,6 @@ body {
     flex-wrap: wrap;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
-    justify-content: center;
     margin: 0;
     padding: 0;
     text-align: center;
@@ -26,6 +25,7 @@ body {
 .card {
     position: relative;
     width: 31.33333%;
+    height: 380px;
     margin: 1%;
     background: whiteSmoke;
     box-shadow: 1px 1px 5px #999;
