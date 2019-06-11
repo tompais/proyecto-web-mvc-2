@@ -191,15 +191,13 @@ class ProductosController extends Controller
         $imagen = new Imagen();
         $producto = new Producto();
 
-        $imagenes = $imagen->traerListaImagenes($publicacion["idProducto"]);
-
-        foreach($imagenes as $img)
-        {
-            unlink(ROOT . "Webroot/img/productos/" . $img->getNombre());
-            $img->eliminarImagen();
+        if(!$imagen->eliminarImagenesProducto($publicacion["idProducto"])) {
+            throw new EliminacionMasivaImagenException("Ocurrió un error al eliminar las imágenes del producto con id " . $publicacion["idProducto"], CodigoError::EliminacionMasivaImagen);
         }
 
-        $producto->eliminarProducto($publicacion["idProducto"]);
+        if(!$producto->eliminarProducto($publicacion["idProducto"])) {
+            throw new EliminarProductoException("Ocurrió un error al eliminar el producto con id " . $publicacion["idProducto"], CodigoError::EliminarProducto);
+        }
 
         header("location: " . getBaseAddress() . "Productos/misProductos");
     }

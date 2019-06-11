@@ -22,4 +22,6 @@ abstract class CodigoError
     const UsuarioNoEncontrado = 15;
     const EstadoInvalido = 20;
     const ImagenPrincipalNoEncontrada = 30;
+    const EliminarProducto = 33;
+    const EliminacionMasivaImagen = 40;
 }

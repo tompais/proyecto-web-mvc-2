@@ -119,6 +119,24 @@ class Imagen extends Model
 
         return $row;
     }
+
+    public function eliminarImagenesProducto($idProducto)
+    {
+        $rows = $this->pageRows(0, 4, "ProductoId = $idProducto AND FechaBaja IS NULL");
+
+        if($rows) {
+            foreach($rows as $row) {
+                $row["FechaBaja"] = date("Y-m-d H:i:s");
+
+                if(!$this->update($row)) {
+                    $rows = null;
+                    break;
+                }
+            }
+        }
+
+        return $rows;
+    }
 }
 
 ?>
