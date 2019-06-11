@@ -55,19 +55,19 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group mb-5">
             <label for="textareaDescripcionProducto">Descripcion</label>
             <textarea class="form-control" rows="5" placeholder="¿Que vendes?" id="textareaDescripcionProducto"
                       name="descripcionProducto"></textarea>
             <small class="form-text text-muted float-left">Opcional</small>
             <div class="mt-2 float-right"><span id='caracteres'>0</span>/200<span></div>
-            <div id="errorDescripcionProducto" class="error"><i
-                        class="fas fa-exclamation-triangle mr-2"></i><span></span></div>
+            <div id="errorDescripcionProducto" class="error"><i class="fas fa-exclamation-triangle mr-2"></i><span></span></div>
         </div>
 
-        <div id="dzUpload" class="dropzone mt-5">
+        <div class="form-group mb-4">
+            <label for="divImagenesProducto">Imagenes</label>
+            <div id="dzUpload" class="dropzone mt-2"></div>
         </div>
-
 
         <div class="d-flex justify-content-center align-items-center my-3">
             <button type="submit" name="btnAgregarEditar" id="btnAgregarEditar" class="btn btn-primary">Agregar</button>
