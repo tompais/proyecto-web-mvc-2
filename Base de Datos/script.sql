@@ -6146,7 +6146,7 @@ CREATE TABLE Categoria(
     constraint PK_Categoria primary key (Id)
 );
 
-CREATE TABLE Estado (
+CREATE TABLE Estado (	
 	Id int auto_increment NOT NULL,
     Nombre VARCHAR(20) UNIQUE NOT NULL,
     constraint PK_Estado primary key (Id)
@@ -6172,6 +6172,7 @@ CREATE TABLE Imagen (
 	Id integer auto_increment not null unique,
     Nombre varchar(100) not null unique,
     ProductoId int not null, 
+    FechaBaja datetime,
     constraint PK_Imagen primary key (Id),
     constraint FK_Imagen_Producto foreign key (ProductoId) references Producto (Id) 
 );

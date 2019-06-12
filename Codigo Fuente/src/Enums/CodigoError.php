@@ -23,4 +23,6 @@ abstract class CodigoError
     const EstadoInvalido = 20;
     const ProductoNoEncontrado = 16;
     const ImagenPrincipalNoEncontrada = 30;
+    const EliminarProducto = 33;
+    const EliminacionMasivaImagen = 40;
 }

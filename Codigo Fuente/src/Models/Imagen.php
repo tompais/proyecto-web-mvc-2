@@ -6,6 +6,23 @@ class Imagen extends Model
     private $nombre;
     private $productoId;
     private $producto;
+    private $fechaBaja;
+
+    /**
+     * @return mixed
+     */
+    public function getFechaBaja()
+    {
+        return $this->fechaBaja;
+    }
+
+    /**
+     * @param mixed $fechaBaja
+     */
+    public function setFechaBaja($fechaBaja)
+    {
+        $this->fechaBaja = $fechaBaja;
+    }
 
     public function getId()
     {
@@ -51,7 +68,7 @@ class Imagen extends Model
     {
         $array = [
             "Nombre" => $this->getNombre(),
-            "ProductoId" => $this->getProductoId()
+            "ProductoId" => $this->getProductoId(),
         ];
         $this->setId($this->insert($array));
         return $this->getId();
@@ -61,11 +78,12 @@ class Imagen extends Model
     {
         $imagenes = array();
 
-        $rows = $this->pageRows(0, PHP_INT_MAX, "ProductoId = $pk");
+        $rows = $this->pageRows(0, PHP_INT_MAX, "ProductoId = $pk AND FechaBaja IS NULL");
 
         foreach($rows as $row)
         {
             $imagen = new Imagen();
+            $imagen->db->disconnect();
             $imagen->setId($row["Id"]);
             $imagen->setNombre($row["Nombre"]);
             $imagen->setProductoId($row["ProductoId"]);
@@ -91,7 +109,7 @@ class Imagen extends Model
 
     public function traerImagenPrincipal($productoId)
     {
-        $row = $this->pageRows(0, 1, "ProductoId = $productoId");
+        $row = $this->pageRows(0, 1, "ProductoId = $productoId AND FechaBaja IS NULL");
 
         if($row) {
             $this->setId($row[0]["Id"]);
@@ -100,6 +118,24 @@ class Imagen extends Model
         }
 
         return $row;
+    }
+
+    public function eliminarImagenesProducto($idProducto)
+    {
+        $rows = $this->pageRows(0, 4, "ProductoId = $idProducto AND FechaBaja IS NULL");
+
+        if($rows) {
+            foreach($rows as $row) {
+                $row["FechaBaja"] = date("Y-m-d H:i:s");
+
+                if(!$this->update($row)) {
+                    $rows = null;
+                    break;
+                }
+            }
+        }
+
+        return $rows;
     }
 }
 

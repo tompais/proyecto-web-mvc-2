@@ -1,5 +1,6 @@
+<link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/lib/dropzonejs/min/basic.min.css"; ?>">
+<link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/lib/dropzonejs/min/dropzone.min.css"; ?>">
 <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/productos/altaProducto.css" ?>">
-<link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/lib/ImageUpload/css/file-upload-with-preview.min.css" ?>">
 
 <div class="container col-xl-7 col-sm-5 mt-3">
 
@@ -54,39 +55,28 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group mb-5">
             <label for="textareaDescripcionProducto">Descripcion</label>
             <textarea class="form-control" rows="5" placeholder="¿Que vendes?" id="textareaDescripcionProducto"
                       name="descripcionProducto"></textarea>
             <small class="form-text text-muted float-left">Opcional</small>
             <div class="mt-2 float-right"><span id='caracteres'>0</span>/200<span></div>
-            <div id="errorDescripcionProducto" class="error"><i
-                        class="fas fa-exclamation-triangle mr-2"></i><span></span></div>
+            <div id="errorDescripcionProducto" class="error"><i class="fas fa-exclamation-triangle mr-2"></i><span></span></div>
         </div>
 
-        
-        <div class="custom-file-container mt-5" data-upload-id="myFirstImage">
-            <label for="inputFileImages">Imagenes<a href="javascript:void(0)" class="custom-file-container__image-clear"
-            title="Clear Image"><i class="fas fa-times ml-2"></i></a></label>
-            <label class="custom-file-container__custom-file">
-                <input type="file" class="custom-file-container__custom-file__custom-file-input" accept=".png,.jpg,.jpeg"
-                multiple="multiple" aria-label="Seleccionar" name="imagenProducto[]" id="inputImagenProducto">
-                <input type=hidden name=MAX_FILE_SIZE value=10485760> <span
-                class="custom-file-container__custom-file__custom-file-control"></span></label>
-            <div class="custom-file-container__image-preview"></div>
-            <div id="errorImagenProducto" class="error"><i class="fas fa-exclamation-triangle mr-2"></i><span></span>
-            </div>
-            </div>
-            
-            
-            <div class="d-flex justify-content-center align-items-center my-3">
-            <button type="submit" name="btnAgregar" id="btnAgregar" class="btn btn-primary">Agregar</button>
+        <div class="form-group mb-4">
+            <label for="divImagenesProducto">Imagenes</label>
+            <div id="dzUpload" class="dropzone mt-2"></div>
+        </div>
+
+        <div class="d-flex justify-content-center align-items-center my-3">
+            <button type="submit" name="btnAgregarEditar" id="btnAgregarEditar" class="btn btn-primary">Agregar</button>
         </div>
 
     </form>
-    
-    </div>
-    
-<script src="<?php echo getBaseAddress() . "Webroot/js/producto/validacionAMProducto.js" ?>"></script>
-<script src="<?php echo getBaseAddress() . "Webroot/lib/ImageUpload/js/file-upload-with-preview.min.js" ?>"></script>
-<script src="<?php echo getBaseAddress() . "Webroot/js/producto/imagenUpload.js" ?>"></script>
+
+</div>
+
+<script src="<?php echo getBaseAddress() . "Webroot/lib/dropzonejs/min/dropzone.min.js"; ?>"></script>
+<script src="<?php echo getBaseAddress() . "Webroot/js/producto/validacionAMProducto.js"; ?>"></script>
+<script src="<?php echo getBaseAddress() . "Webroot/js/producto/altaProducto.js"; ?>"></script>

@@ -72,19 +72,19 @@ class ProductosController extends Controller
             mkdir(ROOT . "Webroot/img/productos", 0777, true);
         }
 
-        if (isset($_FILES["imagenProducto"]["name"])) {
+        if (isset($_FILES["file"]["name"])) {
 
-            $total = count($_FILES["imagenProducto"]["name"]);
+            $total = count($_FILES["file"]["name"]);
 
             for ($id = 0; $id < $total; $id++) {
                 $ruta = ROOT . "Webroot/img/productos/";
-                $nombreImg = $_FILES["imagenProducto"]["name"][$id];
+                $nombreImg = $_FILES["file"]["name"][$id];
 
                 $temp = explode(".", $nombreImg);
                 $newNombre = TokenHelper::getToken() . '.' . end($temp);
 
                 $ruta .= basename($newNombre);
-                $tmp = $_FILES["imagenProducto"]["tmp_name"][$id];
+                $tmp = $_FILES["file"]["tmp_name"][$id];
                 move_uploaded_file($tmp, $ruta);
                 $imagen->setNombre($newNombre);
                 $imagen->setProductoId($producto->getId());
@@ -94,7 +94,7 @@ class ProductosController extends Controller
             throw new ImagenNoInsertadaException("No se ha ingresado ninguna imagen para el producto", CodigoError::ImagenNoInsertada);
         }
 
-        header("location: " . getBaseAddress() . "Productos/misProductos");
+        echo json_encode(true);
     }
 
     function editarProducto($publicacion)
@@ -106,12 +106,13 @@ class ProductosController extends Controller
         $producto = new Producto();
         $imagen = new Imagen();
 
-        $producto->traerProducto($publicacion["producto"]);
+        $producto->traerProducto($publicacion[0]);
 
         $d["categorias"] = $categoria->traerListaCategorias();
         $d["estados"] = $estado->getAllEstados();
         $d["producto"] = $producto;
-        $d["imagenes"] = $imagen->traerListaImagenes($publicacion["producto"]);
+
+        $d["imagenes"] = $imagen->traerListaImagenes($publicacion[0]);
 
         $this->set($d);
         $this->render(Constantes::EDITARPRODUCTO);
@@ -119,7 +120,6 @@ class ProductosController extends Controller
 
     function editar($publicacion)
     {
-
         $sesion = unserialize($_SESSION["session"]);
 
         $producto = new Producto();
@@ -138,7 +138,7 @@ class ProductosController extends Controller
         if(!$producto->actualizarProducto())
             throw new SQLUpdateException("Error al realizar la actualizacion del producto", CodigoError::ErrorUpdateSQL);
 
-        if (isset($_FILES["imagenProducto"]["name"])) {
+        if (isset($_FILES["file"]["name"])) {
             
             $imagen = new Imagen();
 
@@ -147,17 +147,17 @@ class ProductosController extends Controller
             foreach($imagenes as $img)
                 unlink(ROOT . "Webroot/img/productos/" . $img->getNombre());
 
-            $total = count($_FILES["imagenProducto"]["name"]);
+            $total = count($_FILES["file"]["name"]);
     
             for ($id = 0; $id < $total; $id++) {
                 $ruta = ROOT . "Webroot/img/productos/";
-                $nombreImg = $_FILES["imagenProducto"]["name"][$id];
+                $nombreImg = $_FILES["file"]["name"][$id];
     
                 $temp = explode(".", $nombreImg);
                 $newNombre = microtime(true) . '.' . end($temp);
     
                 $ruta .= basename($newNombre);
-                $tmp = $_FILES["imagenProducto"]["tmp_name"][$id];
+                $tmp = $_FILES["file"]["tmp_name"][$id];
                 move_uploaded_file($tmp, $ruta);
 
                 if($id < count($imagenes))
@@ -191,15 +191,13 @@ class ProductosController extends Controller
         $imagen = new Imagen();
         $producto = new Producto();
 
-        $imagenes = $imagen->traerListaImagenes($publicacion["idProducto"]);
-
-        foreach($imagenes as $img)
-        {
-            unlink(ROOT . "Webroot/img/productos/" . $img->getNombre());
-            $img->eliminarImagen();
+        if(!$imagen->eliminarImagenesProducto($publicacion["idProducto"])) {
+            throw new EliminacionMasivaImagenException("Ocurrió un error al eliminar las imágenes del producto con id " . $publicacion["idProducto"], CodigoError::EliminacionMasivaImagen);
         }
 
-        $producto->eliminarProducto($publicacion["idProducto"]);
+        if(!$producto->eliminarProducto($publicacion["idProducto"])) {
+            throw new EliminarProductoException("Ocurrió un error al eliminar el producto con id " . $publicacion["idProducto"], CodigoError::EliminarProducto);
+        }
 
         header("location: " . getBaseAddress() . "Productos/misProductos");
     }
