@@ -5,7 +5,7 @@ var inputPrecioProducto = $('#inputPrecioProducto');
 var selectCategoriaProducto = $('#selectCategoriaProducto');
 var selectEstadoProducto = $('#selectEstadoProducto');
 var textareaDescripcionProducto = $('#textareaDescripcionProducto');
-
+var cantidadDeImagenes = 0;
 Dropzone.autoDiscover = false;
 
 function inicializarDropzoneJs() {
@@ -51,5 +51,25 @@ function inicializarDropzoneJs() {
         }
     });
 }
-
 inicializarDropzoneJs();
+
+
+$(document).ready(function () {
+    function eliminarImagen(id) {
+        var elementoPadreButton = $(id).parent();
+        var elementoPadreDiv = elementoPadreButton.parent();
+        cantidadDeImagenes++;
+        elementoPadreDiv.remove();
+        //dzUpload.dropzone.options.maxFiles = cantidadDeImagenes;
+    }
+
+    $('body .botonEliminar').on('click', 'span', function () {
+        var obj = {};
+        var idImagen = $(this).attr('id');
+        var idSpan = '#'+idImagen;
+        obj.idImagen = idImagen;
+        llamadaAjax(pathAccionProducto, JSON.stringify(obj), true, eliminarImagen(idSpan), "eliminacionFallido");
+    })
+
+})
+
