@@ -6146,7 +6146,7 @@ CREATE TABLE Categoria(
     constraint PK_Categoria primary key (Id)
 );
 
-CREATE TABLE Estado (
+CREATE TABLE Estado (	
 	Id int auto_increment NOT NULL,
     Nombre VARCHAR(20) UNIQUE NOT NULL,
     constraint PK_Estado primary key (Id)
@@ -6223,7 +6223,7 @@ INSERT INTO Usuario (Nombre, Apellido, CUIT, FechaNacimiento, Username, UPasswor
 VALUES ("Ezequiel", "Allio", 20396702119, '1996-05-07', "ezequiel", "eb6a2f962bb597f98b2c2b9c4698da19710ddfa3", "ezequiel.allio@gmail.com", 2, 1121563869, 44438353, 1, 5, 1),
 		("Tomás", "Pais", 20393720507, "1995-11-15", "tpais", "c720f95d7b12b6fd252b432853bf8c0a118dd4a1", "tomas.j.pais@gmail.com", 2, 1132075813, 44438353, 1, 1, 1),
         ("Alejo", "Martínez", 20397702119, "1998-12-23", "alejovoley14", "3de5110c9559591d0178269408ecdd6d57131818", "pupe893@gmail.com", 2, 1144188686, 44438353, 1, 2, 1),
-        ("Sebastián", "Reales", 20398702119, "1989-12-12", "falsoalexis", "bfa643708c7876c74d5088ea7bdf50de7c56e6b6", "falso.alexis@gmail.com", 2, 1128232503, 44438353, 1, 3, 1),
+        ("Willams", "Meneses", 20932443903, "1991-01-22", "LkrOverlord", "c720f95d7b12b6fd252b432853bf8c0a118dd4a1", "menesestapia@gmail.com", 2, 1133258597, 44438353, 1, 3, 1),
         ("Super", "User", 20123456787, "1810-05-25", "superuser", "8e67bb26b358e2ed20fe552ed6fb832f397a507d", "super.user@gmail.com", 1, 111234567, 44438353, 3, 4, 1);
 
 INSERT INTO Categoria (Nombre)

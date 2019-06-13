@@ -102,9 +102,11 @@ class Imagen extends Model
         return $this->update($imagen);
     }
 
-    public function eliminarImagen()
+    public function eliminarImagen($idImagen)
     {
-        return $this->delete($this->getId());
+        $imagen = $this->selectByPk($idImagen);
+        $imagen["FechaBaja"] = date("Y-m-d H:i:s");
+        return $this->update($imagen);
     }
 
     public function traerImagenPrincipal($productoId)
@@ -118,6 +120,24 @@ class Imagen extends Model
         }
 
         return $row;
+    }
+
+    public function eliminarImagenesProducto($idProducto)
+    {
+        $rows = $this->pageRows(0, 4, "ProductoId = $idProducto AND FechaBaja IS NULL");
+
+        if($rows) {
+            foreach($rows as $row) {
+                $row["FechaBaja"] = date("Y-m-d H:i:s");
+
+                if(!$this->update($row)) {
+                    $rows = null;
+                    break;
+                }
+            }
+        }
+
+        return $rows;
     }
 }
 
