@@ -14,7 +14,7 @@ class BuscarController extends Controller
 
         $producto = new Producto();
 
-        $productos = $producto->buscarMejoresProductosPorNombre($param[0]);
+        $productos = $producto->buscarMejoresProductosPorNombre(str_replace("%20", " ", $param[0]));
 
         $productosDto = [];
 
@@ -41,8 +41,8 @@ class BuscarController extends Controller
         $producto = new Producto();
         $imagen = new Imagen();
 
-        $d["palabra"] = $param[0];
-        $d["productos"] = $producto->listaProdutosPorNombre($param[0]);
+        $d["palabra"] = base64_decode($param[0]);
+        $d["productos"] = $producto->listaProdutosPorNombre(base64_decode($param[0]));
 
         $imagenes = [];
         $d["imagenes"] = [];

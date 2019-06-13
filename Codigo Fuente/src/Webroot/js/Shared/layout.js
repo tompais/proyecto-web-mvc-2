@@ -372,6 +372,7 @@ jQuery(document).ready(function ($) {
 $('.ui.search').search({
     type: 'category',
     minCharacters: 3,
+    cache: true,
     searchFields: [
         'title'
     ],
@@ -416,6 +417,7 @@ $('.ui.search').search({
 
 $('.ui.search').keyup(function (e) {
     if(e.keyCode === 13) {
-        window.location.href = pathHome + "Buscar/productos/" + inputSearch.val();
+        console.log(inputSearch.val());
+        console.log(pathHome + "Buscar/productos/" + encodeURIComponent(btoa(inputSearch.val())));
     }
 });

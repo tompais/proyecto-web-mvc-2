@@ -193,7 +193,7 @@ class Producto extends Model
 
     public function buscarMejoresProductosPorNombre($nombre)
     {
-        $rows = $this->pageRows(0, 5, "Nombre like '%$nombre%' ORDER BY Precio AND EstadoId AND FechaBaja IS NULL");
+        $rows = $this->pageRows(0, 5, "Nombre like '%$nombre%' AND FechaBaja IS NULL ORDER BY Precio AND EstadoId");
 
         $productos = [];
 
