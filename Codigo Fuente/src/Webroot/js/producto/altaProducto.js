@@ -25,22 +25,22 @@ function inicializarDropzoneJs() {
         parallelUploads: 5,
         maxFiles: 5,
         acceptedFiles: '.png, .jpg, .jpeg',
-        init: function() {
+        init: function () {
             dzClosure = this; // Makes sure that 'this' is understood inside the functions below.
 
             // for Dropzone to process the queue (instead of default form behavior):
-            btnAgregarEditar.click( function(e) {
+            btnAgregarEditar.click(function (e) {
                 // Make sure that the form isn't actually being sent.
                 $(".error").fadeOut();
                 e.preventDefault();
                 e.stopPropagation();
-                if(validarAltaModificarProducto()) {
+                if (validarAltaModificarProducto()) {
                     dzClosure.processQueue();
                 }
             });
 
             //send all the form data along with the files:
-            this.on("sendingmultiple", function(data, xhr, formData) {
+            this.on("sendingmultiple", function (data, xhr, formData) {
                 formData.append("nombreProducto", inputNombreProducto.val());
                 formData.append("precioProducto", inputPrecioProducto.val());
                 formData.append("categoriaProducto", selectCategoriaProducto.val());
