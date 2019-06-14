@@ -122,6 +122,19 @@ class Imagen extends Model
         return $row;
     }
 
+    public function traerImagen($id)
+    {
+        $row = $this->selectByPk($id);
+
+        if($row) {
+            $this->setId($row["Id"]);
+            $this->setNombre($row["Nombre"]);
+            $this->setProductoId($row["ProductoId"]);
+        }
+
+        return $row;
+    }
+
     public function eliminarImagenesProducto($idProducto)
     {
         $rows = $this->pageRows(0, 4, "ProductoId = $idProducto AND FechaBaja IS NULL");

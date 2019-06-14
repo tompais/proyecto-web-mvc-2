@@ -187,16 +187,26 @@ class ProductosController extends Controller
         $data = json_decode(utf8_decode($json['data']));
         $imagen = new Imagen();
         $idImagen = $data->idImagen;
+        
+        $imagen->traerImagen($idImagen);
+
+        unlink(ROOT . "Webroot/img/productos/" . $imagen->getNombre());
+
         if(!$imagen->eliminarImagen($idImagen)){
             echo json_encode(false);
         }
-        echo json_encode(true);
+        echo json_encode($idImagen);
     }
 
     function eliminar($publicacion)
     {
         $imagen = new Imagen();
         $producto = new Producto();
+        
+        $imagenes = $imagen->traerListaImagenes($publicacion["idProducto"]);
+            
+        foreach($imagenes as $img)
+            unlink(ROOT . "Webroot/img/productos/" . $img->getNombre());
 
         if(!$imagen->eliminarImagenesProducto($publicacion["idProducto"])) {
             throw new EliminacionMasivaImagenException("Ocurrió un error al eliminar las imágenes del producto con id " . $publicacion["idProducto"], CodigoError::EliminacionMasivaImagen);
