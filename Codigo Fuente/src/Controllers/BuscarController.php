@@ -8,30 +8,25 @@
 
 class BuscarController extends Controller
 {
-    function buscarProductoPorNombre($param)
+    function buscarProductoPorNombre($json)
     {
         header("Content-type: application/json");
 
         $producto = new Producto();
 
-        $productos = $producto->buscarMejoresProductosPorNombre($param[0]);
+        $nombres = $producto->getNombresMejoresProductosPorFrase(json_decode(json_encode($json))->producto);
 
-        $productosDto = [];
+        $resultados = [];
 
-        foreach ($productos as $p) {
-            $productoDto = new ProductoDto();
+        foreach ($nombres as $nombre) {
+            $searchResponseDto = new SearchResponseDto();
 
-            $productoDto->id = $p->getId();
-            $productoDto->nombre = $p->getNombre();
-            $productoDto->precio = $p->getPrecio();
-            $productoDto->estado = new EstadoDto();
-            $productoDto->estado->id = $p->getEstado()->getId();
-            $productoDto->estado->nombre = $p->getEstado()->getNombre();
+            $searchResponseDto->name = $nombre;
 
-            $productosDto[] = $productoDto;
+            $resultados[] = $searchResponseDto;
         }
 
-        echo json_encode($productosDto);
+        echo json_encode($resultados);
     }
 
     function productos($param)
