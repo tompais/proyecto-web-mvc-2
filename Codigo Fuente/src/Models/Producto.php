@@ -5,6 +5,7 @@ class Producto extends Model
     private $id;
     private $nombre;
     private $precio;
+    private $cantidad;
     private $categoriaId;
     private $categoria;
     private $usuarioId;
@@ -18,6 +19,21 @@ class Producto extends Model
     private $metodoId;
     private $detalleEntrega;
 
+    /**
+     * @return mixed
+     */
+    public function getCantidad()
+    {
+        return $this->cantidad;
+    }
+
+    /**
+     * @param mixed $cantidad
+     */
+    public function setCantidad($cantidad)
+    {
+        $this->cantidad = $cantidad;
+    }
     /**
      * @return mixed
      */
@@ -197,6 +213,7 @@ class Producto extends Model
         $array = [
             "Nombre" => $this->getNombre(),
             "Precio" => $this->getPrecio(),
+            "Cantidad" => $this->getCantidad(),
             "CategoriaId" => $this->getCategoriaId(),
             "UsuarioId" => $this->getUsuarioId(),
             "Descripcion" => $this->getDescripcion(),
@@ -292,6 +309,12 @@ class Producto extends Model
             && FuncionesUtiles::esMayorACero($this->precio);
     }
 
+    public function validarCantidad()
+    {
+        return (FuncionesUtiles::esEntero($this->cantidad) || FuncionesUtiles::esCadenaNumerica($this->cantidad))
+            && FuncionesUtiles::esMayorACero($this->cantidad);
+    }
+
     public function validarCategoria()
     {
         $this->categoria = new Categoria();
@@ -320,6 +343,19 @@ class Producto extends Model
             ($this->getEstadoId() == Estados::Nuevo || $this->getEstadoId() == Estados::Usado || $this->getEstadoId() == Estados::Reformado);
     }
 
+    public function validarMetedo()
+    {
+        return FuncionesUtiles::esMayorACero($this->getMetodoId()) &&
+            ($this->getMetodoId() == Metodos::AcuerdoMutuo || $this->getMetodoId() == Metodos::PuntoDeEntrega);
+    }
+
+    public function validarDetalleEntrega()
+    {
+        return FuncionesUtiles::esOracionCompuesta($this->detalleEntrega)
+            && ($cantLetras = strlen($this->detalleEntrega)) <= 50
+            && $cantLetras >= 5;
+    }
+
     public function validarUsuario()
     {
         $this->setUsuario(new Usuario());
@@ -328,7 +364,15 @@ class Producto extends Model
 
     public function validarProducto()
     {
-        return $this->validarNombre() && $this->validarDescripcion() && $this->validarPrecio() && $this->validarCategoria() && $this->validarEstado() && $this->validarUsuario();
+        return $this->validarNombre() &&
+               $this->validarDescripcion() &&
+               $this->validarPrecio() &&
+               $this->validarCantidad() &&
+               $this->validarMetedo() &&
+               $this->validarDetalleEntrega() &&
+               $this->validarCategoria() &&
+               $this->validarEstado() &&
+               $this->validarUsuario();
     }
 
     public function listaProdutosPorNombre($nombre)

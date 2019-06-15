@@ -56,6 +56,7 @@ class ProductosController extends Controller
         $producto->setFechaAlta(date("Y-m-d H:i:s"));
         $producto->setNombre($publicacion["nombreProducto"]);
         $producto->setPrecio($publicacion["precioProducto"]);
+        $producto->setCantidad($publicacion["cantidadProducto"]);
         $producto->setEstadoId($publicacion["estadoProducto"]);
         $producto->setCategoriaId($publicacion["categoriaProducto"]);
 

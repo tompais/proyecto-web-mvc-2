@@ -6162,6 +6162,7 @@ CREATE TABLE Producto (
 	Id integer auto_increment not null unique,
     Nombre varchar(50) not null,
     Precio int not null,
+    Cantidad int not null,
     CategoriaId int not null,
     UsuarioId int not null,
     EstadoId int not null, 
