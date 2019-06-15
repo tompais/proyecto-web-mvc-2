@@ -373,7 +373,7 @@ jQuery(document).ready(function ($) {
 });
 
 function realizarBusqueda(palabra) {
-    window.location.href = pathHome + "Buscar/productos/" + palabra;
+    window.location.href = pathHome + "Buscar/productos/" + btoa(encodeURIComponent(palabra.trim().replace("\n", "").replace("\r", "").replace("\t", "").replace(" ", "-"))).replace("=", "");
 }
 
 inputBuscar.easyAutocomplete({

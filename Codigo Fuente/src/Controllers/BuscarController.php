@@ -36,8 +36,8 @@ class BuscarController extends Controller
         $producto = new Producto();
         $imagen = new Imagen();
 
-        $d["palabra"] = $param[0];
-        $d["productos"] = $producto->listaProdutosPorNombre($param[0]);
+        $d["palabra"] = str_replace("-", " ", base64_decode(urldecode($param[0])));
+        $d["productos"] = $producto->listaProdutosPorNombre($d["palabra"]);
 
         $imagenes = [];
         $d["imagenes"] = [];
