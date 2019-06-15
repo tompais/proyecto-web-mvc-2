@@ -263,7 +263,7 @@ class Producto extends Model
 
     public function getNombresMejoresProductosPorFrase($nombre)
     {
-        $rows = $this->pageRows(0, 5, "Nombre like '%$nombre%' AND FechaBaja IS NULL ORDER BY Precio AND EstadoId");
+        $rows = $this->pageRows(0, 5, "Nombre like '%$nombre%' AND FechaBaja IS NULL ORDER BY Precio AND EstadoId", [0 => "Nombre"], true);
 
         $productos = [];
 
@@ -379,7 +379,7 @@ class Producto extends Model
     {
         $productos = array();
         $condicion = "Nombre like '%$nombre%' AND FechaBaja IS NULL";
-        $rows = $this->pageRows(0, 20, $condicion);
+        $rows = $this->pageRows(0, 8, $condicion);
         foreach ($rows as $row) {
             $producto = new Producto();
             $producto->db->disconnect();
