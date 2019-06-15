@@ -26,6 +26,14 @@
         </div>
 
         <div class="form-group">
+            <label for="inputCantidadProducto">Cantidad</label>
+            <input type="number" name="cantidadProducto" placeholder="Ej: 5" id="inputCantidadProducto"
+                   class="form-control">
+            <div id="errorCantidadProducto" class="error"><i class="fas fa-exclamation-triangle mr-2"></i><span></span>
+            </div>
+        </div>
+
+        <div class="form-group">
             <label for="selectCategoriaProducto">Categoria</label>
             <select name="categoriaProducto" id="selectCategoriaProducto" class="form-control">
                 <option value="0" disabled selected>Categoria</option>
@@ -57,7 +65,7 @@
 
         <div class="form-group">
             <label for="selectMetodoProducto">Metodo de Entrea</label>
-            <select name="metodoProducto" id="selectMetodoProducto" class="form-control" onchange="metodoEntrega()">
+            <select name="metodoProducto" id="selectMetodoProducto" class="form-control">
                 <option value="0" disabled selected>Metodo</option>
 
                 <?php
@@ -66,7 +74,7 @@
                 ?>
 
             </select>
-            <div id="errorEstadoProducto" class="error"><i class="fas fa-exclamation-triangle mr-2"></i><span></span>
+            <div id="errorMetodoProducto" class="error"><i class="fas fa-exclamation-triangle mr-2"></i><span></span>
             </div>
         </div>
 
@@ -74,7 +82,7 @@
             <label for="inputDetalleEntregaProducto">Punto de Entrega</label>
             <input type="text" name="detalleEntregaProducto" id="inputDetalleEntregaProducto" class="form-control"
                    placeholder="Ej: Angel Acuña 1557">
-            <div id="errorNombreProducto" class="error"><i class="fas fa-exclamation-triangle mr-2"></i><span></span>
+            <div id="errorDetalleEntregaProducto" class="error"><i class="fas fa-exclamation-triangle mr-2"></i><span></span>
             </div>
         </div>
 

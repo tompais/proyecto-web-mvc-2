@@ -57,6 +57,26 @@ function validarPrecioProducto() {
     return validacion;
 }
 
+function validarCantidadProducto() {
+
+    var validacion = false;
+    var cantidadProducto = $('#inputCantidadProducto').val();
+
+    if (cantidadProducto === null || cantidadProducto.length === 0) {
+        $("#errorCantidadProducto").find("span").text("Ingrese la cantidad del producto");
+        $("#errorCantidadProducto").fadeIn("slow");
+    } else if (!regexSOLONumeros.test(cantidadProducto)) {
+        $("#errorCantidadProducto").find("span").text("Ingrese solo numeros en la cantidad");
+        $("#errorCantidadProducto").fadeIn("slow");
+    } else if (cantidadProducto > 50) {
+        $("#errorCantidadProducto").find("span").text("El maximo de productos que puede cargar es de 50");
+        $("#errorCantidadProducto").fadeIn("slow");
+    } else {
+        validacion = true;
+    }
+    return validacion;
+}
+
 function validarCategoriaProducto() {
 
     var validacion = false;
@@ -85,6 +105,45 @@ function validarEstadoProducto() {
     return validacion;
 }
 
+function validarMetodoProducto() {
+
+    var validacion = false;
+    var metodoProducto = $('#selectMetodoProducto').val();
+
+    if (metodoProducto === null || metodoProducto === 0) {
+        $("#errorMetodoProducto").find("span").text("Elija un metodo de Entrega");
+        $("#errorMetodoProducto").fadeIn("slow");
+    } else {
+        validacion = true;
+    }
+    return validacion;
+}
+
+function validarDetalleEntregaProducto() {
+
+    var validacion = false;
+    var metodoProducto = $('#selectMetodoProducto').val();
+    var detalleEntregaProducto = $('#inputDetalleEntregaProducto').val();
+
+    if (metodoProducto == 1){
+
+        if (detalleEntregaProducto === null || detalleEntregaProducto === "" || detalleEntregaProducto.length === 0) {
+            $("#errorDetalleEntregaProducto").find("span").text("Ingrese el punto de entrega");
+            $("#errorDetalleEntregaProducto").fadeIn("slow");
+        }else if (detalleEntregaProducto.length < 5 || detalleEntregaProducto.length > 50) {
+            $("#errorDetalleEntregaProducto").find("span").text("El punto de entrega debe tener entre 5 y 50 caracteres");
+            $("#errorDetalleEntregaProducto").fadeIn("slow");}
+        else {
+            validacion = true;
+        }
+    }
+    else {
+        validacion = true;
+    }
+    return validacion;
+}
+
+
 function validaDescripcionProducto() {
 
     var validacion = false;
@@ -105,9 +164,13 @@ function validarAltaModificarProducto() {
 
     return validarNombreProducto() &&
         validarPrecioProducto() &&
+        validarCantidadProducto() &&
         validaDescripcionProducto() &&
         validarCategoriaProducto() &&
-        validarEstadoProducto();
+        validarEstadoProducto() &&
+        validarMetodoProducto() &&
+        validarDetalleEntregaProducto() &&
+        validarDetalleEntregaProducto();
 }
 
 var maxlen = 200;
