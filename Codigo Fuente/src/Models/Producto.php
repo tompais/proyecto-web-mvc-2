@@ -14,6 +14,57 @@ class Producto extends Model
     private $descripcion;
     private $fechaBaja;
     private $fechaAlta;
+    private $metodo;
+    private $metodoId;
+    private $detalleEntrega;
+
+    /**
+     * @return mixed
+     */
+    public function getMetodo()
+    {
+        return $this->metodo;
+    }
+
+    /**
+     * @param mixed $metodo
+     */
+    public function setMetodo($metodo)
+    {
+        $this->metodo = $metodo;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMetodoId()
+    {
+        return $this->metodoId;
+    }
+
+    /**
+     * @param mixed $metodoId
+     */
+    public function setMetodoId($metodoId)
+    {
+        $this->metodoId = $metodoId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDetalleEntrega()
+    {
+        return $this->detalleEntrega;
+    }
+
+    /**
+     * @param mixed $detalleEntrega
+     */
+    public function setDetalleEntrega($detalleEntrega)
+    {
+        $this->detalleEntrega = $detalleEntrega;
+    }
 
     /**
      * @return mixed
@@ -150,7 +201,9 @@ class Producto extends Model
             "UsuarioId" => $this->getUsuarioId(),
             "Descripcion" => $this->getDescripcion(),
             "FechaAlta" => $this->getFechaAlta(),
-            "EstadoId" => $this->getEstadoId()
+            "EstadoId" => $this->getEstadoId(),
+            "MetodoId" => $this->getMetodoId(),
+            "DetalleEntrega" => $this->getDetalleEntrega()
         ];
         $this->setId($this->insert($array));
         return $this->getId();

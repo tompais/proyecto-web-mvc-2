@@ -55,6 +55,29 @@
             </div>
         </div>
 
+        <div class="form-group">
+            <label for="selectMetodoProducto">Metodo de Entrea</label>
+            <select name="metodoProducto" id="selectMetodoProducto" class="form-control" onchange="metodoEntrega()">
+                <option value="0" disabled selected>Metodo</option>
+
+                <?php
+                foreach ($metodos as $metodo)
+                    echo "<option value='" . $metodo->getId() . "'>" . $metodo->getTipo() . "</option>";
+                ?>
+
+            </select>
+            <div id="errorEstadoProducto" class="error"><i class="fas fa-exclamation-triangle mr-2"></i><span></span>
+            </div>
+        </div>
+
+        <div class="form-group d-none" id="divDetalleEntregaProducto">
+            <label for="inputDetalleEntregaProducto">Punto de Entrega</label>
+            <input type="text" name="detalleEntregaProducto" id="inputDetalleEntregaProducto" class="form-control"
+                   placeholder="Ej: Angel Acuña 1557">
+            <div id="errorNombreProducto" class="error"><i class="fas fa-exclamation-triangle mr-2"></i><span></span>
+            </div>
+        </div>
+
         <div class="form-group mb-5">
             <label for="textareaDescripcionProducto">Descripcion</label>
             <textarea class="form-control" rows="5" placeholder="¿Que vendes?" id="textareaDescripcionProducto"

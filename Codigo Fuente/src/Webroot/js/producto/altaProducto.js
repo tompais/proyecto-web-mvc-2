@@ -5,6 +5,19 @@ var inputPrecioProducto = $('#inputPrecioProducto');
 var selectCategoriaProducto = $('#selectCategoriaProducto');
 var selectEstadoProducto = $('#selectEstadoProducto');
 var textareaDescripcionProducto = $('#textareaDescripcionProducto');
+var selectMetodoProducto = $('#selectMetodoProducto');
+var divDetalleEntregaProducto = $('#divDetalleEntregaProducto');
+var inputDetalleEntregaProducto = $('#inputDetalleEntregaProducto');
+
+function metodoEntrega () {
+
+    if (selectMetodoProducto.val() == 1){
+        divDetalleEntregaProducto.removeClass("d-none");
+    }
+    else {
+        divDetalleEntregaProducto.addClass("d-none");
+    }
+}
 
 Dropzone.autoDiscover = false;
 
@@ -46,6 +59,8 @@ function inicializarDropzoneJs() {
                 formData.append("categoriaProducto", selectCategoriaProducto.val());
                 formData.append("estadoProducto", selectEstadoProducto.val());
                 formData.append("descripcionProducto", textareaDescripcionProducto.val());
+                formData.append("metodoProducto", selectMetodoProducto.val());
+                formData.append("detalleEntregaProducto", inputDetalleEntregaProducto.val());
                 btnAgregarEditar.submit();
             });
         }

@@ -39,9 +39,11 @@ class ProductosController extends Controller
 
         $categoria = new Categoria();
         $estado = new Estado();
+        $metodo = new Metodo();
 
         $d["categorias"] = $categoria->traerListaCategorias();
         $d["estados"] = $estado->getAllEstados();
+        $d["metodos"] = $metodo->getAllMetodos();
 
         $this->set($d);
         $this->render(Constantes::ALTAPRODUCTO);
@@ -60,6 +62,14 @@ class ProductosController extends Controller
         $producto->setUsuarioId(unserialize($_SESSION["session"])->getId());
 
         $producto->setDescripcion($publicacion["descripcionProducto"]);
+        $producto->setMetodoId($publicacion["metodoProducto"]);
+
+       if ($publicacion["metodoProducto"] == 1 ){
+            $producto->setDetalleEntrega($publicacion["detalleEntregaProducto"]);
+        }
+        else{
+            $producto->setDetalleEntrega("En Espera");
+        }
 
         if (!$producto->validarProducto())
             throw new ProductoInvalidoException("Los datos del producto no son válidos", CodigoError::ProductoInvalido);

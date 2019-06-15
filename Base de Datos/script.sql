@@ -6152,6 +6152,12 @@ CREATE TABLE Estado (
     constraint PK_Estado primary key (Id)
 );
 
+CREATE TABLE Metodo (	
+	Id int auto_increment NOT NULL,
+    Tipo VARCHAR(20) UNIQUE NOT NULL,
+    constraint PK_Metodo primary key (Id)
+);
+
 CREATE TABLE Producto (
 	Id integer auto_increment not null unique,
     Nombre varchar(50) not null,
@@ -6162,10 +6168,13 @@ CREATE TABLE Producto (
     Descripcion varchar (200),
     FechaBaja datetime,
     FechaAlta datetime not null,
+    MetodoId integer not null,
+    DetalleEntrega varchar (50) not null,
     constraint PK_Producto primary key (Id),
     constraint FK_Producto_Categoria foreign key (CategoriaId) references Categoria (Id),
     constraint FK_Producto_Usuario foreign key (UsuarioId) references Usuario (Id),
-    constraint FK_Producto_Estado foreign key (EstadoId) references Estado (Id)
+    constraint FK_Producto_Estado foreign key (EstadoId) references Estado (Id),
+    constraint FK_Prodfucto_Metodo foreign key (MetodoID) references Metodo (Id)
 );
 
 CREATE TABLE Imagen (
@@ -6236,3 +6245,8 @@ VALUES ("Comestibles"),
         
 INSERT INTO Estado (Nombre)
 VALUES ("Nuevo"), ("Usado"), ("Refabricado");
+
+
+INSERT INTO Metodo (Tipo)
+VALUES ("Punto de Entrega"),
+	   ("Acuerdo Mutuo");		
