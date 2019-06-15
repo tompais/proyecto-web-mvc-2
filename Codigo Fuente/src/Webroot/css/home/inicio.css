@@ -1550,10 +1550,18 @@ section
 	display: none;
 }
 
+#logoResponsiveDiv {
+	display: none;
+}
+
 @media only screen and (min-width: 700px) and (max-width: 1200px) {
 	#logo {
 		display: none;
 	}
+	#logoResponsiveDiv {
+		display: flex;
+	}
+
 	#logoResponsive{
 		display: block;
 	}
@@ -1563,8 +1571,15 @@ section
 	#logo{
 		display: none;
 	}
-	#logoResponsive {
-		display: none;
+
+	#logoResponsiveDiv {
+		display: flex;
+		width: 50px;
+		height: 40px;
+	}
+
+	#logoResponsive{
+		display: block;
 	}
 }
 

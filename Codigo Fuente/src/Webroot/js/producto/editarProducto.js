@@ -6,10 +6,10 @@ var inputPrecioProducto = $('#inputPrecioProducto');
 var selectCategoriaProducto = $('#selectCategoriaProducto');
 var selectEstadoProducto = $('#selectEstadoProducto');
 var textareaDescripcionProducto = $('#textareaDescripcionProducto');
-
+var cantidadDeImagenes = 5 - $('#totalPrecarga').val();
 Dropzone.autoDiscover = false;
 
-function inicializarDropzoneJs() {
+function inicializarDropzoneJs(maximo) {
     dzUpload.dropzone({
         url: pathHome + 'Productos/editar',
         addRemoveLinks: true,
@@ -24,7 +24,7 @@ function inicializarDropzoneJs() {
         autoProcessQueue: false,
         uploadMultiple: true,
         parallelUploads: 5,
-        maxFiles: 5,
+        maxFiles: maximo,
         acceptedFiles: '.png, .jpg, .jpeg',
         init: function () {
             dzClosure = this; // Makes sure that 'this' is understood inside the functions below.
@@ -35,12 +35,15 @@ function inicializarDropzoneJs() {
                 $(".error").fadeOut();
                 //e.preventDefault();
                 e.stopPropagation();
+<<<<<<< HEAD
 
                 if (validarAltaModificarProducto() && dzClosure.getQueuedFiles().length > 0) {
                     e.preventDefault();
                     dzClosure.processQueue();
                 }
                 else
+=======
+>>>>>>> befb45280bc39866403e73bb1917e1ad35697238
                 if (validarAltaModificarProducto()) {
                     dzClosure.processQueue();
                 }
@@ -60,4 +63,19 @@ function inicializarDropzoneJs() {
     });
 }
 
-inicializarDropzoneJs();
+inicializarDropzoneJs(cantidadDeImagenes);
+
+function eliminar(id) {
+    var obj = {};
+    obj.idImagen = id;
+    llamadaAjax(pathAccionProducto, JSON.stringify(obj), true, "eliminarImagen", "dummy");
+}
+
+function eliminarImagen(id) {
+    var elementoPadreButton = $("#" + id).parent();
+    var elementoPadreDiv = elementoPadreButton.parent();
+    cantidadDeImagenes++;
+    console.log(cantidadDeImagenes);
+    elementoPadreDiv.remove();
+    dzUpload.dropzone.options = {maxFiles : cantidadDeImagenes};
+}
