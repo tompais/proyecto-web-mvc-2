@@ -8,30 +8,25 @@
 
 class BuscarController extends Controller
 {
-    function buscarProductoPorNombre($param)
+    function buscarProductoPorNombre($json)
     {
         header("Content-type: application/json");
 
         $producto = new Producto();
 
-        $productos = $producto->buscarMejoresProductosPorNombre(str_replace("%20", " ", $param[0]));
+        $nombres = $producto->getNombresMejoresProductosPorFrase(json_decode(json_encode($json))->producto);
 
-        $productosDto = [];
+        $resultados = [];
 
-        foreach ($productos as $p) {
-            $productoDto = new ProductoDto();
+        foreach ($nombres as $nombre) {
+            $searchResponseDto = new SearchResponseDto();
 
-            $productoDto->id = $p->getId();
-            $productoDto->nombre = $p->getNombre();
-            $productoDto->precio = $p->getPrecio();
-            $productoDto->estado = new EstadoDto();
-            $productoDto->estado->id = $p->getEstado()->getId();
-            $productoDto->estado->nombre = $p->getEstado()->getNombre();
+            $searchResponseDto->name = $nombre;
 
-            $productosDto[] = $productoDto;
+            $resultados[] = $searchResponseDto;
         }
 
-        echo json_encode($productosDto);
+        echo json_encode($resultados);
     }
 
     function productos($param)
@@ -41,8 +36,8 @@ class BuscarController extends Controller
         $producto = new Producto();
         $imagen = new Imagen();
 
-        $d["palabra"] = base64_decode($param[0]);
-        $d["productos"] = $producto->listaProdutosPorNombre(base64_decode($param[0]));
+        $d["palabra"] = str_replace("-", " ", base64_decode(urldecode($param[0])));
+        $d["productos"] = $producto->listaProdutosPorNombre($d["palabra"]);
 
         $imagenes = [];
         $d["imagenes"] = [];

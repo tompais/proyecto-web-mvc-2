@@ -1,6 +1,9 @@
 var espaciador = $("#espaciador");
 var layoutHeader = $("#layoutHeader");
-var inputSearch = $("#inputSearch");
+var inputBuscar = $("#inputBuscar");
+var inputBuscarResponsive = $("#inputBuscarResponsive");
+var btnBuscar = $("#btnBuscar");
+var btnBuscarResponsive = $("#btnBuscarResponsive");
 
 espaciador.height(layoutHeader.height());
 $(window).resize(function () {
@@ -369,55 +372,124 @@ jQuery(document).ready(function ($) {
     }
 });
 
-$('.ui.search').search({
-    type: 'category',
-    minCharacters: 3,
-    cache: true,
-    searchFields: [
-        'title'
-    ],
-    apiSettings: {
-        onResponse: function (productos) {
-            const maxResults = 5;
-            var response = {
-                results: {}
-            };
-            $.each(productos, function (index, producto) {
-                var estado = producto.estado.nombre || 'Desconocido';
-                if (index >= maxResults) {
-                    return false;
-                }
-                if (response.results[estado] === undefined) {
-                    response.results[estado] = {
-                        name: estado,
-                        results: []
-                    };
-                }
-                response.results[estado].results.push({
-                    title: producto.nombre,
-                    description: "$" + producto.precio,
-                    url: pathHome + "Productos/publicacion/" + producto.id
-                });
-            });
-            return response;
-        },
-        url: pathHome + "Buscar/buscarProductoPorNombre/{query}"
+function realizarBusqueda(palabra) {
+    window.location.href = pathHome + "Buscar/productos/" + btoa(encodeURIComponent(palabra.trim().replace("\n", "").replace("\r", "").replace("\t", "").replace(" ", "-"))).replace("=", "");
+}
+
+inputBuscar.easyAutocomplete({
+
+    url: function(phrase) {
+        return pathHome + "Buscar/buscarProductoPorNombre";
     },
-    fullTextSearch: true,
-    error: {
-        source: 'Cannot search. No source used, and Semantic API module was not included',
-        noResults: 'No se han encontrado resultados asociados a su búsqueda',
-        logging: 'Error in debug logging, exiting.',
-        noTemplate: 'Nombre de template inválido.',
-        serverError: 'Hubo un error al enviar la query al server.',
-        maxResults: 'Results must be an array to use maxResults setting',
-        method: 'El método que llamó no está definido.'
+
+    getValue: function(element) {
+        return element.name;
+    },
+
+    ajaxSettings: {
+        dataType: "json",
+        method: "POST",
+        data: {
+            dataType: "json"
+        }
+    },
+
+    list: {
+        showAnimation: {
+            type: "fade", //normal|slide|fade
+            time: 400,
+            callback: function() {}
+        },
+
+        hideAnimation: {
+            type: "slide", //normal|slide|fade
+            time: 400,
+            callback: function() {}
+        },
+
+        onClickEvent: function() {
+            realizarBusqueda(inputBuscar.getSelectedItemData().name);
+        }
+    },
+
+    preparePostData: function(data) {
+        data.producto = inputBuscar.val();
+        return data;
+    },
+
+    requestDelay: 400,
+    theme: "bootstrap"
+});
+
+inputBuscarResponsive.easyAutocomplete({
+
+    url: function(phrase) {
+        return pathHome + "Buscar/buscarProductoPorNombre";
+    },
+
+    getValue: function(element) {
+        return element.name;
+    },
+
+    ajaxSettings: {
+        dataType: "json",
+        method: "POST",
+        data: {
+            dataType: "json"
+        }
+    },
+
+    list: {
+        showAnimation: {
+            type: "fade", //normal|slide|fade
+            time: 400,
+            callback: function() {}
+        },
+
+        hideAnimation: {
+            type: "slide", //normal|slide|fade
+            time: 400,
+            callback: function() {}
+        },
+
+        onClickEvent: function() {
+            realizarBusqueda(inputBuscarResponsive.getSelectedItemData().name);
+        }
+    },
+
+    preparePostData: function(data) {
+        data.producto = inputBuscarResponsive.val();
+        return data;
+    },
+
+    requestDelay: 400,
+    theme: "bootstrap"
+});
+
+inputBuscar.keypress(function (e) {
+    if(e.keyCode === 13) {
+        realizarBusqueda($(this).val());
     }
 });
 
-$('.ui.search').keyup(function (e) {
+inputBuscarResponsive.keypress(function (e) {
     if(e.keyCode === 13) {
-        console.log(inputSearch.val());
-        console.log(pathHome + "Buscar/productos/" + encodeURIComponent(btoa(inputSearch.val())));
+        realizarBusqueda($(this).val());
     }
+});
+
+btnBuscar.change(function () {
+    btnBuscarResponsive.val($(this).val());
+});
+
+btnBuscarResponsive.change(function () {
+    btnBuscar.val($(this).val());
+});
+
+btnBuscar.click(function () {
+    realizarBusqueda(inputBuscar.val());
+});
+
+btnBuscarResponsive.click(function () {
+    realizarBusqueda(inputBuscarResponsive.val());
 });
