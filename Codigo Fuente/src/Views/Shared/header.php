@@ -62,19 +62,32 @@
                     <div class="logo_container">
                         <a href="<?php echo getBaseAddress() ?>"><img class="img-fluid" id="logo"
                                                                       src="<?php echo getBaseAddress() . "Webroot/img/home/logo.png" ?>"></a>
-                        <img class="img-fluid" id="logoResponsive"
-                             src="<?php echo getBaseAddress() . "Webroot/img/home/logoResponsive3.png" ?>">
+                        <div id="logoResponsiveDiv">
+                            <img class="img-fluid" id="logoResponsive"
+                                 src="<?php echo getBaseAddress() . "Webroot/img/home/logoResponsive3.png" ?>">
+                        </div>
                     </div>
                     <nav class="navbar">
 
-                        <!-- <form method="post" action='<?php echo getBaseAddress() . "Buscar/productos" ?>' > -->
-                            <div class="ui fluid search">
-                                <div class="ui left icon input">
-                                        <input class="prompt" type="text" id="inputSearch" placeholder="Buscar...">
-                                        <!-- <button type="submit"> -->  <i class="search icon"></i> <!-- </button> -->
+                        <div class="d-none d-md-flex">
+                            <div class="input-group">
+                                <input type="text" id="inputBuscar" class="form-control" placeholder="Buscar...">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" id="btnBuscar" type="button"><i
+                                                class="fas fa-search"></i></button>
                                 </div>
                             </div>
-                        </form>
+                        </div>
+
+                        <div class="d-flex d-md-none">
+                            <div class="input-group input-group-sm">
+                                <input type="text" id="inputBuscarResponsive" name="buscar" class="form-control" placeholder="Buscar...">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" id="btnBuscarResponsive" type="button"><i
+                                                class="fas fa-search fa-1x"></i></button>
+                                </div>
+                            </div>
+                        </div>
 
                         <ul class="navbar_menu">
                             <li><a href="<?php echo getBaseAddress() ?>">Inicio</a></li>
