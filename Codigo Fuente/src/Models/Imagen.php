@@ -102,9 +102,11 @@ class Imagen extends Model
         return $this->update($imagen);
     }
 
-    public function eliminarImagen()
+    public function eliminarImagen($idImagen)
     {
-        return $this->delete($this->getId());
+        $imagen = $this->selectByPk($idImagen);
+        $imagen["FechaBaja"] = date("Y-m-d H:i:s");
+        return $this->update($imagen);
     }
 
     public function traerImagenPrincipal($productoId)
@@ -115,6 +117,19 @@ class Imagen extends Model
             $this->setId($row[0]["Id"]);
             $this->setNombre($row[0]["Nombre"]);
             $this->setProductoId($row[0]["ProductoId"]);
+        }
+
+        return $row;
+    }
+
+    public function traerImagen($id)
+    {
+        $row = $this->selectByPk($id);
+
+        if($row) {
+            $this->setId($row["Id"]);
+            $this->setNombre($row["Nombre"]);
+            $this->setProductoId($row["ProductoId"]);
         }
 
         return $row;

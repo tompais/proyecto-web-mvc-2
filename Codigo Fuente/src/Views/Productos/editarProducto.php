@@ -1,9 +1,10 @@
 <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/lib/dropzonejs/min/basic.min.css"; ?>">
 <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/lib/dropzonejs/min/dropzone.min.css"; ?>">
 <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/productos/altaProducto.css" ?>">
-
+<script>
+    const pathAccionProducto = "<?php echo getBaseAddress()."Productos/eliminarImagen";?>"
+</script>
 <div class="container my-5 w-75">
-
     <h2>Editar Producto <i class='fas fa-1x fa-edit'></i></h2>
 
     <form action="<?php echo getBaseAddress() . "Productos/editar" ?>" method="post" class="mx-auto bg-white text-left"
@@ -72,7 +73,21 @@
             <div id="errorDescripcionProducto" class="error"><i
                         class="fas fa-exclamation-triangle mr-2"></i><span></span></div>
         </div>
-
+        <div id="precargarImagenes" class="row">
+            <?php
+                echo "<input type='hidden' id='totalPrecarga' value='". count($imagenes) ."'>";
+                foreach ($imagenes as $imagen){
+                    $rutaImg = getBaseAddress() . 'Webroot/img/productos/' . $imagen->getNombre();
+                    $idImagen = $imagen->getId();
+                    echo "<div class='col-md-4'>
+                              <button type='button' class='close col botonEliminar' aria-label='Close'>
+                                <span aria-hidden='true' onclick='eliminar($idImagen)' id='$idImagen'>&times;</span>
+                              </button>
+                              <img src='$rutaImg' alt='' data-image='$rutaImg' style='' class='col'>
+                          </div>";
+                }
+            ?>
+        </div>
         <div class="form-group mb-4">
             <label for="divImagenesProducto">Imagenes</label>
             <div id="dzUpload" class="dropzone mt-2"></div>
