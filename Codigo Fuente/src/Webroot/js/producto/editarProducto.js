@@ -1,5 +1,6 @@
 var dzUpload = $('#dzUpload');
 var btnAgregarEditar = $('#btnAgregarEditar');
+var inputIdProducto = $('#idProducto');
 var inputNombreProducto = $('#inputNombreProducto');
 var inputPrecioProducto = $('#inputPrecioProducto');
 var selectCategoriaProducto = $('#selectCategoriaProducto');
@@ -32,15 +33,22 @@ function inicializarDropzoneJs() {
             btnAgregarEditar.click(function (e) {
                 // Make sure that the form isn't actually being sent.
                 $(".error").fadeOut();
-                e.preventDefault();
+                //e.preventDefault();
                 e.stopPropagation();
-                if(validarAltaModificarProducto()) {
+
+                if (validarAltaModificarProducto() && dzClosure.getQueuedFiles().length > 0) {
+                    e.preventDefault();
+                    dzClosure.processQueue();
+                }
+                else
+                if (validarAltaModificarProducto()) {
                     dzClosure.processQueue();
                 }
             });
 
             //send all the form data along with the files:
             this.on("sendingmultiple", function (data, xhr, formData) {
+                formData.append("idProducto", inputIdProducto.val());
                 formData.append("nombreProducto", inputNombreProducto.val());
                 formData.append("precioProducto", inputPrecioProducto.val());
                 formData.append("categoriaProducto", selectCategoriaProducto.val());

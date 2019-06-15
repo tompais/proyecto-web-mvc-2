@@ -179,8 +179,6 @@ class ProductosController extends Controller
                     $imagenes[$i]->eliminarImagen();
             }
 
-        } else {
-            throw new ImagenNoInsertadaException("No se ha ingresado ninguna imagen para el producto", CodigoError::ImagenNoInsertada);
         }
 
         header("location: " . getBaseAddress() . "Productos/misProductos");
