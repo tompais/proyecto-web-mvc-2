@@ -5,6 +5,7 @@ class Producto extends Model
     private $id;
     private $nombre;
     private $precio;
+    private $cantidad;
     private $categoriaId;
     private $categoria;
     private $usuarioId;
@@ -14,6 +15,72 @@ class Producto extends Model
     private $descripcion;
     private $fechaBaja;
     private $fechaAlta;
+    private $metodo;
+    private $metodoId;
+    private $detalleEntrega;
+
+    /**
+     * @return mixed
+     */
+    public function getCantidad()
+    {
+        return $this->cantidad;
+    }
+
+    /**
+     * @param mixed $cantidad
+     */
+    public function setCantidad($cantidad)
+    {
+        $this->cantidad = $cantidad;
+    }
+    /**
+     * @return mixed
+     */
+    public function getMetodo()
+    {
+        return $this->metodo;
+    }
+
+    /**
+     * @param mixed $metodo
+     */
+    public function setMetodo($metodo)
+    {
+        $this->metodo = $metodo;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMetodoId()
+    {
+        return $this->metodoId;
+    }
+
+    /**
+     * @param mixed $metodoId
+     */
+    public function setMetodoId($metodoId)
+    {
+        $this->metodoId = $metodoId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDetalleEntrega()
+    {
+        return $this->detalleEntrega;
+    }
+
+    /**
+     * @param mixed $detalleEntrega
+     */
+    public function setDetalleEntrega($detalleEntrega)
+    {
+        $this->detalleEntrega = $detalleEntrega;
+    }
 
     /**
      * @return mixed
@@ -146,11 +213,14 @@ class Producto extends Model
         $array = [
             "Nombre" => $this->getNombre(),
             "Precio" => $this->getPrecio(),
+            "Cantidad" => $this->getCantidad(),
             "CategoriaId" => $this->getCategoriaId(),
             "UsuarioId" => $this->getUsuarioId(),
             "Descripcion" => $this->getDescripcion(),
             "FechaAlta" => $this->getFechaAlta(),
-            "EstadoId" => $this->getEstadoId()
+            "EstadoId" => $this->getEstadoId(),
+            "MetodoId" => $this->getMetodoId(),
+            "DetalleEntrega" => $this->getDetalleEntrega()
         ];
         $this->setId($this->insert($array));
         return $this->getId();
@@ -239,6 +309,12 @@ class Producto extends Model
             && FuncionesUtiles::esMayorACero($this->precio);
     }
 
+    public function validarCantidad()
+    {
+        return (FuncionesUtiles::esEntero($this->cantidad) || FuncionesUtiles::esCadenaNumerica($this->cantidad))
+            && FuncionesUtiles::esMayorACero($this->cantidad);
+    }
+
     public function validarCategoria()
     {
         $this->categoria = new Categoria();
@@ -267,6 +343,19 @@ class Producto extends Model
             ($this->getEstadoId() == Estados::Nuevo || $this->getEstadoId() == Estados::Usado || $this->getEstadoId() == Estados::Reformado);
     }
 
+    public function validarMetedo()
+    {
+        return FuncionesUtiles::esMayorACero($this->getMetodoId()) &&
+            ($this->getMetodoId() == Metodos::AcuerdoMutuo || $this->getMetodoId() == Metodos::PuntoDeEntrega);
+    }
+
+    public function validarDetalleEntrega()
+    {
+        return FuncionesUtiles::esOracionCompuesta($this->detalleEntrega)
+            && ($cantLetras = strlen($this->detalleEntrega)) <= 50
+            && $cantLetras >= 5;
+    }
+
     public function validarUsuario()
     {
         $this->setUsuario(new Usuario());
@@ -275,7 +364,15 @@ class Producto extends Model
 
     public function validarProducto()
     {
-        return $this->validarNombre() && $this->validarDescripcion() && $this->validarPrecio() && $this->validarCategoria() && $this->validarEstado() && $this->validarUsuario();
+        return $this->validarNombre() &&
+               $this->validarDescripcion() &&
+               $this->validarPrecio() &&
+               $this->validarCantidad() &&
+               $this->validarMetedo() &&
+               $this->validarDetalleEntrega() &&
+               $this->validarCategoria() &&
+               $this->validarEstado() &&
+               $this->validarUsuario();
     }
 
     public function listaProdutosPorNombre($nombre)
