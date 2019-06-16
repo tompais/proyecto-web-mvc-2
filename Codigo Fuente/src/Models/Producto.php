@@ -263,7 +263,7 @@ class Producto extends Model
 
     public function getNombresMejoresProductosPorFrase($nombre)
     {
-        $rows = $this->pageRows(0, 5, "Nombre like '%$nombre%' AND FechaBaja IS NULL ORDER BY Precio AND EstadoId", [0 => "Nombre"], true);
+        $rows = $this->pageRows(0, 5, "Nombre like '%$nombre%'" . (isset($_SESSION["session"]) ? (" AND UsuarioId != " . unserialize($_SESSION["session"])->getId()) : ("")) . " AND FechaBaja IS NULL ORDER BY Precio AND EstadoId", [0 => "Nombre"], true);
 
         $productos = [];
 
@@ -375,11 +375,11 @@ class Producto extends Model
                $this->validarUsuario();
     }
 
-    public function listaProdutosPorNombre($nombre)
+    public function getListaProdutosActivosDeOtrosUsuariosPorNombre($nombre, $pageNumber, $pageSize)
     {
         $productos = array();
-        $condicion = "Nombre like '%$nombre%' AND FechaBaja IS NULL";
-        $rows = $this->pageRows(0, 8, $condicion);
+        $condicion = "Nombre like '%$nombre%' AND FechaBaja IS NULL" . (isset($_SESSION["session"]) ? (" AND UsuarioId != " . unserialize($_SESSION["session"])->getId()) : (""));
+        $rows = $this->pageRows(($pageNumber - 1) * $pageSize, $pageSize, $condicion);
         foreach ($rows as $row) {
             $producto = new Producto();
             $producto->db->disconnect();
@@ -387,11 +387,17 @@ class Producto extends Model
             $producto->setNombre($row["Nombre"]);
             $producto->setPrecio($row["Precio"]);
             $producto->setCategoriaId($row["CategoriaId"]);
+            $producto->setMetodoId($row["MetodoId"]);
             $producto->setFechaAlta($row["FechaAlta"]);
             $productos[] = $producto;
         }
 
         return $productos;
+    }
+
+    public function getCantProductosActivosDeOtrosUsuariosPorNombre($nombre)
+    {
+        return $this->total("Nombre like '%$nombre%' AND FechaBaja IS NULL" . (isset($_SESSION["session"]) ? (" AND UsuarioId != " . unserialize($_SESSION["session"])->getId()) : ("")));
     }
 }
 

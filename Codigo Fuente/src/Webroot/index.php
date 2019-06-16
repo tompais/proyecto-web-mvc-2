@@ -15,6 +15,7 @@ massiveImport('Enums');
 massiveImport('Utils');
 massiveImport('Exceptions');
 massiveImport('Dto');
+massiveImport('ViewModels');
 massiveImport('Models');
 
 header("Content-Type: text/html; charset=utf-8");
