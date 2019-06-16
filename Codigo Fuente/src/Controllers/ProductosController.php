@@ -115,13 +115,17 @@ class ProductosController extends Controller
 
         $categoria = new Categoria();
         $estado = new Estado();
+        $metodo = new Metodo();
         $producto = new Producto();
         $imagen = new Imagen();
 
         $producto->traerProducto($publicacion[0]);
         $d["categorias"] = $categoria->traerListaCategorias();
         $d["estados"] = $estado->getAllEstados();
+        $d["metodos"] = $metodo->getAllMetodos();
+
         $d["producto"] = $producto;
+
 
         $d["imagenes"] = $imagen->traerListaImagenes($publicacion[0]);
 
@@ -140,7 +144,16 @@ class ProductosController extends Controller
         $producto->setEstadoId($publicacion["estadoProducto"]);
         $producto->setCategoriaId($publicacion["categoriaProducto"]);
         $producto->setDescripcion($publicacion["descripcionProducto"]);
+        $producto->setCantidad($publicacion["cantidadProducto"]);
+        $producto->setMetodoId($publicacion["metodoProducto"]);
         $producto->setUsuarioId($sesion->getId());
+
+        if ($publicacion["metodoProducto"] == 1 ){
+            $producto->setDetalleEntrega($publicacion["detalleEntregaProducto"]);
+        }
+        else{
+            $producto->setDetalleEntrega("En Espera");
+        }
 
         if (!$producto->validarProducto())
             throw new ProductoInvalidoException("Los datos del producto no son válidos", CodigoError::ProductoInvalido);

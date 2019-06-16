@@ -27,6 +27,14 @@
         </div>
 
         <div class="form-group">
+            <label for="inputCantidadProducto">Cantidad</label>
+            <input type="number" name="cantidadProducto" value="<?php echo $producto->getCantidad() ?>"
+                placeholder="Ej: 5" id="inputCantidadProducto" class="form-control">
+            <div id="errorCantidadProducto" class="error"><i class="fas fa-exclamation-triangle mr-2"></i><span></span>
+            </div>
+        </div>
+
+        <div class="form-group">
             <label for="selectCategoriaProducto">Categoria</label>
             <select name="categoriaProducto" id="selectCategoriaProducto" class="form-control">
                 <option value="0" disabled>Categoria</option>
@@ -65,6 +73,34 @@
         </div>
 
         <div class="form-group">
+            <label for="selectMetodoProducto">Metodo de Entrea</label>
+            <select name="metodoProducto" id="selectMetodoProducto" class="form-control">
+                <option value="0" disabled selected>Metodo</option>
+
+                <?php
+                foreach ($metodos as $metodo) {
+
+                    if ($producto->getMetodoId() == $metodo->getId())
+                        echo "<option selected value='" . $metodo->getId() . "'>" . $metodo->getTipo() . "</option>";
+                    else
+                        echo "<option value='" . $metodo->getId() . "'>" . $metodo->getTipo() . "</option>";
+                }
+                ?>
+
+            </select>
+            <div id="errorMetodoProducto" class="error"><i class="fas fa-exclamation-triangle mr-2"></i><span></span>
+            </div>
+        </div>
+
+        <div class="form-group d-none" id="divDetalleEntregaProducto">
+            <label for="inputDetalleEntregaProducto">Punto de Entrega</label>
+            <input type="text" name="detalleEntregaProducto" value="<?php echo $producto->getDetalleEntrega() ?>"
+                   id="inputDetalleEntregaProducto" class="form-control" placeholder="Ej: Angel Acuña 1557">
+            <div id="errorDetalleEntregaProducto" class="error"><i class="fas fa-exclamation-triangle mr-2"></i><span></span>
+            </div>
+        </div>
+
+        <div class="form-group">
             <label for="textareaDescripcionProducto">Descripcion</label>
             <textarea class="form-control" rows="5" id="textareaDescripcionProducto"
                       name="descripcionProducto"> <?php echo $producto->getDescripcion() ?> </textarea>
@@ -73,25 +109,34 @@
             <div id="errorDescripcionProducto" class="error"><i
                         class="fas fa-exclamation-triangle mr-2"></i><span></span></div>
         </div>
-        <div id="precargarImagenes" class="row">
-            <?php
-                echo "<input type='hidden' id='totalPrecarga' value='". count($imagenes) ."'>";
-                foreach ($imagenes as $imagen){
-                    $rutaImg = getBaseAddress() . 'Webroot/img/productos/' . $imagen->getNombre();
-                    $idImagen = $imagen->getId();
-                    echo "<div class='col-md-4'>
-                              <button type='button' class='close col botonEliminar' aria-label='Close'>
-                                <span aria-hidden='true' onclick='eliminar($idImagen)' id='$idImagen'>&times;</span>
-                              </button>
-                              <img src='$rutaImg' alt='' data-image='$rutaImg' style='' class='col'>
-                          </div>";
-                }
-            ?>
-        </div>
-        <div class="form-group mb-4">
+
+        <div class="form-group mt-5">
             <label for="divImagenesProducto">Imagenes</label>
             <div id="dzUpload" class="dropzone mt-2"></div>
         </div>
+
+        <div class="form-group my-3">
+            <label for="divImagenesPrecargadasProducto">Imagenes Precargadas</label>
+            <div id="precargarImagenes" class="row">
+                <?php
+
+                echo "<input type='hidden' id='totalPrecarga' value='". count($imagenes) ."'>";
+
+                foreach ($imagenes as $imagen){
+                    $rutaImg = getBaseAddress() . 'Webroot/img/productos/' . $imagen->getNombre();
+
+                    $idImagen = $imagen->getId();
+                    echo "<div class='card col-md-4 mt-4'>
+                              <img src='$rutaImg' alt='' data-image='$rutaImg' style='' class='col h-75'>
+                              <button type='button' class='close col botonEliminar border-top' aria-label='Close'>
+                                <span aria-hidden='true' class='text-danger' onclick='eliminar($idImagen)' id='$idImagen'>&times;</span>
+                              </button>
+                          </div>";
+                }
+                ?>
+            </div>
+        </div>
+
         <input type="hidden" id="idProducto" name="idProducto" value="<?php echo $producto->getId() ?>"/>
 
         <div class="d-flex justify-content-center align-items-center my-3">

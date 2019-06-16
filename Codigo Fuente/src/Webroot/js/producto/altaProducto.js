@@ -51,9 +51,20 @@ function inicializarDropzoneJs() {
                 $(".error").fadeOut();
                 e.preventDefault();
                 e.stopPropagation();
-                if (validarAltaModificarProducto()) {
+
+                if (dzClosure.getQueuedFiles().length == 0) {
+
+                    $("#errorImagenesProducto").find("span").text("Ingrese al menos una imagen");
+                    $("#errorImagenesProducto").fadeIn("slow");
+
+                }
+                else if (validarAltaModificarProducto()) {
                     dzClosure.processQueue();
                 }
+            });
+
+            this.on("maxfilesexceeded", function(file) {
+                dzClosure.removeFile(file);
             });
 
             //send all the form data along with the files:
