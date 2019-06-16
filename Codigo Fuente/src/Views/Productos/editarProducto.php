@@ -92,7 +92,7 @@
             <label for="divImagenesProducto">Imagenes</label>
             <div id="dzUpload" class="dropzone mt-2"></div>
         </div>
-        <input type="hidden" name="idProducto" value="<?php echo $producto->getId() ?>"/>
+        <input type="hidden" id="idProducto" name="idProducto" value="<?php echo $producto->getId() ?>"/>
 
         <div class="d-flex justify-content-center align-items-center my-3">
             <button type="submit" name="btnAgregarEditar" id="btnAgregarEditar" class="btn btn-primary">Guardar cambios</button>

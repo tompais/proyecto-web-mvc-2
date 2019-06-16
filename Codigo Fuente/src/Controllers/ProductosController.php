@@ -144,18 +144,13 @@ class ProductosController extends Controller
 
         if (!$producto->validarProducto())
             throw new ProductoInvalidoException("Los datos del producto no son válidos", CodigoError::ProductoInvalido);
-
+        
         if (!$producto->actualizarProducto())
             throw new SQLUpdateException("Error al realizar la actualizacion del producto", CodigoError::ErrorUpdateSQL);
 
         if (isset($_FILES["file"]["name"])) {
 
             $imagen = new Imagen();
-
-            $imagenes = $imagen->traerListaImagenes($publicacion["idProducto"]);
-
-            foreach ($imagenes as $img)
-                unlink(ROOT . "Webroot/img/productos/" . $img->getNombre());
 
             $total = count($_FILES["file"]["name"]);
 
@@ -164,29 +159,16 @@ class ProductosController extends Controller
                 $nombreImg = $_FILES["file"]["name"][$id];
 
                 $temp = explode(".", $nombreImg);
-                $newNombre = microtime(true) . '.' . end($temp);
+                $newNombre = TokenHelper::getToken() . '.' . end($temp);
 
                 $ruta .= basename($newNombre);
                 $tmp = $_FILES["file"]["tmp_name"][$id];
                 move_uploaded_file($tmp, $ruta);
-
-                if ($id < count($imagenes)) {
-                    $imagen->setNombre($newNombre);
-                    $imagen->cambiarImagen($imagenes[$id]->getId());
-                } else {
-                    $imagen->setNombre($newNombre);
-                    $imagen->setProductoId($publicacion["idProducto"]);
-                    $imagen->insertarImagen();
-                }
+                $imagen->setNombre($newNombre);
+                $imagen->setProductoId($producto->getId());
+                $imagen->insertarImagen();
             }
 
-            if (count($imagenes) > $total) {
-                for ($i = $total; $i < count($imagenes); $i++)
-                    $imagenes[$i]->eliminarImagen();
-            }
-
-        } else {
-            throw new ImagenNoInsertadaException("No se ha ingresado ninguna imagen para el producto", CodigoError::ImagenNoInsertada);
         }
 
         header("location: " . getBaseAddress() . "Productos/misProductos");
