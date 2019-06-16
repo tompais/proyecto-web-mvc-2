@@ -254,30 +254,59 @@ class Model
 
     /**
      * Obtiene la cantidad de todas las filas
+     * @param string $where opcional. Condicion where para contar
+     * @return bool
      */
-    public function total()
+    public function total($where = '')
     {
-
         $sql = "select count(*) from {$this->table}";
 
-        return $this->db->getOne($sql);
+        if(!empty($where))
+            $sql .= " where $where";
 
+        return $this->db->getOne($sql);
     }
 
     /**
      * Obtiene información con paginado
-     * @param $offset int offset
-     * @param $limit int número de filas en cada página
+     * @param string $offset int offset
+     * @param string $limit int número de filas en cada página
      * @param $where string condición WHERE. Default es vacío
      *
+     * @param array $columns array de columnas a filtrar
+     * @param bool $distinct activa el distinct
      * @return array
      */
-    public function pageRows($offset, $limit, $where = '')
+    public function pageRows($offset = '', $limit = '', $where = '', $columns = [], $distinct = false)
     {
-        if (empty($where))
-            $sql = "select * from {$this->table} limit $offset, $limit";
+        $sql = "select ";
+
+        if($distinct)
+            $sql .= "distinct (*) ";
         else
-            $sql = "select * from {$this->table}  where $where limit $offset, $limit";
+            $sql .= "* ";
+
+        if(count($columns)) {
+            $tmp = "";
+
+            foreach ($columns as $column)
+                $tmp .= $column . ", ";
+
+            $sql = str_replace("*", substr_replace($tmp, "", strripos($tmp, ", ")), $sql);
+        }
+
+        $sql .= "from {$this->table}";
+
+        if(!empty($where))
+            $sql .= " where $where";
+
+        if(is_numeric($offset) && is_numeric($limit))
+            $sql .= " limit $offset, $limit";
+
+//        if (empty($where))
+//            $sql = "select * from {$this->table} limit $offset, $limit";
+//        else
+//            $sql = "select * from {$this->table}  where $where limit $offset, $limit";
         return $this->db->getAll($sql);
     }
 }
