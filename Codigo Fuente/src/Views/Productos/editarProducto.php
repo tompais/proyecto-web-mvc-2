@@ -124,7 +124,7 @@
 
                 foreach ($imagenes as $imagen){
                     $rutaImg = getBaseAddress() . 'Webroot/img/productos/' . $imagen->getNombre();
-                    var_dump($imagen.count());
+
                     $idImagen = $imagen->getId();
                     echo "<div class='card col-md-4 mt-4'>
                               <img src='$rutaImg' alt='' data-image='$rutaImg' style='' class='col h-75'>
