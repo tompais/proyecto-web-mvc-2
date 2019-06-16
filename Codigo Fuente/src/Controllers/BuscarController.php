@@ -34,15 +34,31 @@ class BuscarController extends Controller
         $d["title"] = Constantes::BUSQUEDATITLE;
 
         $producto = new Producto();
-        $imagen = new Imagen();
 
         $d["palabra"] = str_replace("-", " ", base64_decode(urldecode($param[0])));
-        $d["productos"] = $producto->listaProdutosPorNombre($d["palabra"]);
+        $d["cantidadProductos"] = $producto->getCantProductosActivosDeOtrosUsuariosPorNombre($d["palabra"]);
 
-        $imagenes = [];
-        $d["imagenes"] = [];
+        $this->set($d);
+        $this->render(Constantes::BUSQUEDAVIEW);
+    }
 
-        foreach($d["productos"] as $p) {
+    function getPublicaciones($data)
+    {
+        header("Content-type: application/json");
+
+        $producto = new Producto();
+
+        $paginationDataSourceDto = new PaginationDataSourceDto();
+
+        $paginationDataSourceDto->items = [];
+
+        $productos = $producto->getListaProdutosActivosDeOtrosUsuariosPorNombre($data[0], $data["pageNumber"], $data["pageSize"]);
+
+        $imagen = new Imagen();
+
+        $publicaciones = [];
+
+        foreach($productos as $p) {
             if(!$imagen->traerImagenPrincipal($p->getId()))
                 throw new ImagenPrincipalNoEncontradaException("No se ha encontrado la Imagen Principal para el producto con Id " . $p->getId(), CodigoError::ImagenPrincipalNoEncontrada);
 
@@ -51,12 +67,21 @@ class BuscarController extends Controller
             $imagenDto->id = $imagen->getId();
             $imagenDto->nombre = $imagen->getNombre();
 
-            $imagenes[] = $imagenDto;
+            $productoDto = new ProductoDto();
+
+            $productoDto->id = $p->getId();
+            $productoDto->nombre = $p->getNombre();
+            $productoDto->estadoId = $p->getEstadoId();
+            $productoDto->metodoId = $p->getMetodoId();
+            $productoDto->categoriaId = $p->getCategoriaId();
+            $productoDto->precio = $p->getPrecio();
+            $productoDto->fechaAlta = $p->getFechaAlta();
+
+            $publicaciones[] = new PublicacionViewModel($productoDto, $imagenDto);
         }
 
-        $d["imagenes"] = $imagenes;
+        $paginationDataSourceDto->items = $publicaciones;
 
-        $this->set($d);
-        $this->render(Constantes::BUSQUEDAVIEW);
+        echo json_encode($paginationDataSourceDto);
     }
 }

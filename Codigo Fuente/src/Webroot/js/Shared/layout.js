@@ -373,7 +373,7 @@ jQuery(document).ready(function ($) {
 });
 
 function realizarBusqueda(palabra) {
-    window.location.href = pathHome + "Buscar/productos/" + btoa(encodeURIComponent(palabra.trim().replace("\n", "").replace("\r", "").replace("\t", "").replace(" ", "-"))).replace("=", "");
+    window.location.href = pathHome + "Buscar/productos/" + btoa(encodeURIComponent(palabra.trim().replace(new RegExp("\n", "gi"), "").replace(new RegExp("\r", "gi"), "").replace(new RegExp("\t", "gi"), "").replace(new RegExp(" ", "gi"), "-"))).replace(new RegExp('=', 'gi'), "");
 }
 
 inputBuscar.easyAutocomplete({

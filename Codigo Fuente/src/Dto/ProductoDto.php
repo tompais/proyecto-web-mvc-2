@@ -15,6 +15,8 @@ class ProductoDto
     public $usuarioId;
     public $estadoId;
     public $estado;
+    public $metodo;
+    public $metodoId;
     public $descripcion;
     public $fechaBaja;
     public $fechaAlta;
