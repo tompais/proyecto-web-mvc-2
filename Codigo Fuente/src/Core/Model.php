@@ -254,14 +254,17 @@ class Model
 
     /**
      * Obtiene la cantidad de todas las filas
+     * @param string $where opcional. Condicion where para contar
+     * @return bool
      */
-    public function total()
+    public function total($where = '')
     {
-
         $sql = "select count(*) from {$this->table}";
 
-        return $this->db->getOne($sql);
+        if(!empty($where))
+            $sql .= " where $where";
 
+        return $this->db->getOne($sql);
     }
 
     /**
@@ -270,8 +273,8 @@ class Model
      * @param string $limit int número de filas en cada página
      * @param $where string condición WHERE. Default es vacío
      *
-     * @param array $columns
-     * @param bool $distinct
+     * @param array $columns array de columnas a filtrar
+     * @param bool $distinct activa el distinct
      * @return array
      */
     public function pageRows($offset = '', $limit = '', $where = '', $columns = [], $distinct = false)
