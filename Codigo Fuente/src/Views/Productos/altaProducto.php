@@ -98,6 +98,7 @@
         <div class="form-group mb-4">
             <label for="divImagenesProducto">Imagenes</label>
             <div id="dzUpload" class="dropzone mt-2"></div>
+            <div id="errorImagenesProducto" class="error"><i class="fas fa-exclamation-triangle mr-2"></i><span></span></div>
         </div>
 
         <div class="d-flex justify-content-center align-items-center my-3">

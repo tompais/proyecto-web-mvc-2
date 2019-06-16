@@ -259,6 +259,9 @@ class Producto extends Model
         $this->setDescripcion($producto["Descripcion"]);
         $this->setFechaAlta($producto["FechaAlta"]);
         $this->setEstadoId($producto["EstadoId"]);
+        $this->setMetodoId($producto["MetodoId"]);
+        $this->setCantidad($producto["Cantidad"]);
+        $this->setDetalleEntrega($producto["DetalleEntrega"]);
     }
 
     public function getNombresMejoresProductosPorFrase($nombre)

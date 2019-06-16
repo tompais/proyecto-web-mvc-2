@@ -3,10 +3,27 @@ var btnAgregarEditar = $('#btnAgregarEditar');
 var inputIdProducto = $('#idProducto');
 var inputNombreProducto = $('#inputNombreProducto');
 var inputPrecioProducto = $('#inputPrecioProducto');
+var inputCantidadProducto = $('#inputCantidadProducto');
 var selectCategoriaProducto = $('#selectCategoriaProducto');
 var selectEstadoProducto = $('#selectEstadoProducto');
 var textareaDescripcionProducto = $('#textareaDescripcionProducto');
 var cantidadDeImagenes = 5 - $('#totalPrecarga').val();
+var selectMetodoProducto = $('#selectMetodoProducto');
+var divDetalleEntregaProducto = $('#divDetalleEntregaProducto');
+var inputDetalleEntregaProducto = $('#inputDetalleEntregaProducto');
+
+selectMetodoProducto.change(
+
+    function metodoEntrega () {
+
+        if (selectMetodoProducto.val() == 2){
+            divDetalleEntregaProducto.addClass("d-none");
+        }
+        else {
+            divDetalleEntregaProducto.removeClass("d-none");
+        }
+    }
+);
 Dropzone.autoDiscover = false;
 
 dzUpload.dropzone({
@@ -35,14 +52,15 @@ dzUpload.dropzone({
             //e.preventDefault();
             e.stopPropagation();
 
-            if (validarAltaModificarProducto() && dzClosure.getQueuedFiles().length > 0) {
-                e.preventDefault();
+            if (dzClosure.getQueuedFiles().length == 0) {
+
+                $("#errorImagenesProducto").find("span").text("Ingrese al menos una imagen");
+                $("#errorImagenesProducto").fadeIn("slow");
+
+            }
+            else if (validarAltaModificarProducto()) {
                 dzClosure.processQueue();
             }
-            else
-                if (validarAltaModificarProducto()) {
-                    dzClosure.processQueue();
-                }
         });
 
         this.on("maxfilesexceeded", function(file) {
@@ -54,9 +72,12 @@ dzUpload.dropzone({
             formData.append("idProducto", inputIdProducto.val());
             formData.append("nombreProducto", inputNombreProducto.val());
             formData.append("precioProducto", inputPrecioProducto.val());
+            formData.append("cantidadProducto", inputCantidadProducto.val());
             formData.append("categoriaProducto", selectCategoriaProducto.val());
             formData.append("estadoProducto", selectEstadoProducto.val());
             formData.append("descripcionProducto", textareaDescripcionProducto.val());
+            formData.append("metodoProducto", selectMetodoProducto.val());
+            formData.append("detalleEntregaProducto", inputDetalleEntregaProducto.val());
             btnAgregarEditar.submit();
         });
     }
