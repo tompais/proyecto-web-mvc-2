@@ -38,5 +38,3 @@
 
 <script src="<?php echo getBaseAddress() . "Webroot/lib/paginationjs/dist/pagination.min.js"; ?>"></script>
 <script src="<?php echo getBaseAddress() . "Webroot/js/buscar/buscar.js"; ?>"></script>
-
-
