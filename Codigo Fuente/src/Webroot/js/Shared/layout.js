@@ -472,24 +472,15 @@ inputBuscar.keypress(function (e) {
     }
 });
 
-inputBuscarResponsive.keypress(function (e) {
-    if(e.keyCode === 13) {
-        realizarBusqueda($(this).val());
-    }
-});
+
 
 btnBuscar.change(function () {
     btnBuscarResponsive.val($(this).val());
 });
 
-btnBuscarResponsive.change(function () {
-    btnBuscar.val($(this).val());
-});
+
 
 btnBuscar.click(function () {
     realizarBusqueda(inputBuscar.val());
 });
 
-btnBuscarResponsive.click(function () {
-    realizarBusqueda(inputBuscarResponsive.val());
-});
