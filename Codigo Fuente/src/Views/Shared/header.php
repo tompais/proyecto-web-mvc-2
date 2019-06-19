@@ -98,7 +98,8 @@
 
                         <ul class="navbar_user">
                             <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
+                            <?php $pathCarrito = getBaseAddress().'Carrito/mostrar'?>
+                            <li><a href="<?php echo $pathCarrito ?>"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
                         </ul>
                         <div class="hamburger_container">
                             <i class="fa fa-bars" aria-hidden="true"></i>

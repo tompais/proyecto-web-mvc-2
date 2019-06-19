@@ -55,6 +55,7 @@ paginador.pagination({
 
                 var anchorButtonAddToCart = $('<a>');
                 anchorButtonAddToCart.attr('href', '#'); //TODO hay que agregar atributo de acción a agregar a carrito
+                anchorButtonAddToCart.attr('onclick', 'agregarProductoCarrito(' + data[i].producto.id + ')');
 
                 var fabOpenCart = $('<i class="fab fa-opencart mr-2">');
 
@@ -90,3 +91,13 @@ paginador.pagination({
         dataType: 'json'
     }
 });
+
+function agregarProductoCarrito(id) {
+    var obj = {};
+    obj.idProducto = id;
+    llamadaAjax(pathHome + 'Carrito/agregar', JSON.stringify(obj), true, "todosPutos", "dummy");
+}
+
+function todosPutos(dummy) {
+
+}
