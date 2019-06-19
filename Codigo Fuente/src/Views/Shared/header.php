@@ -84,14 +84,14 @@
 
                 <div class="col-2 col-lg-4 mt-4">
 
-                    <ul class="navbar_menu mt-2">
+                    <ul class="navbar_menu mt-2" id="elementosNavegacion">
                         <li class="mr-2"><a href="#" ><i class='fas fa-cash-register mr-1' aria-hidden="true"></i>Compras</a></li>
                         <li class="mr-2"><a href="<?php echo getBaseAddress() . 'Productos/misProductos' ?>"><i class='fas fa-piggy-bank  mr-1' aria-hidden="true"></i>Ventas</a></li>
                         <li class="mr-2"><a href="<?php echo getBaseAddress() . 'Carrito/mostrar' ?>" id="carrito"><i class="fa fa-shopping-cart mr-1" aria-hidden="true"></i>Carrito</a><span id="checkout_items" class="checkout_items">2</span></li>
                     </ul>
 
-                    <div class="hamburger_container">
-                        <i class="fa fa-bars" aria-hidden="true"></i>
+                    <div class="hamburger_container mt-1 mr-3">
+                        <i class="fa fa-2x fa-bars" aria-hidden="true"></i>
                     </div>
                 </div>
 
@@ -135,10 +135,9 @@
 
                 ?>
             </li>
-            <li class="menu_item"><a href="<?php echo getBaseAddress() ?>"><i class="fas fa-home mr-1"></i>Inicio</a>
-            </li>
-            <li class="menu_item"><a href="<?php echo getBaseAddress() . 'Carrito/mostrar' ?>"><i
-                            class="fas fa-shopping-cart mr-1"></i>Carrito</a></li>
+
+            <li class="menu_item"><a href="<?php echo getBaseAddress() ?>"><i class="fas fa-home mr-1"></i>Inicio</a></li>
+            <li class="menu_item"><a href="<?php echo getBaseAddress() . 'Carrito/mostrar' ?>"><i class="fas fa-shopping-cart mr-1"></i>Carrito</a></li>
 
         </ul>
     </div>

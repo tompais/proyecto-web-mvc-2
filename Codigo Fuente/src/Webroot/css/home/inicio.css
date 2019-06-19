@@ -1587,11 +1587,11 @@ section
 	#logoResponsive{
 		display: flex;
 	}
-	#carrito {
+	#elementosNavegacion {
 		display: none;
 	}
 	.easy-autocomplete{
-		width: 80% !important
+		width: 75% !important
 	}
 }
 
