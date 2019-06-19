@@ -62,15 +62,30 @@
                     <div class="logo_container">
                         <a href="<?php echo getBaseAddress() ?>"><img class="img-fluid" id="logo"
                                                                       src="<?php echo getBaseAddress() . "Webroot/img/home/logo.png" ?>"></a>
-                        <img class="img-fluid" id="logoResponsive"
-                             src="<?php echo getBaseAddress() . "Webroot/img/home/logoResponsive3.png" ?>">
+                        <div id="logoResponsiveDiv">
+                            <img class="img-fluid" id="logoResponsive"
+                                 src="<?php echo getBaseAddress() . "Webroot/img/home/logoResponsive3.png" ?>">
+                        </div>
                     </div>
                     <nav class="navbar">
 
-                        <div class="ui fluid search">
-                            <div class="ui left icon input">
-                                <input class="prompt" type="text" placeholder="Buscar...">
-                                <i class="search icon"></i>
+                        <div class="d-none d-md-flex">
+                            <div class="input-group">
+                                <input type="text" id="inputBuscar" class="form-control" placeholder="Buscar...">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" id="btnBuscar" type="button"><i
+                                                class="fas fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex d-md-none">
+                            <div class="input-group input-group-sm">
+                                <input type="text" id="inputBuscarResponsive" name="buscar" class="form-control" placeholder="Buscar...">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" id="btnBuscarResponsive" type="button"><i
+                                                class="fas fa-search fa-1x"></i></button>
+                                </div>
                             </div>
                         </div>
 
@@ -83,7 +98,8 @@
 
                         <ul class="navbar_user">
                             <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
+                            <?php $pathCarrito = getBaseAddress().'Carrito/mostrar'?>
+                            <li><a href="<?php echo $pathCarrito ?>"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
                         </ul>
                         <div class="hamburger_container">
                             <i class="fa fa-bars" aria-hidden="true"></i>

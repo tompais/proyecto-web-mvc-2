@@ -21,4 +21,8 @@ abstract class CodigoError
     const EnvioMailRenovacionPasswordFallido = 14;
     const UsuarioNoEncontrado = 15;
     const EstadoInvalido = 20;
+    const ProductoNoEncontrado = 16;
+    const ImagenPrincipalNoEncontrada = 30;
+    const EliminarProducto = 33;
+    const EliminacionMasivaImagen = 40;
 }

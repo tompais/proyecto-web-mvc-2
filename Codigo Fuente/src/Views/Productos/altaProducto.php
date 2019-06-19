@@ -1,5 +1,6 @@
+<link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/lib/dropzonejs/min/basic.min.css"; ?>">
+<link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/lib/dropzonejs/min/dropzone.min.css"; ?>">
 <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/productos/altaProducto.css" ?>">
-<link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/lib/ImageUpload/css/main.2680b2521d08e92a174b.css" ?>">
 
 <div class="container col-xl-7 col-sm-5 mt-3">
 
@@ -21,6 +22,14 @@
             <input type="number" name="precioProducto" placeholder="Ej: 1300" id="inputPrecioProducto"
                    class="form-control">
             <div id="errorPrecioProducto" class="error"><i class="fas fa-exclamation-triangle mr-2"></i><span></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="inputCantidadProducto">Cantidad</label>
+            <input type="number" name="cantidadProducto" placeholder="Ej: 5" id="inputCantidadProducto"
+                   class="form-control">
+            <div id="errorCantidadProducto" class="error"><i class="fas fa-exclamation-triangle mr-2"></i><span></span>
             </div>
         </div>
 
@@ -55,38 +64,51 @@
         </div>
 
         <div class="form-group">
+            <label for="selectMetodoProducto">Metodo de Entrea</label>
+            <select name="metodoProducto" id="selectMetodoProducto" class="form-control">
+                <option value="0" disabled selected>Metodo</option>
+
+                <?php
+                foreach ($metodos as $metodo)
+                    echo "<option value='" . $metodo->getId() . "'>" . $metodo->getTipo() . "</option>";
+                ?>
+
+            </select>
+            <div id="errorMetodoProducto" class="error"><i class="fas fa-exclamation-triangle mr-2"></i><span></span>
+            </div>
+        </div>
+
+        <div class="form-group d-none" id="divDetalleEntregaProducto">
+            <label for="inputDetalleEntregaProducto">Punto de Entrega</label>
+            <input type="text" name="detalleEntregaProducto" id="inputDetalleEntregaProducto" class="form-control"
+                   placeholder="Ej: Angel Acuña 1557">
+            <div id="errorDetalleEntregaProducto" class="error"><i class="fas fa-exclamation-triangle mr-2"></i><span></span>
+            </div>
+        </div>
+
+        <div class="form-group mb-5">
             <label for="textareaDescripcionProducto">Descripcion</label>
             <textarea class="form-control" rows="5" placeholder="¿Que vendes?" id="textareaDescripcionProducto"
                       name="descripcionProducto"></textarea>
             <small class="form-text text-muted float-left">Opcional</small>
             <div class="mt-2 float-right"><span id='caracteres'>0</span>/200<span></div>
-            <div id="errorDescripcionProducto" class="error"><i
-                        class="fas fa-exclamation-triangle mr-2"></i><span></span></div>
+            <div id="errorDescripcionProducto" class="error"><i class="fas fa-exclamation-triangle mr-2"></i><span></span></div>
         </div>
 
-
-        <div class="custom-file-container mt-5" data-upload-id=myFirstImage>
-            <label for="inputFileImages">Imagenes<a href=javascript:void(0) class=custom-file-container__image-clear
-                                                    title="Clear Image"><i class="fas fa-times ml-2"></i></a></label>
-            <label class="custom-file-container__custom-file">
-                <input type=file class="custom-file-container__custom-file__custom-file-input" accept=".png,.jpg,.jpeg"
-                       multiple=multiple aria-label="Seleccionar" name="imagenProducto[]" id="inputImagenProducto">
-                <input type=hidden name=MAX_FILE_SIZE value=10485760> <span
-                        class="custom-file-container__custom-file__custom-file-control"></span></label>
-            <div class=custom-file-container__image-preview></div>
-            <div id="errorImagenProducto" class="error"><i class="fas fa-exclamation-triangle mr-2"></i><span></span>
-            </div>
+        <div class="form-group mb-4">
+            <label for="divImagenesProducto">Imagenes</label>
+            <div id="dzUpload" class="dropzone mt-2"></div>
+            <div id="errorImagenesProducto" class="error"><i class="fas fa-exclamation-triangle mr-2"></i><span></span></div>
         </div>
-
 
         <div class="d-flex justify-content-center align-items-center my-3">
-            <button type="submit" name="btnAgregar" id="btnAgregar" class="btn btn-primary">Agregar</button>
+            <button type="submit" name="btnAgregarEditar" id="btnAgregarEditar" class="btn btn-primary">Agregar</button>
         </div>
 
     </form>
 
 </div>
 
-<script src="<?php echo getBaseAddress() . "Webroot/js/producto/validacionAMProducto.js" ?>"></script>
-<script src="<?php echo getBaseAddress() . "Webroot/lib/ImageUpload/js/main.f7f7894738fb01e41d2e.js" ?>"></script>
-<script src="<?php echo getBaseAddress() . "Webroot/lib/ImageUpload/js/vendor.e990ab0e5e609130e9c2.js" ?>"></script>
+<script src="<?php echo getBaseAddress() . "Webroot/lib/dropzonejs/min/dropzone.min.js"; ?>"></script>
+<script src="<?php echo getBaseAddress() . "Webroot/js/producto/validacionAMProducto.js"; ?>"></script>
+<script src="<?php echo getBaseAddress() . "Webroot/js/producto/altaProducto.js"; ?>"></script>

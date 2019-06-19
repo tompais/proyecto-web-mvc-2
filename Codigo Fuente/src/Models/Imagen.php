@@ -6,6 +6,23 @@ class Imagen extends Model
     private $nombre;
     private $productoId;
     private $producto;
+    private $fechaBaja;
+
+    /**
+     * @return mixed
+     */
+    public function getFechaBaja()
+    {
+        return $this->fechaBaja;
+    }
+
+    /**
+     * @param mixed $fechaBaja
+     */
+    public function setFechaBaja($fechaBaja)
+    {
+        $this->fechaBaja = $fechaBaja;
+    }
 
     public function getId()
     {
@@ -51,7 +68,7 @@ class Imagen extends Model
     {
         $array = [
             "Nombre" => $this->getNombre(),
-            "ProductoId" => $this->getProductoId()
+            "ProductoId" => $this->getProductoId(),
         ];
         $this->setId($this->insert($array));
         return $this->getId();
@@ -61,11 +78,12 @@ class Imagen extends Model
     {
         $imagenes = array();
 
-        $rows = $this->pageRows(0, PHP_INT_MAX, "ProductoId = $pk");
+        $rows = $this->pageRows(0, PHP_INT_MAX, "ProductoId = $pk AND FechaBaja IS NULL");
 
         foreach($rows as $row)
         {
             $imagen = new Imagen();
+            $imagen->db->disconnect();
             $imagen->setId($row["Id"]);
             $imagen->setNombre($row["Nombre"]);
             $imagen->setProductoId($row["ProductoId"]);
@@ -84,9 +102,55 @@ class Imagen extends Model
         return $this->update($imagen);
     }
 
-    public function eliminarImagen()
+    public function eliminarImagen($idImagen)
     {
-        return $this->delete($this->getId());
+        $imagen = $this->selectByPk($idImagen);
+        $imagen["FechaBaja"] = date("Y-m-d H:i:s");
+        return $this->update($imagen);
+    }
+
+    public function traerImagenPrincipal($productoId)
+    {
+        $row = $this->pageRows(0, 1, "ProductoId = $productoId AND FechaBaja IS NULL");
+
+        if($row) {
+            $this->setId($row[0]["Id"]);
+            $this->setNombre($row[0]["Nombre"]);
+            $this->setProductoId($row[0]["ProductoId"]);
+        }
+
+        return $row;
+    }
+
+    public function traerImagen($id)
+    {
+        $row = $this->selectByPk($id);
+
+        if($row) {
+            $this->setId($row["Id"]);
+            $this->setNombre($row["Nombre"]);
+            $this->setProductoId($row["ProductoId"]);
+        }
+
+        return $row;
+    }
+
+    public function eliminarImagenesProducto($idProducto)
+    {
+        $rows = $this->pageRows(0, 4, "ProductoId = $idProducto AND FechaBaja IS NULL");
+
+        if($rows) {
+            foreach($rows as $row) {
+                $row["FechaBaja"] = date("Y-m-d H:i:s");
+
+                if(!$this->update($row)) {
+                    $rows = null;
+                    break;
+                }
+            }
+        }
+
+        return $rows;
     }
 }
 

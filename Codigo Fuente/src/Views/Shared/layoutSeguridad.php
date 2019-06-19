@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/lib/OwlCarousel2-2.2.1/owl.theme.default.css" ?>">
     <link rel="shortcut icon" href="<?php echo getBaseAddress() . "Webroot/img/favicon.ico" ?>" type="image/x-icon">
     <link rel="icon" href="<?php echo getBaseAddress() . "Webroot/img/favicon.ico" ?>" type="image/x-icon">
+    <link href="<?php echo getBaseAddress() . "Webroot/css/shared/poppins.css"; ?>" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/home/inicio.css" ?>">
     <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/home/responsive.css" ?>">
     <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/error/errorValidaciones.css" ?>">

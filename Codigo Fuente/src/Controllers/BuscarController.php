@@ -8,35 +8,80 @@
 
 class BuscarController extends Controller
 {
-    function buscarProductoPorNombre($param)
+    function buscarProductoPorNombre($json)
     {
         header("Content-type: application/json");
 
         $producto = new Producto();
 
-        $productos = $producto->buscarMejoresProductosPorNombre($param[0]);
+        $nombres = $producto->getNombresMejoresProductosPorFrase(json_decode(json_encode($json))->producto);
 
-        $productosDto = [];
+        $resultados = [];
 
-        foreach ($productos as $p) {
-            $productoDto = new ProductoDto();
+        foreach ($nombres as $nombre) {
+            $searchResponseDto = new SearchResponseDto();
 
-            $productoDto->id = $p->getId();
-            $productoDto->nombre = $p->getNombre();
-            $productoDto->precio = $p->getPrecio();
-            $productoDto->estado = new EstadoDto();
-            $productoDto->estado->id = $p->getEstado()->getId();
-            $productoDto->estado->nombre = $p->getEstado()->getNombre();
+            $searchResponseDto->name = $nombre;
 
-            $productosDto[] = $productoDto;
+            $resultados[] = $searchResponseDto;
         }
 
-        echo json_encode($productosDto);
+        echo json_encode($resultados);
     }
 
     function productos($param)
     {
+        $d["title"] = Constantes::BUSQUEDATITLE;
 
+        $producto = new Producto();
+
+        $d["palabra"] = str_replace("-", " ", base64_decode(urldecode($param[0])));
+        $d["cantidadProductos"] = $producto->getCantProductosActivosDeOtrosUsuariosPorNombre($d["palabra"]);
+
+        $this->set($d);
         $this->render(Constantes::BUSQUEDAVIEW);
+    }
+
+    function getPublicaciones($data)
+    {
+        header("Content-type: application/json");
+
+        $producto = new Producto();
+
+        $paginationDataSourceDto = new PaginationDataSourceDto();
+
+        $paginationDataSourceDto->items = [];
+
+        $productos = $producto->getListaProdutosActivosDeOtrosUsuariosPorNombre($data[0], $data["pageNumber"], $data["pageSize"]);
+
+        $imagen = new Imagen();
+
+        $publicaciones = [];
+
+        foreach($productos as $p) {
+            if(!$imagen->traerImagenPrincipal($p->getId()))
+                throw new ImagenPrincipalNoEncontradaException("No se ha encontrado la Imagen Principal para el producto con Id " . $p->getId(), CodigoError::ImagenPrincipalNoEncontrada);
+
+            $imagenDto = new ImagenDto();
+
+            $imagenDto->id = $imagen->getId();
+            $imagenDto->nombre = $imagen->getNombre();
+
+            $productoDto = new ProductoDto();
+
+            $productoDto->id = $p->getId();
+            $productoDto->nombre = $p->getNombre();
+            $productoDto->estadoId = $p->getEstadoId();
+            $productoDto->metodoId = $p->getMetodoId();
+            $productoDto->categoriaId = $p->getCategoriaId();
+            $productoDto->precio = $p->getPrecio();
+            $productoDto->fechaAlta = $p->getFechaAlta();
+
+            $publicaciones[] = new PublicacionViewModel($productoDto, $imagenDto);
+        }
+
+        $paginationDataSourceDto->items = $publicaciones;
+
+        echo json_encode($paginationDataSourceDto);
     }
 }
