@@ -4,6 +4,10 @@
 2. Body y demas
 *********************************/
 
+.easy-autocomplete{
+	width: 90% !important
+}
+
 *
 {
 	margin: 0;
@@ -434,15 +438,18 @@ section
 {
 	display: block;
 	color: #1e1e27;
-	font-size: 13px;
+	font-size: 15px;
 	font-weight: 500;
 	text-transform: uppercase;
-	padding: 20px;
 	-webkit-transition: color 0.3s ease;
 	-moz-transition: color 0.3s ease;
 	-ms-transition: color 0.3s ease;
 	-o-transition: color 0.3s ease;
 	transition: color 0.3s ease;
+}
+.navbar_menu li a i
+{
+	color: #0099df;
 }
 .navbar_menu li a:hover
 {
@@ -494,12 +501,12 @@ section
 	justify-content: center;
 	align-items: center;
 	position: absolute;
-	top: -9px;
-	left: 22px;
+	top: 8px;
+	left: 290px;
 	width: 20px;
 	height: 20px;
 	border-radius: 50%;
-	background: #fe4c50;
+	background: #0099df;
 	font-size: 12px;
 	color: #FFFFFF;
 }
@@ -676,7 +683,7 @@ section
 	-ms-transform: translateY(-50%);
 	-o-transform: translateY(-50%);
 	transform: translateY(-50%);
-	left: 15px;
+
 }
 
 
@@ -1536,7 +1543,7 @@ section
 }
 .footer_social ul li:last-child a
 {
-	padding-right: 0px;
+	padding-right: 0;
 }
 .footer_social ul li a:hover
 {
@@ -1574,12 +1581,17 @@ section
 
 	#logoResponsiveDiv {
 		display: flex;
-		width: 50px;
-		height: 40px;
+		width: 100px;
 	}
 
 	#logoResponsive{
-		display: block;
+		display: flex;
+	}
+	#elementosNavegacion {
+		display: none;
+	}
+	.easy-autocomplete{
+		width: 75% !important
 	}
 }
 
