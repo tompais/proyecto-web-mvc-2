@@ -78,6 +78,8 @@
                 <br>
                 <br>
                 <button type="button" class="btn btn-light ml-4"><i class="fas fa-cart-plus mr-1" style="color: #0099df"></i>Añadir al Carrito</button>
+                <button type="button" class="btn btn-light ml-4"><i class="fas fa-money-check-alt mr-1" style="color: #0099df"></i>Comprar</button>
+
             </div>
         </div>
     </div>

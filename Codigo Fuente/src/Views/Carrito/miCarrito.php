@@ -1,6 +1,15 @@
 
-<div class="container-fluid">
-        <h3 class="my-3">Carrito de compras</h3>
+<div class="container mt-3">
+
+    <div class="panel-heading">
+        <div class="panel-title pt-3">
+            <div class="row">
+                <div class="col-xl-5 col-sm-5">
+                    <h2>Mi Carrito<i class="fa fa-shopping-cart ml-2"></i></h2>
+                </div>
+            </div>
+        </div>
+    </div>
         <?php
 
         if(!isset($_SESSION["carrito"]) || !$publicaciones || !count($publicaciones)) {
