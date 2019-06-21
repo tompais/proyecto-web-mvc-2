@@ -1,5 +1,5 @@
 
-<div class="container mt-3">
+<div class="container mt-3 mb-5">
 
     <div class="panel-heading">
         <div class="panel-title pt-3">
@@ -37,18 +37,19 @@
                 <tr class='productosEnCarrito' id='$idProducto'>
                         <td><img src='$rutaImgPrincipal' width='100px' height='100px'></td>
                         <td>$nombreProducto</td>
-                        <td><button onclick='eliminarProducto($idProducto)'>Eliminar</button></td>
+                        <td><button class='btn btn-danger' onclick='eliminarProducto($idProducto)'>Eliminar</button></td>
                         <td>
                             <div class='quantity d-flex flex-column flex-sm-row align-items-sm-center'>
                                 <div class='quantity_selector'>
-                                    <span class='minus' onclick='bajarSubTotal($idProducto,$cantidadTotal)'><i class='fa fa-minus' aria-hidden='true'></i></span>
+                                    <span class='minus' onclick='bajarSubTotal($idProducto,$cantidadTotal)'><i class='fa fa-minus mr-3' aria-hidden='true'></i></span>
                                     <span id='quantity_value'>$cantidadInicial</span>
-                                    <span class='plus' onclick='subirSubTotal($idProducto, $cantidadTotal)'><i class='fa fa-plus' aria-hidden='true'></i></span>
+                                    <span class='plus' onclick='subirSubTotal($idProducto, $cantidadTotal)'><i class='fa fa-plus ml-3' aria-hidden='true'></i></span>
                                 </div>
                             </div>
                         </td>
                         <td class='precioProducto'>$precio</td>
                         <td class='subtotal'></td>
+                        
                 </tr>
                 <tr>
                     <td></td>
@@ -60,7 +61,9 @@
                 </tr>";
             }
             echo "</table>";
+            echo '<button type="button" class="btn btn-light mr-5 float-right"><i class="fas fa-money-check-alt mr-1" style="color: #0099df"></i>Comprar</button>';
         }
         ?>
+
 </div>
 <script src="<?php echo getBaseAddress() . "Webroot/js/carrito/carrito.js" ?>"></script>

@@ -67,64 +67,145 @@
 
                 <div class="product_price mt-5">$ <?php echo $producto->getPrecio() ?></div>
 
-                <div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
-                    <span>Cantidad:</span>
-                    <div class="quantity_selector">
-                        <span class="minus"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                        <span id="quantity_value">1</span>
-                        <span class="plus"><i class="fa fa-plus" aria-hidden="true"></i></span>
-                    </div>
-                </div>
                 <br>
                 <br>
-                <button type="button" class="btn btn-light ml-4"><i class="fas fa-cart-plus mr-1" style="color: #0099df"></i>Añadir al Carrito</button>
-                <button type="button" class="btn btn-light ml-4"><i class="fas fa-money-check-alt mr-1" style="color: #0099df"></i>Comprar</button>
-
+                <button type="button" class="btn btn-light mt-2"><i class="fas fa-cart-plus mr-1" style="color: #0099df"></i>Añadir al Carrito</button>
             </div>
         </div>
     </div>
 
-</div>
-
-<!-- Tabs -->
-
-<div class="tabs_section_container">
-
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <div class="tabs_container">
-                    <ul class="tabs d-flex flex-sm-row flex-column align-items-left align-items-md-center justify-content-center">
-                        <li class="tab active" data-active-tab="tab_1"><h2 style="color: #049be0;">Vendedor</h2></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+    <div class="tabs_section_container">
 
         <div class="container">
-            <div class="jumbotron">
-                <div class="row">
-                    <div class="col-md-4 col-xs-12 col-sm-6 col-lg-4">
-                        <img src="<?php echo getBaseAddress() . "Webroot/img/publicacion/user.png" ?>" alt="stack photo" class="img">
-                    </div>
-                    <div class="col-md-8 col-xs-12 col-sm-6 col-lg-8" id="iconUser">
-                        <div class="container" style="border-bottom:1px solid black">
-                            <h2> <?php echo $usuario->getNombre() ." ". $usuario->getApellido() ?> </h2>
-                        </div>
-                        <hr>
-                        <ul class="container details">
-                            <li><p><i class="fas fa-mobile-alt" style="width: 30px; color: #0099df"></i><?php echo $usuario->getTelefonoCelular() ?></p></li>
-                            <li><p><i class="fas fa-envelope" style="width: 30px; color: #0099df"></i><?php echo $usuario->getEmail() ?></p></li>
-                            <li><p><i class="fas fa-calendar-alt" style="width: 30px; color: #0099df"></i><?php echo $usuario->getFechaNacimiento() ?></p></li>
-                            <li><p><i class="fas fa-user-tag" style="width: 30px; color: #0099df"></i><?php echo $usuario->getUsername() ?></p>
+            <div class="row">
+                <div class="col">
+                    <div class="tabs_container">
+                        <ul class="tabs d-flex flex-sm-row flex-column align-items-left align-items-md-center justify-content-center">
+                            <li class="tab active" data-active-tab="tab_1"><span>Descripcion</span></li>
+                            <li class="tab" data-active-tab="tab_3"><span>Comentarios</span></li>
                         </ul>
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col">
+
+                    <!-- Tab Description -->
+
+                    <div id="tab_1" class="tab_container active">
+                        <div class="row">
+                            <div class="col-lg-5 desc_col">
+                                <div class="tab_title">
+                                    <h4>Descrpcion</h4>
+                                </div>
+                                <div class="tab_text_block">
+                                    <h2>Pocket cotton sweatshirt</h2>
+                                    <p>Nam tempus turpis at metus scelerisque placerat nulla deumantos solicitud felis. Pellentesque diam dolor, elementum etos lobortis des mollis ut...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab Reviews -->
+
+                    <div id="tab_3" class="tab_container">
+                        <div class="row">
+
+                            <!-- User Reviews -->
+
+                            <div class="col-lg-6 reviews_col">
+                                <div class="tab_title reviews_title">
+                                    <h4>Comentarios</h4>
+                                </div>
+
+                                <!-- User Review -->
+
+                                <div class="user_review_container d-flex flex-column flex-sm-row">
+                                    <div class="user">
+                                        <div class="user_pic"></div>
+                                        <div class="user_rating">
+                                            <ul class="star_rating">
+                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="review">
+                                        <div class="review_date">27 Aug 2016</div>
+                                        <div class="user_name">Brandon William</div>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                    </div>
+                                </div>
+
+                                <!-- User Review -->
+
+                                <div class="user_review_container d-flex flex-column flex-sm-row">
+                                    <div class="user">
+                                        <div class="user_pic"></div>
+                                        <div class="user_rating">
+                                            <ul class="star_rating">
+                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="review">
+                                        <div class="review_date">27 Aug 2016</div>
+                                        <div class="user_name">Brandon William</div>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Add Review -->
+
+                            <div class="col-lg-6 add_review_col">
+
+                                <div class="add_review">
+                                    <form id="review_form" action="post">
+                                        <div>
+                                            <h1>Add Review</h1>
+                                            <input id="review_name" class="form_input input_name" type="text" name="name" placeholder="Name*" required="required" data-error="Name is required.">
+                                            <input id="review_email" class="form_input input_email" type="email" name="email" placeholder="Email*" required="required" data-error="Valid email is required.">
+                                        </div>
+                                        <div>
+                                            <h1>Your Rating:</h1>
+                                            <ul class="user_star_rating">
+                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+                                            </ul>
+                                            <textarea id="review_message" class="input_review" name="message"  placeholder="Your Review" rows="4" required data-error="Please, leave us a review."></textarea>
+                                        </div>
+                                        <div class="text-left text-sm-right">
+                                            <button id="review_submit" type="submit" class="red_button review_submit_btn trans_300" value="Submit">submit</button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
+
     </div>
 
 </div>
+
+
+
 
 <div class="benefit">
     <div class="container">
