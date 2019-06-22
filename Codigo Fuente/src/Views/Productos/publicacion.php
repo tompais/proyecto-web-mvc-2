@@ -69,7 +69,7 @@
 
                 <br>
                 <br>
-                <button type="button" class="btn btn-light mt-2"><i class="fas fa-cart-plus mr-1" style="color: #0099df"></i>Añadir al Carrito</button>
+                <button type="button" class="btn btn-light mt-2" onclick="agregarProductoCarrito(<?php echo $producto->getId() ?>)"><i class="fas fa-cart-plus mr-1" style="color: #0099df"></i>Añadir al Carrito</button>
             </div>
         </div>
     </div>
