@@ -81,5 +81,26 @@ function eliminarProducto(id) {
 function eliminarFila(idProducto) {
     var fila = $('#' + idProducto);
     fila.remove();
+    var carritoCompras = $('#checkout_items');
+    var cantidaEnCarrito = parseInt(carritoCompras.text())-1;
     actualizarTotal();
+    actualizarCarritoCompras(cantidaEnCarrito);
+    if(cantidaEnCarrito == 0){
+        ocultarTabla();
+        mostrarMensaje();
+    }
+
+}
+
+function ocultarTabla() {
+    var tabla = $('#tablaCarrito');
+    tabla.hide();
+}
+
+function mostrarMensaje() {
+    var element =
+    $(document.createElement('p'))
+        .attr('class','text-center')
+        .html('No hay productos agregados al carrito')
+        .appendTo('#contenedorCarrito');
 }
