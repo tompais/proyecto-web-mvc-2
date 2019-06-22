@@ -75,11 +75,38 @@ $(document).ready(function($) {
 function eliminarProducto(id) {
     var obj = {};
     obj.idProducto = id;
-    llamadaAjax(pathHome + 'Carrito/eliminarDelCarrito', JSON.stringify(obj), true, "eliminarFila", "dummy");
+    llamadaAjax(pathHome + 'Carrito/eliminarDelCarrito', JSON.stringify(obj), true, "actualizarPaginaCarrito", "dummy");
 }
 
-function eliminarFila(idProducto) {
+function actualizarPaginaCarrito(idProducto) {
     var fila = $('#' + idProducto);
     fila.remove();
+    var carritoCompras = $('#checkout_items');
+    var cantidaEnCarrito = parseInt(carritoCompras.text())-1;
     actualizarTotal();
+    actualizarCarritoCompras(cantidaEnCarrito);
+    if(cantidaEnCarrito == 0){
+        ocultarTabla();
+        mostrarMensaje();
+        ocultarBotonComprar();
+    }
+
+}
+
+function ocultarTabla() {
+    var tabla = $('#tablaCarrito');
+    tabla.hide();
+}
+
+function mostrarMensaje() {
+    var element =
+    $(document.createElement('p'))
+        .attr('class','text-center')
+        .html('No hay productos agregados al carrito')
+        .appendTo('#contenedorCarrito');
+}
+
+function ocultarBotonComprar() {
+    var botonComprar = $('#botonComprarCarrito');
+    botonComprar.hide();
 }

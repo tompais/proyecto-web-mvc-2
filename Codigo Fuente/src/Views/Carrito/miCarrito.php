@@ -1,5 +1,5 @@
 
-<div class="container mt-3 mb-5">
+<div class="container mt-3 mb-5" id="contenedorCarrito">
 
     <div class="panel-heading">
         <div class="panel-title pt-3">
@@ -16,7 +16,7 @@
             echo "<p class='text-center'>No hay productos agregados al carrito</p>";
         } else {
 
-            echo '<table class="table">
+            echo '<table class="table" id="tablaCarrito">
 			<tr>
                 <td>Imagen</td>
                 <td>Nombre</td>
@@ -50,8 +50,10 @@
                         <td class='precioProducto'>$precio</td>
                         <td class='subtotal'></td>
                         
-                </tr>
-                <tr>
+                </tr>";
+
+            }
+            echo" <tr>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -59,9 +61,8 @@
                     <td>Total</td>
                     <td class='total'></td>
                 </tr>";
-            }
             echo "</table>";
-            echo '<button type="button" class="btn btn-light mr-5 float-right"><i class="fas fa-money-check-alt mr-1" style="color: #0099df"></i>Comprar</button>';
+            echo '<button type="button" class="btn btn-light mr-5 float-right" id="botonComprarCarrito"><i class="fas fa-money-check-alt mr-1" style="color: #0099df"></i>Comprar</button>';
         }
         ?>
 

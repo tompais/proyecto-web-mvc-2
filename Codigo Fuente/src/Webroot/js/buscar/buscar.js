@@ -95,9 +95,9 @@ paginador.pagination({
 function agregarProductoCarrito(id) {
     var obj = {};
     obj.idProducto = id;
-    llamadaAjax(pathHome + 'Carrito/agregar', JSON.stringify(obj), true, "todosPutos", "dummy");
+    llamadaAjax(pathHome + 'Carrito/agregar', JSON.stringify(obj), true, "actualizarCarritoCompras", "dummy");
 }
 
-function todosPutos(dummy) {
 
-}
+
+

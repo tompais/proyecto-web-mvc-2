@@ -370,6 +370,14 @@ jQuery(document).ready(function ($) {
             }
         }
     }
+    function ocultarCarrito() {
+        var carritoCompras = $('#checkout_items');
+        var cantidadEnCarrito = parseInt(carritoCompras.text());
+        if(cantidadEnCarrito == 0){
+            carritoCompras.hide();
+        }
+    }
+    ocultarCarrito();
 });
 
 function realizarBusqueda(palabra) {
@@ -484,3 +492,14 @@ btnBuscar.click(function () {
     realizarBusqueda(inputBuscar.val());
 });
 
+function actualizarCarritoCompras($cantidadEnCarrito) {
+    var carritoCompras = $('#checkout_items');
+    carritoCompras.show();
+    if( $cantidadEnCarrito < 1){
+        carritoCompras.hide();
+    }else{
+        carritoCompras.addClass("checkout_items");
+
+        carritoCompras.text($cantidadEnCarrito);
+    }
+}
