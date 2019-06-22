@@ -71,8 +71,9 @@
                 <br>
                 <?php
                     $idSession = unserialize($_SESSION["session"])->getId();
+                    $idProducto = $producto->getId();
                     if($idSession != $producto->getUsuarioId()){
-                        echo '<button id="botonCarritoPublicacion" type="button" class="btn btn-light mt-2" onclick="agregarProductoCarrito(<?php echo $producto->getId() ?>)"><i class="fas fa-cart-plus mr-1" style="color: #0099df"></i>Añadir al Carrito</button>';
+                        echo '<button id="botonCarritoPublicacion" type="button" class="btn btn-light mt-2" onclick="agregarProductoCarrito('.$idProducto.')"><i class="fas fa-cart-plus mr-1" style="color: #0099df"></i>Añadir al Carrito</button>';
                     }
                 ?>
             </div>
