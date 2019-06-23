@@ -134,7 +134,7 @@
 	{
 		display: none;
 	}
-	.navbar_menu
+	.F
 	{
 		display: none;
 	}
@@ -483,11 +483,12 @@
 		height: 30px;
 		font-size: 12px;
 	}
+
 	.checkout_items
 	{
 		width: 15px;
 		height: 15px;
-		font-size: 10px;		
+		font-size: 10px;
 	}
 	.main_slider
 	{

@@ -19,9 +19,10 @@ class CarritoController extends Controller
 
         if(!in_array($data->idProducto, $_SESSION["carrito"])) {
             $_SESSION["carrito"][] = $data->idProducto;
-        }
 
-        echo json_encode(true);
+        }
+        $cantidadProductosEnCarrito = count($_SESSION["carrito"]);
+        echo json_encode($cantidadProductosEnCarrito);
     }
 
     function mostrar()
@@ -46,6 +47,7 @@ class CarritoController extends Controller
     function eliminarDelCarrito($json)
     {
         header("Content-type: application/json");
+
         $data = json_decode(utf8_decode($json['data']));
 
         array_splice($_SESSION["carrito"], array_search($data->idProducto, $_SESSION["carrito"]));

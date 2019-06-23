@@ -370,6 +370,14 @@ jQuery(document).ready(function ($) {
             }
         }
     }
+    function ocultarCarrito() {
+        var carritoCompras = $('#checkout_items');
+        var cantidadEnCarrito = parseInt(carritoCompras.text());
+        if(cantidadEnCarrito == 0){
+            carritoCompras.hide();
+        }
+    }
+    ocultarCarrito();
 });
 
 function realizarBusqueda(palabra) {
@@ -472,24 +480,35 @@ inputBuscar.keypress(function (e) {
     }
 });
 
-inputBuscarResponsive.keypress(function (e) {
-    if(e.keyCode === 13) {
-        realizarBusqueda($(this).val());
-    }
-});
+
 
 btnBuscar.change(function () {
     btnBuscarResponsive.val($(this).val());
 });
 
-btnBuscarResponsive.change(function () {
-    btnBuscar.val($(this).val());
-});
+
 
 btnBuscar.click(function () {
     realizarBusqueda(inputBuscar.val());
 });
 
-btnBuscarResponsive.click(function () {
-    realizarBusqueda(inputBuscarResponsive.val());
-});
+function actualizarCarritoCompras($cantidadEnCarrito){
+
+    var contadorCarritoHeader = $('#checkout_items');
+    var contadorCarritoHamburguesa = $('#contadorCarritoHamburguesa');
+
+    contadorCarritoHeader.show();
+    contadorCarritoHamburguesa.show();
+
+    if($cantidadEnCarrito < 1){
+
+        contadorCarritoHamburguesa.hide();
+        contadorCarritoHeader.hide();
+    }else{
+
+        contadorCarritoHeader.addClass("checkout_items");
+
+        contadorCarritoHeader.text($cantidadEnCarrito);
+        contadorCarritoHamburguesa.text($cantidadEnCarrito);
+    }
+}
