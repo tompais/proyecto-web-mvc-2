@@ -22,6 +22,7 @@ abstract class CodigoError
     const UsuarioNoEncontrado = 15;
     const EstadoInvalido = 20;
     const ProductoNoEncontrado = 16;
+    const CantidadProductoNegativa = 18;
     const ImagenPrincipalNoEncontrada = 30;
     const EliminarProducto = 33;
     const EliminacionMasivaImagen = 40;

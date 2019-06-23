@@ -43,7 +43,7 @@
                 <tr class='fila-producto' id='$idProducto'>
                         <td><img src='$rutaImgPrincipal' width='100px' height='100px'></td>
                         <td>$nombreProducto</td>
-                        <td><button class='btn btn-danger' onclick='eliminarProducto($idProducto)'>Eliminar</button></td>
+                        <td><button class='btn btn-danger delete-producto-button' onclick='eliminarProducto($idProducto)'>Eliminar</button></td>
                         <td>
                             <div class='quantity d-flex flex-column flex-sm-row align-items-sm-center'>
                                 <div class='quantity_selector'>

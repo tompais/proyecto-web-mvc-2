@@ -6187,6 +6187,25 @@ CREATE TABLE Imagen (
     constraint FK_Imagen_Producto foreign key (ProductoId) references Producto (Id) 
 );
 
+CREATE TABLE Compra(
+	Id integer auto_increment not null unique,
+    CompradorId integer not null,
+    FechaCompra datetime not null,
+    Total integer not null,
+    constraint PK_Compra primary key (Id),
+    constraint FK_Compra_Usuario foreign key (CompradorId) references Usuario (Id)
+);
+
+CREATE TABLE CompraProducto(
+	Id integer auto_increment not null unique,
+    ProductoId integer not null,
+    CompraId integer not null,
+    Cantidad integer not null,
+    constraint PK_CompraProducto primary key (Id, ProductoId, CompraId),
+    constraint FK_CompraProducto_Producto foreign key (ProductoId) references Producto (Id),
+    constraint FK_CompraProducto_Compra foreign key (CompraId) references Compra (Id)
+);
+
 INSERT INTO Rol (Nombre) VALUES ("Administrador"),
                                 ("CoAdministrador"),
 								("Moderador"),
