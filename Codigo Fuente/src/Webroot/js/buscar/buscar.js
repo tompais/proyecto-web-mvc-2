@@ -20,7 +20,7 @@ paginador.pagination({
                 var row = $('<div class="row my-3 w-100">');
 
                 do {
-                    var col = $('<div class="col-sm-4">');
+                    var col = $('<div class="col-sm-4 mt-2">');
 
                     var anchor = $('<a>');
                     anchor.attr('href', pathHome + 'Productos/publicacion/' + data[i].producto.id);
