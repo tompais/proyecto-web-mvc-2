@@ -80,7 +80,7 @@
                 <div class="col mt-4">
                     <div class="input-group">
                         <input type="text" id="inputBuscar" class="form-control"
-                               placeholder="Buscar Productos, marcas y mas...">
+                               placeholder="Buscar...">
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary" id="btnBuscar" type="button"><i
                                         class="fas fa-search"></i></button>
