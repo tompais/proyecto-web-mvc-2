@@ -492,14 +492,23 @@ btnBuscar.click(function () {
     realizarBusqueda(inputBuscar.val());
 });
 
-function actualizarCarritoCompras($cantidadEnCarrito) {
-    var carritoCompras = $('#checkout_items');
-    carritoCompras.show();
-    if( $cantidadEnCarrito < 1){
-        carritoCompras.hide();
-    }else{
-        carritoCompras.addClass("checkout_items");
+function actualizarCarritoCompras($cantidadEnCarrito){
 
-        carritoCompras.text($cantidadEnCarrito);
+    var contadorCarritoHeader = $('#checkout_items');
+    var contadorCarritoHamburguesa = $('#contadorCarritoHamburguesa');
+
+    contadorCarritoHeader.show();
+    contadorCarritoHamburguesa.show();
+
+    if($cantidadEnCarrito < 1){
+
+        contadorCarritoHamburguesa.hide();
+        contadorCarritoHeader.hide();
+    }else{
+
+        contadorCarritoHeader.addClass("checkout_items");
+
+        contadorCarritoHeader.text($cantidadEnCarrito);
+        contadorCarritoHamburguesa.text($cantidadEnCarrito);
     }
 }

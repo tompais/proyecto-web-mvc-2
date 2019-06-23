@@ -715,18 +715,12 @@ section
 }
 .red_button
 {
-	display: -webkit-inline-box;
-	display: -moz-inline-box;
-	display: -ms-inline-flexbox;
-	display: -webkit-inline-flex;
-	display: inline-flex;
-
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	width: auto;
 	height: 40px;
-	background: #f9fef7;
+	background: #ffffff;
 	border-radius: 3px;
 	-webkit-transition: all 0.3s ease;
 	-moz-transition: all 0.3s ease;
@@ -734,22 +728,19 @@ section
 	-o-transition: all 0.3s ease;
 	transition: all 0.3s ease;
 }
-.red_button a
+.red_button button
 {
 	display: block;
-	color: #000000;
+	background: #0099df;
+	color: #ffffff;
+	text-decoration: none;
 	text-transform: uppercase;
 	font-size: 14px;
 	font-weight: 500;
 	text-align: center;
-	line-height: 40px;
-	width: 100%;
+	width: 90%;
 }
-.shop_now_button
-{
-	width: 140px;
-	margin-top: 15px;
-}
+
 
 /*********************************
 4. Banner

@@ -52,10 +52,9 @@ paginador.pagination({
                     productInfo.append(productName);
                     productInfo.append(productPrice);
 
-                    var divButtonAddToCart = $('<div class="red_button add_to_cart_button">');
+                    var divButtonAddToCart = $('<div class="red_button">');
 
-                    var anchorButtonAddToCart = $('<a>');
-                    anchorButtonAddToCart.attr('href', '#'); //TODO hay que agregar atributo de acción a agregar a carrito
+                    var anchorButtonAddToCart = $('<button class="btn btn-primary ml-3">');
                     anchorButtonAddToCart.attr('onclick', 'agregarProductoCarrito(' + data[i].producto.id + ')');
 
                     var fabOpenCart = $('<i class="fab fa-opencart mr-2">');
@@ -68,15 +67,15 @@ paginador.pagination({
 
                     divButtonAddToCart.append(anchorButtonAddToCart);
 
-                    productFilter.append(productImage);
+                    anchor.append(productImage);
+
+                    productFilter.append(anchor);
                     productFilter.append(productInfo);
 
                     productItem.append(productFilter);
                     productItem.append(divButtonAddToCart);
 
-                    anchor.append(productItem);
-
-                    col.append(anchor);
+                    col.append(productItem);
 
                     row.append(col);
 

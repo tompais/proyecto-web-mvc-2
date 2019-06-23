@@ -143,8 +143,7 @@
             </li>
 
             <li class="menu_item"><a href="<?php echo getBaseAddress() ?>"><i class="fas fa-home mr-1"></i>Inicio</a></li>
-            <li class="menu_item"><a href="<?php echo getBaseAddress() . 'Carrito/mostrar' ?>"><i class="fas fa-shopping-cart mr-1"></i>Carrito</a></li>
-
+            <li class="menu_item"><a href="<?php echo getBaseAddress() . 'Carrito/mostrar' ?>" id="carrito"><i class="fas fa-shopping-cart mr-1"></i>Carrito <span id="contadorCarritoHamburguesa"><?php echo $cantidad ?></span> </a></li>
         </ul>
     </div>
 </div>
