@@ -58,7 +58,7 @@ function actualizarTotal(){
 
 $(document).ready(function($) {
     function subtTotalInicial(cantidad) {
-        $('.productosEnCarrito').each(function() {
+        $('.fila-producto').each(function() {
             var tdPrecioProducto = $(this).find('.precioProducto');
             var precioProducto = Number(tdPrecioProducto.text());
             var subTotal = $(this).find('.subtotal');
@@ -112,6 +112,9 @@ function ocultarBotonComprar() {
 }
 
 $('#botonComprarCarrito').click(function () {
+    $(this).prop('disabled', true);
+    $(".delete-producto-button").prop('disabled', true);
+
     var array = [];
     $.each($('.fila-producto'), function (i, item) {
         array.push({
@@ -120,10 +123,21 @@ $('#botonComprarCarrito').click(function () {
         });
     });
 
-    llamadaAjax(pathComprar, JSON.stringify(array), true, "todosPutos", "dummy");
+    llamadaAjax(pathComprar, JSON.stringify(array), true, "compraExitosa", "compraFallida");
 });
 
 
-function todosPutos(dummy) {
-    console.log(dummy);
+function compraExitosa(dummy) {
+    alertify.alert("¡Compra Exitosa!", "Su compra se ha realizado con éxito");
+
+    setTimeout(function () {
+        window.location.href = pathHome;
+    }, 3000);
+}
+
+function compraFallida(err) {
+    $(this).prop('disabled', false);
+    $(".delete-producto-button").prop('disabled', false);
+
+    alertify.alert("Error en la Compra", err);
 }
