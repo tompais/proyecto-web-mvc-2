@@ -65,5 +65,20 @@ class CompraController extends Controller
         unset($_SESSION['carrito']);
 
         echo json_encode(true);
+
+    }
+
+    function exito()
+    {
+        $d["title"] = Constantes::COMPRAEXITOSATITLE;
+        $this->set($d);
+        $this->render(Constantes::COMPRAEXITOSAVIEW);
+    }
+
+    function misCompras()
+    {
+        $d["title"] = Constantes::COMPRASTITLE;
+        $this->set($d);
+        $this->render(Constantes::COMPRASVIEW);
     }
 }

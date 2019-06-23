@@ -11,9 +11,6 @@
                     <div class="main_slider_content">
                         <h6>Encuentra todos los productos</h6>
                         <h1>Aqui en ShopLine</h1>
-                        <div class="red_button shop_now_button mt-5 ">
-                            <a href="<?php echo getBaseAddress() . "Buscar/productos" ?>">Encontrar</a>
-                        </div>
                     </div>
                 </div>
             </div>

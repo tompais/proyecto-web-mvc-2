@@ -6,7 +6,7 @@
         <div class="panel-title pt-3">
             <div class="row">
                 <div class="col-xl-5 col-sm-5">
-                    <h2>Mis Ventas</h2>
+                    <h2>Mis Ventas<i class="fa fa-piggy-bank ml-2"></i></h2>
                 </div>
                 <div class="col-xl-7 col-sm-5">
                     <a href="<?php echo getBaseAddress() . 'Productos/agregarProducto' ?>" class="btn btn-primary float-right"><i class="fas fa-plus mr-1"></i> Agregar un Producto</a>
