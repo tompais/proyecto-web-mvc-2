@@ -19,11 +19,7 @@ class Router
         {
             header("Location: " . getBaseAddress());
         }
-        else if (self::isProductController($explode_url[0]) &&  !isset($_SESSION["session"]))
-        {
-            header("Location: " . getBaseAddress() . "Seguridad/login");
-        }
-        else if (self::isCartController($explode_url[0])  && !isset($_SESSION["session"]))
+        else if ((self::isProductController($explode_url[0]) || self::isCartController($explode_url[0])) &&  !isset($_SESSION["session"]))
         {
             header("Location: " . getBaseAddress() . "Seguridad/login");
         }

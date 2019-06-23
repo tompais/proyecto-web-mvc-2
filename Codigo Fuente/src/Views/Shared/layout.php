@@ -48,6 +48,7 @@
 
     <script>
         const pathHome = "<?php echo getBaseAddress(); ?>";
+        var isSessionSetted = <?php echo isset($_SESSION["session"]) ? json_encode(true): json_encode(false); ?>;
     </script>
 
     <main role="main">
