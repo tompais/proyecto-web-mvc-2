@@ -22,7 +22,7 @@ function subirSubTotal(idProducto, cantidadTotal) {
     var tdCantidad = tr.find('#quantity_value');
     var tdPrecio = tr.find('.precioProducto');
     var cantidad = parseInt(tdCantidad.text());
-    if(cantidad <= cantidadTotal){
+    if(cantidad < cantidadTotal){
         tdCantidad.text(cantidad+1);
         var precio = parseInt(tdPrecio.text());
         var subTotalParcial = (cantidad+1) * precio;
@@ -109,4 +109,21 @@ function mostrarMensaje() {
 function ocultarBotonComprar() {
     var botonComprar = $('#botonComprarCarrito');
     botonComprar.hide();
+}
+
+$('#botonComprarCarrito').click(function () {
+    var array = [];
+    $.each($('.fila-producto'), function (i, item) {
+        array.push({
+            id: $(item).attr('id'),
+            cantidad: $(item).find('#quantity_value').text()
+        });
+    });
+
+    llamadaAjax(pathComprar, JSON.stringify(array), true, "todosPutos", "dummy");
+});
+
+
+function todosPutos(dummy) {
+    console.log(dummy);
 }
