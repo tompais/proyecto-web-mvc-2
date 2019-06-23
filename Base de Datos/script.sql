@@ -6246,7 +6246,7 @@ VALUES ("Comestibles"),
         
 INSERT INTO Estado (Nombre)
 VALUES ("Nuevo"), ("Usado"), ("Refabricado");
-
+		
 
 INSERT INTO Metodo (Tipo)
 VALUES ("Punto de Entrega"),

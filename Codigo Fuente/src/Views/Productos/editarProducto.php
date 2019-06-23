@@ -113,6 +113,7 @@
         <div class="form-group mt-5">
             <label for="divImagenesProducto">Imagenes</label>
             <div id="dzUpload" class="dropzone mt-2"></div>
+            <div id="errorImagenesProducto" class="error"><i class="fas fa-exclamation-triangle mr-2"></i><span></span></div>
         </div>
 
         <div class="form-group my-3">
@@ -129,7 +130,7 @@
                     echo "<div class='card col-md-4 mt-4'>
                               <img src='$rutaImg' alt='' data-image='$rutaImg' style='' class='col h-75'>
                               <button type='button' class='close col botonEliminar border-top' aria-label='Close'>
-                                <span aria-hidden='true' class='text-danger' onclick='eliminar($idImagen)' id='$idImagen'>&times;</span>
+                                <span aria-hidden='true' class='text-danger' onclick='eliminar($idImagen)' id='$idImagen'><i class='fas fa-times'></i></span>
                               </button>
                           </div>";
                 }

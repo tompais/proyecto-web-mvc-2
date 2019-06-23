@@ -370,6 +370,14 @@ jQuery(document).ready(function ($) {
             }
         }
     }
+    function ocultarCarrito() {
+        var carritoCompras = $('#checkout_items');
+        var cantidadEnCarrito = parseInt(carritoCompras.text());
+        if(cantidadEnCarrito == 0){
+            carritoCompras.hide();
+        }
+    }
+    ocultarCarrito();
 });
 
 function realizarBusqueda(palabra) {
@@ -472,24 +480,26 @@ inputBuscar.keypress(function (e) {
     }
 });
 
-inputBuscarResponsive.keypress(function (e) {
-    if(e.keyCode === 13) {
-        realizarBusqueda($(this).val());
-    }
-});
+
 
 btnBuscar.change(function () {
     btnBuscarResponsive.val($(this).val());
 });
 
-btnBuscarResponsive.change(function () {
-    btnBuscar.val($(this).val());
-});
+
 
 btnBuscar.click(function () {
     realizarBusqueda(inputBuscar.val());
 });
 
-btnBuscarResponsive.click(function () {
-    realizarBusqueda(inputBuscarResponsive.val());
-});
+function actualizarCarritoCompras($cantidadEnCarrito) {
+    var carritoCompras = $('#checkout_items');
+    carritoCompras.show();
+    if( $cantidadEnCarrito < 1){
+        carritoCompras.hide();
+    }else{
+        carritoCompras.addClass("checkout_items");
+
+        carritoCompras.text($cantidadEnCarrito);
+    }
+}

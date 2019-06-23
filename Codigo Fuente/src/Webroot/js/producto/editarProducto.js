@@ -52,15 +52,19 @@ dzUpload.dropzone({
             //e.preventDefault();
             e.stopPropagation();
 
-            if (dzClosure.getQueuedFiles().length == 0) {
-
-                $("#errorImagenesProducto").find("span").text("Ingrese al menos una imagen");
-                $("#errorImagenesProducto").fadeIn("slow");
-
-            }
-            else if (validarAltaModificarProducto()) {
+            if (validarAltaModificarProducto() && dzClosure.getQueuedFiles().length > 0) {
+                e.preventDefault();
                 dzClosure.processQueue();
             }
+            else if (validarAltaModificarProducto() && dzClosure.getQueuedFiles().length == 0 && cantidadDeImagenes < 5) {
+                dzClosure.processQueue();
+            }
+            else {
+                e.preventDefault();
+                $("#errorImagenesProducto").find("span").text("Ingrese al menos una imagen");
+                $("#errorImagenesProducto").fadeIn("slow");
+            }
+
         });
 
         this.on("maxfilesexceeded", function(file) {

@@ -282,9 +282,12 @@ class Producto extends Model
             "Id" => $this->getId(),
             "Nombre" => $this->getNombre(),
             "Precio" => $this->getPrecio(),
+            "Cantidad" => $this->getCantidad(),
             "CategoriaId" => $this->getCategoriaId(),
             "Descripcion" => $this->getDescripcion(),
-            "EstadoId" => $this->getEstadoId()
+            "EstadoId" => $this->getEstadoId(),
+            "MetodoId" => $this->getMetodoId(),
+            "DetalleEntrega" => $this->getDetalleEntrega()
         ];
 
         return $this->update($array);
