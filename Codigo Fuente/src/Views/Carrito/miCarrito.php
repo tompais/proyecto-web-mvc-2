@@ -1,8 +1,12 @@
 
+<script>
+    const pathComprar = "<?php echo getBaseAddress() . "Compra/comprar"; ?>";
+</script>
+
 <div class="container mt-3 mb-5" id="contenedorCarrito">
 
     <div class="panel-heading">
-        <div class="panel-title pt-3">
+        <div class="panel-title py-3">
             <div class="row">
                 <div class="col-xl-5 col-sm-5">
                     <h2>Mi Carrito<i class="fa fa-shopping-cart ml-2"></i></h2>
@@ -17,14 +21,16 @@
         } else {
 
             echo '<table class="table" id="tablaCarrito">
-			<tr>
-                <td>Imagen</td>
-                <td>Nombre</td>
-                <td>Eliminar</td>
-                <td>Cantidad</td>
-                <td>Precio unitario</td>
-                <td>Sub total</td>
-		    </tr>';
+            <thead>
+                <tr>
+                    <td>Imagen</td>
+                    <td>Nombre</td>
+                    <td>Eliminar</td>
+                    <td>Cantidad</td>
+                    <td>Precio unitario</td>
+                    <td>Sub total</td>
+                </tr>
+            </thead>';
 
             foreach ($publicaciones as $publicacion){
                 $idProducto = $publicacion->producto->getId();
@@ -34,7 +40,7 @@
                 $rutaImgPrincipal = getBaseAddress() . "Webroot/img/productos/" . $publicacion->imagen->getNombre();
                 $precio = $publicacion->producto->getPrecio();
                 echo "
-                <tr class='productosEnCarrito' id='$idProducto'>
+                <tr class='fila-producto' id='$idProducto'>
                         <td><img src='$rutaImgPrincipal' width='100px' height='100px'></td>
                         <td>$nombreProducto</td>
                         <td><button class='btn btn-danger' onclick='eliminarProducto($idProducto)'>Eliminar</button></td>
