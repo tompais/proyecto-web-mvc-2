@@ -6,27 +6,9 @@ class ProductosController extends Controller
     function misProductos()
     {
 
-        $sesion = unserialize($_SESSION["session"]);
-
         $producto = new Producto();
 
-        $productos = "";
-
-        if ($productos = $producto->traerListaProductos($sesion->getId())) {
-            $imagen = new Imagen();
-
-            $imagenes = [];
-
-            foreach ($productos as $producto) {
-                $imgProduc = $imagen->traerListaImagenes($producto->getId());
-
-                foreach ($imgProduc as $imgP)
-                    array_push($imagenes, $imgP);
-            }
-
-            $d["productos"] = $productos;
-            $d["imagenes"] = $imagenes;
-        }
+        $d["cantidadProductos"] = $producto->getCantProductosActivosPropios();
 
         $d["title"] = Constantes::PRODUTOSTITLE;
         $this->set($d);
@@ -232,7 +214,6 @@ class ProductosController extends Controller
         $producto = new Producto();
         $categoria = new Categoria();
         $usuario = new Usuario();
-        $direccion = new Direccion(); //TODO utilizar para agregar en los detalles de la publicación
 
         $producto->traerProducto($publicacion[0]);
         $categoria->traerCategoria($producto->getCategoriaId());
@@ -250,5 +231,49 @@ class ProductosController extends Controller
 
         $this->set($d);
         $this->render(Constantes::PUBLICACIONVIEW);
+    }
+
+    function getPublicaciones($data)
+    {
+        header("Content-type: application/json");
+
+        $producto = new Producto();
+
+        $paginationDataSourceDto = new PaginationDataSourceDto();
+
+        $paginationDataSourceDto->items = [];
+
+        $productos = $producto->getListaProdutosActivosPropios($data["pageNumber"], $data["pageSize"]);
+
+        $imagen = new Imagen();
+
+        $publicaciones = [];
+
+        foreach($productos as $p) {
+            if(!$imagen->traerImagenPrincipal($p->getId()))
+                throw new ImagenPrincipalNoEncontradaException("No se ha encontrado la Imagen Principal para el producto con Id " . $p->getId(), CodigoError::ImagenPrincipalNoEncontrada);
+
+            $imagenDto = new ImagenDto();
+
+            $imagenDto->id = $imagen->getId();
+            $imagenDto->nombre = $imagen->getNombre();
+
+            $productoDto = new ProductoDto();
+
+            $productoDto->id = $p->getId();
+            $productoDto->nombre = $p->getNombre();
+            $productoDto->estadoId = $p->getEstadoId();
+            $productoDto->metodoId = $p->getMetodoId();
+            $productoDto->categoriaId = $p->getCategoriaId();
+            $productoDto->precio = $p->getPrecio();
+            $productoDto->fechaAlta = $p->getFechaAlta();
+            $productoDto->cantidad = $p->getCantidad();
+
+            $publicaciones[] = new PublicacionViewModel($productoDto, $imagenDto);
+        }
+
+        $paginationDataSourceDto->items = $publicaciones;
+
+        echo json_encode($paginationDataSourceDto);
     }
 }
