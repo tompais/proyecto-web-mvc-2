@@ -193,6 +193,8 @@ class ProductosController extends Controller
         
         $imagenes = $imagen->traerListaImagenes($publicacion["idProducto"]);
             
+        unset($imagenes[0]);
+
         foreach($imagenes as $img)
             unlink(ROOT . "Webroot/img/productos/" . $img->getNombre());
 

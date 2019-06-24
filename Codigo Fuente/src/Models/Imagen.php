@@ -122,6 +122,19 @@ class Imagen extends Model
         return $row;
     }
 
+    public function traerImagenCompra($productoId)
+    {
+        $row = $this->pageRows(0, 1, "ProductoId = $productoId");
+
+        if($row) {
+            $this->setId($row[0]["Id"]);
+            $this->setNombre($row[0]["Nombre"]);
+            $this->setProductoId($row[0]["ProductoId"]);
+        }
+
+        return $row;
+    }
+
     public function traerImagen($id)
     {
         $row = $this->selectByPk($id);
