@@ -35,8 +35,15 @@ class CarritoController extends Controller
                 $producto = new Producto();
                 $imagen = new Imagen();
                 $producto->traerProducto($item);
+                $productoId = $producto->getId();
+                if(!isset($productoId)){
+                    throw new SQLGetException("Error al traer el producto", CodigoError::ErrorGetSql);
+                }
                 $imagen->traerImagenPrincipal($producto->getId());
-
+                $imagenId = $imagen->getId();
+                if(!isset($imagenId)){
+                    throw new SQLGetException("Error al traer la imagen principal del producto", CodigoError::ErrorGetSql);
+                }
                 $d["publicaciones"][] = new PublicacionViewModel($producto, $imagen);
             }
         }
