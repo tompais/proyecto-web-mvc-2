@@ -27,7 +27,6 @@ body {
     width: 31.33333%;
     height: 380px;
     margin: 1%;
-    background: whiteSmoke;
     box-shadow: 1px 1px 5px #999;
 }
 @media (max-width: 815px) {
@@ -64,6 +63,7 @@ body {
     display: inline-block;
     padding: 0 10px 10px;
 }
+
 .card_icons li a:hover{
     color: #007bff;
 }

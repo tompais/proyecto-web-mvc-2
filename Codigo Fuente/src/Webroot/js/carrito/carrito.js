@@ -123,12 +123,12 @@ $('#botonComprarCarrito').click(function () {
         });
     });
 
-    llamadaAjax(pathComprar, JSON.stringify(array), true, "compraExitosa", "compraFallida");
+    llamadaAjax(pathComprar, JSON.stringify(array), true, 'compraExitosa', 'compraFallida');
 });
 
 
 function compraExitosa(dummy) {
-    alertify.alert("¡Compra Exitosa!", "Su compra se ha realizado con éxito");
+    alertify.alert('¡Compra Exitosa!', 'Su compra se ha realizado con éxito');
 
     setTimeout(function () {
         window.location.href = pathHome;
@@ -139,5 +139,5 @@ function compraFallida(err) {
     $(this).prop('disabled', false);
     $(".delete-producto-button").prop('disabled', false);
 
-    alertify.alert("Error en la Compra", err);
+    alertify.alert('Error en la Compra', err);
 }
