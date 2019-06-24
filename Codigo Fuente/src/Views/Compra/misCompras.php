@@ -50,29 +50,23 @@
                             $metodo = $metodos[$i]->tipo;
                             
 
-                            echo "<div class='row user-infos $compraId'>
-                                <div class='col'>
-                                    <div class='row'>
-                                        <div class='col-md-6 img'>
+                            echo "<div class='row my-5 user-infos $compraId'>
+                                        <div class='col-md-6 h-100'>
                                             <img src='$ruta'
-                                                alt='' class='img-rounded'>
+                                                alt='' class='img-fluid img-rounded shadow w-100 h-100'>
                                         </div>
-                                        <div class='col-md-6 details'>
+                                        <div class='col-md-3 ml-md-3 details'>
                                             <blockquote>
                                                 <h5>$nombreProducto</h5>
                                                 <small><cite title='Source Title'>$nombreVendedor<i
                                                                 class='icon-map-marker'></i></cite></small>
                                             </blockquote>
-                                            <p>
-                                                Email: $email<br>
-                                                Telefono: $telefono<br>
-                                                Metodo: $metodo<br>
-                                                Cantidad: $cantidad<br>
-                                                Total: $$precio.00
-                                            </p>
+                                            <p>Email: $email</p>
+                                            <p>Telefono: $telefono</p>
+                                            <p>Metodo: $metodo</p>
+                                            <p>Cantidad: $cantidad</p>
+                                            <p>Total: $$precio.00</p>
                                         </div>
-                                    </div>
-                                </div>
                             </div>";
 
                             $i++;

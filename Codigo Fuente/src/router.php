@@ -19,7 +19,7 @@ class Router
         {
             header("Location: " . getBaseAddress());
         }
-        else if ((self::isProductController($explode_url[0]) || self::isCartController($explode_url[0])) &&  !isset($_SESSION["session"]))
+        else if ((self::isProductController($explode_url[0]) || self::isCartController($explode_url[0]) || self::isBuyController($explode_url[0])) &&  !isset($_SESSION["session"]))
         {
             header("Location: " . getBaseAddress() . "Seguridad/login");
         }
@@ -36,6 +36,11 @@ class Router
     private static function isProductController($controller)
     {
         return !strcasecmp($controller, 'Productos');
+    }
+
+    private static function isBuyController($controller)
+    {
+        return !strcasecmp($controller, 'Compra');
     }
 
     private static function isCartController($controller)
