@@ -17,10 +17,10 @@ class CarritoController extends Controller
             $_SESSION["carrito"] = [];
         }
 
-        if(!in_array($data->idProducto, $_SESSION["carrito"])) {
-            $_SESSION["carrito"][] = $data->idProducto;
-
+        if(in_array($data->idProducto, $_SESSION["carrito"])) {
+            throw new ProductoDuplicadoCarritoException("El producto ya se encuentra en el carrito", CodigoError::ProductoDuplicadoEnCarrito);
         }
+        $_SESSION["carrito"][] = $data->idProducto;
         $cantidadProductosEnCarrito = count($_SESSION["carrito"]);
         echo json_encode($cantidadProductosEnCarrito);
     }
