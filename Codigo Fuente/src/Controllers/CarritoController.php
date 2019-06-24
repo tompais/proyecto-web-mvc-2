@@ -56,6 +56,10 @@ class CarritoController extends Controller
         header("Content-type: application/json");
 
         $data = json_decode(utf8_decode($json['data']));
+        
+        if(!array_search($data->idProducto, $_SESSION["carrito"])){
+            throw new ProductoInvalidoException("El producto a eliminar no se encuentra en el carrito", CodigoError::ProductoNoEncontrado);
+        }
 
         array_splice($_SESSION["carrito"], array_search($data->idProducto, $_SESSION["carrito"]));
 
