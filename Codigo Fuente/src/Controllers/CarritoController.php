@@ -17,10 +17,10 @@ class CarritoController extends Controller
             $_SESSION["carrito"] = [];
         }
 
-        if(!in_array($data->idProducto, $_SESSION["carrito"])) {
-            $_SESSION["carrito"][] = $data->idProducto;
-
+        if(in_array($data->idProducto, $_SESSION["carrito"])) {
+            throw new ProductoDuplicadoCarritoException("El producto ya se encuentra en el carrito", CodigoError::ProductoDuplicadoEnCarrito);
         }
+        $_SESSION["carrito"][] = $data->idProducto;
         $cantidadProductosEnCarrito = count($_SESSION["carrito"]);
         echo json_encode($cantidadProductosEnCarrito);
     }
@@ -35,8 +35,15 @@ class CarritoController extends Controller
                 $producto = new Producto();
                 $imagen = new Imagen();
                 $producto->traerProducto($item);
+                $productoId = $producto->getId();
+                if(!isset($productoId)){
+                    throw new SQLGetException("Error al traer el producto", CodigoError::ErrorGetSql);
+                }
                 $imagen->traerImagenPrincipal($producto->getId());
-
+                $imagenId = $imagen->getId();
+                if(!isset($imagenId)){
+                    throw new SQLGetException("Error al traer la imagen principal del producto", CodigoError::ErrorGetSql);
+                }
                 $d["publicaciones"][] = new PublicacionViewModel($producto, $imagen);
             }
         }
@@ -49,6 +56,10 @@ class CarritoController extends Controller
         header("Content-type: application/json");
 
         $data = json_decode(utf8_decode($json['data']));
+        
+        if(array_search($data->idProducto, $_SESSION["carrito"]) === false){
+            throw new ProductoInvalidoException("El producto a eliminar no se encuentra en el carrito", CodigoError::ProductoNoEncontrado);
+        }
 
         array_splice($_SESSION["carrito"], array_search($data->idProducto, $_SESSION["carrito"]));
 
