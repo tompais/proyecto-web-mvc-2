@@ -491,24 +491,3 @@ btnBuscar.change(function () {
 btnBuscar.click(function () {
     realizarBusqueda(inputBuscar.val());
 });
-
-function actualizarCarritoCompras($cantidadEnCarrito){
-
-    var contadorCarritoHeader = $('#checkout_items');
-    var contadorCarritoHamburguesa = $('#contadorCarritoHamburguesa');
-
-    contadorCarritoHeader.show();
-    contadorCarritoHamburguesa.show();
-
-    if($cantidadEnCarrito < 1){
-
-        contadorCarritoHamburguesa.hide();
-        contadorCarritoHeader.hide();
-    }else{
-
-        contadorCarritoHeader.addClass("checkout_items");
-
-        contadorCarritoHeader.text($cantidadEnCarrito);
-        contadorCarritoHamburguesa.text($cantidadEnCarrito);
-    }
-}
