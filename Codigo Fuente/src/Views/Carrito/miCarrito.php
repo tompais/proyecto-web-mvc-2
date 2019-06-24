@@ -68,7 +68,7 @@
                     <td class='total'></td>
                 </tr>";
             echo "</table>";
-            echo '<a href="'. getBaseAddress() . 'Compra/exito' . '"><button type="button" class="btn btn-light mr-5 float-right" id="botonComprarCarrito"><i class="fas fa-money-check-alt mr-1" style="color: #0099df"></i>Comprar</button></a>';
+            echo '<button type="button" class="btn btn-light mr-5 float-right" id="botonComprarCarrito"><i class="fas fa-money-check-alt mr-1" style="color: #0099df"></i>Comprar</button>';
         }
         ?>
 
