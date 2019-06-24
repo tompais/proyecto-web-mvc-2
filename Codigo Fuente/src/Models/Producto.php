@@ -395,6 +395,7 @@ class Producto extends Model
             $producto->setCategoriaId($row["CategoriaId"]);
             $producto->setMetodoId($row["MetodoId"]);
             $producto->setFechaAlta($row["FechaAlta"]);
+            $producto->setCantidad($row["Cantidad"]);
             $productos[] = $producto;
         }
 

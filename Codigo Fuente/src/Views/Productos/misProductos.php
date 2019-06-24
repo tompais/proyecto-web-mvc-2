@@ -43,7 +43,7 @@
                                 <li><a href='" . $pathAccionEditarPublicacion . $id . "'><i class='fas fa-edit'></i></a></li>
                                 <li><a href='#' onclick='insertarIdProducto($id)' data-toggle='modal' data-target='#eliminarModal'><i class='fas fa-times'></i></a></li>
                             </ul>
-                            <p>$$precio.00</p>
+                            <p class='font-weight-bold' style='color: #0099df;'>$$precio.00</p>
                         </li>";
     
                     while($j < count($imagenes) && $id == $imagenes[$j]->getProductoId())
