@@ -5,6 +5,7 @@
 <script>
     const palabra = "<?php echo $palabra ?>";
     const cantidadProductos = "<?php echo $cantidadProductos ?>";
+    var carrito = <?php echo isset($_SESSION["carrito"]) ? json_encode($_SESSION["carrito"]) : json_encode(null); ?>;
 </script>
 
 <div class="container product_section_container mt-4">

@@ -395,6 +395,28 @@ class Producto extends Model
             $producto->setCategoriaId($row["CategoriaId"]);
             $producto->setMetodoId($row["MetodoId"]);
             $producto->setFechaAlta($row["FechaAlta"]);
+            $producto->setCantidad($row["Cantidad"]);
+            $productos[] = $producto;
+        }
+
+        return $productos;
+    }
+
+    public function getListaProdutosActivosPropios($pageNumber, $pageSize)
+    {
+        $productos = array();
+        $condicion = "FechaBaja IS NULL AND UsuarioId = " . unserialize($_SESSION["session"])->getId();
+        $rows = $this->pageRows(($pageNumber - 1) * $pageSize, $pageSize, $condicion);
+        foreach ($rows as $row) {
+            $producto = new Producto();
+            $producto->db->disconnect();
+            $producto->setId($row["Id"]);
+            $producto->setNombre($row["Nombre"]);
+            $producto->setPrecio($row["Precio"]);
+            $producto->setCategoriaId($row["CategoriaId"]);
+            $producto->setMetodoId($row["MetodoId"]);
+            $producto->setFechaAlta($row["FechaAlta"]);
+            $producto->setCantidad($row["Cantidad"]);
             $productos[] = $producto;
         }
 
@@ -404,6 +426,11 @@ class Producto extends Model
     public function getCantProductosActivosDeOtrosUsuariosPorNombre($nombre)
     {
         return $this->total("Nombre like '%$nombre%' AND FechaBaja IS NULL" . (isset($_SESSION["session"]) ? (" AND UsuarioId != " . unserialize($_SESSION["session"])->getId()) : ("")));
+    }
+
+    public function getCantProductosActivosPropios()
+    {
+        return $this->total("FechaBaja IS NULL AND UsuarioId = " . unserialize($_SESSION["session"])->getId());
     }
 }
 

@@ -1,5 +1,6 @@
 var paginador = $('#paginador');
 var divProductosContainer = $('#divProductosContainer');
+var btnAddToCart;
 
 paginador.pagination({
     dataSource: pathHome + 'Buscar/getPublicaciones/' + palabra,
@@ -10,80 +11,96 @@ paginador.pagination({
     totalNumber: cantidadProductos,
     className: 'paginationjs-theme-blue paginationjs-big',
     callback: function (data, pagination) {
-        divProductosContainer.empty();
-        const cantPublicaciones = data.length;
-        var i = 0;
-        while(i < cantPublicaciones) {
-            var cont = 0;
+        if(cantidadProductos != 0) {
+            divProductosContainer.empty();
+            const cantPublicaciones = data.length;
+            var i = 0;
+            while(i < cantPublicaciones) {
+                var cont = 0;
 
-            var row = $('<div class="row my-3 w-100">');
+                var row = $('<div class="row my-3 w-100">');
 
-            do {
-                var col = $('<div class="col-sm-4">');
+                do {
+                    var col = $('<div class="col-sm-4 mt-2">');
 
-                var anchor = $('<a>');
-                anchor.attr('href', pathHome + 'Productos/publicacion/' + data[i].producto.id);
+                    var anchor = $('<a>');
+                    anchor.attr('href', pathHome + 'Productos/publicacion/' + data[i].producto.id);
 
-                var productItem = $('<div class="product-item w-100">');
+                    var productItem = $('<div id="' + data[i].producto.id + '" class="product-item w-100">');
 
-                var productFilter = $('<div class="product product_filter">');
+                    var productFilter = $('<div class="product product_filter">');
 
-                var productImage = $('<div class="product_image h-75 justify-content-center align-items-center">');
+                    var productImage = $('<div class="product_image h-75 justify-content-center align-items-center">');
 
-                var img = $('<img class="h-100">');
-                img.attr('src', pathHome + 'Webroot/img/productos/' + data[i].imagen.nombre);
+                    var img = $('<img class="h-100">');
+                    img.attr('src', pathHome + 'Webroot/img/productos/' + data[i].imagen.nombre);
 
-                productImage.append(img);
+                    productImage.append(img);
 
-                var productInfo = $('<div class="product_info">');
+                    var productInfo = $('<div class="product_info">');
 
-                var productName = $('<h6 class="product_name">');
+                    var productName = $('<h6 class="product_name">');
 
-                var anchorProductName = $('<a>');
-                anchorProductName.attr('href', pathHome + 'Productos/publicacion/' + data[i].producto.id);
-                anchorProductName.text(data[i].producto.nombre);
+                    var anchorProductName = $('<a>');
+                    anchorProductName.attr('href', pathHome + 'Productos/publicacion/' + data[i].producto.id);
+                    anchorProductName.text(data[i].producto.nombre);
 
-                productName.append(anchorProductName);
+                    productName.append(anchorProductName);
 
-                var productPrice = $('<div class="product_price">');
-                productPrice.text('$' + data[i].producto.precio);
+                    var productPrice = $('<div class="product_price">');
+                    productPrice.text('$' + data[i].producto.precio);
 
-                productInfo.append(productName);
-                productInfo.append(productPrice);
+                    productInfo.append(productName);
+                    productInfo.append(productPrice);
 
-                var divButtonAddToCart = $('<div class="red_button add_to_cart_button">');
+                    var divButtonAddToCart = $('<div class="red_button">');
 
-                var anchorButtonAddToCart = $('<a>');
-                anchorButtonAddToCart.attr('href', '#'); //TODO hay que agregar atributo de acción a agregar a carrito
-                anchorButtonAddToCart.attr('onclick', 'agregarProductoCarrito(' + data[i].producto.id + ')');
+                    var buttonAddToCart = $('<button id="btnAddToCart" class="btn btn-primary ml-3">');
 
-                var fabOpenCart = $('<i class="fab fa-opencart mr-2">');
+                    var fabOpenCart = $('<i class="fab fa-opencart mr-2">');
 
-                var spanAddToCart = $('<span>');
-                spanAddToCart.text('Agregar al Carrito');
+                    var fasCheck = $('<i class="fas fa-check mr-2">');
 
-                anchorButtonAddToCart.append(fabOpenCart);
-                anchorButtonAddToCart.append(spanAddToCart);
+                    var fasBan = $('<i class="fas fa-ban mr-2">');
 
-                divButtonAddToCart.append(anchorButtonAddToCart);
+                    var spanAddToCart = $('<span>');
 
-                productFilter.append(productImage);
-                productFilter.append(productInfo);
+                    if (window.carrito != null && window.carrito.length != 0 && $.inArray(parseInt(data[i].producto.id), window.carrito) != -1) {
+                        spanAddToCart.text('En Carrito');
+                        buttonAddToCart.append(fasCheck);
+                        buttonAddToCart.prop('disabled', true);
+                    } else if (data[i].producto.cantidad == 0) {
+                        spanAddToCart.text('Sin Stock');
+                        buttonAddToCart.append(fasBan);
+                        buttonAddToCart.prop('disabled', true);
+                    } else {
+                        spanAddToCart.text('Agregar al Carrito');
+                        buttonAddToCart.append(fabOpenCart);
+                        buttonAddToCart.attr('onclick', 'agregarProductoCarrito(' + data[i].producto.id + ')');
+                    }
 
-                productItem.append(productFilter);
-                productItem.append(divButtonAddToCart);
+                    buttonAddToCart.append(spanAddToCart);
 
-                anchor.append(productItem);
+                    divButtonAddToCart.append(buttonAddToCart);
 
-                col.append(anchor);
+                    anchor.append(productImage);
 
-                row.append(col);
+                    productFilter.append(anchor);
+                    productFilter.append(productInfo);
 
-                i++;
-                cont++;
-            }while(i < cantPublicaciones && cont < 3);
+                    productItem.append(productFilter);
+                    productItem.append(divButtonAddToCart);
 
-            divProductosContainer.append(row);
+                    col.append(productItem);
+
+                    row.append(col);
+
+                    i++;
+                    cont++;
+                }while(i < cantPublicaciones && cont < 3);
+
+                divProductosContainer.append(row);
+            }
         }
     },
     ajax: {
@@ -92,12 +109,43 @@ paginador.pagination({
     }
 });
 
+
 function agregarProductoCarrito(id) {
-    var obj = {};
-    obj.idProducto = id;
-    llamadaAjax(pathHome + 'Carrito/agregar', JSON.stringify(obj), true, "actualizarCarritoCompras", "dummy");
+    if(window.isSessionSetted) {
+        btnAddToCart = $('#' + id).find("#btnAddToCart");
+        var obj = {};
+        obj.idProducto = id;
+        llamadaAjax(pathHome + 'Carrito/agregar', JSON.stringify(obj), true, "actualizarCarritoCompras", "dummy");
+    } else {
+        window.location.href = pathHome + "Seguridad/login";
+    }
 }
 
+function actualizarCarritoCompras(cantidadEnCarrito){
 
+    btnAddToCart.empty();
+    btnAddToCart.prop('disabled', true);
+    btnAddToCart.append($('<i class="fas fa-check mr-2">'));
+    var spanAddToCart = $('<span>');
+    spanAddToCart.text('En Carrito');
+    btnAddToCart.append(spanAddToCart);
+    btnAddToCart.removeAttr('onclick');
 
+    var contadorCarritoHeader = $('#checkout_items');
+    var contadorCarritoHamburguesa = $('#contadorCarritoHamburguesa');
 
+    contadorCarritoHeader.show();
+    contadorCarritoHamburguesa.show();
+
+    if(cantidadEnCarrito < 1){
+
+        contadorCarritoHamburguesa.hide();
+        contadorCarritoHeader.hide();
+    }else{
+
+        contadorCarritoHeader.addClass("checkout_items");
+
+        contadorCarritoHeader.text(cantidadEnCarrito);
+        contadorCarritoHamburguesa.text(cantidadEnCarrito);
+    }
+}

@@ -22,7 +22,7 @@ function subirSubTotal(idProducto, cantidadTotal) {
     var tdCantidad = tr.find('#quantity_value');
     var tdPrecio = tr.find('.precioProducto');
     var cantidad = parseInt(tdCantidad.text());
-    if(cantidad <= cantidadTotal){
+    if(cantidad < cantidadTotal){
         tdCantidad.text(cantidad+1);
         var precio = parseInt(tdPrecio.text());
         var subTotalParcial = (cantidad+1) * precio;
@@ -58,7 +58,7 @@ function actualizarTotal(){
 
 $(document).ready(function($) {
     function subtTotalInicial(cantidad) {
-        $('.productosEnCarrito').each(function() {
+        $('.fila-producto').each(function() {
             var tdPrecioProducto = $(this).find('.precioProducto');
             var precioProducto = Number(tdPrecioProducto.text());
             var subTotal = $(this).find('.subtotal');
@@ -109,4 +109,35 @@ function mostrarMensaje() {
 function ocultarBotonComprar() {
     var botonComprar = $('#botonComprarCarrito');
     botonComprar.hide();
+}
+
+$('#botonComprarCarrito').click(function () {
+    $(this).prop('disabled', true);
+    $(".delete-producto-button").prop('disabled', true);
+
+    var array = [];
+    $.each($('.fila-producto'), function (i, item) {
+        array.push({
+            id: $(item).attr('id'),
+            cantidad: $(item).find('#quantity_value').text()
+        });
+    });
+
+    llamadaAjax(pathComprar, JSON.stringify(array), true, 'compraExitosa', 'compraFallida');
+});
+
+
+function compraExitosa(dummy) {
+    alertify.alert('¡Compra Exitosa!', 'Su compra se ha realizado con éxito');
+
+    setTimeout(function () {
+        window.location.href = pathHome;
+    }, 3000);
+}
+
+function compraFallida(err) {
+    $(this).prop('disabled', false);
+    $(".delete-producto-button").prop('disabled', false);
+
+    alertify.alert('Error en la Compra', err);
 }

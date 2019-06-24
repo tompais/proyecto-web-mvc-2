@@ -19,6 +19,8 @@ abstract class Constantes
     const PUBLICACIONVIEW = "publicacion";
     const BUSQUEDAVIEW = "productos";
     const CARRITOCOMPRASVIEW = "miCarrito";
+    const COMPRAEXITOSAVIEW = "compraExitosa";
+    const COMPRASVIEW = "misCompras";
 
     //Acciones
     const CERRARSESIONACTION = "cerrarSession";
@@ -34,6 +36,8 @@ abstract class Constantes
     const PUBLICACIONTITLE = "Publicacion";
     const BUSQUEDATITLE = "Producto Buscado";
     const CARRITOCOMPRASTITLE = "Mi carrito";
+    const COMPRAEXITOSATITLE = "Compra Exitosa";
+    const COMPRASTITLE = "Mis Compras";
 
     const OLVIDEPASSWORDTITLE = "Olvidé Mi Contraseña";
 

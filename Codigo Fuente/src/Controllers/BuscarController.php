@@ -76,6 +76,7 @@ class BuscarController extends Controller
             $productoDto->categoriaId = $p->getCategoriaId();
             $productoDto->precio = $p->getPrecio();
             $productoDto->fechaAlta = $p->getFechaAlta();
+            $productoDto->cantidad = $p->getCantidad();
 
             $publicaciones[] = new PublicacionViewModel($productoDto, $imagenDto);
         }

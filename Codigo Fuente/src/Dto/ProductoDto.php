@@ -20,4 +20,5 @@ class ProductoDto
     public $descripcion;
     public $fechaBaja;
     public $fechaAlta;
+    public $cantidad;
 }

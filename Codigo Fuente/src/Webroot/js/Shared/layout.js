@@ -491,15 +491,3 @@ btnBuscar.change(function () {
 btnBuscar.click(function () {
     realizarBusqueda(inputBuscar.val());
 });
-
-function actualizarCarritoCompras($cantidadEnCarrito) {
-    var carritoCompras = $('#checkout_items');
-    carritoCompras.show();
-    if( $cantidadEnCarrito < 1){
-        carritoCompras.hide();
-    }else{
-        carritoCompras.addClass("checkout_items");
-
-        carritoCompras.text($cantidadEnCarrito);
-    }
-}
