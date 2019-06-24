@@ -1,3 +1,24 @@
+function actualizarCarritoCompras(cantidadEnCarrito){
+
+    var contadorCarritoHeader = $('#checkout_items');
+    var contadorCarritoHamburguesa = $('#contadorCarritoHamburguesa');
+
+    contadorCarritoHeader.show();
+    contadorCarritoHamburguesa.show();
+
+    if(cantidadEnCarrito < 1){
+
+        contadorCarritoHamburguesa.hide();
+        contadorCarritoHeader.hide();
+    }else{
+
+        contadorCarritoHeader.addClass("checkout_items");
+
+        contadorCarritoHeader.text(cantidadEnCarrito);
+        contadorCarritoHamburguesa.text(cantidadEnCarrito);
+    }
+}
+
 function actualizarCantidad(producto) {
     var divCard = $('#' + producto.id);
     var divCantidad = divCard.find('.product_quantity');
@@ -123,21 +144,18 @@ $('#botonComprarCarrito').click(function () {
         });
     });
 
-    llamadaAjax(pathComprar, JSON.stringify(array), true, "compraExitosa", "compraFallida");
+    llamadaAjax(pathComprar, JSON.stringify(array), true, 'compraExitosa', 'compraFallida');
 });
 
 
 function compraExitosa(dummy) {
-    alertify.alert("¡Compra Exitosa!", "Su compra se ha realizado con éxito");
-
-    setTimeout(function () {
-        window.location.href = pathHome;
-    }, 3000);
+    window.location.href = pathHome + "Compra/exito";
 }
 
 function compraFallida(err) {
     $(this).prop('disabled', false);
     $(".delete-producto-button").prop('disabled', false);
 
-    alertify.alert("Error en la Compra", err);
+    alertify.alert('Error en la Compra', err);
 }
+

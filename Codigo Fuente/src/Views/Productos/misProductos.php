@@ -1,12 +1,16 @@
+<link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/lib/paginationjs/dist/pagination.css"; ?>">
 <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/productos/misProductos.css" ?>">
 
+<script>
+    const cantidadProductos = "<?php echo $cantidadProductos; ?>";
+</script>
 <div class="container mt-3">
 
     <div class="panel-heading">
         <div class="panel-title pt-3">
             <div class="row">
                 <div class="col-xl-5 col-sm-5">
-                    <h2>Mis Ventas</h2>
+                    <h2>Mis Ventas<i class="fa fa-piggy-bank ml-2"></i></h2>
                 </div>
                 <div class="col-xl-7 col-sm-5">
                     <a href="<?php echo getBaseAddress() . 'Productos/agregarProducto' ?>" class="btn btn-primary float-right"><i class="fas fa-plus mr-1"></i> Agregar un Producto</a>
@@ -15,46 +19,19 @@
         </div>
     </div>
 
-        <?php
-            $j = 0;
-
-            if(isset($productos))
-            {
-                echo '<ul class="cards justify-content-start">';
-
-                $pathAccionEditarPublicacion = getBaseAddress() . "Productos/editarProducto/";
-                $pathAccionPublicacion = getBaseAddress() . "Productos/publicacion/";
-
-                foreach($productos as $producto)
-                {
-                    $imagen = $imagenes[$j]->getNombre();
-                    $id = $producto->getId();
-    
-                    $rutaImg = getBaseAddress() . 'Webroot/img/productos/' . $imagen;
-                    $precio = $producto->getPrecio();
-    
-                    echo "<li class='card mt-3'>
-                            <div class='card__inner h-75 w-100'>
-                                <img class='img-fluid h-100 w-100' src='$rutaImg'>
-                            </div>
-                            <h3 class='card__tagline mt-2'>". $producto->getNombre() ."</h3>
-                            <ul class='card__icons mt-2'>
-                                <li><a href='" . $pathAccionPublicacion . $id . "'><i class='fas fa-eye'></i></a></li>
-                                <li><a href='" . $pathAccionEditarPublicacion . $id . "'><i class='fas fa-edit'></i></a></li>
-                                <li><a href='#' onclick='insertarIdProducto($id)' data-toggle='modal' data-target='#eliminarModal'><i class='fas fa-times'></i></a></li>
-                            </ul>
-                            <p>$$precio.00</p>
-                        </li>";
-    
-                    while($j < count($imagenes) && $id == $imagenes[$j]->getProductoId())
-                        $j++;
-                }
-
-                echo "</ul>";
+    <div class="d-flex flex-column mx-auto justify-content-center mt-3">
+        <div id="divProductosContainer" class="d-flex flex-column justify-content-center align-items-center">
+            <?php
+            if (!$cantidadProductos) {
+                echo '<h5 class="text-center text-black-50">No tiene productos en venta</h5>';
             }
-            else
-                echo "<p class='text-center'>No tiene productos en venta</p>";
-        ?>
+            ?>
+        </div>
+
+        <div id="paginador" class="d-flex mx-auto justify-content-center align-items-center mt-4"></div>
+    </div>
+
+
 
 
 
@@ -84,4 +61,6 @@
     
 </div>
 
-<script src="<?php echo getBaseAddress() . "Webroot/js/producto/eliminarProducto.js" ?>"></script>
+<script src="<?php echo getBaseAddress() . "Webroot/lib/paginationjs/dist/pagination.min.js"; ?>"></script>
+<script src="<?php echo getBaseAddress() . "Webroot/js/producto/misProductos.js"; ?>"></script>
+<script src="<?php echo getBaseAddress() . "Webroot/js/producto/eliminarProducto.js"; ?>"></script>

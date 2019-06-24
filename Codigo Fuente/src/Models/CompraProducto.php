@@ -126,4 +126,24 @@ class CompraProducto extends Model
 
         return $id;
     }
+
+    public function traerComprasProductos($pk)
+    {
+        $comprasProductos = array();
+
+        $rows = $this->pageRows(0, PHP_INT_MAX, "CompraId = $pk");
+
+        foreach($rows as $row)
+        {
+            $compraProducto = new CompraProducto();
+            $compraProducto->db->disconnect();
+            $compraProducto->setId($row["Id"]);
+            $compraProducto->setCompraId($row["CompraId"]);
+            $compraProducto->setCantidad($row["Cantidad"]);
+            $compraProducto->setProductoId($row["ProductoId"]);
+            $comprasProductos[] = $compraProducto;
+        }
+
+        return $comprasProductos;
+    }
 }

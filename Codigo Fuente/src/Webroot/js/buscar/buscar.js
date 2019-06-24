@@ -1,5 +1,6 @@
 var paginador = $('#paginador');
 var divProductosContainer = $('#divProductosContainer');
+var btnAddToCart;
 
 paginador.pagination({
     dataSource: pathHome + 'Buscar/getPublicaciones/' + palabra,
@@ -25,7 +26,7 @@ paginador.pagination({
                     var anchor = $('<a>');
                     anchor.attr('href', pathHome + 'Productos/publicacion/' + data[i].producto.id);
 
-                    var productItem = $('<div class="product-item w-100">');
+                    var productItem = $('<div id="' + data[i].producto.id + '" class="product-item w-100">');
 
                     var productFilter = $('<div class="product product_filter">');
 
@@ -54,18 +55,33 @@ paginador.pagination({
 
                     var divButtonAddToCart = $('<div class="red_button">');
 
-                    var anchorButtonAddToCart = $('<button class="btn btn-primary ml-3">');
-                    anchorButtonAddToCart.attr('onclick', 'agregarProductoCarrito(' + data[i].producto.id + ')');
+                    var buttonAddToCart = $('<button id="btnAddToCart" class="btn btn-primary ml-3">');
 
                     var fabOpenCart = $('<i class="fab fa-opencart mr-2">');
 
+                    var fasCheck = $('<i class="fas fa-check mr-2">');
+
+                    var fasBan = $('<i class="fas fa-ban mr-2">');
+
                     var spanAddToCart = $('<span>');
-                    spanAddToCart.text('Agregar al Carrito');
 
-                    anchorButtonAddToCart.append(fabOpenCart);
-                    anchorButtonAddToCart.append(spanAddToCart);
+                    if (window.carrito != null && window.carrito.length != 0 && $.inArray(parseInt(data[i].producto.id), window.carrito) != -1) {
+                        spanAddToCart.text('En Carrito');
+                        buttonAddToCart.append(fasCheck);
+                        buttonAddToCart.prop('disabled', true);
+                    } else if (data[i].producto.cantidad == 0) {
+                        spanAddToCart.text('Sin Stock');
+                        buttonAddToCart.append(fasBan);
+                        buttonAddToCart.prop('disabled', true);
+                    } else {
+                        spanAddToCart.text('Agregar al Carrito');
+                        buttonAddToCart.append(fabOpenCart);
+                        buttonAddToCart.attr('onclick', 'agregarProductoCarrito(' + data[i].producto.id + ')');
+                    }
 
-                    divButtonAddToCart.append(anchorButtonAddToCart);
+                    buttonAddToCart.append(spanAddToCart);
+
+                    divButtonAddToCart.append(buttonAddToCart);
 
                     anchor.append(productImage);
 
@@ -96,6 +112,7 @@ paginador.pagination({
 
 function agregarProductoCarrito(id) {
     if(window.isSessionSetted) {
+        btnAddToCart = $('#' + id).find("#btnAddToCart");
         var obj = {};
         obj.idProducto = id;
         llamadaAjax(pathHome + 'Carrito/agregar', JSON.stringify(obj), true, "actualizarCarritoCompras", "dummy");
@@ -104,6 +121,31 @@ function agregarProductoCarrito(id) {
     }
 }
 
+function actualizarCarritoCompras(cantidadEnCarrito){
 
+    btnAddToCart.empty();
+    btnAddToCart.prop('disabled', true);
+    btnAddToCart.append($('<i class="fas fa-check mr-2">'));
+    var spanAddToCart = $('<span>');
+    spanAddToCart.text('En Carrito');
+    btnAddToCart.append(spanAddToCart);
+    btnAddToCart.removeAttr('onclick');
 
+    var contadorCarritoHeader = $('#checkout_items');
+    var contadorCarritoHamburguesa = $('#contadorCarritoHamburguesa');
 
+    contadorCarritoHeader.show();
+    contadorCarritoHamburguesa.show();
+
+    if(cantidadEnCarrito < 1){
+
+        contadorCarritoHamburguesa.hide();
+        contadorCarritoHeader.hide();
+    }else{
+
+        contadorCarritoHeader.addClass("checkout_items");
+
+        contadorCarritoHeader.text(cantidadEnCarrito);
+        contadorCarritoHamburguesa.text(cantidadEnCarrito);
+    }
+}
