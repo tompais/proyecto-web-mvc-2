@@ -13,71 +13,86 @@ paginador.pagination({
         if(cantidadProductos != 0) {
             divProductosContainer.empty();
 
-            var ulCards = $('<ul class="cards justify-content-start">');
+            const cantPublicaciones = data.length;
 
-            $.each(data, function (i, item) {
-                var liCard = $('<li class="card mt-3">');
+            var i = 0;
 
-                var divCardInner = $("<div class='card__inner h-75 w-100'>");
+            while(i < cantPublicaciones) {
+                var cont = 0;
 
-                var imgCardInner = $("<img class='img-fluid h-100 w-100'>");
-                imgCardInner.attr('src', pathHome + 'Webroot/img/productos/' + item.imagen.nombre);
+                var row = $('<div class="row w-100">');
 
-                divCardInner.append(imgCardInner);
+                do {
+                    var col = $('<div class="col-sm-4">');
 
-                var h3CardTagLine = $("<h3 class='card__tagline mt-2'>");
-                h3CardTagLine.text(item.producto.nombre);
+                    var divCard = $('<div class="card w-100 justify-content-center align-items-center mt-3">');
 
-                var ulCardIcons = $("<ul class='card__icons mt-2'>");
+                    var divCardInner = $("<div class='card__inner h-75 w-100'>");
 
-                var liAccionVerPublicacion = $("<li>");
+                    var imgCardInner = $("<img class='img-fluid h-100 w-100'>");
+                    imgCardInner.attr('src', pathHome + 'Webroot/img/productos/' + data[i].imagen.nombre);
 
-                var anchorAccionVerPublicacion = $("<a>");
-                anchorAccionVerPublicacion.attr('href', pathHome + 'Productos/publicacion/' + item.producto.id);
+                    divCardInner.append(imgCardInner);
 
-                var iFasFaEye = $("<i class='fas fa-eye'>");
+                    var h3CardTagLine = $("<h3 class='card__tagline mt-2'>");
+                    h3CardTagLine.text(data[i].producto.nombre);
 
-                anchorAccionVerPublicacion.append(iFasFaEye);
+                    var ulCardIcons = $("<ul class='card__icons mt-2'>");
 
-                liAccionVerPublicacion.append(anchorAccionVerPublicacion);
+                    var liAccionVerPublicacion = $("<li>");
 
-                var liAccionEditarPublicacion = $("<li>");
+                    var anchorAccionVerPublicacion = $("<a>");
+                    anchorAccionVerPublicacion.attr('href', pathHome + 'Productos/publicacion/' + data[i].producto.id);
 
-                var anchorAccionEditarPublicacion = $("<a>");
-                anchorAccionEditarPublicacion.attr('href', pathHome + 'Productos/editarProducto/' + item.producto.id);
+                    var iFasFaEye = $("<i class='fas fa-eye'>");
 
-                var iFasFaEdit = $("<li class='fas fa-edit'>");
+                    anchorAccionVerPublicacion.append(iFasFaEye);
 
-                anchorAccionEditarPublicacion.append(iFasFaEdit);
+                    liAccionVerPublicacion.append(anchorAccionVerPublicacion);
 
-                liAccionEditarPublicacion.append(anchorAccionEditarPublicacion);
+                    var liAccionEditarPublicacion = $("<li>");
 
-                var liAccionEliminarPublicacion = $("<li>");
+                    var anchorAccionEditarPublicacion = $("<a>");
+                    anchorAccionEditarPublicacion.attr('href', pathHome + 'Productos/editarProducto/' + data[i].producto.id);
 
-                var anchorAccionEliminarPublicacion = $("<a href='#' onclick='insertarIdProducto(" + item.producto.id + ")' data-toggle='modal' data-target='#eliminarModal'>");
+                    var iFasFaEdit = $("<li class='fas fa-edit'>");
 
-                var iFasFaTimes = $("<li class='fas fa-times'>");
+                    anchorAccionEditarPublicacion.append(iFasFaEdit);
 
-                anchorAccionEliminarPublicacion.append(iFasFaTimes);
+                    liAccionEditarPublicacion.append(anchorAccionEditarPublicacion);
 
-                liAccionEliminarPublicacion.append(anchorAccionEliminarPublicacion);
+                    var liAccionEliminarPublicacion = $("<li>");
 
-                ulCardIcons.append(liAccionVerPublicacion);
-                ulCardIcons.append(liAccionEditarPublicacion);
-                ulCardIcons.append(liAccionEliminarPublicacion);
+                    var anchorAccionEliminarPublicacion = $("<a href='#' onclick='insertarIdProducto(" + data[i].producto.id + ")' data-toggle='modal' data-target='#eliminarModal'>");
 
-                var pPrecio = $("<p class='font-weight-bold' style='color: #0099df;'>");
-                pPrecio.text("$ " + item.producto.precio);
+                    var iFasFaTimes = $("<li class='fas fa-times'>");
 
-                liCard.append(divCardInner);
-                liCard.append(h3CardTagLine);
-                liCard.append(ulCardIcons);
-                liCard.append(pPrecio);
+                    anchorAccionEliminarPublicacion.append(iFasFaTimes);
 
-                ulCards.append(liCard);
-            });
+                    liAccionEliminarPublicacion.append(anchorAccionEliminarPublicacion);
 
-            divProductosContainer.append(ulCards);
+                    ulCardIcons.append(liAccionVerPublicacion);
+                    ulCardIcons.append(liAccionEditarPublicacion);
+                    ulCardIcons.append(liAccionEliminarPublicacion);
+
+                    var pPrecio = $("<p class='font-weight-bold' style='color: #0099df;'>");
+                    pPrecio.text("$ " + data[i].producto.precio);
+
+                    divCard.append(divCardInner);
+                    divCard.append(h3CardTagLine);
+                    divCard.append(ulCardIcons);
+                    divCard.append(pPrecio);
+
+                    col.append(divCard);
+
+                    row.append(col);
+
+                    i++;
+                    cont++;
+                }while(i < cantPublicaciones && cont < 3);
+
+                divProductosContainer.append(row);
+            }
         }
     },
     ajax: {
