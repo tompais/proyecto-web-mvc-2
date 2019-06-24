@@ -109,4 +109,24 @@ class Compra extends Model
 
         return $id;
     }
+
+    public function traerUltimasCompras($pk)
+    {
+        $compras = array();
+
+        $rows = $this->pageRows(0, 5, "CompradorId = $pk ORDER BY FechaCompra DESC");
+
+        foreach($rows as $row)
+        {
+            $compra = new Compra();
+            $compra->db->disconnect();
+            $compra->setId($row["Id"]);
+            $compra->setCompradorId($row["CompradorId"]);
+            $compra->setTotal($row["Total"]);
+            $compra->setFechaCompra($row["FechaCompra"]);
+            $compras[] = $compra;
+        }
+
+        return $compras;
+    }
 }

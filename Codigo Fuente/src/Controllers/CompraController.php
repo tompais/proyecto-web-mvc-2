@@ -77,6 +77,80 @@ class CompraController extends Controller
 
     function misCompras()
     {
+        $compra = new Compra();
+        $compraProducto = new CompraProducto();
+        $usuario = new Usuario();
+
+        $sesion = unserialize($_SESSION["session"]);
+
+        $compras = $compra->traerUltimasCompras($sesion->getId());
+
+        $comprasProductos = array();
+
+        foreach($compras as $comp)
+            $comprasProductos = array_merge($comprasProductos, $compraProducto->traerComprasProductos($comp->getId()));
+
+        $producto = new Producto();
+        $imagen = new Imagen();
+        $metodo = new Metodo();
+
+        $publicaciones = array();
+        $comprasProductosDto = array();
+        $usuariosDto = array();
+        $metodosDto = array();
+        
+        foreach($comprasProductos as $cProducto)
+        {
+            $productoDto = new ProductoDto();
+
+            $producto->traerProducto($cProducto->getProductoId());
+
+            $productoDto->nombre = $producto->getNombre();
+
+            $productoDto->precio = $producto->getPrecio();
+
+            $metodoDto = new MetodoDto();
+
+            $metodo->traerMetodo($producto->getMetodoId());
+
+            $metodoDto->tipo = $metodo->getTipo();
+
+            $metodosDto[] = $metodoDto;
+
+            $imagenDto = new ImagenDto();
+
+            $imagen->traerImagenCompra($producto->getId());
+
+            $imagenDto->nombre = $imagen->getNombre();
+
+            $compraProductoDto = new CompraProductoDto();
+
+            $compraProductoDto->compraId = $cProducto->getCompraId();
+
+            $compraProductoDto->cantidad = $cProducto->getCantidad();
+
+            $comprasProductosDto[] = $compraProductoDto;
+
+            $publicaciones[] = new PublicacionViewModel($productoDto, $imagenDto);
+
+            $usuario->traerUsuario($producto->getUsuarioId());
+
+            $usuarioDto = new UsuarioDto();
+
+            $usuarioDto->nombre = $usuario->getNombre();
+            $usuarioDto->apellido = $usuario->getApellido();
+            $usuarioDto->email = $usuario->getEmail();
+            $usuarioDto->telefono = $usuario->getTelefonoCelular();
+
+            $usuariosDto[] = $usuarioDto;
+        }
+
+        $d["compras"] = $compras;
+        $d["comprasProductos"] = $comprasProductosDto;
+        $d["publicaciones"] = $publicaciones;
+        $d["usuarios"] = $usuariosDto;
+        $d["metodos"] = $metodosDto;
+
         $d["title"] = Constantes::COMPRASTITLE;
         $this->set($d);
         $this->render(Constantes::COMPRASVIEW);

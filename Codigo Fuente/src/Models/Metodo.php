@@ -56,4 +56,12 @@ class Metodo extends Model
         return $metodos;
     }
 
+    public function traerMetodo($pk)
+    {
+        $metodo = $this->selectByPk($pk);
+
+        $this->setId($metodo["Id"]);
+        $this->setTipo($metodo["Tipo"]);
+    }
+
 }
