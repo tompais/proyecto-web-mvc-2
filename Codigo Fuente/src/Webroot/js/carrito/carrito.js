@@ -149,11 +149,7 @@ $('#botonComprarCarrito').click(function () {
 
 
 function compraExitosa(dummy) {
-    alertify.alert('¡Compra Exitosa!', 'Su compra se ha realizado con éxito');
-
-    setTimeout(function () {
-        window.location.href = pathHome;
-    }, 3000);
+    window.location.href = pathHome + "Compra/exito";
 }
 
 function compraFallida(err) {
