@@ -29,4 +29,5 @@ abstract class CodigoError
     const MetodoNoEncontrado = 44;
     const ProductoDuplicadoEnCarrito = 50;
     const ErrorGetSql = 51;
+    const CierreSession = 52;
 }

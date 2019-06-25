@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/lib/sbAdmin/css/sb-admin.css"; ?>">
 </head>
 
-<body>
+<body id="page-top">
     <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -44,23 +44,26 @@
     <script src="<?php echo getBaseAddress() . "Webroot/lib/EasyAutocomplete/jquery.easy-autocomplete.min.js"; ?>"></script>
     <script src="<?php echo getBaseAddress() . "Webroot/js/utilidades/constantes.js"; ?>"></script>
     <script src="<?php echo getBaseAddress() . "Webroot/js/utilidades/utilidades.js"; ?>"></script>
-    <script src="<?php echo getBaseAddress() . "Webroot/lib/sbAdmin/js/sb-admin.js"; ?>"></script>
 
     <main role="main">
         
         <div class="starter-template super_container">
 
             <?php
-            require_once ROOT . "Views/Shared/headerDashboard.php";
+            require_once ROOT . "Views/Shared/DashBoard/headerDashboard.php";
             ?>
 
             <div id="wrapper">
                 <?php
-                require_once ROOT . "Views/Shared/sidebarDashboard.php";
+                require_once ROOT . "Views/Shared/DashBoard/sidebarDashboard.php";
                 ?>
 
                 <?php
                 echo $content_for_layout;
+                ?>
+
+                <?php
+                require_once ROOT . "Views/Shared/DashBoard/footerDashBoard.php";
                 ?>
             </div>
 
@@ -72,6 +75,8 @@
         </a>
 
     </main>
+
+    <script src="<?php echo getBaseAddress() . "Webroot/lib/sbAdmin/js/sb-admin.js"; ?>"></script>
 
 </body>
 

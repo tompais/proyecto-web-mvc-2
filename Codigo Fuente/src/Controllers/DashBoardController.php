@@ -48,9 +48,9 @@ class DashBoardController extends Controller
             $session->setId($user->getId());
             $session->setUserName($user->getUsername());
             $session->setRolId($user->getRolId());
-            $_SESSION["session"] = serialize($session);
+            $_SESSION["sessionAdmin"] = serialize($session);
             if($data->recordarme)
-                setcookie("session", $_SESSION["session"], time() + 60*2, "/", apache_request_headers()["Host"]); //60 segs = 1 min. Multiplicado por 2, son 2 minutos.
+                setcookie("session", $_SESSION["sessionAdmin"], time() + 60*2, "/", apache_request_headers()["Host"]); //60 segs = 1 min. Multiplicado por 2, son 2 minutos.
         }
 
         echo json_encode(true);
@@ -62,5 +62,15 @@ class DashBoardController extends Controller
         $d["title"] = Constantes::DASHBOARDTITLE;
         $this->set($d);
         $this->render(Constantes::INICIODASHBOARDVIEW);
+    }
+
+    function cerrarSession()
+    {
+        session_destroy();
+        if(isset($_COOKIE["sessionAdmin"])) {
+            unset($_COOKIE["sessionAdmin"]);
+            setcookie("sessionAdmin", null, -1, "/", apache_request_headers()["Host"]);
+        }
+        header("location: " . getBaseAddress(). "DashBoard/login");
     }
 }

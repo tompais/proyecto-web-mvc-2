@@ -23,6 +23,10 @@ class Router
         {
             header("Location: " . getBaseAddress() . "Seguridad/login");
         }
+        /*else if ((self::isDashboardController($explode_url[0]) && !isset($_SESSION["sessionAdmin"])))
+        {
+            header("Location: " . getBaseAddress() . "DashBoard/login");
+        }*/
         else
         {
             $request->controller = $explode_url[0];
@@ -36,6 +40,11 @@ class Router
     private static function isProductController($controller)
     {
         return !strcasecmp($controller, 'Productos');
+    }
+
+    private static function isDashboardController($controller)
+    {
+        return !strcasecmp($controller, 'DashBoard');
     }
 
     private static function isBuyController($controller)
