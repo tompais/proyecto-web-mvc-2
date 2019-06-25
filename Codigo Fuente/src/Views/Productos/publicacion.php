@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/publicacion/publicacionProducto.css" ?>">
-<link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/publicacion/publicacionProductoResponsive.css" ?>">
+<link rel="stylesheet"
+      href="<?php echo getBaseAddress() . "Webroot/css/publicacion/publicacionProductoResponsive.css" ?>">
 <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/lib/OwlCarousel2-2.2.1/owl.carousel.css"; ?>">
 <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/lib/OwlCarousel2-2.2.1/owl.theme.default.css"; ?>">
 
@@ -9,7 +10,8 @@
             <div class="breadcrumbs d-flex flex-row align-items-center">
                 <ul>
                     <li><a href="·">Inicio</a></li>
-                    <li><a href="#"><i class="fa fa-angle-right mr-3" aria-hidden="true"></i><?php echo $categoria->getNombre() ?></a></li>
+                    <li><a href="#"><i class="fa fa-angle-right mr-3"
+                                       aria-hidden="true"></i><?php echo $categoria->getNombre() ?></a></li>
                 </ul>
             </div>
 
@@ -19,25 +21,25 @@
     <div class="row">
         <?php
 
-                $imagen = $imagenes[0]->getNombre();
-                $rutaImgPrincipal = getBaseAddress() . 'Webroot/img/productos/' . $imagen;
+        $imagen = $imagenes[0]->getNombre();
+        $rutaImgPrincipal = getBaseAddress() . 'Webroot/img/productos/' . $imagen;
 
-                echo "<div class='col-lg-7'>
+        echo "<div class='col-lg-7'>
                             <div class='single_product_pics'>
                                 <div class='row'>
                                     <div class='col-lg-3 thumbnails_col order-lg-1 order-2'>
                                         <div class='single_product_thumbnails mx-1' id='barraImagenes' style='overflow: auto'>
                                             <ul>";
 
-                                            for ($j=0;$j<count($imagenes);$j++){
+        for ($j = 0; $j < count($imagenes); $j++) {
 
-                                                $imagen = $imagenes[$j]->getNombre();
-                                                $rutaImg = getBaseAddress() . 'Webroot/img/productos/' . $imagen;
+            $imagen = $imagenes[$j]->getNombre();
+            $rutaImg = getBaseAddress() . 'Webroot/img/productos/' . $imagen;
 
-                                                echo "<li><img src='$rutaImg' alt='' data-image='$rutaImg'></li>";
-                                            }
+            echo "<li><img src='$rutaImg' alt='' data-image='$rutaImg'></li>";
+        }
 
-                echo                     "</ul>
+        echo "</ul>
                                         </div>
                                     </div>
                                     <div class='col-lg-9 image_col order-lg-2 order-1'>
@@ -57,9 +59,8 @@
                     <?php
                     if ($producto->getDescripcion() == "") {
                         echo '<p>Ninguna Descripcion</p>';
-                    }
-                    else{
-                        echo '<p>'. $producto->getDescripcion() .'</p>';
+                    } else {
+                        echo '<p>' . $producto->getDescripcion() . '</p>';
                     }
                     ?>
                 </div>
@@ -67,17 +68,19 @@
                     <span class="ti-truck"></span><span>Caracteristicas</span>
                 </div>
 
-                <div class="product_price mt-5" style="font-size: 24px">Precio: $<?php echo $producto->getPrecio() ?></div><br>
-                <div class="product_price mt-5" style="font-size: 24px">Cantidad: <?php echo $producto->getCantidad() ?> (disponibles) </div>
+                <div class="product_price mt-5" style="font-size: 24px">Precio:
+                    $<?php echo $producto->getPrecio() ?></div>
+                <br>
+                <div class="product_price mt-5" style="font-size: 24px">Cantidad: <?php echo $producto->getCantidad() ?>
+                    (disponibles)
+                </div>
 
                 <br>
                 <br>
                 <?php
-                    $idSession = unserialize($_SESSION["session"])->getId();
-                    $idProducto = $producto->getId();
-                    if($idSession != $producto->getUsuarioId()){
-                        echo '<button id="botonCarritoPublicacion" type="button" class="btn btn-light mt-2" onclick="agregarProductoCarrito('.$idProducto.')"><i class="fas fa-cart-plus mr-1" style="color: #0099df"></i>Añadir al Carrito</button>';
-                    }
+                if (!isset($_SESSION["session"]) || unserialize($_SESSION["session"])->getId() != $producto->getUsuarioId()) {
+                    echo '<button id="botonCarritoPublicacion" type="button" class="btn btn-light mt-2" onclick="agregarProductoCarrito(' . $producto->getId() . ')"><i class="fas fa-cart-plus mr-1" style="color: #0099df"></i>Añadir al Carrito</button>';
+                }
                 ?>
             </div>
         </div>
@@ -118,12 +121,17 @@
                                             <div class="product-item">
                                                 <div class="product discount">
                                                     <div class="product_image">
-                                                        <img src="<?php echo getBaseAddress() . "Webroot/img/home/product_1.png" ?>" alt="">
+                                                        <img src="<?php echo getBaseAddress() . "Webroot/img/home/product_1.png" ?>"
+                                                             alt="">
                                                     </div>
                                                     <div class="product_info">
-                                                        <h6 class="product_name"><a href="#">Buzo Bordo con capucha</a></h6>
+                                                        <h6 class="product_name"><a href="#">Buzo Bordo con capucha</a>
+                                                        </h6>
                                                         <div class="product_price">$520.00</div>
-                                                        <button class="btn btn-primary btn-block btn-sm" style="background: #0099df"><i class="fab fa-opencart mr-1"></i>Agregar al Carrito</button>
+                                                        <button class="btn btn-primary btn-block btn-sm"
+                                                                style="background: #0099df"><i
+                                                                    class="fab fa-opencart mr-1"></i>Agregar al Carrito
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -135,12 +143,16 @@
                                             <div class="product-item women">
                                                 <div class="product">
                                                     <div class="product_image">
-                                                        <img src="<?php echo getBaseAddress() . "Webroot/img/home/product_2.png" ?>" alt="">
+                                                        <img src="<?php echo getBaseAddress() . "Webroot/img/home/product_2.png" ?>"
+                                                             alt="">
                                                     </div>
                                                     <div class="product_info">
                                                         <h6 class="product_name"><a href="#">Samsung S8 Plus</a></h6>
                                                         <div class="product_price">$50000.00</div>
-                                                        <button class="btn btn-primary btn-block btn-sm" style="background: #0099df"><i class="fab fa-opencart mr-1"></i>Agregar al Carrito</button>
+                                                        <button class="btn btn-primary btn-block btn-sm"
+                                                                style="background: #0099df"><i
+                                                                    class="fab fa-opencart mr-1"></i>Agregar al Carrito
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -152,12 +164,16 @@
                                             <div class="product-item women">
                                                 <div class="product">
                                                     <div class="product_image">
-                                                        <img src="<?php echo getBaseAddress() . "Webroot/img/home/product_3.png" ?>" alt="">
+                                                        <img src="<?php echo getBaseAddress() . "Webroot/img/home/product_3.png" ?>"
+                                                             alt="">
                                                     </div>
                                                     <div class="product_info">
                                                         <h6 class="product_name"><a href="#">Nike Airmax 97</a></h6>
                                                         <div class="product_price">$2500.00</div>
-                                                        <button class="btn btn-primary btn-block btn-sm" style="background: #0099df"><i class="fab fa-opencart mr-1"></i>Agregar al Carrito</button>
+                                                        <button class="btn btn-primary btn-block btn-sm"
+                                                                style="background: #0099df"><i
+                                                                    class="fab fa-opencart mr-1"></i>Agregar al Carrito
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -169,12 +185,16 @@
                                             <div class="product-item accessories">
                                                 <div class="product">
                                                     <div class="product_image">
-                                                        <img src="<?php echo getBaseAddress() . "Webroot/img/home/product_4.png" ?>" alt="">
+                                                        <img src="<?php echo getBaseAddress() . "Webroot/img/home/product_4.png" ?>"
+                                                             alt="">
                                                     </div>
                                                     <div class="product_info">
                                                         <h6 class="product_name"><a href="#">Moto G5 Plus</a></h6>
                                                         <div class="product_price">$6000.00</div>
-                                                        <button class="btn btn-primary btn-block btn-sm" style="background: #0099df"><i class="fab fa-opencart mr-1"></i>Agregar al Carrito</button>
+                                                        <button class="btn btn-primary btn-block btn-sm"
+                                                                style="background: #0099df"><i
+                                                                    class="fab fa-opencart mr-1"></i>Agregar al Carrito
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -186,12 +206,16 @@
                                             <div class="product-item women men">
                                                 <div class="product">
                                                     <div class="product_image">
-                                                        <img src="<?php echo getBaseAddress() . "Webroot/img/home/product_5.png" ?>"s alt="">
+                                                        <img src="<?php echo getBaseAddress() . "Webroot/img/home/product_5.png" ?>"
+                                                             s alt="">
                                                     </div>
                                                     <div class="product_info">
                                                         <h6 class="product_name"><a href="#">Puma Active 600</a></h6>
                                                         <div class="product_price">$1000.00</div>
-                                                        <button class="btn btn-primary btn-block btn-sm" style="background: #0099df"><i class="fab fa-opencart mr-1"></i>Agregar al Carrito</button>
+                                                        <button class="btn btn-primary btn-block btn-sm"
+                                                                style="background: #0099df"><i
+                                                                    class="fab fa-opencart mr-1"></i>Agregar al Carrito
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -233,7 +257,8 @@
                                     <div class="review">
                                         <div class="review_date">27 Aug 2016</div>
                                         <div class="user_name">Brandon William</div>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                            tempor incididunt ut labore et dolore magna aliqua.</p>
                                     </div>
                                 </div>
 
@@ -255,7 +280,8 @@
                                     <div class="review">
                                         <div class="review_date">27 Aug 2016</div>
                                         <div class="user_name">Brandon William</div>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                            tempor incididunt ut labore et dolore magna aliqua.</p>
                                     </div>
                                 </div>
                             </div>
@@ -268,8 +294,12 @@
                                     <form id="review_form" action="post">
                                         <div>
                                             <h1>Add Review</h1>
-                                            <input id="review_name" class="form_input input_name" type="text" name="name" placeholder="Name*" required="required" data-error="Name is required.">
-                                            <input id="review_email" class="form_input input_email" type="email" name="email" placeholder="Email*" required="required" data-error="Valid email is required.">
+                                            <input id="review_name" class="form_input input_name" type="text"
+                                                   name="name" placeholder="Name*" required="required"
+                                                   data-error="Name is required.">
+                                            <input id="review_email" class="form_input input_email" type="email"
+                                                   name="email" placeholder="Email*" required="required"
+                                                   data-error="Valid email is required.">
                                         </div>
                                         <div>
                                             <h1>Your Rating:</h1>
@@ -280,10 +310,14 @@
                                                 <li><i class="fa fa-star" aria-hidden="true"></i></li>
                                                 <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
                                             </ul>
-                                            <textarea id="review_message" class="input_review" name="message"  placeholder="Your Review" rows="4" required data-error="Please, leave us a review."></textarea>
+                                            <textarea id="review_message" class="input_review" name="message"
+                                                      placeholder="Your Review" rows="4" required
+                                                      data-error="Please, leave us a review."></textarea>
                                         </div>
                                         <div class="text-left text-sm-right">
-                                            <button id="review_submit" type="submit" class="red_button review_submit_btn trans_300" value="Submit">submit</button>
+                                            <button id="review_submit" type="submit"
+                                                    class="red_button review_submit_btn trans_300" value="Submit">submit
+                                            </button>
                                         </div>
                                     </form>
                                 </div>
@@ -300,8 +334,6 @@
     </div>
 
 </div>
-
-
 
 
 <div class="benefit">
@@ -362,8 +394,11 @@
             <div class="col-lg-6">
                 <form action="post">
                     <div class="newsletter_form d-flex flex-md-row flex-column flex-xs-column align-items-center justify-content-lg-end justify-content-center">
-                        <input id="newsletter_email" type="email" placeholder="pupe893@gmail.com" required="required" data-error="Valid email is required.">
-                        <button id="newsletter_submit" type="submit" class="newsletter_submit_btn trans_300" value="Submit">Subcribite</button>
+                        <input id="newsletter_email" type="email" placeholder="pupe893@gmail.com" required="required"
+                               data-error="Valid email is required.">
+                        <button id="newsletter_submit" type="submit" class="newsletter_submit_btn trans_300"
+                                value="Submit">Subcribite
+                        </button>
                     </div>
                 </form>
             </div>
