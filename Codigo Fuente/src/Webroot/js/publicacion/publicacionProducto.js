@@ -317,8 +317,3 @@ jQuery(document).ready(function($)
 		}
 	}
 });
-function agregarProductoCarrito(id) {
-	var obj = {};
-	obj.idProducto = id;
-	llamadaAjax(pathHome + 'Carrito/agregar', JSON.stringify(obj), true, "actualizarCarritoCompras", "dummy");
-}

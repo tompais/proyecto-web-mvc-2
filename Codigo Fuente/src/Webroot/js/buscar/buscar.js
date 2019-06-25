@@ -110,18 +110,6 @@ paginador.pagination({
 });
 
 
-function agregarProductoCarrito(id) {
-    if(window.isSessionSetted) {
-        btnAddToCart = $('#' + id).find("#btnAddToCart");
-        var obj = {};
-        obj.idProducto = id;
-        llamadaAjax(pathHome + 'Carrito/agregar', JSON.stringify(obj), true, "actualizarCarritoCompras", "dummy");
-    } else {
-        window.location.href = pathHome + "Seguridad/login";
-    }
-}
-
-
 function actualizarCarritoCompras(cantidadEnCarrito){
 
     btnAddToCart.empty();
