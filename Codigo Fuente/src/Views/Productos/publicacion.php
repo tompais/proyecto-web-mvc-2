@@ -90,7 +90,7 @@
                 <div class="col">
                     <div class="tabs_container">
                         <ul class="tabs d-flex flex-sm-row flex-column align-items-md-center justify-content-center">
-                            <li class="tab active" data-active-tab="tab_1"><span>Descripcion</span></li>
+                            <li class="tab active" data-active-tab="tab_1"><span>Relacionados</span></li>
                             <li class="tab" data-active-tab="tab_3"><span>Comentarios</span></li>
                         </ul>
                     </div>
