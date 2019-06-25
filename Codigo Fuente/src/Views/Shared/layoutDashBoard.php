@@ -44,7 +44,7 @@
     <script src="<?php echo getBaseAddress() . "Webroot/lib/EasyAutocomplete/jquery.easy-autocomplete.min.js"; ?>"></script>
     <script src="<?php echo getBaseAddress() . "Webroot/js/utilidades/constantes.js"; ?>"></script>
     <script src="<?php echo getBaseAddress() . "Webroot/js/utilidades/utilidades.js"; ?>"></script>
-    <script src="<?php echo getBaseAddress() . "Webroot/lib/js/sbAdmin/sb-admin.js"; ?>"></script>
+    <script src="<?php echo getBaseAddress() . "Webroot/lib/sbAdmin/js/sb-admin.js"; ?>"></script>
 
     <main role="main">
         
