@@ -12,14 +12,21 @@ class CarritoController extends Controller
     {
         header("Content-type: application/json");
         $data = json_decode(utf8_decode($json['data']));
+        $producto = new Producto();
+        $producto->traerProducto($data->idProducto);
 
         if(!isset($_SESSION["carrito"])) {
             $_SESSION["carrito"] = [];
         }
 
-        if(in_array($data->idProducto, $_SESSION["carrito"])) {
+        if(in_array($data->idProducto, $_SESSION["carrito"])=== true) {
             throw new ProductoDuplicadoCarritoException("El producto ya se encuentra en el carrito", CodigoError::ProductoDuplicadoEnCarrito);
         }
+
+        if($producto->getCantidad() < 1){
+            throw new CantidadProductoNegativaException("Se agoto el stock del producto seleccionado", CodigoError::CantidadProductoNegativa);
+        }
+
         $_SESSION["carrito"][] = $data->idProducto;
         $cantidadProductosEnCarrito = count($_SESSION["carrito"]);
         echo json_encode($cantidadProductosEnCarrito);

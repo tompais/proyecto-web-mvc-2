@@ -121,6 +121,7 @@ function agregarProductoCarrito(id) {
     }
 }
 
+
 function actualizarCarritoCompras(cantidadEnCarrito){
 
     btnAddToCart.empty();
