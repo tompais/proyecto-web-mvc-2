@@ -6196,14 +6196,17 @@ CREATE TABLE Compra(
     constraint FK_Compra_Usuario foreign key (CompradorId) references Usuario (Id)
 );
 
-CREATE TABLE CompraProducto(
+CREATE TABLE RegistroCompra(
 	Id integer auto_increment not null unique,
-    ProductoId integer not null,
+    NombreProducto varchar(50) not null,
+    PrecioUnitario integer not null,
+    NombreImagenPrincipal varchar(50) not null,
     CompraId integer not null,
     Cantidad integer not null,
-    constraint PK_CompraProducto primary key (Id, ProductoId, CompraId),
-    constraint FK_CompraProducto_Producto foreign key (ProductoId) references Producto (Id),
-    constraint FK_CompraProducto_Compra foreign key (CompraId) references Compra (Id)
+    TipoMetodoEntrega varchar(50) not null,
+    DetalleEntrega varchar(50) not null,
+    constraint PK_RegistroCompra primary key (Id, CompraId),
+    constraint FK_RegistroCompra_Compra foreign key (CompraId) references Compra (Id)
 );
 
 INSERT INTO Rol (Nombre) VALUES ("Administrador"),

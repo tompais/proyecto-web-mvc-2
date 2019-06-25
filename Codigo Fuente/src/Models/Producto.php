@@ -251,17 +251,21 @@ class Producto extends Model
     {
         $producto = $this->selectByPk($pk);
 
-        $this->setId($producto["Id"]);
-        $this->setNombre($producto["Nombre"]);
-        $this->setPrecio($producto["Precio"]);
-        $this->setCategoriaId($producto["CategoriaId"]);
-        $this->setUsuarioId($producto["UsuarioId"]);
-        $this->setDescripcion($producto["Descripcion"]);
-        $this->setFechaAlta($producto["FechaAlta"]);
-        $this->setEstadoId($producto["EstadoId"]);
-        $this->setMetodoId($producto["MetodoId"]);
-        $this->setCantidad($producto["Cantidad"]);
-        $this->setDetalleEntrega($producto["DetalleEntrega"]);
+        if($producto) {
+            $this->setId($producto["Id"]);
+            $this->setNombre($producto["Nombre"]);
+            $this->setPrecio($producto["Precio"]);
+            $this->setCategoriaId($producto["CategoriaId"]);
+            $this->setUsuarioId($producto["UsuarioId"]);
+            $this->setDescripcion($producto["Descripcion"]);
+            $this->setFechaAlta($producto["FechaAlta"]);
+            $this->setEstadoId($producto["EstadoId"]);
+            $this->setMetodoId($producto["MetodoId"]);
+            $this->setCantidad($producto["Cantidad"]);
+            $this->setDetalleEntrega($producto["DetalleEntrega"]);
+        }
+
+        return $producto;
     }
 
     public function getNombresMejoresProductosPorFrase($nombre)
