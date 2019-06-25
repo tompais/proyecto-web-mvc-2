@@ -10,12 +10,12 @@ class DashBoardController extends Controller
 {
 
     function login()
-    {
-        $this->layout = "layoutSeguridadDashboard";
-        $d['title'] = Constantes::LOGINDASHBOARDTITLE;
-        $this->set($d);
-        $this->render(Constantes::LOGINDASHBOARVIEW);
-    }
+{
+    $this->layout = "layoutSeguridadDashboard";
+    $d['title'] = Constantes::LOGINDASHBOARDTITLE;
+    $this->set($d);
+    $this->render(Constantes::LOGINDASHBOARVIEW);
+}
 
     function loguearAdmin($json)
     {
@@ -50,7 +50,7 @@ class DashBoardController extends Controller
             $session->setRolId($user->getRolId());
             $_SESSION["sessionAdmin"] = serialize($session);
             if($data->recordarme)
-                setcookie("session", $_SESSION["sessionAdmin"], time() + 60*2, "/", apache_request_headers()["Host"]); //60 segs = 1 min. Multiplicado por 2, son 2 minutos.
+                setcookie("sessionAdmin", $_SESSION["sessionAdmin"], time() + 60*2, "/", apache_request_headers()["Host"]); //60 segs = 1 min. Multiplicado por 2, son 2 minutos.
         }
 
         echo json_encode(true);

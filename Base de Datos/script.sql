@@ -6125,21 +6125,6 @@ CREATE TABLE Usuario(
     constraint FK_Usuario_Genero FOREIGN KEY (GeneroId) REFERENCES Genero (Id)
 );
 
-CREATE TABLE Permiso(
-	Id integer NOT NULL auto_increment,
-    Nombre varchar(30) UNIQUE NOT NULL,
-    constraint PK_Permiso primary key (Id)
-);
-
-CREATE TABLE PermisoRol(
-	Id integer auto_increment not null unique,
-    PermisoId integer NOT NULL,
-    RolId integer NOT NULL,
-    constraint PK_PermisoRol primary key (Id, PermisoId, RolId),
-    constraint FK_PermisoRol_Permiso foreign key (PermisoId) references Permiso (Id),
-    constraint FK_PermisoRol_Rol foreign key (RolId) references Rol (Id)
-);
-
 CREATE TABLE Categoria(
     Id integer auto_increment not null unique,
     Nombre varchar(30) not null unique,
@@ -6210,34 +6195,8 @@ CREATE TABLE RegistroCompra(
 );
 
 INSERT INTO Rol (Nombre) VALUES ("Administrador"),
-                                ("CoAdministrador"),
-								("Moderador"),
                                 ("Usuario");
 
-INSERT INTO Permiso (Nombre) VALUES ("Hacer backup"),
-                                    ("Modificar db"),
-                                    ("Administrar moderadores"),
-                                    ("Modificar categorias"),
-                                    ("Banear"),
-                                    ("Borrar publicacion"),
-                                    ("Normal");
-
-INSERT INTO PermisoRol (PermisoId, RolId) VALUES (1, 1),
-                                                 (2, 1),
-                                                 (3, 1),
-                                                 (4, 1),
-                                                 (5, 1),
-                                                 (6, 1),
-                                                 (7, 1),
-                                                 (3, 2),
-                                                 (4, 2),
-                                                 (5, 2),
-                                                 (6, 2),
-                                                 (7, 2),
-                                                 (5, 3),
-                                                 (6, 3),
-                                                 (7, 3),
-                                                 (7, 4);
 
 INSERT INTO Genero (Nombre) VALUES ("Masculino"),
 								("Femenino"),
