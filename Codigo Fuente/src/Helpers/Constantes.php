@@ -21,6 +21,7 @@ abstract class Constantes
     const CARRITOCOMPRASVIEW = "miCarrito";
     const COMPRAEXITOSAVIEW = "compraExitosa";
     const COMPRASVIEW = "misCompras";
+    const INICIODASHBOARDVIEW = "inicioDashboard";
 
     //Acciones
     const CERRARSESIONACTION = "cerrarSession";
@@ -38,6 +39,7 @@ abstract class Constantes
     const CARRITOCOMPRASTITLE = "Mi carrito";
     const COMPRAEXITOSATITLE = "Compra Exitosa";
     const COMPRASTITLE = "Mis Compras";
+    const DASHBOARDTITLE = "Estadisticas Shopline";
 
     const OLVIDEPASSWORDTITLE = "Olvidé Mi Contraseña";
 
