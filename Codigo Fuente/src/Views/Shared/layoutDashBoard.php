@@ -51,10 +51,25 @@
         <div class="starter-template super_container">
 
             <?php
-            echo $content_for_layout;
+            require_once ROOT . "Views/Shared/headerDashboard.php";
             ?>
 
+            <div id="wrapper">
+                <?php
+                require_once ROOT . "Views/Shared/sidebarDashboard.php";
+                ?>
+
+                <?php
+                echo $content_for_layout;
+                ?>
+            </div>
+
         </div>
+
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
 
     </main>
 
