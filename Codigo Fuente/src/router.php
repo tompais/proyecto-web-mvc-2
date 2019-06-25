@@ -23,6 +23,10 @@ class Router
         {
             header("Location: " . getBaseAddress() . "Seguridad/login");
         }
+        else if ((self::isDashboardController($explode_url[0])) && !self::isDashboardLoginAction($explode_url[1]) && !self::isDashboardLoginAdminAction($explode_url[1]) && !isset($_SESSION["sessionAdmin"]))
+        {
+            header("Location: " . getBaseAddress() . "DashBoard/login");
+        }
         else
         {
             $request->controller = $explode_url[0];
@@ -36,6 +40,21 @@ class Router
     private static function isProductController($controller)
     {
         return !strcasecmp($controller, 'Productos');
+    }
+
+    private static function isDashboardController($controller)
+    {
+        return !strcasecmp($controller, 'DashBoard');
+    }
+
+    private static function isDashboardLoginAction($action)
+    {
+        return !strcasecmp($action, 'login');
+    }
+
+    private static function isDashboardLoginAdminAction($action)
+    {
+        return !strcasecmp($action, 'loguearAdmin');
     }
 
     private static function isBuyController($controller)
