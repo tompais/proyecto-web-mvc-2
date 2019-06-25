@@ -13,6 +13,7 @@ class RegistroCompraDto
     public $compra;
     public $cantidad;
     public $nombreProducto;
+    public $vendedorId;
     public $precioUnitario;
     public $nombreImagenPrincipal;
     public $tipoMetodoEntrega;

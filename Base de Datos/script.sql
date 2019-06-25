@@ -6184,6 +6184,7 @@ CREATE TABLE Compra(
 CREATE TABLE RegistroCompra(
 	Id integer auto_increment not null unique,
     NombreProducto varchar(50) not null,
+    VendedorId integer not null,
     PrecioUnitario integer not null,
     NombreImagenPrincipal varchar(50) not null,
     CompraId integer not null,

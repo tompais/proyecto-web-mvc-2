@@ -40,14 +40,15 @@
                         
                         while($i < count($comprasProductos) && $compraId == $comprasProductos[$i]->compraId)
                         {
-                            $ruta = getBaseAddress() . "Webroot/img/productos/" . $publicaciones[$i]->getImagen()->nombre;
-                            $nombreProducto = $publicaciones[$i]->getProducto()->nombre;
+                            $ruta = getBaseAddress() . "Webroot/img/productos/" . $comprasProductos[$i]->nombreImagenPrincipal;
+                            $nombreProducto = $comprasProductos[$i]->nombreProducto;
                             $nombreVendedor = $usuarios[$i]->nombre . " " . $usuarios[$i]->apellido;
                             $email = $usuarios[$i]->email;
                             $telefono = $usuarios[$i]->telefono;
                             $cantidad = $comprasProductos[$i]->cantidad;
-                            $precio = $publicaciones[$i]->getProducto()->precio * $cantidad;
-                            $metodo = $metodos[$i]->tipo;
+                            $precio = $comprasProductos[$i]->precioUnitario * $cantidad;
+                            $metodo = $comprasProductos[$i]->tipoMetodoEntrega;
+                            $detalleEntrega = $comprasProductos[$i]->detalleEntrega;
                             
 
                             echo "<div class='row my-5 user-infos $compraId'>
@@ -65,8 +66,10 @@
                                             <p>Telefono: $telefono</p>
                                             <p>Metodo: $metodo</p>
                                             <p>Cantidad: $cantidad</p>
-                                            <p>Total: $$precio.00</p>
-                                        </div>
+                                            <p>Total: $$precio.00</p>";
+                                            if($detalleEntrega != "En espera")
+                                                echo "<p>Detalle Entrega: $detalleEntrega</p>";
+                                        echo "</div>
                             </div>";
 
                             $i++;
