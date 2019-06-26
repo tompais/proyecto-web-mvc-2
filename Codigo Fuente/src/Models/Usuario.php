@@ -340,12 +340,17 @@ class Usuario extends Model
     {
         $usuario = $this->selectByPk($pk);
 
-        $this->setNombre($usuario["Nombre"]);
-        $this->setApellido($usuario["Apellido"]);
-        $this->setUsername($usuario["Username"]);
-        $this->setEmail($usuario["Email"]);
-        $this->setTelefonoCelular($usuario["TelefonoCelular"]);
-        $this->setFechaNacimiento($usuario["FechaNacimiento"]);
+        if($usuario) {
+            $this->setNombre($usuario["Nombre"]);
+            $this->setApellido($usuario["Apellido"]);
+            $this->setUsername($usuario["Username"]);
+            $this->setEmail($usuario["Email"]);
+            $this->setTelefonoCelular($usuario["TelefonoCelular"]);
+            $this->setFechaNacimiento($usuario["FechaNacimiento"]);
+            $this->setGeolocalizacionId($usuario["GeolocalizacionId"]);
+        }
+
+        return $usuario;
     }
 
     /**

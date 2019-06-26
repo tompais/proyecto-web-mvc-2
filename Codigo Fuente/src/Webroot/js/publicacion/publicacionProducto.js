@@ -1,3 +1,6 @@
+var map = $('#map');
+var googleMap;
+
 /* JS Document */
 
 /******************************
@@ -317,3 +320,15 @@ jQuery(document).ready(function($)
 		}
 	}
 });
+
+function initMap() {
+	googleMap = new google.maps.Map(document.getElementById('map'), {
+		center: {lat: window.latitud, lng: window.longitud},
+		zoom: 16
+	});
+
+	var marker = new google.maps.Marker({
+		position: new google.maps.LatLng(window.latitud, window.longitud),
+		map: googleMap
+	});
+}
