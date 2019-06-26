@@ -502,3 +502,32 @@ function agregarProductoCarrito(id) {
         window.location.href = pathHome + "Seguridad/login";
     }
 }
+
+function actualizarCarritoCompras(cantidadEnCarrito){
+    var btnAddToCart = $('#btnAddToCart')
+    btnAddToCart.empty();
+    btnAddToCart.prop('disabled', true);
+    btnAddToCart.append($('<i class="fas fa-check mr-2">'));
+    var spanAddToCart = $('<span>');
+    spanAddToCart.text('En Carrito');
+    btnAddToCart.append(spanAddToCart);
+    btnAddToCart.removeAttr('onclick');
+
+    var contadorCarritoHeader = $('#checkout_items');
+    var contadorCarritoHamburguesa = $('#contadorCarritoHamburguesa');
+
+    contadorCarritoHeader.show();
+    contadorCarritoHamburguesa.show();
+
+    if(cantidadEnCarrito < 1){
+
+        contadorCarritoHamburguesa.hide();
+        contadorCarritoHeader.hide();
+    }else{
+
+        contadorCarritoHeader.addClass("checkout_items");
+
+        contadorCarritoHeader.text(cantidadEnCarrito);
+        contadorCarritoHamburguesa.text(cantidadEnCarrito);
+    }
+}
