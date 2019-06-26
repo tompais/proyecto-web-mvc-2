@@ -96,4 +96,17 @@ class Geolocalizacion extends Model
         $this->setId($this->insert($array));
         return $this->getId();
     }
+
+    public function getGeolocalizacionById($pk)
+    {
+        $row = $this->selectByPk($pk);
+
+        if($row) {
+            $this->setId($row["Id"]);
+            $this->setLatitud($row["Latitud"]);
+            $this->setLongitud($row["Longitud"]);
+        }
+
+        return $row;
+    }
 }

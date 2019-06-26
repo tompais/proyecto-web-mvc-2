@@ -2,6 +2,10 @@
 4. Breadcrumbs
 *********************************/
 
+#map {
+	height: 300px;
+}
+
 .breadcrumbs
 {
 	width: 100%;
