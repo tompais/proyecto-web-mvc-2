@@ -4,6 +4,11 @@
 <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/lib/OwlCarousel2-2.2.1/owl.carousel.css"; ?>">
 <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/lib/OwlCarousel2-2.2.1/owl.theme.default.css"; ?>">
 
+<script>
+    var latitud = <?php echo $geolocalizacion->getLatitud(); ?>;
+    var longitud = <?php echo $geolocalizacion->getLongitud(); ?>;
+</script>
+
 <div class="container single_product_container">
     <div class="row">
         <div class="col">
@@ -85,6 +90,16 @@
             </div>
         </div>
     </div>
+
+    <div class="d-flex flex-column mx-auto justify-content-center align-items-center w-100">
+        <div class="col text-center my-5">
+            <div class="section_title">
+                <h2>Ubicación del Vendedor</h2>
+            </div>
+        </div>
+        <div id="map" class="w-100"></div>
+    </div>
+
 
     <div class="tabs_section_container">
 
@@ -409,3 +424,4 @@
 
 <script src="<?php echo getBaseAddress() . "Webroot/lib/OwlCarousel2-2.2.1/owl.carousel.js"; ?>"></script>
 <script src="<?php echo getBaseAddress() . "Webroot/js/publicacion/publicacionProducto.js" ?>"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcFcGF94xuFjqe9X4qNEbB9uA_awWv8Lg&callback=initMap"></script>

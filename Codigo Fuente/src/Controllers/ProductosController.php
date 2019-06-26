@@ -216,10 +216,13 @@ class ProductosController extends Controller
         $producto = new Producto();
         $categoria = new Categoria();
         $usuario = new Usuario();
+        $geolocalizacion = new Geolocalizacion();
 
         $producto->traerProducto($publicacion[0]);
         $categoria->traerCategoria($producto->getCategoriaId());
         $usuario->traerUsuario($producto->getUsuarioId());
+
+        $geolocalizacion->getGeolocalizacionById($usuario->getGeolocalizacionId());
 
         $imagen = new Imagen();
 
@@ -229,6 +232,7 @@ class ProductosController extends Controller
         $d["producto"] = $producto;
         $d["categoria"] = $categoria;
         $d["usuario"] = $usuario;
+        $d["geolocalizacion"] = $geolocalizacion;
 
 
         $this->set($d);
