@@ -131,111 +131,36 @@
                             <div class="row mt-5">
                                 <div class="col">
                                     <div class="owl-carousel owl-theme product_slider">
-                                        <!-- Producto 1 -->
-                                        <div class="owl-item product_slider_item">
-                                            <div class="product-item">
-                                                <div class="product discount">
-                                                    <div class="product_image">
-                                                        <img src="<?php echo getBaseAddress() . "Webroot/img/home/product_1.png" ?>"
-                                                             alt="">
-                                                    </div>
-                                                    <div class="product_info">
-                                                        <h6 class="product_name"><a href="#">Buzo Bordo con capucha</a>
-                                                        </h6>
-                                                        <div class="product_price">$520.00</div>
-                                                        <button class="btn btn-primary btn-block btn-sm"
-                                                                style="background: #0099df"><i
-                                                                    class="fab fa-opencart mr-1"></i>Agregar al Carrito
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <?php
 
-                                        <!-- Producto 2 -->
+                                            foreach ($productosRelacionados as $productoRelacionado){
 
-                                        <div class="owl-item product_slider_item">
-                                            <div class="product-item women">
-                                                <div class="product">
-                                                    <div class="product_image">
-                                                        <img src="<?php echo getBaseAddress() . "Webroot/img/home/product_2.png" ?>"
-                                                             alt="">
-                                                    </div>
-                                                    <div class="product_info">
-                                                        <h6 class="product_name"><a href="#">Samsung S8 Plus</a></h6>
-                                                        <div class="product_price">$50000.00</div>
-                                                        <button class="btn btn-primary btn-block btn-sm"
-                                                                style="background: #0099df"><i
-                                                                    class="fab fa-opencart mr-1"></i>Agregar al Carrito
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                                $imagen = $imagenesProductosRelacionados[$productoRelacionado->getId()]->getNombre();
+                                                $rutaImg = getBaseAddress() . 'Webroot/img/productos/' . $imagen;
 
-                                        <!-- Producto 3 -->
-
-                                        <div class="owl-item product_slider_item">
-                                            <div class="product-item women">
-                                                <div class="product">
-                                                    <div class="product_image">
-                                                        <img src="<?php echo getBaseAddress() . "Webroot/img/home/product_3.png" ?>"
-                                                             alt="">
-                                                    </div>
-                                                    <div class="product_info">
-                                                        <h6 class="product_name"><a href="#">Nike Airmax 97</a></h6>
-                                                        <div class="product_price">$2500.00</div>
-                                                        <button class="btn btn-primary btn-block btn-sm"
-                                                                style="background: #0099df"><i
-                                                                    class="fab fa-opencart mr-1"></i>Agregar al Carrito
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- Producto 4 -->
-
-                                        <div class="owl-item product_slider_item">
-                                            <div class="product-item accessories">
-                                                <div class="product">
-                                                    <div class="product_image">
-                                                        <img src="<?php echo getBaseAddress() . "Webroot/img/home/product_4.png" ?>"
-                                                             alt="">
-                                                    </div>
-                                                    <div class="product_info">
-                                                        <h6 class="product_name"><a href="#">Moto G5 Plus</a></h6>
-                                                        <div class="product_price">$6000.00</div>
-                                                        <button class="btn btn-primary btn-block btn-sm"
-                                                                style="background: #0099df"><i
-                                                                    class="fab fa-opencart mr-1"></i>Agregar al Carrito
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- Producto 5 -->
-
-                                        <div class="owl-item product_slider_item">
-                                            <div class="product-item women men">
-                                                <div class="product">
-                                                    <div class="product_image">
-                                                        <img src="<?php echo getBaseAddress() . "Webroot/img/home/product_5.png" ?>"
-                                                             s alt="">
-                                                    </div>
-                                                    <div class="product_info">
-                                                        <h6 class="product_name"><a href="#">Puma Active 600</a></h6>
-                                                        <div class="product_price">$1000.00</div>
-                                                        <button class="btn btn-primary btn-block btn-sm"
-                                                                style="background: #0099df"><i
-                                                                    class="fab fa-opencart mr-1"></i>Agregar al Carrito
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
+                                                echo '<div class="owl-item product_slider_item">
+                                                        <div class="product-item">
+                                                            <div class="product discount">
+                                                            
+                                                                <div class="product_image">
+                                                                    <img src='.$rutaImg.' alt="">
+                                                                </div>
+                                                             
+                                                                <div class="product_info">
+                                                                    <h6 class="product_name"><a href="#">'.$productoRelacionado->getNombre().'</a>
+                                                                    </h6>
+                                                                <div class="product_price">'.$productoRelacionado->getPrecio().'</div>
+                                                                    <button class="btn btn-primary btn-block btn-sm"
+                                                                        style="background: #0099df"><i
+                                                                        class="fab fa-opencart mr-1"></i>Agregar al Carrito
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                      </div>';
+                                            }
+                                            
+                                        ?>
                                     </div>
                                 </div>
                             </div>

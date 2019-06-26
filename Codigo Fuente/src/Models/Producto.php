@@ -247,6 +247,26 @@ class Producto extends Model
         return $productos;
     }
 
+    public function traerProductosRelacionados($condicion){
+        $productosRelacionados = array();
+
+        $rows = $this->pageRows(0, 5, $condicion);
+
+        foreach ($rows as $row) {
+            $producto = new Producto();
+            $producto->setId($row["Id"]);
+            $producto->setNombre($row["Nombre"]);
+            $producto->setPrecio($row["Precio"]);
+            $producto->setCategoriaId($row["CategoriaId"]);
+            $producto->setUsuarioId($row["UsuarioId"]);
+            $producto->setDescripcion($row["Descripcion"]);
+            $producto->setFechaAlta($row["FechaAlta"]);
+            $productosRelacionados[] = $producto;
+        }
+
+        return $productosRelacionados;
+    }
+
     public function traerProducto($pk)
     {
         $producto = $this->selectByPk($pk);
