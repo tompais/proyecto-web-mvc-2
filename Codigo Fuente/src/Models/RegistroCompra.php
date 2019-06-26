@@ -17,6 +17,23 @@ class RegistroCompra extends Model
     private $nombreImagenPrincipal;
     private $tipoMetodoEntrega;
     private $detalleEntrega;
+    private $vendedorId;
+
+    /**
+     * @return mixed
+     */
+    public function getVendedorId()
+    {
+        return $this->vendedorId;
+    }
+
+    /**
+     * @param mixed $vendedorId
+     */
+    public function setVendedorId($vendedorId)
+    {
+        $this->vendedorId = $vendedorId;
+    }
 
     /**
      * @return mixed
@@ -171,7 +188,8 @@ class RegistroCompra extends Model
             "PrecioUnitario" => $this->getPrecioUnitario(),
             "NombreImagenPrincipal" => $this->getNombreImagenPrincipal(),
             "TipoMetodoEntrega" => $this->getTipoMetodoEntrega(),
-            "DetalleEntrega" => $this->getDetalleEntrega()
+            "DetalleEntrega" => $this->getDetalleEntrega(),
+            "VendedorId" => $this->getVendedorId()
         ];
 
         $id = $this->insert($array);
@@ -182,23 +200,28 @@ class RegistroCompra extends Model
         return $id;
     }
 
-    public function traerComprasProductos($pk)
+    public function traerRegistrosCompras($pk)
     {
-        $comprasProductos = array();
+        $traerRegistroCompra = array();
 
         $rows = $this->pageRows(0, PHP_INT_MAX, "CompraId = $pk");
 
         foreach($rows as $row)
         {
-            $compraProducto = new RegistroCompra();
-            $compraProducto->db->disconnect();
-            $compraProducto->setId($row["Id"]);
-            $compraProducto->setCompraId($row["CompraId"]);
-            $compraProducto->setCantidad($row["Cantidad"]);
-            $compraProducto->setProductoId($row["ProductoId"]);
-            $comprasProductos[] = $compraProducto;
+            $registroCompra = new RegistroCompra();
+            $registroCompra->db->disconnect();
+            $registroCompra->setId($row["Id"]);
+            $registroCompra->setCompraId($row["CompraId"]);
+            $registroCompra->setCantidad($row["Cantidad"]);
+            $registroCompra->setDetalleEntrega($row["DetalleEntrega"]);
+            $registroCompra->setNombreImagenPrincipal($row["NombreImagenPrincipal"]);
+            $registroCompra->setPrecioUnitario($row["PrecioUnitario"]);
+            $registroCompra->setNombreProducto($row["NombreProducto"]);
+            $registroCompra->setTipoMetodoEntrega($row["TipoMetodoEntrega"]);
+            $registroCompra->setVendedorId($row["VendedorId"]);
+            $traerRegistroCompra[] = $registroCompra;
         }
 
-        return $comprasProductos;
+        return $traerRegistroCompra;
     }
 }

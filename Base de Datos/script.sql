@@ -6,13 +6,15 @@ USE pw;
 
 ALTER DATABASE pw CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-/*Tabla de Provincias y Localidades*/
+-- Creacion tabla Provincia --
 
 CREATE TABLE Provincia (
 	Id INT( 2 ) NOT NULL ,
 	Nombre VARCHAR( 50 ) NOT NULL ,
 	PRIMARY KEY (ID)
 );
+
+-- Creacion tabla Partido --
 
 CREATE TABLE Partido (
 	Id INT( 3 ) NOT NULL ,
@@ -21,12 +23,168 @@ CREATE TABLE Partido (
 	PRIMARY KEY (ID)
 );
 
+-- Creacion tabla Localidad --
+
 CREATE TABLE Localidad (
 	Id INT( 4 ) NOT NULL ,
 	PartidoId INT ( 3 ) NOT NULL ,
 	Nombre VARCHAR( 100 ) NOT NULL ,
 	PRIMARY KEY (ID)
 );
+
+-- Creacion tabla Rol--
+
+CREATE TABLE Rol(
+    Id integer NOT NULL AUTO_INCREMENT,
+    Nombre varchar(30) UNIQUE NOT NULL,
+    constraint PK_Rol primary key (Id)
+);
+
+-- Creacion tabla Genero --
+
+CREATE TABLE Genero (
+	Id integer NOT NULL AUTO_INCREMENT,
+    Nombre varchar(30) UNIQUE NOT NULL,
+    constraint PK_Genero primary key (Id)
+);
+
+-- Creacion tabla Direccion --
+
+CREATE TABLE Direccion (
+	Id integer NOT NULL auto_increment,
+    Calle varchar(50) NOT NULL,
+    Altura integer NOT NULL,
+    Piso integer,
+    Departamento varchar(3),
+    ProvinciaId integer NOT NULL,
+    PartidoId integer NOT NULL,
+    LocalidadId integer NOT NULL,
+    constraint PK_Direccion primary key (Id),
+    constraint FK_Direccion_Provincia foreign key (ProvinciaId) references Provincia (ID),
+    constraint FK_Direccion_Partido foreign key (PartidoId) references Partido (ID),
+    constraint FK_Direccion_Localidad foreign key (LocalidadId) references Localidad (ID)
+);
+
+-- Creacion tabla Geolocalizacion --
+
+CREATE TABLE Geolocalizacion (
+	Id integer NOT NULL auto_increment,
+    Latitud decimal(12, 10) NOT NULL,
+    Longitud decimal(13, 10) NOT NULL,
+    constraint PK_Geolocalizacion PRIMARY KEY (Id)
+);
+
+-- Creacion tabla Usuario --
+
+CREATE TABLE Usuario(
+    Id integer NOT NULL AUTO_INCREMENT,
+    Nombre varchar(30) NOT NULL,
+    Apellido varchar(30) NOT NULL,
+    CUIT bigint UNIQUE NOT NULL,
+    FechaNacimiento date NOT NULL,
+    Username varchar(30) UNIQUE NOT NULL,
+    UPassword varchar(100) NOT NULL,
+    TelefonoCelular integer NOT NULL,
+    TelefonoFijo integer NOT NULL,
+    DireccionId integer NOT NULL, 
+    GeolocalizacionId integer NOT NULL,
+    RolId integer NOT NULL,
+    GeneroId integer NOT NULL,
+    Email varchar(30) UNIQUE NOT NULL,
+    FechaBaneo date,
+    FechaBaja date,
+    constraint PK_Usuario primary key (Id),
+    constraint FK_Usuario_Direccion foreign key (DireccionId) references Direccion (Id),
+    constraint FK_Usuario_Geolocalizacion foreign key (GeolocalizacionId) references Geolocalizacion (Id),
+    constraint FK_Usuario_Rol foreign key (RolId) references Rol (Id),
+    constraint FK_Usuario_Genero FOREIGN KEY (GeneroId) REFERENCES Genero (Id)
+);
+
+-- Creacion tabla Categoria --
+
+CREATE TABLE Categoria(
+    Id integer auto_increment not null unique,
+    Nombre varchar(30) not null unique,
+    constraint PK_Categoria primary key (Id)
+);
+
+-- Creacion tabla Estado --
+
+CREATE TABLE Estado (	
+	Id int auto_increment NOT NULL,
+    Nombre VARCHAR(20) UNIQUE NOT NULL,
+    constraint PK_Estado primary key (Id)
+);
+
+-- Creacion tabla Metodo --
+
+CREATE TABLE Metodo (	
+	Id int auto_increment NOT NULL,
+    Tipo VARCHAR(20) UNIQUE NOT NULL,
+    constraint PK_Metodo primary key (Id)
+);
+
+-- Creacion tabla Producto --
+
+CREATE TABLE Producto (
+	Id integer auto_increment not null unique,
+    Nombre varchar(50) not null,
+    Precio int not null,
+    Cantidad int not null,
+    CategoriaId int not null,
+    UsuarioId int not null,
+    EstadoId int not null, 
+    Descripcion varchar (200),
+    FechaBaja datetime,
+    FechaAlta datetime not null,
+    MetodoId integer not null,
+    DetalleEntrega varchar (50) not null,
+    constraint PK_Producto primary key (Id),
+    constraint FK_Producto_Categoria foreign key (CategoriaId) references Categoria (Id),
+    constraint FK_Producto_Usuario foreign key (UsuarioId) references Usuario (Id),
+    constraint FK_Producto_Estado foreign key (EstadoId) references Estado (Id),
+    constraint FK_Prodfucto_Metodo foreign key (MetodoID) references Metodo (Id)
+);
+
+-- Creacion tabla Imagen --
+
+CREATE TABLE Imagen (
+	Id integer auto_increment not null unique,
+    Nombre varchar(100) not null unique,
+    ProductoId int not null, 
+    FechaBaja datetime,
+    constraint PK_Imagen primary key (Id),
+    constraint FK_Imagen_Producto foreign key (ProductoId) references Producto (Id) 
+);
+
+-- Creacion tabla Compra --
+
+CREATE TABLE Compra(
+	Id integer auto_increment not null unique,
+    CompradorId integer not null,
+    FechaCompra datetime not null,
+    Total integer not null,
+    constraint PK_Compra primary key (Id),
+    constraint FK_Compra_Usuario foreign key (CompradorId) references Usuario (Id)
+);
+
+-- Creacion tabla RegistroCompra --
+
+CREATE TABLE RegistroCompra(
+	Id integer auto_increment not null unique,
+    NombreProducto varchar(50) not null,
+    VendedorId integer not null,
+    PrecioUnitario integer not null,
+    NombreImagenPrincipal varchar(50) not null,
+    CompraId integer not null,
+    Cantidad integer not null,
+    TipoMetodoEntrega varchar(50) not null,
+    DetalleEntrega varchar(50) not null,
+    constraint PK_RegistroCompra primary key (Id, CompraId),
+    constraint FK_RegistroCompra_Compra foreign key (CompraId) references Compra (Id)
+);
+
+-- Insercion en la tabla Provincia --
 
 INSERT INTO Provincia (ID,Nombre) VALUES(1,'BUENOS AIRES');
 INSERT INTO Provincia (ID,Nombre) VALUES(2,'CATAMARCA');
@@ -51,6 +209,8 @@ INSERT INTO Provincia (ID,Nombre) VALUES(20,'SANTA FE');
 INSERT INTO Provincia (ID,Nombre) VALUES(21,'SANTIAGO DEL ESTERO');
 INSERT INTO Provincia (ID,Nombre) VALUES(22,'TIERRA DEL FUEGO');
 INSERT INTO Provincia (ID,Nombre) VALUES(23,'TUCUMAN');
+
+-- Insercion en la tabla Partido --
 
 INSERT INTO Partido (ID,ProvinciaId,Nombre) VALUES(1,1,'AZUL');
 INSERT INTO Partido (ID,ProvinciaId,Nombre) VALUES(2,1,'PUAN');
@@ -625,6 +785,8 @@ INSERT INTO Partido (ID,ProvinciaId,Nombre) VALUES(571,23,'TAFI');
 INSERT INTO Partido (ID,ProvinciaId,Nombre) VALUES(572,23,'GRANEROS');
 INSERT INTO Partido (ID,ProvinciaId,Nombre) VALUES(573,23,'FAMAILLA');
 INSERT INTO Partido (ID,ProvinciaId,Nombre) VALUES(574,23,'CAPITAL');
+
+-- Insercion en la tabla Localidad --
 
 INSERT INTO Localidad (ID,PartidoId,Nombre) VALUES(1,1,'16 DE JULIO');
 INSERT INTO Localidad (ID,PartidoId,Nombre) VALUES(2,2,'17 DE AGOSTO');
@@ -6065,150 +6227,35 @@ INSERT INTO Localidad (ID,PartidoId,Nombre) VALUES(5436,565,'VIPOS');
 INSERT INTO Localidad (ID,PartidoId,Nombre) VALUES(5437,566,'YACUCHINA');
 INSERT INTO Localidad (ID,PartidoId,Nombre) VALUES(5438,572,'YANIMAS');
 INSERT INTO Localidad (ID,PartidoId,Nombre) VALUES(5439,571,'YERBA BUENA');
-/*Fin de Tablas de Provincias y Localidad*/
 
-CREATE TABLE Rol(
-    Id integer NOT NULL AUTO_INCREMENT,
-    Nombre varchar(30) UNIQUE NOT NULL,
-    constraint PK_Rol primary key (Id)
-);
-
-CREATE TABLE Genero (
-	Id integer NOT NULL AUTO_INCREMENT,
-    Nombre varchar(30) UNIQUE NOT NULL,
-    constraint PK_Genero primary key (Id)
-);
-
-CREATE TABLE Direccion (
-	Id integer NOT NULL auto_increment,
-    Calle varchar(50) NOT NULL,
-    Altura integer NOT NULL,
-    Piso integer,
-    Departamento varchar(3),
-    ProvinciaId integer NOT NULL,
-    PartidoId integer NOT NULL,
-    LocalidadId integer NOT NULL,
-    constraint PK_Direccion primary key (Id),
-    constraint FK_Direccion_Provincia foreign key (ProvinciaId) references Provincia (ID),
-    constraint FK_Direccion_Partido foreign key (PartidoId) references Partido (ID),
-    constraint FK_Direccion_Localidad foreign key (LocalidadId) references Localidad (ID)
-);
-
-CREATE TABLE Geolocalizacion (
-	Id integer NOT NULL auto_increment,
-    Latitud decimal(12, 10) NOT NULL,
-    Longitud decimal(13, 10) NOT NULL,
-    constraint PK_Geolocalizacion PRIMARY KEY (Id)
-);
-
-CREATE TABLE Usuario(
-    Id integer NOT NULL AUTO_INCREMENT,
-    Nombre varchar(30) NOT NULL,
-    Apellido varchar(30) NOT NULL,
-    CUIT bigint UNIQUE NOT NULL,
-    FechaNacimiento date NOT NULL,
-    Username varchar(30) UNIQUE NOT NULL,
-    UPassword varchar(100) NOT NULL,
-    TelefonoCelular integer NOT NULL,
-    TelefonoFijo integer NOT NULL,
-    DireccionId integer NOT NULL, 
-    GeolocalizacionId integer NOT NULL,
-    RolId integer NOT NULL,
-    GeneroId integer NOT NULL,
-    Email varchar(30) UNIQUE NOT NULL,
-    FechaBaneo date,
-    FechaBaja date,
-    constraint PK_Usuario primary key (Id),
-    constraint FK_Usuario_Direccion foreign key (DireccionId) references Direccion (Id),
-    constraint FK_Usuario_Geolocalizacion foreign key (GeolocalizacionId) references Geolocalizacion (Id),
-    constraint FK_Usuario_Rol foreign key (RolId) references Rol (Id),
-    constraint FK_Usuario_Genero FOREIGN KEY (GeneroId) REFERENCES Genero (Id)
-);
-
-CREATE TABLE Categoria(
-    Id integer auto_increment not null unique,
-    Nombre varchar(30) not null unique,
-    constraint PK_Categoria primary key (Id)
-);
-
-CREATE TABLE Estado (	
-	Id int auto_increment NOT NULL,
-    Nombre VARCHAR(20) UNIQUE NOT NULL,
-    constraint PK_Estado primary key (Id)
-);
-
-CREATE TABLE Metodo (	
-	Id int auto_increment NOT NULL,
-    Tipo VARCHAR(20) UNIQUE NOT NULL,
-    constraint PK_Metodo primary key (Id)
-);
-
-CREATE TABLE Producto (
-	Id integer auto_increment not null unique,
-    Nombre varchar(50) not null,
-    Precio int not null,
-    Cantidad int not null,
-    CategoriaId int not null,
-    UsuarioId int not null,
-    EstadoId int not null, 
-    Descripcion varchar (200),
-    FechaBaja datetime,
-    FechaAlta datetime not null,
-    MetodoId integer not null,
-    DetalleEntrega varchar (50) not null,
-    constraint PK_Producto primary key (Id),
-    constraint FK_Producto_Categoria foreign key (CategoriaId) references Categoria (Id),
-    constraint FK_Producto_Usuario foreign key (UsuarioId) references Usuario (Id),
-    constraint FK_Producto_Estado foreign key (EstadoId) references Estado (Id),
-    constraint FK_Prodfucto_Metodo foreign key (MetodoID) references Metodo (Id)
-);
-
-CREATE TABLE Imagen (
-	Id integer auto_increment not null unique,
-    Nombre varchar(100) not null unique,
-    ProductoId int not null, 
-    FechaBaja datetime,
-    constraint PK_Imagen primary key (Id),
-    constraint FK_Imagen_Producto foreign key (ProductoId) references Producto (Id) 
-);
-
-CREATE TABLE Compra(
-	Id integer auto_increment not null unique,
-    CompradorId integer not null,
-    FechaCompra datetime not null,
-    Total integer not null,
-    constraint PK_Compra primary key (Id),
-    constraint FK_Compra_Usuario foreign key (CompradorId) references Usuario (Id)
-);
-
-CREATE TABLE RegistroCompra(
-	Id integer auto_increment not null unique,
-    NombreProducto varchar(50) not null,
-    PrecioUnitario integer not null,
-    NombreImagenPrincipal varchar(50) not null,
-    CompraId integer not null,
-    Cantidad integer not null,
-    TipoMetodoEntrega varchar(50) not null,
-    DetalleEntrega varchar(50) not null,
-    constraint PK_RegistroCompra primary key (Id, CompraId),
-    constraint FK_RegistroCompra_Compra foreign key (CompraId) references Compra (Id)
-);
+-- Insercion en la tabla Rol --
 
 INSERT INTO Rol (Nombre) VALUES ("Administrador"),
                                 ("Usuario");
 
+-- Insercion en la tabla Genero --
 
-INSERT INTO Genero (Nombre) VALUES ("Masculino"),
-								("Femenino"),
-                                ("Otro");
+INSERT INTO Genero (Nombre) VALUES  ("Masculino"),
+									("Femenino"),
+									("Otro");
+							
+-- Insercion en la tabla Direccion --
 
-INSERT INTO Direccion (Calle, Altura, ProvinciaId, PartIdoId, LocalIdadId, Piso, Departamento) VALUES ("Aquiles", 509, 1, 3, 764, null, null),
+INSERT INTO Direccion (Calle, Altura, ProvinciaId, PartIdoId, LocalIdadId, Piso, Departamento) VALUES   ("Aquiles", 509, 1, 3, 764, null, null),
 																										("Ángel Acuña", 1557, 1, 92, 435, null, null),
                                                                                                         ("Llerena", 2786, 1, 3, 188, 7, 'B'),
                                                                                                         ("El Infierno", 666, 1, 3, 764, null, null),
                                                                                                         ("Calle Falsa", 123, 1, 3, 764, null, null);
+                                                                                                        
+-- Insercion en la tabla Geolocalizacion --                                                                                                        
 
-INSERT INTO Geolocalizacion (Latitud, Longitud) values (-34.6480793, -58.5819326), (-34.5956494, -58.5268267), (-34.7345426, -58.7205458), (-34.6182986, -58.6311807), (0, 0);
+INSERT INTO Geolocalizacion (Latitud, Longitud) values  (-34.6480793, -58.5819326), 
+														(-34.5956494, -58.5268267), 
+														(-34.7345426, -58.7205458), 
+														(-34.6182986, -58.6311807), 
+														(0, 0);
+                                                        
+-- Insercion en la tabla Usuario --                                                        
 
 INSERT INTO Usuario (Nombre, Apellido, CUIT, FechaNacimiento, Username, UPassword, Email, RolId, TelefonoCelular, TelefonoFijo, GeneroId, DireccionId, GeolocalizacionId)
 VALUES ("Ezequiel", "Allio", 20396702119, '1996-05-07', "ezequiel", "eb6a2f962bb597f98b2c2b9c4698da19710ddfa3", "ezequiel.allio@gmail.com", 2, 1121563869, 44438353, 1, 5, 2),
@@ -6216,19 +6263,24 @@ VALUES ("Ezequiel", "Allio", 20396702119, '1996-05-07', "ezequiel", "eb6a2f962bb
         ("Alejo", "Martínez", 20397702119, "1998-12-23", "alejovoley14", "3de5110c9559591d0178269408ecdd6d57131818", "pupe893@gmail.com", 2, 1144188686, 44438353, 1, 2, 4),
         ("Willams", "Meneses", 20932443903, "1991-01-22", "LkrOverlord", "c720f95d7b12b6fd252b432853bf8c0a118dd4a1", "menesestapia@gmail.com", 2, 1133258597, 44438353, 1, 3, 3),
         ("Super", "User", 20123456787, "1810-05-25", "superuser", "8e67bb26b358e2ed20fe552ed6fb832f397a507d", "super.user@gmail.com", 1, 111234567, 44438353, 3, 4, 4);
-
-INSERT INTO Categoria (Nombre)
-VALUES ("Comestibles"),
-        ("Hogar"),
-        ("Iluminación"),
-        ("Librería"),
-        ("Ropa"),
-        ("Tecnología");
         
-INSERT INTO Estado (Nombre)
-VALUES ("Nuevo"), ("Usado"), ("Refabricado");
-		
+-- Insercion en la tabla Cateogoria --        
 
-INSERT INTO Metodo (Tipo)
-VALUES ("Punto de Entrega"),
-	   ("Acuerdo Mutuo");		
+INSERT INTO Categoria (Nombre) VALUES   ("Comestibles"),
+										("Hogar"),
+										("Iluminación"),
+										("Librería"),
+										("Ropa"),
+										("Tecnología");
+        
+-- Insercion en la tabla Estado --        
+        
+INSERT INTO Estado (Nombre) VALUES  ("Nuevo"), 
+									("Usado"), 
+									("Refabricado");
+
+-- Insercion en la tabla Metodo --		
+
+INSERT INTO Metodo (Tipo) VALUES ("Punto de Entrega"),
+								 ("Acuerdo Mutuo");		
+

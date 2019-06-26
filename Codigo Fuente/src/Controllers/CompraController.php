@@ -47,6 +47,8 @@ class CompraController extends Controller
 
             $registroCompraDto->precioUnitario = $producto->getPrecio();
 
+            $registroCompraDto->vendedorId = $producto->getUsuarioId();
+
             if(!$imagen->traerImagenPrincipal($fila->id)) {
                 throw new ImagenPrincipalNoEncontradaException("No se ha la imagen principal para el producto con id " . $fila->id, CodigoError::ImagenPrincipalNoEncontrada);
             }
@@ -83,6 +85,7 @@ class CompraController extends Controller
             $registroCompra->setCompraId($compra->getId());
             $registroCompra->setTipoMetodoEntrega($registroCompraDto->tipoMetodoEntrega);
             $registroCompra->setDetalleEntrega($registroCompraDto->detalleEntrega);
+            $registroCompra->setVendedorId($registroCompraDto->vendedorId);
 
             if(!$registroCompra->insertarRegistroCompra())
                 throw new SQLInsertException(CodigoError::ErrorInsertSQL, "No se ha podido registrar el producto de id " . $registroCompra->getProductoId() . " comprado");
@@ -114,36 +117,36 @@ class CompraController extends Controller
         $registrosCompras = array();
 
         foreach($compras as $comp)
-            $registrosCompras = array_merge($registrosCompras, $registroCompra->traerComprasProductos($comp->getId()));
+            $registrosCompras = array_merge($registrosCompras, $registroCompra->traerRegistrosCompras($comp->getId()));
 
-        $metodo = new Metodo();
-
-        $publicaciones = array();
         $comprasProductosDto = array();
         $usuariosDto = array();
-        $metodosDto = array();
         
         foreach($registrosCompras as $rc)
         {
-            $metodoDto = new MetodoDto();
-
-            $metodo->traerMetodo($producto->getMetodoId());
-
-            $metodoDto->tipo = $metodo->getTipo();
-
-            $metodosDto[] = $metodoDto;
-
             $registroCompraDto = new RegistroCompraDto();
 
             $registroCompraDto->compraId = $rc->getCompraId();
 
             $registroCompraDto->cantidad = $rc->getCantidad();
 
+            $registroCompraDto->tipoMetodoEntrega = $rc->getTipoMetodoEntrega();
+
+            $registroCompraDto->detalleEntrega = $rc->getDetalleEntrega();
+
+            $registroCompraDto->precioUnitario = $rc->getPrecioUnitario();
+
+            $registroCompraDto->nombreImagenPrincipal = $rc->getNombreImagenPrincipal();
+
+            $registroCompraDto->nombreProducto = $rc->getNombreProducto();
+
+            $registroCompraDto->vendedorId = $rc->getVendedorId();
+
             $comprasProductosDto[] = $registroCompraDto;
 
-            $publicaciones[] = new PublicacionViewModel($productoDto, $imagenDto);
+            $compra->traerCompra($rc->getCompraId());
 
-            $usuario->traerUsuario($producto->getUsuarioId());
+            $usuario->traerUsuario($rc->getVendedorId());
 
             $usuarioDto = new UsuarioDto();
 
@@ -157,9 +160,7 @@ class CompraController extends Controller
 
         $d["compras"] = $compras;
         $d["comprasProductos"] = $comprasProductosDto;
-        $d["publicaciones"] = $publicaciones;
         $d["usuarios"] = $usuariosDto;
-        $d["metodos"] = $metodosDto;
 
         $d["title"] = Constantes::COMPRASTITLE;
         $this->set($d);

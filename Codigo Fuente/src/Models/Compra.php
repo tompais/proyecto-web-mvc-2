@@ -129,4 +129,14 @@ class Compra extends Model
 
         return $compras;
     }
+
+    public function traerCompra($pk)
+    {
+        $compra = $this->selectByPk($pk);
+
+        $this->setId($compra["Id"]);
+        $this->setCompradorId($compra["CompradorId"]);
+        $this->setTotal($compra["Total"]);
+        $this->setFechaCompra($compra["FechaCompra"]);
+    }
 }
