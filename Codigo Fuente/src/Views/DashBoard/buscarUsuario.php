@@ -1,3 +1,8 @@
+<script>
+    const pathAccionBanearUsuario = "<?php echo getBaseAddress() . "DashBoard/banear"; ?>";
+    const palabraBuscada = "<?php echo $palabraBuscada ?>"
+</script>
+
 <div id="content-wrapper">
 
     <div class="container-fluid">
@@ -20,13 +25,26 @@
                 <table class="table table-hover mb-0">
                     <tr>
                         <td>
-                            <span><strong>Username:</strong> ' . $usuario->getUsername() . '</span><br>
-                            <span><strong>Estado:</strong> No baneado</span>
-                        </td>
-                        <td class="text-right text-nowrap">
-                            <button class="btn btn-xs btn-danger"><i class="fas fa-user-times" data-toggle="modal" data-target="#modalBaneo"></i></button>
-                            <button class="btn btn-xs btn-success"><i class="fas fa-user-check"></i></button>
-                        </td>
+                            <input type="hidden" id="inputUsuarioId" value="'. $usuario->getId() .'">
+                            <span><strong>Username:</strong> ' . $usuario->getUsername() . '</span><br>';
+
+                            if ($usuario->getFechaBaneo() != null){
+                                echo '<span><strong>Estado:</strong> Baneado</span><br>';
+                                echo '<span><strong>Fecha de Baneo:</strong> '. $usuario->getFechaBaneo() .'</span>';
+                            }
+                            else{
+                                echo '<span><strong>Estado:</strong> No baneado</span>';
+                            }
+
+         echo '         </td>
+                        <td class="text-right text-nowrap">';
+                           if ($usuario->getFechaBaneo() != null){
+                               echo '<button class="btn btn-xs btn-success"><i class="fas fa-user-check"></i></button>';
+                           }
+                           else {
+                               echo '<button class="btn btn-xs btn-danger"><i class="fas fa-user-times" data-toggle="modal" data-target="#modalBaneo"></i></button>';
+                           }
+            echo        '</td>
                     </tr>
                 </table>
             </div>';
@@ -44,15 +62,27 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
-                        ...
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-danger">Banear</button>
-                    </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="inputFechaNacimiento">Fecha de Baneo</label>
+                                <div class="input-group">
+                                    <input type="text" name="fechaBaneo" id="inputFechaBaneo" class="form-control">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" id="btnInputFechaBaneo" type="button"><i class="fas fa-calendar-alt"></i></button>
+                                    </div>
+                                </div>
+                                <div id="errorFechaNacimiento" class="error"><i class="fas fa-exclamation-triangle"></i> Formato de Fecha Inválido
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-danger" id="btnBanear">Banear</button>
+                        </div>
                 </div>
             </div>
         </div>
 
     </div>
+
+    <script src="<?php echo getBaseAddress() . "Webroot/js/dashboard/buscarUsuario.js"; ?>"></script>

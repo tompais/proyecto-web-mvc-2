@@ -358,10 +358,12 @@ class Usuario extends Model
         $usuario = $this->pageRows(0, 1, "Username LIKE '$username'");
 
         if($usuario) {
+            $this->setId($usuario[0]["Id"]);
             $this->setNombre($usuario[0]["Nombre"]);
             $this->setApellido($usuario[0]["Apellido"]);
             $this->setUsername($usuario[0]["Username"]);
             $this->setEmail($usuario[0]["Email"]);
+            $this->setFechaBaneo($usuario[0]["FechaBaneo"]);
             $this->setTelefonoCelular($usuario[0]["TelefonoCelular"]);
             $this->setFechaNacimiento($usuario[0]["FechaNacimiento"]);
             $this->setGeolocalizacionId($usuario[0]["GeolocalizacionId"]);
@@ -569,7 +571,15 @@ class Usuario extends Model
         return $this->update($array);
     }
 
-}
+    public function banear ()
+    {
+        $array = [
+            "Id" => $this->getId(),
+            "FechaBaneo" => date("Y-m-d", strtotime($this->getFechaBaneo()))
+        ];
+        return $this->update($array);
+    }
 
+}
 
 ?>
