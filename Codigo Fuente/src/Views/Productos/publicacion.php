@@ -154,7 +154,7 @@
                             </div>
                             <div class="row mt-5">
                                 <div class="col">
-                                    <div class="owl-carousel owl-theme product_slider">
+                                    <div id="carouselProductosRelacionados" class="owl-carousel owl-theme product_slider">
                                         <?php
 
                                             foreach ($productosRelacionados as $productoRelacionado){
@@ -164,19 +164,19 @@
 
                                                 if (!isset($_SESSION["session"]) || unserialize($_SESSION["session"])->getId() != $productoRelacionado->getUsuarioId()) {
                                                     if ($productoRelacionado->getCantidad() == 0) {
-                                                        $boton = '<button class="btn btn-primary btn-block"
-                                                                    id="btnAddToCart" disabled=""><i
-                                                                    class="fas fa-ban mr-2s"></i>
+                                                        $boton = '<button class="btn btn-primary"
+                                                                    id="btnAddToCart" disabled><i
+                                                                    class="fas fa-ban mr-2"></i>
                                                                     <span>SIN STOCK</span>
                                                                   </button>';
-                                                    }elseif (isset($_SESSION["carrito"]) and in_array($productoRelacionado->getId(), $_SESSION["carrito"])){
-                                                        $boton = '<button class="btn btn-primary btn-block"
+                                                    }else if (isset($_SESSION["carrito"]) and in_array($productoRelacionado->getId(), $_SESSION["carrito"])){
+                                                        $boton = '<button class="btn btn-primary"
                                                                       id="btnAddToCart" onclick="agregarProductoCarrito('.$productoRelacionado->getId().')"
-                                                                      disabled=""><i class="fas fa-check mr-2s"></i>
+                                                                      disabled=""><i class="fas fa-check fa-1x mr-2"></i>
                                                                       <span>EN CARRITO</span>
                                                                   </button>';
                                                     }else{
-                                                        $boton = '<button class="btn btn-primary btn-block"
+                                                        $boton = '<button class="btn btn-primary"
                                                                       id="btnAddToCart" onclick="agregarProductoCarrito('.$productoRelacionado->getId().')"><i
                                                                       class="fab fa-opencart mr-2"></i>Agregar al carrito
                                                                   </button>';
@@ -184,10 +184,10 @@
                                                 }
                                                 echo '<div class="owl-item product_slider_item" id='.$productoRelacionado->getId().'>
                                                         <div class="product-item">
-                                                            <div class="product discount">
+                                                            <div class="d-flex flex-column product discount justify-content-center align-items-center">
                                                                 <a href="'.$patHomePublicacion.$productoRelacionado->getId().'">
-                                                                <div class="product_image">
-                                                                    <img src='.$rutaImg.' alt="">
+                                                                <div class="product_image" style="height: 180px;">
+                                                                    <img src='.$rutaImg.' class="img-fluid h-100" alt="">
                                                                 </div>
                                                                 </a>
                                                                 <div class="product_info">

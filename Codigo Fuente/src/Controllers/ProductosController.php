@@ -242,10 +242,10 @@ class ProductosController extends Controller
 
 
         $productosRelacionados = $productoRelacionado->traerProductosRelacionados($condicion);
-        $imagenProductoRelacionado = new Imagen();
         $imagenesProductosRelacionados = array();
 
         foreach ($productosRelacionados as $productoRelacionado){
+            $imagenProductoRelacionado = new Imagen();
             $imagenProductoRelacionado->traerImagenPrincipal($productoRelacionado->getId());
             $imagenesProductosRelacionados[$productoRelacionado->getId()] = $imagenProductoRelacionado;
         }
