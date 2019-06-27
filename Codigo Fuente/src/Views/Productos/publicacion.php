@@ -86,10 +86,25 @@
 
                 <?php
                 if (!isset($_SESSION["session"]) || unserialize($_SESSION["session"])->getId() != $producto->getUsuarioId()) {
-                    echo '<button class="btn btn-primary btn-block btn-sm"
+                    if ($producto->getCantidad() == 0) {
+                        echo '<button class="btn btn-primary btn-block"
+                                  id="btnAddToCart" disabled=""><i
+                                  class="fas fa-ban mr-2s"></i>
+                                  <span>SIN STOCK</span>
+                              </button>';
+                    }elseif (in_array($producto->getId(), $_SESSION["carrito"])){
+                        echo '<button class="btn btn-primary btn-block btn-sm"
+                                  style="background: #0099df" id="btnAddToCart" 
+                                  onclick="agregarProductoCarrito('.$producto->getId().')"
+                                  disabled=""><i
+                                  class="fas fa-check mr-2"></i>EN CARRITO
+                              </button>';
+                    }else{
+                        echo '<button class="btn btn-primary btn-block btn-sm"
                                   style="background: #0099df" id="btnAddToCart" onclick="agregarProductoCarrito('.$producto->getId().')"><i
-                                  class="fab fa-opencart mr-1"></i>Agregar al Carrito
-                          </button>';
+                                  class="fab fa-opencart mr-2"></i>AGREGAR AL CARRITO
+                              </button>';
+                    }
                 }
                 ?>
                 </div>
@@ -144,6 +159,7 @@
                                                 $imagen = $imagenesProductosRelacionados[$productoRelacionado->getId()]->getNombre();
                                                 $rutaImg = getBaseAddress() . 'Webroot/img/productos/' . $imagen;
 
+
                                                 echo '<div class="owl-item product_slider_item" id='.$productoRelacionado->getId().'>
                                                         <div class="product-item">
                                                             <div class="product discount">
@@ -156,10 +172,7 @@
                                                                     <h6 class="product_name"><a href="#">'.$productoRelacionado->getNombre().'</a>
                                                                     </h6>
                                                                 <div class="product_price">'.$productoRelacionado->getPrecio().'</div>
-                                                                    <button class="btn btn-primary btn-block btn-sm"
-                                                                        style="background: #0099df" id="btnAddToCart"><i
-                                                                        class="fab fa-opencart mr-1"></i>Agregar al Carrito
-                                                                    </button>
+                                                                    
                                                                 </div>
                                                             </div>
                                                         </div>
