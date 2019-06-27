@@ -1,6 +1,6 @@
 var paginador = $('#paginador');
 var divProductosContainer = $('#divProductosContainer');
-var btnAddToCart;
+
 
 paginador.pagination({
     dataSource: pathHome + 'Buscar/getPublicaciones/' + palabra,
@@ -108,5 +108,6 @@ paginador.pagination({
         dataType: 'json'
     }
 });
+
 
 

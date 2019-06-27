@@ -4,6 +4,7 @@ var inputBuscar = $("#inputBuscar");
 var inputBuscarResponsive = $("#inputBuscarResponsive");
 var btnBuscar = $("#btnBuscar");
 var btnBuscarResponsive = $("#btnBuscarResponsive");
+var btnAddToCart;
 
 espaciador.height(layoutHeader.height());
 $(window).resize(function () {
@@ -503,8 +504,8 @@ function agregarProductoCarrito(id) {
     }
 }
 
-function actualizarCarritoCompras(cantidadEnCarrito){
-    var btnAddToCart = $('#btnAddToCart')
+function actualizarCarritoCompras(productoDto){
+    var btnAddToCart = $('#' + productoDto.id).find('#btnAddToCart');
     btnAddToCart.empty();
     btnAddToCart.prop('disabled', true);
     btnAddToCart.append($('<i class="fas fa-check mr-2">'));
@@ -519,7 +520,7 @@ function actualizarCarritoCompras(cantidadEnCarrito){
     contadorCarritoHeader.show();
     contadorCarritoHamburguesa.show();
 
-    if(cantidadEnCarrito < 1){
+    if(productoDto.cantidad < 1){
 
         contadorCarritoHamburguesa.hide();
         contadorCarritoHeader.hide();
@@ -527,7 +528,7 @@ function actualizarCarritoCompras(cantidadEnCarrito){
 
         contadorCarritoHeader.addClass("checkout_items");
 
-        contadorCarritoHeader.text(cantidadEnCarrito);
-        contadorCarritoHamburguesa.text(cantidadEnCarrito);
+        contadorCarritoHeader.text(productoDto.cantidad);
+        contadorCarritoHamburguesa.text(productoDto.cantidad);
     }
 }
