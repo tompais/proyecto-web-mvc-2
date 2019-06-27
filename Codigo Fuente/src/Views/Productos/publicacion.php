@@ -103,7 +103,7 @@
                               </button>';
                     }else{
                         echo '<button class="btn btn-primary btn-block"
-                                  style="background: #0099df" id="btnAddToCart" onclick="agregarProductoCarrito(\'.$producto->getId().\')"><i
+                                  style="background: #0099df" id="btnAddToCart" onclick="agregarProductoCarrito('.$producto->getId().')"><i
                                   class="fab fa-opencart mr-2"></i>AGREGAR AL CARRITO
                               </button>';
                     }
