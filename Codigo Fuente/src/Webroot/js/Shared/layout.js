@@ -510,7 +510,7 @@ function actualizarCarritoCompras(productoDto){
     btnAddToCart.prop('disabled', true);
     btnAddToCart.append($('<i class="fas fa-check mr-2">'));
     var spanAddToCart = $('<span>');
-    spanAddToCart.text('En Carrito');
+    spanAddToCart.text("EN CARRITO");
     btnAddToCart.append(spanAddToCart);
     btnAddToCart.removeAttr('onclick');
 

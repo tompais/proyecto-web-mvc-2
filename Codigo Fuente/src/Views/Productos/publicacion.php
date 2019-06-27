@@ -99,7 +99,8 @@
                                   id="btnAddToCart" 
                                   onclick="agregarProductoCarrito('.$producto->getId().')"
                                   disabled=""><i
-                                  class="fas fa-check mr-2"></i>EN CARRITO
+                                  class="fas fa-check mr-2"></i>
+                                  <span>EN CARRITO</span>
                               </button>';
                     }else{
                         echo '<button class="btn btn-primary btn-block"
