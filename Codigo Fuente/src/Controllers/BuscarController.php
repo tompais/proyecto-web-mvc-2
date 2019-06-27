@@ -6,7 +6,7 @@
  * Time: 17:39
  */
 
-class BuscarController extends Controller
+class   BuscarController extends Controller
 {
     function buscarProductoPorNombre($json)
     {

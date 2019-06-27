@@ -64,6 +64,19 @@ class DashBoardController extends Controller
         $this->render(Constantes::INICIODASHBOARDVIEW);
     }
 
+    function buscar($param)
+    {
+        $this->layout = "layoutDashBoard";
+        $d["title"] = Constantes::BUSCARUSUARIODASHBOARDTITLE;
+
+        $usuario = new Usuario();
+        $usuario->traerUsuarioPorUserName($param["usuarioBuscado"]);
+        $d["usuario"] = $usuario;
+
+        $this->set($d);
+        $this->render(Constantes::BUSCARUSUARIODAHBOARDVIEW);
+    }
+
     function cerrarSession()
     {
         session_destroy();

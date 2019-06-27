@@ -353,6 +353,23 @@ class Usuario extends Model
         return $usuario;
     }
 
+    public function traerUsuarioPorUserName ($username)
+    {
+        $usuario = $this->pageRows(0, 1, "Username LIKE '$username'");
+
+        if($usuario) {
+            $this->setNombre($usuario[0]["Nombre"]);
+            $this->setApellido($usuario[0]["Apellido"]);
+            $this->setUsername($usuario[0]["Username"]);
+            $this->setEmail($usuario[0]["Email"]);
+            $this->setTelefonoCelular($usuario[0]["TelefonoCelular"]);
+            $this->setFechaNacimiento($usuario[0]["FechaNacimiento"]);
+            $this->setGeolocalizacionId($usuario[0]["GeolocalizacionId"]);
+        }
+
+        return $usuario;
+    }
+
     /**
      * @param mixed $fechaBaja
      */

@@ -10,14 +10,14 @@
         <i class="fas fa-2x fa-bars"></i>
     </button>
 
-    <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+    <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0" method="post" action="<?php echo getBaseAddress() . "DashBoard/buscar"; ?>">
         <div class="input-group">
-            <input type="text" class="form-control" placeholder="Buscar Usuario.." aria-label="Search" aria-describedby="basic-addon2">
-            <div class="input-group-append">
-                <button class="btn btn-primary" type="button">
-                    <i class="fas fa-search"></i>
-                </button>
-            </div>
+                <input type="text" class="form-control" placeholder="Buscar Usuario.." aria-label="Search" aria-describedby="basic-addon2" id="inputUsuarioBuscado" name="usuarioBuscado">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
         </div>
     </form>
 
