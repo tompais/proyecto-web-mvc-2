@@ -94,7 +94,7 @@
                                   class="fas fa-ban mr-2s"></i>
                                   <span>SIN STOCK</span>
                               </button>';
-                    }elseif (in_array($producto->getId(), $_SESSION["carrito"])){
+                    }elseif (isset($_SESSION["carrito"]) and in_array($producto->getId(), $_SESSION["carrito"])){
                         echo '<button class="btn btn-primary btn-block"
                                   id="btnAddToCart" 
                                   onclick="agregarProductoCarrito('.$producto->getId().')"
@@ -168,7 +168,7 @@
                                                                     class="fas fa-ban mr-2s"></i>
                                                                     <span>SIN STOCK</span>
                                                                   </button>';
-                                                    }elseif (in_array($productoRelacionado->getId(), $_SESSION["carrito"])){
+                                                    }elseif (isset($_SESSION["carrito"]) and in_array($productoRelacionado->getId(), $_SESSION["carrito"])){
                                                         $boton = '<button class="btn btn-primary btn-block"
                                                                       id="btnAddToCart" onclick="agregarProductoCarrito('.$productoRelacionado->getId().')"
                                                                       disabled=""><i class="fas fa-check mr-2s"></i>
