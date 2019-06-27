@@ -464,13 +464,14 @@ class Usuario extends Model
 
     public function loguearUsuarioDB ()
     {
-        $row = $this->pageRows(0, 1, "(Username LIKE '$this->username' OR Email LIKE '$this->email') AND FechaBaneo IS NULL AND FechaBaja IS NULL AND UPassword LIKE '$this->upassword'");
+        $row = $this->pageRows(0, 1, "(Username LIKE '$this->username' OR Email LIKE '$this->email') AND FechaBaja IS NULL AND UPassword LIKE '$this->upassword'");
 
         if($row) {
             $this->setId($row[0]["Id"]);
             $this->setEmail($row[0]["Email"]);
             $this->setUsername($row[0]["Username"]);
             $this->setRolId($row[0]["RolId"]);
+            $this->setFechaBaneo($row[0]["FechaBaneo"]);
         }
 
         return $row;
@@ -575,8 +576,18 @@ class Usuario extends Model
     {
         $array = [
             "Id" => $this->getId(),
-            "FechaBaneo" => date("Y-m-d", strtotime($this->getFechaBaneo()))
+            "FechaBaneo" => date('Y-m-d', strtotime($this->getFechaBaneo()))
         ];
+        return $this->update($array);
+    }
+
+    public function desbanear()
+    {
+        $array = [
+            "Id" => $this->getId(),
+            "FechaBaneo" => null
+        ];
+
         return $this->update($array);
     }
 

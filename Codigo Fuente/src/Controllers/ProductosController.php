@@ -214,6 +214,7 @@ class ProductosController extends Controller
         $d["title"] = Constantes::PUBLICACIONTITLE;
 
         $producto = new Producto();
+        $productoRelacionado = new Producto();
         $categoria = new Categoria();
         $usuario = new Usuario();
         $geolocalizacion = new Geolocalizacion();
@@ -228,11 +229,34 @@ class ProductosController extends Controller
 
         $imagenes = $imagen->traerListaImagenes($producto->getId());
 
+        $codicion = "";
+        $categoriaId = $producto->getCategoriaId();
+        $idProducto = $producto->getId();
+
+        if(isset($_SESSION["session"])){
+            $idUsuario = unserialize($_SESSION["session"])->getId();
+            $condicion = "UsuarioId <> $idUsuario AND FechaBaja IS NULL AND CategoriaId = $categoriaId AND Id <> $idProducto";
+        }else{
+            $condicion = "FechaBaja IS NULL AND CategoriaId = $categoriaId AND Id <> $idProducto";
+        }
+
+
+        $productosRelacionados = $productoRelacionado->traerProductosRelacionados($condicion);
+        $imagenesProductosRelacionados = array();
+
+        foreach ($productosRelacionados as $productoRelacionado){
+            $imagenProductoRelacionado = new Imagen();
+            $imagenProductoRelacionado->traerImagenPrincipal($productoRelacionado->getId());
+            $imagenesProductosRelacionados[$productoRelacionado->getId()] = $imagenProductoRelacionado;
+        }
+
         $d["imagenes"] = $imagenes;
+        $d["imagenesProductosRelacionados"] = $imagenesProductosRelacionados;
         $d["producto"] = $producto;
         $d["categoria"] = $categoria;
         $d["usuario"] = $usuario;
         $d["geolocalizacion"] = $geolocalizacion;
+        $d["productosRelacionados"] = $productosRelacionados;
 
 
         $this->set($d);
