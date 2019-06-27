@@ -82,11 +82,17 @@
 
                 <br>
                 <br>
+                <div id="<?php echo $producto->getId();?>">
+
                 <?php
                 if (!isset($_SESSION["session"]) || unserialize($_SESSION["session"])->getId() != $producto->getUsuarioId()) {
-                    echo '<button id="botonCarritoPublicacion" type="button" class="btn btn-light mt-2" onclick="agregarProductoCarrito(' . $producto->getId() . ')"><i class="fas fa-cart-plus mr-1" style="color: #0099df"></i>Añadir al Carrito</button>';
+                    echo '<button class="btn btn-primary btn-block btn-sm"
+                                  style="background: #0099df" id="btnAddToCart" onclick="agregarProductoCarrito('.$producto->getId().')"><i
+                                  class="fab fa-opencart mr-1"></i>Agregar al Carrito
+                          </button>';
                 }
                 ?>
+                </div>
             </div>
         </div>
     </div>
@@ -138,7 +144,7 @@
                                                 $imagen = $imagenesProductosRelacionados[$productoRelacionado->getId()]->getNombre();
                                                 $rutaImg = getBaseAddress() . 'Webroot/img/productos/' . $imagen;
 
-                                                echo '<div class="owl-item product_slider_item">
+                                                echo '<div class="owl-item product_slider_item" id='.$productoRelacionado->getId().'>
                                                         <div class="product-item">
                                                             <div class="product discount">
                                                             
@@ -151,7 +157,7 @@
                                                                     </h6>
                                                                 <div class="product_price">'.$productoRelacionado->getPrecio().'</div>
                                                                     <button class="btn btn-primary btn-block btn-sm"
-                                                                        style="background: #0099df"><i
+                                                                        style="background: #0099df" id="btnAddToCart"><i
                                                                         class="fab fa-opencart mr-1"></i>Agregar al Carrito
                                                                     </button>
                                                                 </div>
