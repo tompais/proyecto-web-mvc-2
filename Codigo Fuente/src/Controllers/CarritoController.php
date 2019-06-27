@@ -29,7 +29,10 @@ class CarritoController extends Controller
 
         $_SESSION["carrito"][] = $data->idProducto;
         $cantidadProductosEnCarrito = count($_SESSION["carrito"]);
-        echo json_encode($cantidadProductosEnCarrito);
+        $productoDto = new ProductoDto();
+        $productoDto->id = $data->idProducto;
+        $productoDto->cantidad = $cantidadProductosEnCarrito;
+        echo json_encode($productoDto);
     }
 
     function mostrar()
@@ -64,7 +67,7 @@ class CarritoController extends Controller
 
         $data = json_decode(utf8_decode($json['data']));
         
-        if(array_search($data->idProducto, $_SESSION["carrito"]) === false){
+        if(array_search($data->idProducto, $_SESSION["carrito"]) === null){
             throw new ProductoInvalidoException("El producto a eliminar no se encuentra en el carrito", CodigoError::ProductoNoEncontrado);
         }
 

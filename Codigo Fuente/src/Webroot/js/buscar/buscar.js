@@ -1,6 +1,6 @@
 var paginador = $('#paginador');
 var divProductosContainer = $('#divProductosContainer');
-var btnAddToCart;
+
 
 paginador.pagination({
     dataSource: pathHome + 'Buscar/getPublicaciones/' + palabra,
@@ -110,31 +110,4 @@ paginador.pagination({
 });
 
 
-function actualizarCarritoCompras(cantidadEnCarrito){
 
-    btnAddToCart.empty();
-    btnAddToCart.prop('disabled', true);
-    btnAddToCart.append($('<i class="fas fa-check mr-2">'));
-    var spanAddToCart = $('<span>');
-    spanAddToCart.text('En Carrito');
-    btnAddToCart.append(spanAddToCart);
-    btnAddToCart.removeAttr('onclick');
-
-    var contadorCarritoHeader = $('#checkout_items');
-    var contadorCarritoHamburguesa = $('#contadorCarritoHamburguesa');
-
-    contadorCarritoHeader.show();
-    contadorCarritoHamburguesa.show();
-
-    if(cantidadEnCarrito < 1){
-
-        contadorCarritoHamburguesa.hide();
-        contadorCarritoHeader.hide();
-    }else{
-
-        contadorCarritoHeader.addClass("checkout_items");
-
-        contadorCarritoHeader.text(cantidadEnCarrito);
-        contadorCarritoHamburguesa.text(cantidadEnCarrito);
-    }
-}

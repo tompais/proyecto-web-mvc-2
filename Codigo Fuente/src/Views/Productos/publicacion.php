@@ -6,9 +6,11 @@
 
 <script>
     var latitud = <?php echo $geolocalizacion->getLatitud(); ?>;
-    var longitud = <?php echo $geolocalizacion->getLongitud(); ?>;
+    var longitud = <?php echo $geolocalizacion->getLongitud(); ?>
 </script>
-
+<?php
+    $patHomePublicacion = getBaseAddress().'Productos/publicacion/';
+?>
 <div class="container single_product_container">
     <div class="row">
         <div class="col">
@@ -82,11 +84,33 @@
 
                 <br>
                 <br>
+                <div id="<?php echo $producto->getId();?>">
+
                 <?php
                 if (!isset($_SESSION["session"]) || unserialize($_SESSION["session"])->getId() != $producto->getUsuarioId()) {
-                    echo '<button id="botonCarritoPublicacion" type="button" class="btn btn-light mt-2" onclick="agregarProductoCarrito(' . $producto->getId() . ')"><i class="fas fa-cart-plus mr-1" style="color: #0099df"></i>Añadir al Carrito</button>';
+                    if ($producto->getCantidad() == 0) {
+                        echo '<button class="btn btn-primary btn-block"
+                                  id="btnAddToCart" disabled=""><i
+                                  class="fas fa-ban mr-2s"></i>
+                                  <span>SIN STOCK</span>
+                              </button>';
+                    }elseif (isset($_SESSION["carrito"]) and in_array($producto->getId(), $_SESSION["carrito"])){
+                        echo '<button class="btn btn-primary btn-block"
+                                  id="btnAddToCart" 
+                                  onclick="agregarProductoCarrito('.$producto->getId().')"
+                                  disabled=""><i
+                                  class="fas fa-check mr-2"></i>
+                                  <span>EN CARRITO</span>
+                              </button>';
+                    }else{
+                        echo '<button class="btn btn-primary btn-block"
+                                  style="background: #0099df" id="btnAddToCart" onclick="agregarProductoCarrito('.$producto->getId().')"><i
+                                  class="fab fa-opencart mr-2"></i>AGREGAR AL CARRITO
+                              </button>';
+                    }
                 }
                 ?>
+                </div>
             </div>
         </div>
     </div>
@@ -131,111 +155,52 @@
                             <div class="row mt-5">
                                 <div class="col">
                                     <div class="owl-carousel owl-theme product_slider">
-                                        <!-- Producto 1 -->
-                                        <div class="owl-item product_slider_item">
-                                            <div class="product-item">
-                                                <div class="product discount">
-                                                    <div class="product_image">
-                                                        <img src="<?php echo getBaseAddress() . "Webroot/img/home/product_1.png" ?>"
-                                                             alt="">
-                                                    </div>
-                                                    <div class="product_info">
-                                                        <h6 class="product_name"><a href="#">Buzo Bordo con capucha</a>
-                                                        </h6>
-                                                        <div class="product_price">$520.00</div>
-                                                        <button class="btn btn-primary btn-block btn-sm"
-                                                                style="background: #0099df"><i
-                                                                    class="fab fa-opencart mr-1"></i>Agregar al Carrito
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <?php
 
-                                        <!-- Producto 2 -->
+                                            foreach ($productosRelacionados as $productoRelacionado){
 
-                                        <div class="owl-item product_slider_item">
-                                            <div class="product-item women">
-                                                <div class="product">
-                                                    <div class="product_image">
-                                                        <img src="<?php echo getBaseAddress() . "Webroot/img/home/product_2.png" ?>"
-                                                             alt="">
-                                                    </div>
-                                                    <div class="product_info">
-                                                        <h6 class="product_name"><a href="#">Samsung S8 Plus</a></h6>
-                                                        <div class="product_price">$50000.00</div>
-                                                        <button class="btn btn-primary btn-block btn-sm"
-                                                                style="background: #0099df"><i
-                                                                    class="fab fa-opencart mr-1"></i>Agregar al Carrito
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                                $imagen = $imagenesProductosRelacionados[$productoRelacionado->getId()]->getNombre();
+                                                $rutaImg = getBaseAddress() . 'Webroot/img/productos/' . $imagen;
 
-                                        <!-- Producto 3 -->
+                                                if (!isset($_SESSION["session"]) || unserialize($_SESSION["session"])->getId() != $productoRelacionado->getUsuarioId()) {
+                                                    if ($productoRelacionado->getCantidad() == 0) {
+                                                        $boton = '<button class="btn btn-primary btn-block"
+                                                                    id="btnAddToCart" disabled=""><i
+                                                                    class="fas fa-ban mr-2s"></i>
+                                                                    <span>SIN STOCK</span>
+                                                                  </button>';
+                                                    }elseif (isset($_SESSION["carrito"]) and in_array($productoRelacionado->getId(), $_SESSION["carrito"])){
+                                                        $boton = '<button class="btn btn-primary btn-block"
+                                                                      id="btnAddToCart" onclick="agregarProductoCarrito('.$productoRelacionado->getId().')"
+                                                                      disabled=""><i class="fas fa-check mr-2s"></i>
+                                                                      <span>EN CARRITO</span>
+                                                                  </button>';
+                                                    }else{
+                                                        $boton = '<button class="btn btn-primary btn-block"
+                                                                      id="btnAddToCart" onclick="agregarProductoCarrito('.$productoRelacionado->getId().')"><i
+                                                                      class="fab fa-opencart mr-2"></i>Agregar al carrito
+                                                                  </button>';
+                                                    }
+                                                }
+                                                echo '<div class="owl-item product_slider_item" id='.$productoRelacionado->getId().'>
+                                                        <div class="product-item">
+                                                            <div class="product discount">
+                                                                <a href="'.$patHomePublicacion.$productoRelacionado->getId().'">
+                                                                <div class="product_image">
+                                                                    <img src='.$rutaImg.' alt="">
+                                                                </div>
+                                                                </a>
+                                                                <div class="product_info">
+                                                                    <h6 class="product_name"><a href="#">'.$productoRelacionado->getNombre().'</a>
+                                                                    </h6>
+                                                                </div>
+                                                                '.$boton.'
+                                                            </div>
+                                                        </div>
+                                                      </div>';
+                                            }
 
-                                        <div class="owl-item product_slider_item">
-                                            <div class="product-item women">
-                                                <div class="product">
-                                                    <div class="product_image">
-                                                        <img src="<?php echo getBaseAddress() . "Webroot/img/home/product_3.png" ?>"
-                                                             alt="">
-                                                    </div>
-                                                    <div class="product_info">
-                                                        <h6 class="product_name"><a href="#">Nike Airmax 97</a></h6>
-                                                        <div class="product_price">$2500.00</div>
-                                                        <button class="btn btn-primary btn-block btn-sm"
-                                                                style="background: #0099df"><i
-                                                                    class="fab fa-opencart mr-1"></i>Agregar al Carrito
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- Producto 4 -->
-
-                                        <div class="owl-item product_slider_item">
-                                            <div class="product-item accessories">
-                                                <div class="product">
-                                                    <div class="product_image">
-                                                        <img src="<?php echo getBaseAddress() . "Webroot/img/home/product_4.png" ?>"
-                                                             alt="">
-                                                    </div>
-                                                    <div class="product_info">
-                                                        <h6 class="product_name"><a href="#">Moto G5 Plus</a></h6>
-                                                        <div class="product_price">$6000.00</div>
-                                                        <button class="btn btn-primary btn-block btn-sm"
-                                                                style="background: #0099df"><i
-                                                                    class="fab fa-opencart mr-1"></i>Agregar al Carrito
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- Producto 5 -->
-
-                                        <div class="owl-item product_slider_item">
-                                            <div class="product-item women men">
-                                                <div class="product">
-                                                    <div class="product_image">
-                                                        <img src="<?php echo getBaseAddress() . "Webroot/img/home/product_5.png" ?>"
-                                                             s alt="">
-                                                    </div>
-                                                    <div class="product_info">
-                                                        <h6 class="product_name"><a href="#">Puma Active 600</a></h6>
-                                                        <div class="product_price">$1000.00</div>
-                                                        <button class="btn btn-primary btn-block btn-sm"
-                                                                style="background: #0099df"><i
-                                                                    class="fab fa-opencart mr-1"></i>Agregar al Carrito
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
+                                        ?>
                                     </div>
                                 </div>
                             </div>

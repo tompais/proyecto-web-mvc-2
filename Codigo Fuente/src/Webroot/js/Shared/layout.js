@@ -4,6 +4,7 @@ var inputBuscar = $("#inputBuscar");
 var inputBuscarResponsive = $("#inputBuscarResponsive");
 var btnBuscar = $("#btnBuscar");
 var btnBuscarResponsive = $("#btnBuscarResponsive");
+var btnAddToCart;
 
 espaciador.height(layoutHeader.height());
 $(window).resize(function () {
@@ -500,5 +501,34 @@ function agregarProductoCarrito(id) {
         llamadaAjax(pathHome + 'Carrito/agregar', JSON.stringify(obj), true, "actualizarCarritoCompras", "dummy");
     } else {
         window.location.href = pathHome + "Seguridad/login";
+    }
+}
+
+function actualizarCarritoCompras(productoDto){
+    var btnAddToCart = $('#' + productoDto.id).find('#btnAddToCart');
+    btnAddToCart.empty();
+    btnAddToCart.prop('disabled', true);
+    btnAddToCart.append($('<i class="fas fa-check mr-2">'));
+    var spanAddToCart = $('<span>');
+    spanAddToCart.text("EN CARRITO");
+    btnAddToCart.append(spanAddToCart);
+    btnAddToCart.removeAttr('onclick');
+
+    var contadorCarritoHeader = $('#checkout_items');
+    var contadorCarritoHamburguesa = $('#contadorCarritoHamburguesa');
+
+    contadorCarritoHeader.show();
+    contadorCarritoHamburguesa.show();
+
+    if(productoDto.cantidad < 1){
+
+        contadorCarritoHamburguesa.hide();
+        contadorCarritoHeader.hide();
+    }else{
+
+        contadorCarritoHeader.addClass("checkout_items");
+
+        contadorCarritoHeader.text(productoDto.cantidad);
+        contadorCarritoHamburguesa.text(productoDto.cantidad);
     }
 }
