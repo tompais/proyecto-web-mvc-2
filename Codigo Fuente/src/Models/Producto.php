@@ -261,6 +261,7 @@ class Producto extends Model
             $producto->setUsuarioId($row["UsuarioId"]);
             $producto->setDescripcion($row["Descripcion"]);
             $producto->setFechaAlta($row["FechaAlta"]);
+            $producto->setCantidad($row["Cantidad"]);
             $productosRelacionados[] = $producto;
         }
 

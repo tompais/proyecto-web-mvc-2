@@ -93,15 +93,15 @@
                                   <span>SIN STOCK</span>
                               </button>';
                     }elseif (in_array($producto->getId(), $_SESSION["carrito"])){
-                        echo '<button class="btn btn-primary btn-block btn-sm"
-                                  style="background: #0099df" id="btnAddToCart" 
+                        echo '<button class="btn btn-primary btn-block"
+                                  id="btnAddToCart" 
                                   onclick="agregarProductoCarrito('.$producto->getId().')"
                                   disabled=""><i
                                   class="fas fa-check mr-2"></i>EN CARRITO
                               </button>';
                     }else{
-                        echo '<button class="btn btn-primary btn-block btn-sm"
-                                  style="background: #0099df" id="btnAddToCart" onclick="agregarProductoCarrito('.$producto->getId().')"><i
+                        echo '<button class="btn btn-primary btn-block"
+                                  style="background: #0099df" id="btnAddToCart" onclick="agregarProductoCarrito(\'.$producto->getId().\')"><i
                                   class="fab fa-opencart mr-2"></i>AGREGAR AL CARRITO
                               </button>';
                     }
@@ -159,7 +159,26 @@
                                                 $imagen = $imagenesProductosRelacionados[$productoRelacionado->getId()]->getNombre();
                                                 $rutaImg = getBaseAddress() . 'Webroot/img/productos/' . $imagen;
 
-
+                                                if (!isset($_SESSION["session"]) || unserialize($_SESSION["session"])->getId() != $productoRelacionado->getUsuarioId()) {
+                                                    if ($productoRelacionado->getCantidad() == 0) {
+                                                        $boton = '<button class="btn btn-primary btn-block"
+                                                                id="btnAddToCart" disabled=""><i
+                                                                class="fas fa-ban mr-2s"></i>
+                                                                <span>SIN STOCK</span>
+                                                              </button>';
+                                                    }elseif (in_array($productoRelacionado->getId(), $_SESSION["carrito"])){
+                                                        $boton = '<button class="btn btn-primary btn-block"
+                                                                      id="btnAddToCart" onclick="agregarProductoCarrito('.$productoRelacionado->getId().')"
+                                                                      disabled=""><i class="fas fa-check mr-2s"></i>
+                                                                      <span>EN CARRITO</span>
+                                                                  </button>';
+                                                    }else{
+                                                        $boton = '<button class="btn btn-primary btn-block"
+                                                                      id="btnAddToCart" onclick="agregarProductoCarrito('.$productoRelacionado->getId().')"><i
+                                                                      class="fab fa-opencart mr-2"></i>Agregar al carrito
+                                                                  </button>';
+                                                    }
+                                                }
                                                 echo '<div class="owl-item product_slider_item" id='.$productoRelacionado->getId().'>
                                                         <div class="product-item">
                                                             <div class="product discount">
@@ -171,9 +190,10 @@
                                                                 <div class="product_info">
                                                                     <h6 class="product_name"><a href="#">'.$productoRelacionado->getNombre().'</a>
                                                                     </h6>
+                                                                </div>
                                                                 <div class="product_price">'.$productoRelacionado->getPrecio().'</div>
                                                                     
-                                                                </div>
+                                                                '.$boton.'
                                                             </div>
                                                         </div>
                                                       </div>';
