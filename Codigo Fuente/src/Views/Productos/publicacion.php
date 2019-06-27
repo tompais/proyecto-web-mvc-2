@@ -6,9 +6,11 @@
 
 <script>
     var latitud = <?php echo $geolocalizacion->getLatitud(); ?>;
-    var longitud = <?php echo $geolocalizacion->getLongitud(); ?>;
+    var longitud = <?php echo $geolocalizacion->getLongitud(); ?>
 </script>
-
+<?php
+    $patHomePublicacion = getBaseAddress().'Productos/publicacion/';
+?>
 <div class="container single_product_container">
     <div class="row">
         <div class="col">
@@ -162,10 +164,10 @@
                                                 if (!isset($_SESSION["session"]) || unserialize($_SESSION["session"])->getId() != $productoRelacionado->getUsuarioId()) {
                                                     if ($productoRelacionado->getCantidad() == 0) {
                                                         $boton = '<button class="btn btn-primary btn-block"
-                                                                id="btnAddToCart" disabled=""><i
-                                                                class="fas fa-ban mr-2s"></i>
-                                                                <span>SIN STOCK</span>
-                                                              </button>';
+                                                                    id="btnAddToCart" disabled=""><i
+                                                                    class="fas fa-ban mr-2s"></i>
+                                                                    <span>SIN STOCK</span>
+                                                                  </button>';
                                                     }elseif (in_array($productoRelacionado->getId(), $_SESSION["carrito"])){
                                                         $boton = '<button class="btn btn-primary btn-block"
                                                                       id="btnAddToCart" onclick="agregarProductoCarrito('.$productoRelacionado->getId().')"
@@ -182,17 +184,15 @@
                                                 echo '<div class="owl-item product_slider_item" id='.$productoRelacionado->getId().'>
                                                         <div class="product-item">
                                                             <div class="product discount">
-                                                            
+                                                                <a href="'.$patHomePublicacion.$productoRelacionado->getId().'">
                                                                 <div class="product_image">
                                                                     <img src='.$rutaImg.' alt="">
                                                                 </div>
-                                                             
+                                                                </a>
                                                                 <div class="product_info">
                                                                     <h6 class="product_name"><a href="#">'.$productoRelacionado->getNombre().'</a>
                                                                     </h6>
                                                                 </div>
-                                                                <div class="product_price">'.$productoRelacionado->getPrecio().'</div>
-                                                                    
                                                                 '.$boton.'
                                                             </div>
                                                         </div>
