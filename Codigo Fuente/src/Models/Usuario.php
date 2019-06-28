@@ -353,6 +353,25 @@ class Usuario extends Model
         return $usuario;
     }
 
+    public function traerUsuarioPorUserName ($username)
+    {
+        $usuario = $this->pageRows(0, 1, "Username LIKE '$username'");
+
+        if($usuario) {
+            $this->setId($usuario[0]["Id"]);
+            $this->setNombre($usuario[0]["Nombre"]);
+            $this->setApellido($usuario[0]["Apellido"]);
+            $this->setUsername($usuario[0]["Username"]);
+            $this->setEmail($usuario[0]["Email"]);
+            $this->setFechaBaneo($usuario[0]["FechaBaneo"]);
+            $this->setTelefonoCelular($usuario[0]["TelefonoCelular"]);
+            $this->setFechaNacimiento($usuario[0]["FechaNacimiento"]);
+            $this->setGeolocalizacionId($usuario[0]["GeolocalizacionId"]);
+        }
+
+        return $usuario;
+    }
+
     /**
      * @param mixed $fechaBaja
      */
@@ -445,13 +464,14 @@ class Usuario extends Model
 
     public function loguearUsuarioDB ()
     {
-        $row = $this->pageRows(0, 1, "(Username LIKE '$this->username' OR Email LIKE '$this->email') AND FechaBaneo IS NULL AND FechaBaja IS NULL AND UPassword LIKE '$this->upassword'");
+        $row = $this->pageRows(0, 1, "(Username LIKE '$this->username' OR Email LIKE '$this->email') AND FechaBaja IS NULL AND UPassword LIKE '$this->upassword'");
 
         if($row) {
             $this->setId($row[0]["Id"]);
             $this->setEmail($row[0]["Email"]);
             $this->setUsername($row[0]["Username"]);
             $this->setRolId($row[0]["RolId"]);
+            $this->setFechaBaneo($row[0]["FechaBaneo"]);
         }
 
         return $row;
@@ -552,7 +572,25 @@ class Usuario extends Model
         return $this->update($array);
     }
 
-}
+    public function banear ()
+    {
+        $array = [
+            "Id" => $this->getId(),
+            "FechaBaneo" => date('Y-m-d', strtotime(str_replace('/', '-', $this->getFechaBaneo())))
+        ];
+        return $this->update($array);
+    }
 
+    public function desbanear()
+    {
+        $array = [
+            "Id" => $this->getId(),
+            "FechaBaneo" => null
+        ];
+
+        return $this->update($array);
+    }
+
+}
 
 ?>

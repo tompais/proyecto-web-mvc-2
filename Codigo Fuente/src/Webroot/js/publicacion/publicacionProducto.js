@@ -1,4 +1,5 @@
 var map = $('#map');
+var carouselProductosRelacionados = $("#carouselProductosRelacionados");
 var googleMap;
 
 /* JS Document */

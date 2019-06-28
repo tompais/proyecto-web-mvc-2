@@ -73,4 +73,36 @@ class DashBoardController extends Controller
         }
         header("location: " . getBaseAddress(). "DashBoard/login");
     }
+
+    function buscar($param)
+    {
+        $this->layout = "layoutDashBoard";
+        $d["title"] = Constantes::BUSCARUSUARIODASHBOARDTITLE;
+
+        $usuario = new Usuario();
+        $usuario->traerUsuarioPorUserName($param[0]);
+        $d["palabraBuscada"] = $param[0];
+        $d["usuario"] = $usuario;
+
+        $this->set($d);
+        $this->render(Constantes::BUSCARUSUARIODAHBOARDVIEW);
+    }
+
+    function banear($json)
+    {
+        header("Content-type: application/json");
+
+        $data = json_decode(utf8_decode($json['data']));
+
+        $usuario =  new Usuario();
+
+        $usuario->setId($data->usuarioId);
+        $usuario->setFechaBaneo($data->fechaBaneo);
+
+        $usuario->banear();
+
+        echo json_encode(true);
+
+    }
+
 }
