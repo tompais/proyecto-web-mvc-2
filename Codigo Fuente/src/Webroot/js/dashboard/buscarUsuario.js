@@ -2,7 +2,7 @@ var inputFechaBaneo = $("#inputFechaBaneo");
 var btnInputFechaBaneo = $("#btnInputFechaBaneo");
 var inputUsuarioId = $("#inputUsuarioId");
 var btnBanear = $("#btnBanear");
-
+var btnDesbanear = $("#btnDesbanear");
 inicializarDatePicker();
 
 btnInputFechaBaneo.click(function () {
@@ -41,6 +41,10 @@ btnBanear.click(function () {
     banearUsuario();
 });
 
+btnDesbanear.click(function () {
+    desbanearUsuario();
+});
+
 function banearUsuario() {
     $("input").prop("disabled", true);
     btnBanear.prop("disabled", true);
@@ -48,6 +52,14 @@ function banearUsuario() {
     obj.fechaBaneo = inputFechaBaneo.val();
     obj.usuarioId = inputUsuarioId.val();
     llamadaAjax(pathAccionBanearUsuario, JSON.stringify(obj), true, "baneoExitoso", "loginFallido");
+}
+
+function desbanearUsuario() {
+    $("input").prop("disabled", true);
+    btnBanear.prop("disabled", true);
+    var obj = {};
+    obj.usuarioId = inputUsuarioId.val();
+    llamadaAjax(pathAccionDesbanearUsuario, JSON.stringify(obj), true, "baneoExitoso", "loginFallido");
 }
 
 function baneoExitoso (dummy) {

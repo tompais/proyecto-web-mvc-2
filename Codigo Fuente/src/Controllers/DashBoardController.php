@@ -105,4 +105,20 @@ class DashBoardController extends Controller
 
     }
 
+    function desbanear($json)
+    {
+        header("Content-type: application/json");
+
+        $data = json_decode(utf8_decode($json['data']));
+
+        $usuario = new Usuario();
+
+        $usuario->setId($data->usuarioId);
+
+        $usuario->desbanear();
+
+        echo json_encode(true);
+
+    }
+
 }
