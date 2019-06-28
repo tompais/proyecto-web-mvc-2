@@ -576,7 +576,7 @@ class Usuario extends Model
     {
         $array = [
             "Id" => $this->getId(),
-            "FechaBaneo" => date('Y-m-d', strtotime($this->getFechaBaneo()))
+            "FechaBaneo" => date('Y-m-d', strtotime(str_replace('/', '-', $this->getFechaBaneo())))
         ];
         return $this->update($array);
     }
