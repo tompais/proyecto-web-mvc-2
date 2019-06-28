@@ -46,7 +46,7 @@
                             <td class='text-center'><img src='$rutaImgPrincipal' height='100px'></td>
                             <td class='align-middle text-center'>$nombreProducto</td>
                             
-                            <td class='align-middle test-center'>
+                            <td class='align-middle text-center px-0'>
                                 <div class='quantity text-center'>
                                     <div class='quantity_selector'>
                                         <span class='minus' onclick='bajarSubTotal($idProducto,$cantidadTotal)'><i class='fa fa-minus mr-3' aria-hidden='true'></i></span>
@@ -55,9 +55,9 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class='align-middle text-center'>$ <span class='precioProducto'>$precio</span></td>
-                            <td class='align-middle text-center'>$ <span class='subtotal'></span></td>
-                            <td class='align-middle text-center'><button class='btn btn-danger delete-producto-button' onclick='eliminarProducto($idProducto)'><i class='fas fa-trash-alt'></i></button></td>  
+                            <td class='align-middle text-center px-0'>$ <span class='precioProducto'>$precio</span></td>
+                            <td class='align-middle text-center px-0'>$ <span class='subtotal'></span></td>
+                            <td class='align-middle text-center px-0'><button class='btn btn-danger delete-producto-button' onclick='eliminarProducto($idProducto)'><i class='fas fa-trash-alt'></i></button></td>  
                     </tr>";
             }
             echo" <tr>
@@ -68,10 +68,19 @@
                     <td></td>
                     <td class='text-center'>Total: $ <span class='total'></span></td>
                 </tr>";
+
+            echo" <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class='text-center'><button type='button' class='btn btn-light' id='botonComprarCarrito'><i class='fas fa-money-check-alt mr-1' style='color: #0099df'></i>Comprar</button></td>
+                </tr>";
+
             echo "</tbody>
                   </table>
                   </div>";
-            echo '<button type="button" class="btn btn-light mr-5 float-right" id="botonComprarCarrito"><i class="fas fa-money-check-alt mr-1" style="color: #0099df"></i>Comprar</button>';
         }
         ?>
 
