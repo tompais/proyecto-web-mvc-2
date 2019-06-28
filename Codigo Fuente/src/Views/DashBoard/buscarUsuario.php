@@ -1,5 +1,6 @@
 <script>
     const pathAccionBanearUsuario = "<?php echo getBaseAddress() . "DashBoard/banear"; ?>";
+    const pathAccionDesbanearUsuario = "<?php echo getBaseAddress() . "DashBoard/desbanear"; ?>";
     const palabraBuscada = "<?php echo $palabraBuscada ?>"
 </script>
 
@@ -39,7 +40,7 @@
          echo '         </td>
                         <td class="text-right text-nowrap">';
                            if ($usuario->getFechaBaneo() != null){
-                               echo '<button class="btn btn-xs btn-success"><i class="fas fa-user-check"></i></button>';
+                               echo '<button class="btn btn-xs btn-success" id="btnDesbanear"><i class="fas fa-user-check" ></i></button>';
                            }
                            else {
                                echo '<button class="btn btn-xs btn-danger"><i class="fas fa-user-times" data-toggle="modal" data-target="#modalBaneo"></i></button>';
