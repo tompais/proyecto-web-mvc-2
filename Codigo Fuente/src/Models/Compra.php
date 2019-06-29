@@ -13,6 +13,23 @@ class Compra extends Model
     private $comprador;
     private $fechaCompra;
     private $total;
+    private $facturada;
+
+    /**
+     * @return mixed
+     */
+    public function getFacturada()
+    {
+        return $this->facturada;
+    }
+
+    /**
+     * @param mixed $facturada
+     */
+    public function setFacturada($facturada)
+    {
+        $this->facturada = $facturada;
+    }
 
     /**
      * @return mixed
@@ -99,7 +116,8 @@ class Compra extends Model
         $array = [
             "CompradorId" => $this->getCompradorId(),
             "Total" => $this->getTotal(),
-            "FechaCompra" => $this->getFechaCompra()
+            "FechaCompra" => $this->getFechaCompra(),
+            "Facturada" => "No Facturada"
         ];
 
         $id = $this->insert($array);
@@ -144,7 +162,9 @@ class Compra extends Model
 
         $compras = array();
 
-        $rows = $this->pageRows(0, PHP_INT_MAX, "CompradorId = $pk ");
+        $mesActual = date("n");
+
+        $rows = $this->pageRows(0, PHP_INT_MAX, "CompradorId = $pk and month(FechaCompra) like $mesActual and Facturada like 'No Facturada' ");
 
         foreach($rows as $row)
         {
@@ -160,4 +180,24 @@ class Compra extends Model
         return $compras;
 
     }
+
+    public function actualizarFacturado($pk)
+    {
+        $mesActual = date("n");
+
+        $rows = $this->pageRows(0, PHP_INT_MAX, "CompradorId = $pk and month(FechaCompra) like $mesActual and Facturada like 'No Facturada' ");
+
+        if($rows) {
+            foreach($rows as $row) {
+                $row["Facturada"] = "Facturado";
+
+                if(!$this->update($row)) {
+                    $rows = null;
+                    break;
+                }
+            }
+        }
+
+    }
+
 }

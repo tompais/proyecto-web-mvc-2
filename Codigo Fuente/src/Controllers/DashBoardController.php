@@ -131,6 +131,7 @@ class DashBoardController extends Controller
         $compras = $compra->traerListaDeCompras($param["usuarioFacturarId"]);
 
         $d["compra"] = $compras;
+        $d["palabraBuscada"] = $param["palabraBuscada"];
 
         $this->set($d);
         $this->render(Constantes::FACTURACIONDASHBOARDVIEW);
@@ -140,13 +141,18 @@ class DashBoardController extends Controller
     {
 
         $facturacion = new Facturacion();
+        $compra = new Compra();
 
         $facturacion->setUsuarioId($param["usuarioId"]);
         $facturacion->setTotal($param["totalFacturacion"]);
 
         $facturacion->insertarFacturacion();
 
-        header("location: " . getBaseAddress() . "DashBoard/inicio");
+        $compra->actualizarFacturado($param["usuarioId"]);
+
+        $palabraBuscada = $param["palabraBuscada"];
+
+        header("location: " . getBaseAddress() . "DashBoard/buscar/" . $palabraBuscada );
 
     }
 
