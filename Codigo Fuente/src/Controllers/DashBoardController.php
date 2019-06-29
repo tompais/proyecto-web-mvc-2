@@ -150,10 +150,17 @@ class DashBoardController extends Controller
 
         $compra->actualizarFacturado($param["usuarioId"]);
 
-        $palabraBuscada = $param["palabraBuscada"];
+        header("location: " . getBaseAddress() . "DashBoard/exito");
 
-        header("location: " . getBaseAddress() . "DashBoard/buscar/" . $palabraBuscada );
+    }
 
+    function exito()
+    {
+        $this->layout = "layoutDashBoard";
+        $d["title"] = Constantes::FACTURACIONEXITOSATITLE;
+
+        $this->set($d);
+        $this->render(Constantes::FACTURACIONEXITOSAVIEW);
     }
 
 }
