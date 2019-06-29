@@ -130,18 +130,24 @@ class DashBoardController extends Controller
         $compras = [];
         $compras = $compra->traerListaDeCompras($param["usuarioFacturarId"]);
 
-        $registroCompras = [];
-
-        foreach ($compras as $compra){
-            $registroCompra = new RegistroCompra();
-            $registroCompras = $registroCompra->traerRegistrosCompras($compra->getId());
-        }
-
         $d["compra"] = $compras;
-        $d["registroCompras"] = $registroCompras;
 
         $this->set($d);
         $this->render(Constantes::FACTURACIONDASHBOARDVIEW);
+    }
+
+    function generarFacturacion($param)
+    {
+
+        $facturacion = new Facturacion();
+
+        $facturacion->setUsuarioId($param["usuarioId"]);
+        $facturacion->setTotal($param["totalFacturacion"]);
+
+        $facturacion->insertarFacturacion();
+
+        header("location: " . getBaseAddress() . "DashBoard/inicio");
+
     }
 
 }

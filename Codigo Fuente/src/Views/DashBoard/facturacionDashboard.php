@@ -21,8 +21,6 @@
                         <thead>
                         <tr>
                             <th>Nº de Compra</th>
-                            <th>Producto</th>
-                            <th>Cantidad</th>
                             <th>Fecha</th>
                             <th>Total de compra</th>
                             <th>Total a facturar</th>
@@ -31,24 +29,28 @@
 
                         <tbody>
                         <?php
-
+                        $totalFacturacion = 0;
                         foreach ($compra as $facturacion){
                                 echo '<tr>
-                                    <td>' . $facturacion->getId() . '</td>';
-                                foreach ($registroCompras as $registroCompra) {
-                                  echo '     <td>' . $registroCompra->getNombreProducto() . '</td>
-                                        <td>' . $registroCompra->getCantidad() . '</td>';
-                                }
-                                echo'    <td>' . $facturacion->getFechaCompra() . '</td>
-                                    <td>$ ' . $facturacion->getTotal() . '</td>
-                                    <td>$ ' . (($facturacion->getTotal() * 4) / 100) . '</td>
-                                </tr>';
-                            }
+                                        <td>' . $facturacion->getId() . '</td>                                    
+                                        <td>' . $facturacion->getFechaCompra() . '</td>                                        
+                                        <td>$ ' . $facturacion->getTotal() . '</td>
+                                        <td>$ ' . (($facturacion->getTotal() * 4) / 100) . '</td>
+                                    </tr>';
+
+                                $totalFacturacion += (($facturacion->getTotal()*4)/100);
+                        }
 
                         ?>
 
                         </tbody>
                     </table>
+
+                    <form method="post" action="<?php echo getBaseAddress() . "DashBoard/generarFacturacion" ?>">
+                        <input type="hidden" id="inputUsuarioId" name="usuarioId" value="<?php echo $compra[0]->getCompradorId() ?>">
+                        <input type="hidden" id="inputTotalFacut" name="totalFacturacion" value="<?php echo $totalFacturacion ?>">
+                        <button class="btn btn-primary float-right">Generar Facturacion</button>
+                    </form>
                 </div>
             </div>
             <div class="card-footer small text-muted"></div>

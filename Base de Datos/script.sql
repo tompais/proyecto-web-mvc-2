@@ -184,6 +184,17 @@ CREATE TABLE RegistroCompra(
     constraint FK_RegistroCompra_Compra foreign key (CompraId) references Compra (Id)
 );
 
+
+CREATE TABLE Facturacion (
+	Id integer auto_increment not null unique,
+    Mes varchar (15) not null,
+    Anio varchar (4) not null,
+    UsuarioId int not null,
+    Total int not null,
+    constraint PK_Facturacion primary key (Id, UsuarioID),
+    constraint FK_Facturacion_Usuario foreign key (UsuarioId) references Usuario (Id)
+);
+
 -- Insercion en la tabla Provincia --
 
 INSERT INTO Provincia (ID,Nombre) VALUES(1,'BUENOS AIRES');

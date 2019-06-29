@@ -144,7 +144,7 @@ class Compra extends Model
 
         $compras = array();
 
-        $rows = $this->pageRows(0, PHP_INT_MAX, "CompradorId = $pk");
+        $rows = $this->pageRows(0, PHP_INT_MAX, "CompradorId = $pk ");
 
         foreach($rows as $row)
         {
