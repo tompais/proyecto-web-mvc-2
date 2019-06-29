@@ -164,9 +164,11 @@ CREATE TABLE Compra(
     CompradorId integer not null,
     FechaCompra datetime not null,
     Total integer not null,
+    Facturada varchar (20) not null,
     constraint PK_Compra primary key (Id),
     constraint FK_Compra_Usuario foreign key (CompradorId) references Usuario (Id)
 );
+
 
 -- Creacion tabla RegistroCompra --
 
@@ -182,6 +184,17 @@ CREATE TABLE RegistroCompra(
     DetalleEntrega varchar(50) not null,
     constraint PK_RegistroCompra primary key (Id, CompraId),
     constraint FK_RegistroCompra_Compra foreign key (CompraId) references Compra (Id)
+);
+
+
+CREATE TABLE Facturacion (
+	Id integer auto_increment not null unique,
+    Mes varchar (15) not null,
+    Anio varchar (4) not null,
+    UsuarioId int not null,
+    Total int not null,
+    constraint PK_Facturacion primary key (Id, UsuarioID),
+    constraint FK_Facturacion_Usuario foreign key (UsuarioId) references Usuario (Id)
 );
 
 -- Insercion en la tabla Provincia --
