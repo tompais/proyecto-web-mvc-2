@@ -33,4 +33,12 @@ class UsuarioController extends Controller
         $this->set($d);
         $this->render(Constantes::MIPERFILVIEW);
     }
+
+    function misFacturaciones()
+    {
+        $d["title"] = Constantes::MISFACTURACIONESTITLE;
+        $this->set($d);
+        $this->render(Constantes::MISFACTURACIONESVIEW);
+    }
+
 }

@@ -26,6 +26,7 @@ abstract class Constantes
     const BUSCARUSUARIODAHBOARDVIEW = "buscarUsuario";
     const FACTURACIONDASHBOARDVIEW = "facturacionDashboard";
     const MIPERFILVIEW = "miPerfil";
+    const MISFACTURACIONESVIEW = "misFacturaciones";
 
     //Acciones
     const CERRARSESIONACTION = "cerrarSession";
@@ -48,6 +49,7 @@ abstract class Constantes
     const BUSCARUSUARIODASHBOARDTITLE = "Usuario Buscado";
     const FACTURACIONDASHBOARDTITLE = "Facturaciones";
     const MIPERFILTITLE = "Mi Perfil";
+    const MISFACTURACIONESTITLE = "Mis Facturaciones";
 
     const OLVIDEPASSWORDTITLE = "Olvidé Mi Contraseña";
 

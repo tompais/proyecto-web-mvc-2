@@ -43,7 +43,7 @@
                             <form method="post" action="'.getBaseAddress()."DashBoard/facturar".'" class="mr-3">
                                 <input type="hidden" id="inputUsuarioFacturarId" name="usuarioFacturarId" value="'.$usuario->getId().'" >
                                 <input type="hidden" id="inputPalabraBuscada" name="palabraBuscada" value="'.$palabraBuscada.'" >
-                                <button class="btn btn-primary ml-3" id="btnFacturar" type="submit">Facturar</button>
+                                <button class="btn btn-primary ml-3" id="btnFacturar" type="submit"><i class="fas fa-money-check mr-2"></i>Facturar</button>
                              </form>';
 
                            if ($usuario->getFechaBaneo() != null){

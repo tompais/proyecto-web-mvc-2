@@ -10,6 +10,9 @@
                             <div class="col-xl-5 col-sm-5">
                                 <h2>Mi Perfil <i class="fa fa-user  ml-2"></i></h2>
                             </div>
+                            <div class="col-xl-7 col-sm-5">
+                                <a href="<?php echo getBaseAddress() . 'Usuario/misFacturaciones' ?>" class="btn btn-primary float-right"><i class="fas fa-money-check mr-2"></i>Mis Facturaciones</a>
+                            </div>
                         </div>
                     </div>
                 </div>
