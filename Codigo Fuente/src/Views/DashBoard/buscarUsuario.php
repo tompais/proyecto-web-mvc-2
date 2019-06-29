@@ -45,7 +45,10 @@
                            else {
                                echo '<button class="btn btn-xs btn-danger"><i class="fas fa-user-times" data-toggle="modal" data-target="#modalBaneo"></i></button>';
                            }
-            echo        '</td>
+            echo        '<form method="post" action="'.getBaseAddress()."DashBoard/facturar".'">
+                            <input type="hidden" id="inputUsuarioFacturarId" name="usuarioFacturarId" value="'.$usuario->getId().'" >
+                            <button class="btn btn-primary ml-3" id="btnFacturar" type="submit">Facturar</button></td>
+                         </form>   
                     </tr>
                 </table>
             </div>';

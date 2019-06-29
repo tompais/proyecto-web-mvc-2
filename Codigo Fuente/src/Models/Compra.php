@@ -139,4 +139,25 @@ class Compra extends Model
         $this->setTotal($compra["Total"]);
         $this->setFechaCompra($compra["FechaCompra"]);
     }
+
+    public function traerListaDeCompras ($pk){
+
+        $compras = array();
+
+        $rows = $this->pageRows(0, PHP_INT_MAX, "CompradorId = $pk");
+
+        foreach($rows as $row)
+        {
+            $compra = new Compra();
+            $compra->db->disconnect();
+            $compra->setId($row["Id"]);
+            $compra->setCompradorId($row["CompradorId"]);
+            $compra->setTotal($row["Total"]);
+            $compra->setFechaCompra($row["FechaCompra"]);
+            $compras[] = $compra;
+        }
+
+        return $compras;
+
+    }
 }
