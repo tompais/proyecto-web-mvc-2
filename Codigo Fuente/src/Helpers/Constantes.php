@@ -25,6 +25,7 @@ abstract class Constantes
     const LOGINDASHBOARVIEW = "loginDashboard";
     const BUSCARUSUARIODAHBOARDVIEW = "buscarUsuario";
     const FACTURACIONDASHBOARDVIEW = "facturacionDashboard";
+    const MIPERFILVIEW = "miPerfil";
 
     //Acciones
     const CERRARSESIONACTION = "cerrarSession";
@@ -46,6 +47,7 @@ abstract class Constantes
     const LOGINDASHBOARDTITLE = "Inicio Sesion Admin";
     const BUSCARUSUARIODASHBOARDTITLE = "Usuario Buscado";
     const FACTURACIONDASHBOARDTITLE = "Facturaciones";
+    const MIPERFILTITLE = "Mi Perfil";
 
     const OLVIDEPASSWORDTITLE = "Olvidé Mi Contraseña";
 

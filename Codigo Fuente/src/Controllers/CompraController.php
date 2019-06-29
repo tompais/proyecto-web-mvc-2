@@ -166,4 +166,5 @@ class CompraController extends Controller
         $this->set($d);
         $this->render(Constantes::COMPRASVIEW);
     }
+
 }
