@@ -133,7 +133,8 @@
                     <div class="tabs_container">
                         <ul class="tabs d-flex flex-sm-row flex-column align-items-md-center justify-content-center">
                             <li class="tab active" data-active-tab="tab_1"><span>Relacionados</span></li>
-                            <li class="tab" data-active-tab="tab_3"><span>Comentarios</span></li>
+                            <li class="tab" data-active-tab="tab_3"><span>Reseñas</span></li>
+                            <li class="tab" data-active-tab="tab_5"><span>Comentarios</span></li>
                         </ul>
                     </div>
                 </div>
@@ -216,7 +217,7 @@
 
                             <div class="col-lg-6 reviews_col">
                                 <div class="tab_title reviews_title">
-                                    <h4>Comentarios</h4>
+                                    <h4>Reseñas</h4>
                                 </div>
 
                                 <!-- User Review -->
@@ -309,7 +310,7 @@
 
                     <!--Comentarios-->
 
-                    <div id="tab_3" class="tab_container">
+                    <div id="tab_5" class="tab_container">
                         <div class="row">
 
                             <div class="col-lg-6 reviews_col">
