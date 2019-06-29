@@ -1,5 +1,6 @@
 <script>
     const pathAccionBanearUsuario = "<?php echo getBaseAddress() . "DashBoard/banear"; ?>";
+    const pathAccionDesbanearUsuario = "<?php echo getBaseAddress() . "DashBoard/desbanear"; ?>";
     const palabraBuscada = "<?php echo $palabraBuscada ?>"
 </script>
 
@@ -37,14 +38,23 @@
                             }
 
          echo '         </td>
-                        <td class="text-right text-nowrap">';
+                        <td class="text-right text-nowrap">
+                        <div class="row float-right mr-3">
+                            <form method="post" action="'.getBaseAddress()."DashBoard/facturar".'" class="mr-3">
+                                <input type="hidden" id="inputUsuarioFacturarId" name="usuarioFacturarId" value="'.$usuario->getId().'" >
+                                <input type="hidden" id="inputPalabraBuscada" name="palabraBuscada" value="'.$palabraBuscada.'" >
+                                <button class="btn btn-primary ml-3" id="btnFacturar" type="submit">Facturar</button>
+                             </form>';
+
                            if ($usuario->getFechaBaneo() != null){
-                               echo '<button class="btn btn-xs btn-success"><i class="fas fa-user-check"></i></button>';
+                               echo '<button class="btn btn-xs btn-success" id="btnDesbanear"><i class="fas fa-user-check" ></i></button>';
                            }
                            else {
                                echo '<button class="btn btn-xs btn-danger"><i class="fas fa-user-times" data-toggle="modal" data-target="#modalBaneo"></i></button>';
                            }
-            echo        '</td>
+
+        echo '            </div>
+                        </td>    
                     </tr>
                 </table>
             </div>';

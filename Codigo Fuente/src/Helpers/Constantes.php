@@ -24,6 +24,7 @@ abstract class Constantes
     const INICIODASHBOARDVIEW = "inicioDashboard";
     const LOGINDASHBOARVIEW = "loginDashboard";
     const BUSCARUSUARIODAHBOARDVIEW = "buscarUsuario";
+    const FACTURACIONDASHBOARDVIEW = "facturacionDashboard";
 
     //Acciones
     const CERRARSESIONACTION = "cerrarSession";
@@ -44,6 +45,7 @@ abstract class Constantes
     const DASHBOARDTITLE = "Estadisticas Shopline";
     const LOGINDASHBOARDTITLE = "Inicio Sesion Admin";
     const BUSCARUSUARIODASHBOARDTITLE = "Usuario Buscado";
+    const FACTURACIONDASHBOARDTITLE = "Facturaciones";
 
     const OLVIDEPASSWORDTITLE = "Olvidé Mi Contraseña";
 
