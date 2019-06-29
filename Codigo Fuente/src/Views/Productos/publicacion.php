@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/lib/rateYo/jquery.rateyo.min.css"; ?>">
 <link rel="stylesheet" href="<?php echo getBaseAddress() . "Webroot/css/publicacion/publicacionProducto.css" ?>">
 <link rel="stylesheet"
       href="<?php echo getBaseAddress() . "Webroot/css/publicacion/publicacionProductoResponsive.css" ?>">
@@ -9,7 +10,7 @@
     var longitud = <?php echo $geolocalizacion->getLongitud(); ?>
 </script>
 <?php
-    $patHomePublicacion = getBaseAddress().'Productos/publicacion/';
+$patHomePublicacion = getBaseAddress() . 'Productos/publicacion/';
 ?>
 <div class="container single_product_container">
     <div class="row">
@@ -84,32 +85,32 @@
 
                 <br>
                 <br>
-                <div id="<?php echo $producto->getId();?>">
+                <div id="<?php echo $producto->getId(); ?>">
 
-                <?php
-                if (!isset($_SESSION["session"]) || unserialize($_SESSION["session"])->getId() != $producto->getUsuarioId()) {
-                    if ($producto->getCantidad() == 0) {
-                        echo '<button class="btn btn-primary btn-block"
+                    <?php
+                    if (!isset($_SESSION["session"]) || unserialize($_SESSION["session"])->getId() != $producto->getUsuarioId()) {
+                        if ($producto->getCantidad() == 0) {
+                            echo '<button class="btn btn-primary btn-block"
                                   id="btnAddToCart" disabled=""><i
                                   class="fas fa-ban mr-2s"></i>
                                   <span>SIN STOCK</span>
                               </button>';
-                    }elseif (isset($_SESSION["carrito"]) and in_array($producto->getId(), $_SESSION["carrito"])){
-                        echo '<button class="btn btn-primary btn-block"
+                        } elseif (isset($_SESSION["carrito"]) and in_array($producto->getId(), $_SESSION["carrito"])) {
+                            echo '<button class="btn btn-primary btn-block"
                                   id="btnAddToCart" 
-                                  onclick="agregarProductoCarrito('.$producto->getId().')"
+                                  onclick="agregarProductoCarrito(' . $producto->getId() . ')"
                                   disabled=""><i
                                   class="fas fa-check mr-2"></i>
                                   <span>EN CARRITO</span>
                               </button>';
-                    }else{
-                        echo '<button class="btn btn-primary btn-block"
-                                  style="background: #0099df" id="btnAddToCart" onclick="agregarProductoCarrito('.$producto->getId().')"><i
+                        } else {
+                            echo '<button class="btn btn-primary btn-block"
+                                  style="background: #0099df" id="btnAddToCart" onclick="agregarProductoCarrito(' . $producto->getId() . ')"><i
                                   class="fab fa-opencart mr-2"></i>AGREGAR AL CARRITO
                               </button>';
+                        }
                     }
-                }
-                ?>
+                    ?>
                 </div>
             </div>
         </div>
@@ -155,51 +156,52 @@
                             </div>
                             <div class="row mt-5">
                                 <div class="col">
-                                    <div id="carouselProductosRelacionados" class="owl-carousel owl-theme product_slider">
+                                    <div id="carouselProductosRelacionados"
+                                         class="owl-carousel owl-theme product_slider">
                                         <?php
 
-                                            foreach ($productosRelacionados as $productoRelacionado){
+                                        foreach ($productosRelacionados as $productoRelacionado) {
 
-                                                $imagen = $imagenesProductosRelacionados[$productoRelacionado->getId()]->getNombre();
-                                                $rutaImg = getBaseAddress() . 'Webroot/img/productos/' . $imagen;
+                                            $imagen = $imagenesProductosRelacionados[$productoRelacionado->getId()]->getNombre();
+                                            $rutaImg = getBaseAddress() . 'Webroot/img/productos/' . $imagen;
 
-                                                if (!isset($_SESSION["session"]) || unserialize($_SESSION["session"])->getId() != $productoRelacionado->getUsuarioId()) {
-                                                    if ($productoRelacionado->getCantidad() == 0) {
-                                                        $boton = '<button class="btn btn-primary"
+                                            if (!isset($_SESSION["session"]) || unserialize($_SESSION["session"])->getId() != $productoRelacionado->getUsuarioId()) {
+                                                if ($productoRelacionado->getCantidad() == 0) {
+                                                    $boton = '<button class="btn btn-primary"
                                                                     id="btnAddToCart" disabled><i
                                                                     class="fas fa-ban mr-2"></i>
                                                                     <span>SIN STOCK</span>
                                                                   </button>';
-                                                    }else if (isset($_SESSION["carrito"]) and in_array($productoRelacionado->getId(), $_SESSION["carrito"])){
-                                                        $boton = '<button class="btn btn-primary"
-                                                                      id="btnAddToCart" onclick="agregarProductoCarrito('.$productoRelacionado->getId().')"
+                                                } else if (isset($_SESSION["carrito"]) and in_array($productoRelacionado->getId(), $_SESSION["carrito"])) {
+                                                    $boton = '<button class="btn btn-primary"
+                                                                      id="btnAddToCart" onclick="agregarProductoCarrito(' . $productoRelacionado->getId() . ')"
                                                                       disabled=""><i class="fas fa-check fa-1x mr-2"></i>
                                                                       <span>EN CARRITO</span>
                                                                   </button>';
-                                                    }else{
-                                                        $boton = '<button class="btn btn-primary"
-                                                                      id="btnAddToCart" onclick="agregarProductoCarrito('.$productoRelacionado->getId().')"><i
+                                                } else {
+                                                    $boton = '<button class="btn btn-primary"
+                                                                      id="btnAddToCart" onclick="agregarProductoCarrito(' . $productoRelacionado->getId() . ')"><i
                                                                       class="fab fa-opencart mr-2"></i>Agregar al carrito
                                                                   </button>';
-                                                    }
                                                 }
-                                                echo '<div class="owl-item product_slider_item" id='.$productoRelacionado->getId().'>
+                                            }
+                                            echo '<div class="owl-item product_slider_item" id=' . $productoRelacionado->getId() . '>
                                                         <div class="product-item">
                                                             <div class="d-flex flex-column product discount justify-content-center align-items-center">
-                                                                <a href="'.$patHomePublicacion.$productoRelacionado->getId().'">
+                                                                <a href="' . $patHomePublicacion . $productoRelacionado->getId() . '">
                                                                 <div class="product_image" style="height: 180px;">
-                                                                    <img src='.$rutaImg.' class="img-fluid h-100" alt="">
+                                                                    <img src=' . $rutaImg . ' class="img-fluid h-100" alt="">
                                                                 </div>
                                                                 </a>
                                                                 <div class="product_info">
-                                                                    <h6 class="product_name"><a href="#">'.$productoRelacionado->getNombre().'</a>
+                                                                    <h6 class="product_name"><a href="#">' . $productoRelacionado->getNombre() . '</a>
                                                                     </h6>
                                                                 </div>
-                                                                '.$boton.'
+                                                                ' . $boton . '
                                                             </div>
                                                         </div>
                                                       </div>';
-                                            }
+                                        }
 
                                         ?>
                                     </div>
@@ -211,100 +213,55 @@
                     <!-- Tab Reviews -->
 
                     <div id="tab_3" class="tab_container">
-                        <div class="row">
+                        <!-- User Reviews -->
+                        <div class="tab_title reviews_title mb-4">
+                            <h4>Reseñas</h4>
+                        </div>
 
-                            <!-- User Reviews -->
-
-                            <div class="col-lg-6 reviews_col">
-                                <div class="tab_title reviews_title">
-                                    <h4>Reseñas</h4>
-                                </div>
-
-                                <!-- User Review -->
-
-                                <div class="user_review_container d-flex flex-column flex-sm-row">
-                                    <div class="user">
-                                        <div class="user_pic"></div>
-                                        <div class="user_rating">
-                                            <ul class="star_rating">
-                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-                                            </ul>
+                        <div class="d-flex flex-column">
+                            <div class="user_review_container d-flex flex-column flex-sm-row">
+                                <div class="review pl-0">
+                                    <div class="review_date">27/08/2016</div>
+                                    <div class="user_name mb-1">Brandon William</div>
+                                    <div class="user_rating mt-0 mb-3">
+                                        <!-- Estrellas -->
+                                        <div class="d-flex" style="color: #0099df;">
+                                            <i class="fas fa-star" aria-hidden="true"></i>
+                                            <i class="fas fa-star" aria-hidden="true"></i>
+                                            <i class="fas fa-star" aria-hidden="true"></i>
+                                            <i class="fas fa-star" aria-hidden="true"></i>
+                                            <i class="far fa-star" aria-hidden="true"></i>
                                         </div>
                                     </div>
-                                    <div class="review">
-                                        <div class="review_date">27 Aug 2016</div>
-                                        <div class="user_name">Brandon William</div>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                            tempor incididunt ut labore et dolore magna aliqua.</p>
-                                    </div>
+                                    <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                        sed do eiusmod
+                                        tempor incididunt ut labore et dolore magna aliqua.</p>
                                 </div>
+                            </div>
+                        </div>
 
-                                <!-- User Review -->
+                        <!-- Add Review -->
 
-                                <div class="user_review_container d-flex flex-column flex-sm-row">
-                                    <div class="user">
-                                        <div class="user_pic"></div>
-                                        <div class="user_rating">
-                                            <ul class="star_rating">
-                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-                                            </ul>
+                        <div class="form-row">
+                            <div class="col">
+                                <div class="add_review mt-0">
+                                    <div id="review_form">
+                                        <h1>Califique:</h1>
+                                        <div id="rateYo"></div>
+                                        <div class="form-group">
+                                                <textarea id="review_message" class="form-control input_review"
+                                                          name="message"
+                                                          placeholder="Deje una reseña..." rows="4" required
+                                                          data-error="Please, leave us a review."></textarea>
+                                            <div class="d-flex justify-content-end">
+                                                <p><span id="spanReviewCharCounter">0</span>/200</p>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="review">
-                                        <div class="review_date">27 Aug 2016</div>
-                                        <div class="user_name">Brandon William</div>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                            tempor incididunt ut labore et dolore magna aliqua.</p>
+
+                                        <button class="float-right btn btn-primary">Dejar reseña</button>
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Add Review -->
-
-                            <div class="col-lg-6 add_review_col">
-
-                                <div class="add_review">
-                                    <form id="review_form" action="post">
-                                        <div>
-                                            <h1>Add Review</h1>
-                                            <input id="review_name" class="form_input input_name" type="text"
-                                                   name="name" placeholder="Name*" required="required"
-                                                   data-error="Name is required.">
-                                            <input id="review_email" class="form_input input_email" type="email"
-                                                   name="email" placeholder="Email*" required="required"
-                                                   data-error="Valid email is required.">
-                                        </div>
-                                        <div>
-                                            <h1>Your Rating:</h1>
-                                            <ul class="user_star_rating">
-                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-                                            </ul>
-                                            <textarea id="review_message" class="input_review" name="message"
-                                                      placeholder="Your Review" rows="4" required
-                                                      data-error="Please, leave us a review."></textarea>
-                                        </div>
-                                        <div class="text-left text-sm-right">
-                                            <button id="review_submit" type="submit"
-                                                    class="red_button review_submit_btn trans_300" value="Submit">submit
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
-
-                            </div>
-
                         </div>
                     </div>
 
@@ -483,5 +440,7 @@
 
 
 <script src="<?php echo getBaseAddress() . "Webroot/lib/OwlCarousel2-2.2.1/owl.carousel.js"; ?>"></script>
-<script src="<?php echo getBaseAddress() . "Webroot/js/publicacion/publicacionProducto.js" ?>"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcFcGF94xuFjqe9X4qNEbB9uA_awWv8Lg&callback=initMap"></script>
+<script src="<?php echo getBaseAddress() . "Webroot/lib/rateYo/jquery.rateyo.min.js"; ?>"></script>
+<script src="<?php echo getBaseAddress() . "Webroot/js/publicacion/publicacionProducto.js"; ?>"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcFcGF94xuFjqe9X4qNEbB9uA_awWv8Lg&callback=initMap" async
+        defer></script>
