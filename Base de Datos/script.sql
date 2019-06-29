@@ -186,7 +186,17 @@ CREATE TABLE RegistroCompra(
     constraint FK_RegistroCompra_Compra foreign key (CompraId) references Compra (Id)
 );
 
+-- Creación tabla Review --
+CREATE TABLE Review(
+	Id integer auto_increment not null unique,
+    Calificacion integer not null,
+    Descripcion varchar(200) not null,
+    ProductoId integer not null,
+    constraint PK_Review primary key (Id),
+    constraint FK_Review_Producto foreign key (ProductoId) references Producto (Id)
+);
 
+-- Creación Tabla Facturación --
 CREATE TABLE Facturacion (
 	Id integer auto_increment not null unique,
     Mes varchar (15) not null,
