@@ -1,6 +1,11 @@
+const cantMaxCharsReview = 200;
+
 var map = $('#map');
 var carouselProductosRelacionados = $("#carouselProductosRelacionados");
 var googleMap;
+var rateYo = $('#rateYo');
+var reviewMessage = $('#review_message');
+var spanReviewCharCounter = $('#spanReviewCharCounter');
 
 /* JS Document */
 
@@ -333,3 +338,26 @@ function initMap() {
 		map: googleMap
 	});
 }
+
+rateYo.rateYo({
+	starWidth: '25px',
+	normalFill: '#ebebeb',
+	ratedFill: '#0099df',
+	fullStar: true
+});
+
+function contarCaracteresReviewMessage() {
+	var txt = reviewMessage.val();
+	var txtLength = txt.length;
+
+	if(txtLength <= cantMaxCharsReview) {
+		spanReviewCharCounter.text(txtLength);
+	} else {
+		reviewMessage.val(txt.substring(0, cantMaxCharsReview));
+		spanReviewCharCounter.text(cantMaxCharsReview);
+	}
+}
+
+reviewMessage.keyup(function () {
+	contarCaracteresReviewMessage();
+});
