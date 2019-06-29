@@ -135,7 +135,7 @@ class Model
 
                     // De lo contrario, construyo lista de actualización
 
-                    $uplist .= "`$k`='$v'" . ",";
+                    $uplist .= "`$k`= " . ($v == null ? "NULL" : "'$v'") . ",";
 
                 }
 

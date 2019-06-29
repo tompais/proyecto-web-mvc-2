@@ -1,3 +1,7 @@
+var map = $('#map');
+var carouselProductosRelacionados = $("#carouselProductosRelacionados");
+var googleMap;
+
 /* JS Document */
 
 /******************************
@@ -317,8 +321,15 @@ jQuery(document).ready(function($)
 		}
 	}
 });
-function agregarProductoCarrito(id) {
-	var obj = {};
-	obj.idProducto = id;
-	llamadaAjax(pathHome + 'Carrito/agregar', JSON.stringify(obj), true, "actualizarCarritoCompras", "dummy");
+
+function initMap() {
+	googleMap = new google.maps.Map(document.getElementById('map'), {
+		center: {lat: window.latitud, lng: window.longitud},
+		zoom: 16
+	});
+
+	var marker = new google.maps.Marker({
+		position: new google.maps.LatLng(window.latitud, window.longitud),
+		map: googleMap
+	});
 }

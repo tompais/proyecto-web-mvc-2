@@ -107,7 +107,13 @@ class SeguridadController extends Controller
 
         if(!$user->loguearUsuarioDB()) {
             throw new UsuarioNoEncontradoException("Usuario o contraseña inválido. Revise sus datos y vuelva a intentarlo", CodigoError::UsuarioNoEncontrado);
+        } else if (date("Y-m-d", strtotime($user->getFechaBaneo())) >= date("Y-m-d", time())) {
+            throw new UsuarioBaneadoException("Su usuario se encuentra baneado hasta el " . date("d/m/Y", strtotime($user->getFechaBaneo())), CodigoError::UsuarioBaneado);
         } else {
+            if($user->getFechaBaneo())
+                if(!$user->desbanear())
+                    throw new SQLUpdateException("No se ha podido desbanear al usuario con id " . $user->getId(), CodigoError::ErrorUpdateSQL);
+
             $session->setId($user->getId());
             $session->setUserName($user->getUsername());
             $session->setRolId($user->getRolId());
@@ -195,7 +201,7 @@ class SeguridadController extends Controller
 
     function cerrarSession()
     {
-        session_destroy();
+        unset($_SESSION['session']);
         if(isset($_COOKIE["session"])) {
             unset($_COOKIE["session"]);
             setcookie("session", null, -1, "/", apache_request_headers()["Host"]);

@@ -19,9 +19,13 @@ class Router
         {
             header("Location: " . getBaseAddress());
         }
-        else if ((self::isProductController($explode_url[0]) || self::isCartController($explode_url[0])) &&  !isset($_SESSION["session"]))
+        else if (((self::isProductController($explode_url[0]) && !self::isPostAction($explode_url[1])) || self::isCartController($explode_url[0]) || self::isBuyController($explode_url[0])) &&  !isset($_SESSION["session"]))
         {
             header("Location: " . getBaseAddress() . "Seguridad/login");
+        }
+        else if ((self::isDashboardController($explode_url[0])) && !self::isDashboardLoginAction($explode_url[1]) && !self::isDashboardLoginAdminAction($explode_url[1]) && !isset($_SESSION["sessionAdmin"]))
+        {
+            header("Location: " . getBaseAddress() . "DashBoard/login");
         }
         else
         {
@@ -38,6 +42,26 @@ class Router
         return !strcasecmp($controller, 'Productos');
     }
 
+    private static function isDashboardController($controller)
+    {
+        return !strcasecmp($controller, 'DashBoard');
+    }
+
+    private static function isDashboardLoginAction($action)
+    {
+        return !strcasecmp($action, 'login');
+    }
+
+    private static function isDashboardLoginAdminAction($action)
+    {
+        return !strcasecmp($action, 'loguearAdmin');
+    }
+
+    private static function isBuyController($controller)
+    {
+        return !strcasecmp($controller, 'Compra');
+    }
+
     private static function isCartController($controller)
     {
         return !strcasecmp($controller, 'Carrito');
@@ -51,6 +75,11 @@ class Router
     private static function isCloseSessionAction($action)
     {
         return !strcasecmp($action, Constantes::CERRARSESIONACTION);
+    }
+
+    private static function isPostAction($action)
+    {
+        return !strcasecmp($action, 'publicacion');
     }
 }
 ?>

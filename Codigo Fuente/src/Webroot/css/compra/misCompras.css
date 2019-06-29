@@ -6,6 +6,12 @@
     margin-bottom: 0;
 }
 
+@media (min-width: 768px) {
+    .user-infos {
+        height: 300px;
+    }
+}
+
 .dropdown-user {
     margin: 13px 0;
     padding: 5px;

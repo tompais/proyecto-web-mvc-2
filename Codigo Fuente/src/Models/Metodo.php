@@ -60,8 +60,12 @@ class Metodo extends Model
     {
         $metodo = $this->selectByPk($pk);
 
-        $this->setId($metodo["Id"]);
-        $this->setTipo($metodo["Tipo"]);
+        if($metodo) {
+            $this->setId($metodo["Id"]);
+            $this->setTipo($metodo["Tipo"]);
+        }
+
+        return $metodo;
     }
 
 }

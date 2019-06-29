@@ -5,8 +5,8 @@ const nombresMeses = [
 
 const nombresDias = ["D", "L", "M", "M", "J", "V", "S"];
 
-var inputFechaNacimiento = $("#inputFechaNacimiento");
-var btnInputFechaNacimiento = $("#btnInputFechaNacimiento");
+var inputFechaNacimiento = $("#inputFechaBaneo");
+var btnInputFechaNacimiento = $("#btnInputFechaBaneo");
 var selectProvincia = $("#selectProvincia");
 var selectPartido = $("#selectPartido");
 var selectLocalidad = $("#selectLocalidad");

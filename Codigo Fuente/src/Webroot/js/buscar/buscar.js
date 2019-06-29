@@ -1,6 +1,6 @@
 var paginador = $('#paginador');
 var divProductosContainer = $('#divProductosContainer');
-var btnAddToCart;
+
 
 paginador.pagination({
     dataSource: pathHome + 'Buscar/getPublicaciones/' + palabra,
@@ -110,42 +110,4 @@ paginador.pagination({
 });
 
 
-function agregarProductoCarrito(id) {
-    if(window.isSessionSetted) {
-        btnAddToCart = $('#' + id).find("#btnAddToCart");
-        var obj = {};
-        obj.idProducto = id;
-        llamadaAjax(pathHome + 'Carrito/agregar', JSON.stringify(obj), true, "actualizarCarritoCompras", "dummy");
-    } else {
-        window.location.href = pathHome + "Seguridad/login";
-    }
-}
 
-function actualizarCarritoCompras(cantidadEnCarrito){
-
-    btnAddToCart.empty();
-    btnAddToCart.prop('disabled', true);
-    btnAddToCart.append($('<i class="fas fa-check mr-2">'));
-    var spanAddToCart = $('<span>');
-    spanAddToCart.text('En Carrito');
-    btnAddToCart.append(spanAddToCart);
-    btnAddToCart.removeAttr('onclick');
-
-    var contadorCarritoHeader = $('#checkout_items');
-    var contadorCarritoHamburguesa = $('#contadorCarritoHamburguesa');
-
-    contadorCarritoHeader.show();
-    contadorCarritoHamburguesa.show();
-
-    if(cantidadEnCarrito < 1){
-
-        contadorCarritoHamburguesa.hide();
-        contadorCarritoHeader.hide();
-    }else{
-
-        contadorCarritoHeader.addClass("checkout_items");
-
-        contadorCarritoHeader.text(cantidadEnCarrito);
-        contadorCarritoHamburguesa.text(cantidadEnCarrito);
-    }
-}

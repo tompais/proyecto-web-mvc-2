@@ -93,7 +93,7 @@
                     <ul class="navbar_menu mt-2" id="elementosNavegacion">
                         <li class="mr-2"><a href="<?php echo getBaseAddress() . 'Compra/misCompras'; ?>">Compras<i class='fas fa-cash-register ml-1' aria-hidden="true"></i></a></li>
                         <li class="mr-2"><a href="<?php echo getBaseAddress() . 'Productos/misProductos'; ?>">Ventas<i class='fas fa-piggy-bank  ml-1' aria-hidden="true"></i></a></li>
-                        <li class="mr-2"><a href="<?php echo getBaseAddress() . 'Carrito/mostrar'; ?>" id="carrito">Carrito<i class="fa fa-shopping-cart ml-1" aria-hidden="true"></i></a><span id="checkout_items" class="checkout_items"><?php echo $cantidad?></span></li>
+                        <li class="mr-2"><a href="<?php echo getBaseAddress() . 'Carrito/mostrar'; ?>" id="carrito"><div class="contenedorCarrito">Carrito<i class="fa fa-shopping-cart ml-1 mr-2" aria-hidden="true"></i></a><span id="checkout_items" class="checkout_items"><?php echo $cantidad?></span></div></li>
                     </ul>
 
                     <div class="hamburger_container mt-1 mr-3">
@@ -143,7 +143,7 @@
             </li>
 
             <li class="menu_item"><a href="<?php echo getBaseAddress() ?>"><i class="fas fa-home mr-1"></i>Inicio</a></li>
-            <li class="menu_item"><a href="<?php echo getBaseAddress() . 'Carrito/mostrar' ?>" id="carrito"><i class="fas fa-shopping-cart mr-1"></i>Carrito <span id="contadorCarritoHamburguesa"><?php echo $cantidad ?></span> </a></li>
+            <li class="menu_item"><a href="<?php echo getBaseAddress() . 'Carrito/mostrar' ?>" id="carrito"><div class="contenedorCarrito"><i class="fas fa-shopping-cart mr-1" aria-hidden="true"></i><span id="contadorCarritoHamburguesa" class="checkout_items"><?php echo $cantidad ?></span></div>Carrito</a></li>
         </ul>
     </div>
 </div>
