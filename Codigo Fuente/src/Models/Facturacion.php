@@ -119,4 +119,25 @@ class Facturacion extends Model
         $this->setId($this->insert($array));
         return $this->getId();
     }
+
+    public function traerListaDeFacturaciones ($pk){
+
+        $facturaciones = array();
+
+        $rows = $this->pageRows(0, PHP_INT_MAX, "UsuarioId = $pk ");
+
+        foreach($rows as $row)
+        {
+            $facturacion = new Facturacion();
+            $facturacion->db->disconnect();
+            $facturacion->setId($row["Id"]);
+            $facturacion->setTotal($row["Total"]);
+            $facturacion->setMes($row["Mes"]);
+            $facturacion->setAnio($row["Anio"]);
+            $facturaciones[] = $facturacion;
+        }
+
+        return $facturaciones;
+
+    }
 }
