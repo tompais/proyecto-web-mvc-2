@@ -180,5 +180,14 @@ class DashBoardController extends Controller
         $this->render(Constantes::ULTIMOSBANEADOSVIEW);
     }
 
+    function estadisticas()
+    {
+        $this->layout = "layoutDashBoard";
+        $d["title"] = Constantes::ESTADISTICASDASHBOARDTITLE;
+
+        $this->set($d);
+        $this->render(Constantes::ESTADISTICASDASHBOARDVIEW);
+    }
+
 
 }

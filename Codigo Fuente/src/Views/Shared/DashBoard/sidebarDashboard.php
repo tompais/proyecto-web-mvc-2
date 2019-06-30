@@ -12,7 +12,7 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="<?php echo getBaseAddress() . "DashBoard/estadisticas" ?>">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Estadisticas</span></a>
     </li>
