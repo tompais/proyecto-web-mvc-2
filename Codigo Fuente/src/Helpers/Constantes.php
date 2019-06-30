@@ -28,7 +28,7 @@ abstract class Constantes
     const MIPERFILVIEW = "miPerfil";
     const MISFACTURACIONESVIEW = "misFacturaciones";
     const FACTURACIONEXITOSAVIEW = "facturacionExitosa";
-
+    const ULTIMOSBANEADOSVIEW = "ultimosBaneados";
     //Acciones
     const CERRARSESIONACTION = "cerrarSession";
 
@@ -52,6 +52,7 @@ abstract class Constantes
     const MIPERFILTITLE = "Mi Perfil";
     const MISFACTURACIONESTITLE = "Mis Facturaciones";
     const FACTURACIONEXITOSATITLE = "Facturacion exitosa";
+    const ULTIMOSBANEADOSTITLE = "Ultimos baneados";
 
     const OLVIDEPASSWORDTITLE = "Olvidé Mi Contraseña";
 

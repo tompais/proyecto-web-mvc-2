@@ -34,7 +34,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">Ultimos Baneados</h5>
                                 <p class="card-text">Vea los ultimos usuarios baneados</p>
-                                <a href="#" class="btn btn-primary">Ver</a>
+                                <a href="<?php echo getBaseAddress() . "DashBoard/ultimosBaneados" ?>" class="btn btn-primary">Ver</a>
                             </div>
                         </div>
                     </div>
