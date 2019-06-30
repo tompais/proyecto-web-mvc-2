@@ -21,7 +21,7 @@
                             <hr class="my-4">
                             <p>Busca a todos los usuarios registrados en ShopLine</p>
                             <p class="lead">
-                                <a class="btn btn-primary btn-lg" href="#" role="button">Encontrar usuario</a>
+                                <button class="btn btn-primary btn-lg" id="btnFocusEnBuscar">Encontrar usuario</button>
                             </p>
                         </div>
                     </div>
@@ -34,7 +34,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">Ultimos Baneados</h5>
                                 <p class="card-text">Vea los ultimos usuarios baneados</p>
-                                <a href="#" class="btn btn-primary">Ver</a>
+                                <a href="<?php echo getBaseAddress() . "DashBoard/ultimosBaneados" ?>" class="btn btn-primary">Ver</a>
                             </div>
                         </div>
                     </div>
@@ -54,5 +54,10 @@
 
 </div>
 
+<script>
+    $( "#btnFocusEnBuscar" ).click(function() {
+        $( "#inputUsuarioBuscado" ).focus();
+    });
+</script>
 
 

@@ -163,4 +163,31 @@ class DashBoardController extends Controller
         $this->render(Constantes::FACTURACIONEXITOSAVIEW);
     }
 
+    function ultimosBaneados()
+    {
+        $this->layout = "layoutDashBoard";
+        $d["title"] = Constantes::ULTIMOSBANEADOSTITLE;
+
+        $usuario = new Usuario();
+
+        $baneados = [];
+
+        $baneados = $usuario->traerListaDeUltimoBaneados();
+
+        $d["baneados"] = $baneados;
+
+        $this->set($d);
+        $this->render(Constantes::ULTIMOSBANEADOSVIEW);
+    }
+
+    function estadisticas()
+    {
+        $this->layout = "layoutDashBoard";
+        $d["title"] = Constantes::ESTADISTICASDASHBOARDTITLE;
+
+        $this->set($d);
+        $this->render(Constantes::ESTADISTICASDASHBOARDVIEW);
+    }
+
+
 }
