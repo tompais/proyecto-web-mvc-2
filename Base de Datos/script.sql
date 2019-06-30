@@ -191,6 +191,7 @@ CREATE TABLE RegistroCompra(
 );
 
 -- Creación tabla Review --
+
 CREATE TABLE Review(
 	Id integer auto_increment not null unique,
     Calificacion integer not null,
@@ -204,6 +205,7 @@ CREATE TABLE Review(
 );
 
 -- Creación Tabla Facturación --
+
 CREATE TABLE Facturacion (
 	Id integer auto_increment not null unique,
     Mes varchar (15) not null,

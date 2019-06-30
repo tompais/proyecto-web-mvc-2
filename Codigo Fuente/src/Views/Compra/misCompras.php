@@ -12,6 +12,14 @@
         </div>
     </div>
 
+    <div id="divProductosContainer" class="d-flex flex-column justify-content-center align-items-center">
+        <?php
+        if (!$compras) {
+            echo '<h5 class="text-center text-black-50">No tienes compras realizadas</h5>';
+        }
+        ?>
+    </div>
+
     <?php
 
         $i = 0;
