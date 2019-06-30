@@ -516,7 +516,6 @@ function guardarReviewFallido(err) {
 
 /*Fin de Submit de Review*/
 
-<<<<<<< HEAD
 function cargarPreguntaExitosa(pregunta)
 {
 	var divContenedor = $("<div class='user_review_container d-flex flex-column flex-sm-row'></div>");
@@ -654,7 +653,7 @@ function mostrarMas(idProducto)
 	obj.idProducto = idProducto;
 	llamadaAjax(pathMostrarMas, JSON.stringify(obj), true, "cargarMasComentarios", "dummy");
 }
-=======
+
 /*Implementación de nivel de vendedor con estrellas*/
 
 divNivelVendedorRateYo.rateYo({
@@ -673,4 +672,3 @@ function inicializarNivelVendedor() {
 inicializarNivelVendedor();
 
 /*Fin de implementación de nivel de vendedor con estrellas*/
->>>>>>> 6bb34f84db1ea662f739c713b34983eb111f6e79

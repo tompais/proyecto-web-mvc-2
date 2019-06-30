@@ -12,16 +12,13 @@
     const pathGuardarReview = "<?php echo getBaseAddress() . "Productos/guardarReview"; ?>";
     var cantidadReviews = <?php echo $cantidadReviews; ?>;
     const pathGetReviews = "<?php echo getBaseAddress() . "Productos/getReviews" ?>";
-<<<<<<< HEAD
     var idSesion = <?php echo isset($_SESSION["session"])?unserialize($_SESSION["session"])->getId():0; ?>;
     var usuarioId = <?php echo $producto->getUsuarioId(); ?>;
     var totalComentarios = <?php echo $totalComentarios; ?>;
     const pathPreguntar = "<?php echo getBaseAddress() . "Productos/realizarPregunta "; ?>";
     const pathResponder = "<?php echo getBaseAddress() . "Productos/realizarRespuesta "; ?>";
     const pathMostrarMas = "<?php echo getBaseAddress() . "Productos/mostrarMas "; ?>";
-=======
     var nivelVendedor = <?php echo $nivelVendedor; ?>;
->>>>>>> 6bb34f84db1ea662f739c713b34983eb111f6e79
 </script>
 <?php
 $patHomePublicacion = getBaseAddress() . 'Productos/publicacion/';
