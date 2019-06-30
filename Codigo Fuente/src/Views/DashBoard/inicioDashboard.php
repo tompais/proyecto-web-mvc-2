@@ -21,7 +21,7 @@
                             <hr class="my-4">
                             <p>Busca a todos los usuarios registrados en ShopLine</p>
                             <p class="lead">
-                                <a class="btn btn-primary btn-lg" href="#" role="button">Encontrar usuario</a>
+                                <button class="btn btn-primary btn-lg" id="btnFocusEnBuscar">Encontrar usuario</button>
                             </p>
                         </div>
                     </div>
@@ -54,5 +54,10 @@
 
 </div>
 
+<script>
+    $( "#btnFocusEnBuscar" ).click(function() {
+        $( "#inputUsuarioBuscado" ).focus();
+    });
+</script>
 
 
