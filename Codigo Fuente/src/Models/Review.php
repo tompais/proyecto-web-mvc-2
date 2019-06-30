@@ -205,4 +205,22 @@ class Review extends Model
 
         return $reviews;
     }
+
+    public function getSumaCalificacionesByProductoId($productoId)
+    {
+        $rows = $this->pageRows('', '', 'ProductoId = ' . $productoId, [0 => 'Calificacion']);
+
+        $sum = 0;
+
+        foreach ($rows as $row) {
+            $sum += $row["Calificacion"];
+        }
+
+        return $sum;
+    }
+
+    public function getCantReviewsByProductoId($productoId)
+    {
+        return $this->total('ProductoId = ' . $productoId);
+    }
 }
