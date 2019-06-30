@@ -10,7 +10,10 @@ class ReviewDto
 {
     public $id;
     public $calificacion;
-    public $descripcion;
+    public $detalle;
     public $productoId;
     public $producto;
+    public $usuarioId;
+    public $usuario;
+    public $fechaAlta;
 }

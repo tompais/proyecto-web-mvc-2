@@ -7,7 +7,11 @@
 
 <script>
     var latitud = <?php echo $geolocalizacion->getLatitud(); ?>;
-    var longitud = <?php echo $geolocalizacion->getLongitud(); ?>
+    var longitud = <?php echo $geolocalizacion->getLongitud(); ?>;
+    var productoId = <?php echo $producto->getId(); ?>;
+    const pathGuardarReview = "<?php echo getBaseAddress() . "Productos/guardarReview"; ?>";
+    var cantidadReviews = <?php echo $cantidadReviews; ?>;
+    const pathGetReviews = "<?php echo getBaseAddress() . "Productos/getReviews" ?>";
 </script>
 <?php
 $patHomePublicacion = getBaseAddress() . 'Productos/publicacion/';
@@ -214,55 +218,44 @@ $patHomePublicacion = getBaseAddress() . 'Productos/publicacion/';
 
                     <div id="tab_3" class="tab_container">
                         <!-- User Reviews -->
-                        <div class="tab_title reviews_title mb-4">
+                        <div class="tab_title reviews_title mb-0">
                             <h4>Reseñas</h4>
                         </div>
 
-                        <div class="d-flex flex-column">
-                            <div class="user_review_container d-flex flex-column flex-sm-row">
-                                <div class="review pl-0">
-                                    <div class="review_date">27/08/2016</div>
-                                    <div class="user_name mb-1">Brandon William</div>
-                                    <div class="user_rating mt-0 mb-3">
-                                        <!-- Estrellas -->
-                                        <div class="d-flex" style="color: #0099df;">
-                                            <i class="fas fa-star" aria-hidden="true"></i>
-                                            <i class="fas fa-star" aria-hidden="true"></i>
-                                            <i class="fas fa-star" aria-hidden="true"></i>
-                                            <i class="fas fa-star" aria-hidden="true"></i>
-                                            <i class="far fa-star" aria-hidden="true"></i>
-                                        </div>
-                                    </div>
-                                    <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                        sed do eiusmod
-                                        tempor incididunt ut labore et dolore magna aliqua.</p>
-                                </div>
-                            </div>
+                        <div id="divReviewsContainer" class="user_review_container d-flex flex-column mb-0">
+                        </div>
+
+                        <!-- Show More -->
+
+                        <div id="divShowMoreReviews" class="d-none mt-4 justify-content-center align-items-center">
+                            <h6 id="cursorPointerShowMoreReviews" class="text-primary" style="cursor: pointer;">Mostrar más</h6>
                         </div>
 
                         <!-- Add Review -->
 
-                        <div class="form-row">
-                            <div class="col">
-                                <div class="add_review mt-0">
-                                    <div id="review_form">
-                                        <h1>Califique:</h1>
-                                        <div id="rateYo"></div>
-                                        <div class="form-group">
+                        <?php
+
+                        if(isset($_SESSION["session"]) && unserialize($_SESSION["session"])->getId() != $producto->getUsuarioId() && $usuarioComproEsteProducto && !$usuarioRealizoReviewEsteProducto)
+                            echo '<div id="divAddReview" class="d-flex flex-column mt-4">
+                            <div class="add_review mt-0">
+                                <div id="review_form">
+                                    <h1>Califique:</h1>
+                                    <div id="rateYo"></div>
+                                    <div class="form-group">
                                                 <textarea id="review_message" class="form-control input_review"
                                                           name="message"
                                                           placeholder="Deje una reseña..." rows="4" required
                                                           data-error="Please, leave us a review."></textarea>
-                                            <div class="d-flex justify-content-end">
-                                                <p><span id="spanReviewCharCounter">0</span>/200</p>
-                                            </div>
+                                        <div class="d-flex justify-content-end mb-0">
+                                            <p class="mb-0"><span id="spanReviewCharCounter">0</span>/200</p>
                                         </div>
-
-                                        <button class="float-right btn btn-primary">Dejar reseña</button>
+                                        <div id="errorReview" class="error"><i class="fas fa-exclamation-triangle mr-2"></i><span></span></div>
                                     </div>
+                                    <button id="btnSubmitReview" class="float-right btn btn-primary">Dejar reseña</button>
                                 </div>
                             </div>
-                        </div>
+                        </div>';
+                        ?>
                     </div>
 
                     <!--Comentarios-->

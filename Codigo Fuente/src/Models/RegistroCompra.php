@@ -279,4 +279,16 @@ class RegistroCompra extends Model
 
         return $traerRegistroCompra;
     }
+
+    /**
+     * Retorna si el usuario dado realizó una compra del producto dado
+     *
+     * @param $idUsuario
+     * @param $idProducto
+     * @return bool
+     */
+    public function realizoUsuarioCompraProducto($idUsuario, $idProducto)
+    {
+        return $this->pageRows(0, 1, "ProductoId = $idProducto AND CompradorId = $idUsuario") ? true : false;
+    }
 }
