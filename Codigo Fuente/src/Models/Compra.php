@@ -13,23 +13,6 @@ class Compra extends Model
     private $comprador;
     private $fechaCompra;
     private $total;
-    private $facturada;
-
-    /**
-     * @return mixed
-     */
-    public function getFacturada()
-    {
-        return $this->facturada;
-    }
-
-    /**
-     * @param mixed $facturada
-     */
-    public function setFacturada($facturada)
-    {
-        $this->facturada = $facturada;
-    }
 
     /**
      * @return mixed
@@ -122,7 +105,7 @@ class Compra extends Model
 
         $id = $this->insert($array);
 
-        if($id)
+        if ($id)
             $this->setId($id);
 
         return $id;
@@ -134,8 +117,7 @@ class Compra extends Model
 
         $rows = $this->pageRows(0, 5, "CompradorId = $pk ORDER BY FechaCompra DESC");
 
-        foreach($rows as $row)
-        {
+        foreach ($rows as $row) {
             $compra = new Compra();
             $compra->db->disconnect();
             $compra->setId($row["Id"]);
@@ -156,48 +138,6 @@ class Compra extends Model
         $this->setCompradorId($compra["CompradorId"]);
         $this->setTotal($compra["Total"]);
         $this->setFechaCompra($compra["FechaCompra"]);
-    }
-
-    public function traerListaDeCompras ($pk){
-
-        $compras = array();
-
-        $mesActual = date("n");
-
-        $rows = $this->pageRows(0, PHP_INT_MAX, "CompradorId = $pk and month(FechaCompra) like $mesActual and Facturada like 'No Facturada' ");
-
-        foreach($rows as $row)
-        {
-            $compra = new Compra();
-            $compra->db->disconnect();
-            $compra->setId($row["Id"]);
-            $compra->setCompradorId($row["CompradorId"]);
-            $compra->setTotal($row["Total"]);
-            $compra->setFechaCompra($row["FechaCompra"]);
-            $compras[] = $compra;
-        }
-
-        return $compras;
-
-    }
-
-    public function actualizarFacturado($pk)
-    {
-        $mesActual = date("n");
-
-        $rows = $this->pageRows(0, PHP_INT_MAX, "CompradorId = $pk and month(FechaCompra) like $mesActual and Facturada like 'No Facturada' ");
-
-        if($rows) {
-            foreach($rows as $row) {
-                $row["Facturada"] = "Facturado";
-
-                if(!$this->update($row)) {
-                    $rows = null;
-                    break;
-                }
-            }
-        }
-
     }
 
 }

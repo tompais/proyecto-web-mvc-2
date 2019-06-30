@@ -43,7 +43,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">Estadisticas</h5>
                                 <p class="card-text">Ver todas las estadisticas del flujo de Shopline</p>
-                                <a href="#" class="btn btn-primary">Ver</a>
+                                <a href="<?php echo getBaseAddress() . "DashBoard/estadisticas" ?>"  class="btn btn-primary">Ver</a>
                             </div>
                         </div>
                     </div>

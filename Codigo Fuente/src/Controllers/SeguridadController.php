@@ -202,6 +202,8 @@ class SeguridadController extends Controller
     function cerrarSession()
     {
         unset($_SESSION['session']);
+        unset($_SESSION['carrito']);
+
         if(isset($_COOKIE["session"])) {
             unset($_COOKIE["session"]);
             setcookie("session", null, -1, "/", apache_request_headers()["Host"]);

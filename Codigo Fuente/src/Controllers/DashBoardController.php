@@ -126,31 +126,64 @@ class DashBoardController extends Controller
         $this->layout = "layoutDashBoard";
         $d["title"] = Constantes::FACTURACIONDASHBOARDTITLE;
 
-        $compra = new Compra();
-        $compras = [];
-        $compras = $compra->traerListaDeCompras($param["usuarioFacturarId"]);
+        $registroCompra = new RegistroCompra();
+        $registroCompras = [];
 
-        $d["compra"] = $compras;
+        $registroCompras = $registroCompra->traerListaDeRegistroCompraPorVendedor($param["usuarioFacturarId"]);
+
+        $d["registroCompras"] = $registroCompras;
         $d["palabraBuscada"] = $param["palabraBuscada"];
 
         $this->set($d);
         $this->render(Constantes::FACTURACIONDASHBOARDVIEW);
     }
 
+    function facturarMensual()
+    {
+        $this->layout = "layoutDashBoard";
+        $d["title"] = Constantes::FACTURACIONMENSUALDASHBOARDTITLE;
+
+        $registroCompra = new RegistroCompra();
+        $registroCompras = [];
+        $registroCompras  = $registroCompra->traerListaDeRegistroComprasPorMes();
+
+        $d["registroCompras"] = $registroCompras;
+
+        $this->set($d);
+        $this->render(Constantes::FACTURACIONMENSUALDASHBOARDVIEW);
+    }
+
     function generarFacturacion($param)
     {
 
         $facturacion = new Facturacion();
-        $compra = new Compra();
+        $registroCompra = new RegistroCompra();
 
-        $facturacion->setUsuarioId($param["usuarioId"]);
+        $facturacion->setUsuarioId($param["vendedorId"]);
         $facturacion->setTotal($param["totalFacturacion"]);
 
         $facturacion->insertarFacturacion();
 
-        $compra->actualizarFacturado($param["usuarioId"]);
+        $registroCompra->actualizarFacturado($param["vendedorId"]);
 
         header("location: " . getBaseAddress() . "DashBoard/exito");
+
+    }
+
+    function generarFacturacionMensual($json)
+    {
+        header("Content-type: application/json");
+
+        $data = json_decode(utf8_decode($json['data']));
+
+        $registroCompra = new RegistroCompra();
+        $facturacion = new Facturacion();
+
+        $registroCompra->actualizarFacturadoMensual($data->vendedoresId);
+
+        $facturacion->insertarFacturacion();
+
+        echo json_encode(true);
 
     }
 
