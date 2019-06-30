@@ -179,18 +179,22 @@ CREATE TABLE RegistroCompra(
     PrecioUnitario integer not null,
     NombreImagenPrincipal varchar(50) not null,
     CompraId integer not null,
+    ProductoId integer not null,
+    CompradorId integer not null,
     Cantidad integer not null,
     TipoMetodoEntrega varchar(50) not null,
     DetalleEntrega varchar(50) not null,
     constraint PK_RegistroCompra primary key (Id, CompraId),
-    constraint FK_RegistroCompra_Compra foreign key (CompraId) references Compra (Id)
+    constraint FK_RegistroCompra_Compra foreign key (CompraId) references Compra (Id),
+    constraint FK_RegistroCompra_Producto foreign key (ProductoId) references Producto (Id),
+    constraint FK_RegistroCompra_Comprador foreign key (CompradorId) references Usuario (Id)
 );
 
 -- Creación tabla Review --
 CREATE TABLE Review(
 	Id integer auto_increment not null unique,
     Calificacion integer not null,
-    Descripcion varchar(200) not null,
+    Detalle varchar(200) not null,
     ProductoId integer not null,
     constraint PK_Review primary key (Id),
     constraint FK_Review_Producto foreign key (ProductoId) references Producto (Id)

@@ -18,6 +18,57 @@ class RegistroCompra extends Model
     private $tipoMetodoEntrega;
     private $detalleEntrega;
     private $vendedorId;
+    private $productoId;
+    private $compradorId;
+    private $comprador;
+
+    /**
+     * @return mixed
+     */
+    public function getComprador()
+    {
+        return $this->comprador;
+    }
+
+    /**
+     * @param mixed $comprador
+     */
+    public function setComprador($comprador)
+    {
+        $this->comprador = $comprador;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProductoId()
+    {
+        return $this->productoId;
+    }
+
+    /**
+     * @param mixed $productoId
+     */
+    public function setProductoId($productoId)
+    {
+        $this->productoId = $productoId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCompradorId()
+    {
+        return $this->compradorId;
+    }
+
+    /**
+     * @param mixed $compradorId
+     */
+    public function setCompradorId($compradorId)
+    {
+        $this->compradorId = $compradorId;
+    }
 
     /**
      * @return mixed
@@ -189,7 +240,9 @@ class RegistroCompra extends Model
             "NombreImagenPrincipal" => $this->getNombreImagenPrincipal(),
             "TipoMetodoEntrega" => $this->getTipoMetodoEntrega(),
             "DetalleEntrega" => $this->getDetalleEntrega(),
-            "VendedorId" => $this->getVendedorId()
+            "VendedorId" => $this->getVendedorId(),
+            "ProductoId" => $this->getProductoId(),
+            "CompradorId" => $this->getCompradorId()
         ];
 
         $id = $this->insert($array);
@@ -219,6 +272,8 @@ class RegistroCompra extends Model
             $registroCompra->setNombreProducto($row["NombreProducto"]);
             $registroCompra->setTipoMetodoEntrega($row["TipoMetodoEntrega"]);
             $registroCompra->setVendedorId($row["VendedorId"]);
+            $registroCompra->setProductoId($row["ProductoId"]);
+            $registroCompra->setCompradorId($row["CompradorId"]);
             $traerRegistroCompra[] = $registroCompra;
         }
 
