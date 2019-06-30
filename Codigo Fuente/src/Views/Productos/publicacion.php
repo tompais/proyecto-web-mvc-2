@@ -12,6 +12,12 @@
     const pathGuardarReview = "<?php echo getBaseAddress() . "Productos/guardarReview"; ?>";
     var cantidadReviews = <?php echo $cantidadReviews; ?>;
     const pathGetReviews = "<?php echo getBaseAddress() . "Productos/getReviews" ?>";
+    var idSesion = <?php echo isset($_SESSION["session"])?unserialize($_SESSION["session"])->getId():0; ?>;
+    var usuarioId = <?php echo $producto->getUsuarioId(); ?>;
+    var totalComentarios = <?php echo $totalComentarios; ?>;
+    const pathPreguntar = "<?php echo getBaseAddress() . "Productos/realizarPregunta "; ?>";
+    const pathResponder = "<?php echo getBaseAddress() . "Productos/realizarRespuesta "; ?>";
+    const pathMostrarMas = "<?php echo getBaseAddress() . "Productos/mostrarMas "; ?>";
 </script>
 <?php
 $patHomePublicacion = getBaseAddress() . 'Productos/publicacion/';
@@ -261,93 +267,84 @@ $patHomePublicacion = getBaseAddress() . 'Productos/publicacion/';
                     <!--Comentarios-->
 
                     <div id="tab_5" class="tab_container">
-                        <div class="row">
 
-                            <div class="col-lg-6 reviews_col">
-                                <div class="tab_title reviews_title">
-                                    <h4>Comentarios</h4>
-                                </div>
+                        <div class="tab_title reviews_title">
+                            <h4>Comentarios</h4>
+                        </div>
 
-                                <div class="user_review_container d-flex flex-column flex-sm-row">
-                                    <div class="user">
-                                        <div class="user_pic"></div>
-                                        <div class="user_rating">
-                                            <ul class="star_rating">
-                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="review">
-                                        <div class="review_date">27 Aug 2016</div>
-                                        <div class="user_name">Brandon William</div>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                            tempor incididunt ut labore et dolore magna aliqua.</p>
-                                    </div>
-                                </div>
+                        <?php
 
-                                <div class="user_review_container d-flex flex-column flex-sm-row">
-                                    <div class="user">
-                                        <div class="user_pic"></div>
-                                        <div class="user_rating">
-                                            <ul class="star_rating">
-                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="review">
-                                        <div class="review_date">27 Aug 2016</div>
-                                        <div class="user_name">Brandon William</div>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                            tempor incididunt ut labore et dolore magna aliqua.</p>
-                                    </div>
-                                </div>
-                            </div>
+                        $id = $producto->getId();
+                        $usuarioId = $producto->getUsuarioId();
+                        $i = 0;
 
-                            <div class="col-lg-6 add_review_col">
+                        echo "<div class='d-flex flex-column'>";
 
-                                <div class="add_review">
-                                    <form id="review_form" action="post">
+                        if(isset($_SESSION["session"]) && unserialize($_SESSION["session"])->getId() != $usuarioId)
+                        {
+                            echo "<div class='form-group'>
                                         <div>
-                                            <h1>Add Review</h1>
-                                            <input id="review_name" class="form_input input_name" type="text"
-                                                   name="name" placeholder="Name*" required="required"
-                                                   data-error="Name is required.">
-                                            <input id="review_email" class="form_input input_email" type="email"
-                                                   name="email" placeholder="Email*" required="required"
-                                                   data-error="Valid email is required.">
+                                            <textarea id='pregunta' class='form-control input_review' placeholder='Escriba su pregunta...' rows='4'></textarea>
                                         </div>
-                                        <div>
-                                            <h1>Your Rating:</h1>
-                                            <ul class="user_star_rating">
-                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-                                            </ul>
-                                            <textarea id="review_message" class="input_review" name="message"
-                                                      placeholder="Your Review" rows="4" required
-                                                      data-error="Please, leave us a review."></textarea>
-                                        </div>
-                                        <div class="text-left text-sm-right">
-                                            <button id="review_submit" type="submit"
-                                                    class="red_button review_submit_btn trans_300" value="Submit">submit
+                                        <div class='text-left text-sm-right'>
+                                            <input type='hidden' id='productoId' value='$id' />
+                                            <button id='btnPregunta' type='button' class='mt-3 float-right btn btn-primary'>Preguntar
                                             </button>
                                         </div>
-                                    </form>
+                                </div> <div id='divComentarios'></div>";
+                        }
+
+                        foreach($comentarios as $comentario)
+                        {
+                            $fechaPregunta = date("d/m/Y", strtotime($comentario->getFechaPregunta()));
+                            $username = $comentario->getUsuarioUsername();
+                            $pregunta = $comentario->getPregunta();
+                            $respuesta = $comentario->getRespuesta();
+                            $fechaRespuesta = date("d/m/Y", strtotime($comentario->getFechaRespuesta()));
+                            $idPregunta = $comentario->getId();
+
+                            echo "<div class='user_review_container d-flex flex-column flex-sm-row'>
+                                        <div class='user'>
+                                            <div class='user_pic'></div>
+                                        </div>
+                                        <div class='review pl-3'>
+                                            <div class='review_date'>$fechaPregunta</div>
+                                            <div class='user_name mb-1'>$username</div>
+                                            <p class='text-justify'>$pregunta</p>
+                                        </div>
+                                    </div><div id='respondido$idPregunta'></div>";
+                                    
+                            if(isset($_SESSION["session"]) && unserialize($_SESSION["session"])->getId() == $usuarioId && !$respuesta)
+                            {
+                                echo "<div class='form-group' id='res$idPregunta'>
+                                        <div>
+                                            <textarea id='respuesta$idPregunta' class='form-control input_review' placeholder='Escriba su respuesta...' rows='4'></textarea>
+                                        </div>
+                                        <div class='text-left text-sm-right'>
+                                            <button onclick='responder($idPregunta)' type='button' class='mt-3 float-right btn btn-primary'>Responder
+                                            </button>
+                                        </div>
+                                    </div>";
+                            }
+                            else
+                            if($respuesta)
+                                echo "<div class='review_date'>$fechaRespuesta</div><p class='text-justify user_name'>$respuesta</p>";
+                        
+                        
+                            $i++;
+                        }
+
+                        if($i == 4 && ($totalComentarios - 4) > 0)
+                        {
+                            echo "<div id='masComentarios'></div>
                                 </div>
+                                <div id='divMostrarMas' class='mt-4 justify-content-center align-items-center'>
+                                    <h6 id='cursorMasComentarios' onclick='mostrarMas($id)' class='text-primary' style='cursor: pointer;'>Mostrar más</h6>
+                                </div>";
+                        }
 
-                            </div>
+                        ?>
 
-                        </div>
                     </div>
 
                     <!-- Fin comentarios -->

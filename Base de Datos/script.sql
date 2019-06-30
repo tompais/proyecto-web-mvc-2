@@ -216,6 +216,21 @@ CREATE TABLE Facturacion (
     constraint FK_Facturacion_Usuario foreign key (UsuarioId) references Usuario (Id)
 );
 
+-- Tabla para comentarios --
+
+CREATE TABLE Comentario (
+    Id integer auto_increment not null unique,
+    Pregunta varchar(100) not null,
+    UsuarioId int not null,
+    ProductoId int not null,
+    UsuarioUsername varchar(30) not null,
+    Respuesta varchar(100),
+    FechaPregunta date not null,
+    FechaRespuesta date,
+    constraint PK_Comentario primary key (Id, UsuarioID),
+    constraint FK_Comentario_Usuario foreign key (UsuarioId) references Usuario (Id)
+);
+
 -- Insercion en la tabla Provincia --
 
 INSERT INTO Provincia (ID,Nombre) VALUES(1,'BUENOS AIRES');

@@ -262,6 +262,8 @@ class ProductosController extends Controller
             $imagenesProductosRelacionados[$productoRelacionado->getId()] = $imagenProductoRelacionado;
         }
 
+        $comentario = new Comentario();
+
         $d["cantidadReviews"] = $review->getCantReviewsEnPublicacion();
         $d["imagenes"] = $imagenes;
         $d["imagenesProductosRelacionados"] = $imagenesProductosRelacionados;
@@ -270,6 +272,8 @@ class ProductosController extends Controller
         $d["usuario"] = $usuario;
         $d["geolocalizacion"] = $geolocalizacion;
         $d["productosRelacionados"] = $productosRelacionados;
+        $d["comentarios"] = $comentario->traerUltimosComentarios(0, $publicacion[0]);
+        $d["totalComentarios"] = $comentario->contarComentarios();
 
         $this->set($d);
         $this->render(Constantes::PUBLICACIONVIEW);
@@ -385,5 +389,94 @@ class ProductosController extends Controller
         }
 
         echo json_encode($reviewViewModels);
+    }
+
+    function realizarPregunta($json)
+    {
+        header("Content-type: application/json");
+
+        $data = json_decode(utf8_decode($json['data']));
+
+        $comentario = New Comentario();
+
+        $comentario->setUsuarioId(unserialize($_SESSION["session"])->getId());
+
+        $comentario->setProductoId($data->productoId);
+
+        $comentario->setPregunta($data->pregunta);
+
+        $comentario->setFechaPregunta(date("Y-m-d"));
+
+        $comentario->setUsuarioUsername(unserialize($_SESSION["session"])->getUserName());
+
+        $comentario->insertarComentario();
+
+        $comentarioDto = new ComentarioDto();
+
+        $comentarioDto->id = $comentario->getId();
+
+        $comentarioDto->pregunta = $data->pregunta;
+
+        $comentarioDto->fechaPregunta = date("d/m/Y", strtotime($comentario->getFechaPregunta()));
+
+        $comentarioDto->usuarioUsername = $comentario->getUsuarioUsername();
+
+        echo json_encode($comentarioDto);
+    }
+
+    function realizarRespuesta($json)
+    {
+        header("Content-type: application/json");
+
+        $data = json_decode(utf8_decode($json['data']));
+
+        $comentario = New Comentario();
+
+        $comentario->setId($data->id);
+
+        $comentario->setRespuesta($data->respuesta);
+        
+        $comentario->setFechaRespuesta(date("Y-m-d"));
+
+        $comentario->insertarRespuesta();
+
+        $comentarioDto = new ComentarioDto();
+
+        $comentarioDto->id = $comentario->getId();
+
+        $comentarioDto->respuesta = $comentario->getRespuesta();
+
+        $comentarioDto->fechaRespuesta = date("d/m/Y", strtotime($comentario->getFechaRespuesta()));
+
+        echo json_encode($comentarioDto);
+    }
+
+    function mostrarMas($json)
+    {
+        header("Content-type: application/json");
+
+        $data = json_decode(utf8_decode($json['data']));
+
+        $comentario = New Comentario();
+
+        $comentarios = $comentario->traerUltimosComentarios($data->inicio, $data->idProducto);
+
+        $comentariosDto = [];
+
+        foreach($comentarios as $coment)
+        {
+            $comentarioDto = new ComentarioDto();
+
+            $comentarioDto->id = $coment->getId();
+            $comentarioDto->pregunta = $coment->getPregunta();
+            $comentarioDto->respuesta = $coment->getRespuesta();
+            $comentarioDto->fechaPregunta = $coment->getFechaPregunta();
+            $comentarioDto->fechaRespuesta = $coment->getFechaRespuesta();
+            $comentarioDto->usuarioUsername = $coment->getUsuarioUsername();
+
+            $comentariosDto[] = $comentarioDto;
+        }
+
+        echo json_encode($comentariosDto);
     }
 }
