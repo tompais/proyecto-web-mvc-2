@@ -31,4 +31,6 @@ abstract class CodigoError
     const ProductoDuplicadoEnCarrito = 50;
     const ErrorGetSql = 51;
     const CierreSession = 52;
+    const UsuarioNuncaRealizoCompra = 60;
+    const ReviewRealizadaPreviamente = 61;
 }
