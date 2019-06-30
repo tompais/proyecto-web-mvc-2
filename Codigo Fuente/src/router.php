@@ -19,7 +19,7 @@ class Router
         {
             header("Location: " . getBaseAddress());
         }
-        else if (((self::isProductController($explode_url[0]) && !self::isPostAction($explode_url[1]) && !self::isGetReviewsAction($explode_url[1])) || self::isCartController($explode_url[0]) || self::isBuyController($explode_url[0])) &&  !isset($_SESSION["session"]))
+        else if (((self::isProductController($explode_url[0]) && !self::isPostAction($explode_url[1]) && !self::isGetReviewsAction($explode_url[1]) && !self::isMostrarMas($explode_url[1])) || self::isCartController($explode_url[0]) || self::isBuyController($explode_url[0])) &&  !isset($_SESSION["session"]))
         {
             header("Location: " . getBaseAddress() . "Seguridad/login");
         }
@@ -85,6 +85,11 @@ class Router
     private static function isGetReviewsAction($action)
     {
         return !strcasecmp($action, 'getReviews');
+    }
+
+    private static function isMostrarMas($action)
+    {
+        return !strcasecmp($action, 'mostrarMas');
     }
 }
 ?>

@@ -14,6 +14,13 @@ var divAddReview = $('#divAddReview');
 var divReviewsContainer = $('#divReviewsContainer');
 var divShowMoreReviews = $('#divShowMoreReviews');
 var cursorPointerShowMoreReviews = $('#cursorPointerShowMoreReviews');
+var divNivelVendedorRateYo = $('#divNivelVendedorRateYo');
+
+var btnPregunta = $("#btnPregunta");
+var pregunta = $("#pregunta");
+var productoId = $("#productoId");
+var divComentarios = $("#divComentarios");
+var inicio = 4;
 
 /* JS Document */
 
@@ -508,3 +515,160 @@ function guardarReviewFallido(err) {
 }
 
 /*Fin de Submit de Review*/
+
+function cargarPreguntaExitosa(pregunta)
+{
+	var divContenedor = $("<div class='user_review_container d-flex flex-column flex-sm-row'></div>");
+
+	var divUser = $("<div class='user'><div class='user_pic'></div></div>");
+
+	var divPregunta = $("<div class='review pl-3'></div>");
+
+	var divFechaPregunta = $("<div class='review_date'></div>");
+	divFechaPregunta.append(pregunta.fechaPregunta);
+
+	var divUsername = $("<div class='user_name mb-1'></div>");
+	divUsername.append(pregunta.usuarioUsername);
+
+	var pPregunta = $("<p class='text-justify'></p>");
+	pPregunta.text(pregunta.pregunta);
+
+	divPregunta.append(divFechaPregunta);
+	divPregunta.append(divUsername);
+	divPregunta.append(pPregunta);
+
+	divContenedor.append(divUser);
+	divContenedor.append(divPregunta);
+
+	divComentarios.prepend(divContenedor);
+}
+
+function cargarRespuestaExitosa(respuesta)
+{
+	$("#res" + respuesta.id).remove();
+
+	var divRespuesta = $("#respondido" + respuesta.id);
+
+	var divFechaRespuesta = $("<div class='review_date'></div>");
+	divFechaRespuesta.append(respuesta.fechaRespuesta);
+
+	var pRespuesta = $("<p class='text-justify user_name'></p>");
+	pRespuesta.text(respuesta.respuesta);
+
+	divRespuesta.append(divFechaRespuesta);
+	divRespuesta.append(pRespuesta);
+}
+
+function preguntar() {
+	var obj = {};
+	obj.pregunta = pregunta.val();
+	obj.productoId = productoId.val();
+	llamadaAjax(pathPreguntar, JSON.stringify(obj), true, "cargarPreguntaExitosa", "dummy");
+}
+
+function responder(idPregunta) {
+	var obj = {};
+	obj.respuesta = $("#respuesta" + idPregunta).val();
+	obj.id = idPregunta;
+	llamadaAjax(pathResponder, JSON.stringify(obj), true, "cargarRespuestaExitosa", "dummy");
+}
+
+btnPregunta.click(function () {
+    preguntar();
+});
+
+function cargarMasComentarios(comentarios)
+{
+	var divMasComentarios = $("#masComentarios");
+	$.each(comentarios, function(index, comentario){
+		var divContenedor = $("<div class='user_review_container d-flex flex-column flex-sm-row'></div>");
+
+		var divUser = $("<div class='user'><div class='user_pic'></div></div>");
+
+		var divPregunta = $("<div class='review pl-3'></div>");
+
+		var divFechaPregunta = $("<div class='review_date'></div>");
+		divFechaPregunta.append(comentario.fechaPregunta);
+
+		var divUsername = $("<div class='user_name mb-1'></div>");
+		divUsername.append(comentario.usuarioUsername);
+
+		var pPregunta = $("<p class='text-justify'></p>");
+		pPregunta.text(comentario.pregunta);
+
+		divPregunta.append(divFechaPregunta);
+		divPregunta.append(divUsername);
+		divPregunta.append(pPregunta);
+
+		divContenedor.append(divUser);
+		divContenedor.append(divPregunta);
+
+		divMasComentarios.append(divContenedor);
+
+		var divRes = $("<div id='" + comentario.id + "'></div>");
+
+		divMasComentarios.append(divRes);
+		
+		if(idSesion != 0 && idSesion == usuarioId && !comentario.respuesta)
+		{
+			var divContenedorResponder = $("<div class='form-group' id='res" + comentario.id + "'>");
+
+			var divTextarea = $("<div><textarea id='respuesta" + comentario.id + "' class='form-control input_review' placeholder='Escriba su respuesta...' rows='4'></textarea></div>");
+
+			divContenedorResponder.append(divTextarea);
+
+			var divBoton = $("<div class='text-left text-sm-right'></div>");
+			var boton = $("<button onclick='responder(" + comentario.id + ")' type='button' class='mt-3 float-right btn btn-primary'>Responder</button>");
+
+			divBoton.append(boton);
+
+			divContenedorResponder.append(divBoton);
+
+			divMasComentarios.append(divContenedorResponder);
+		}
+		else
+		if(comentario.respuesta)
+		{
+			var divFechaRespuesta = $("<div class='review_date'></div>");
+			divFechaRespuesta.append(comentario.fechaRespuesta);
+
+			var pRespuesta = $("<p class='text-justify user_name'></p>");
+			pRespuesta.text(comentario.respuesta);
+
+			divMasComentarios.append(divFechaRespuesta);
+			divMasComentarios.append(pRespuesta);
+		}
+
+		inicio++;
+	});
+
+	if((inicio % 4) != 0 || (totalComentarios - inicio) == 0)
+		$("#divMostrarMas").remove();
+}
+
+function mostrarMas(idProducto)
+{
+	var obj = {};
+	obj.inicio = inicio;
+	obj.idProducto = idProducto;
+	llamadaAjax(pathMostrarMas, JSON.stringify(obj), true, "cargarMasComentarios", "dummy");
+}
+
+/*Implementación de nivel de vendedor con estrellas*/
+
+divNivelVendedorRateYo.rateYo({
+	starWidth: '20px',
+	normalFill: '#ebebeb',
+	ratedFill: '#0099df',
+	readOnly: true
+});
+
+function inicializarNivelVendedor() {
+	if(window.nivelVendedor >= 0) {
+		divNivelVendedorRateYo.rateYo('option', 'rating', parseFloat(window.nivelVendedor).toFixed(2));
+	}
+}
+
+inicializarNivelVendedor();
+
+/*Fin de implementación de nivel de vendedor con estrellas*/
