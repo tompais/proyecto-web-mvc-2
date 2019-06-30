@@ -247,6 +247,28 @@ class Producto extends Model
         return $productos;
     }
 
+    public function traerListaProductosByUsuarioId()
+    {
+        $productos = array();
+
+        $rows = $this->pageRows(0, PHP_INT_MAX, "UsuarioId = " . $this->getUsuarioId());
+
+        foreach ($rows as $row) {
+            $producto = new Producto();
+            $producto->setId($row["Id"]);
+            $producto->setNombre($row["Nombre"]);
+            $producto->setPrecio($row["Precio"]);
+            $producto->setCategoriaId($row["CategoriaId"]);
+            $producto->setUsuarioId($row["UsuarioId"]);
+            $producto->setDescripcion($row["Descripcion"]);
+            $producto->setFechaAlta($row["FechaAlta"]);
+            $producto->db->disconnect();
+            $productos[] = $producto;
+        }
+
+        return $productos;
+    }
+
     public function traerProductosRelacionados($condicion){
         $productosRelacionados = array();
 
