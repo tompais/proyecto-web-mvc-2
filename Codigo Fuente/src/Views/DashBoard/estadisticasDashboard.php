@@ -52,5 +52,9 @@
 
     </div>
     <!-- /.container-fluid -->
-    
+
 </div>
+
+<script src="<?php echo getBaseAddress() . "Webroot/js/dashboard/estadisticas/chart-area-demo.js"; ?>"></script>
+<script src="<?php echo getBaseAddress() . "Webroot/js/dashboard/estadisticas/chart-bar-demo.js"; ?>"></script>
+<script src="<?php echo getBaseAddress() . "Webroot/js/dashboard/estadisticas/chart-pie-demo.js"; ?>"></script>

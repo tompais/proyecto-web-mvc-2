@@ -44,6 +44,7 @@
     <script src="<?php echo getBaseAddress() . "Webroot/lib/EasyAutocomplete/jquery.easy-autocomplete.min.js"; ?>"></script>
     <script src="<?php echo getBaseAddress() . "Webroot/js/utilidades/constantes.js"; ?>"></script>
     <script src="<?php echo getBaseAddress() . "Webroot/js/utilidades/utilidades.js"; ?>"></script>
+    <script src="<?php echo getBaseAddress() . "Webroot/lib/chart.js/Chart.js"; ?>"></script>
 
     <script>
         const pathHome = "<?php echo getBaseAddress(); ?>";
