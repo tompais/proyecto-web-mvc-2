@@ -150,10 +150,44 @@ class DashBoardController extends Controller
 
         $compra->actualizarFacturado($param["usuarioId"]);
 
-        $palabraBuscada = $param["palabraBuscada"];
-
-        header("location: " . getBaseAddress() . "DashBoard/buscar/" . $palabraBuscada );
+        header("location: " . getBaseAddress() . "DashBoard/exito");
 
     }
+
+    function exito()
+    {
+        $this->layout = "layoutDashBoard";
+        $d["title"] = Constantes::FACTURACIONEXITOSATITLE;
+
+        $this->set($d);
+        $this->render(Constantes::FACTURACIONEXITOSAVIEW);
+    }
+
+    function ultimosBaneados()
+    {
+        $this->layout = "layoutDashBoard";
+        $d["title"] = Constantes::ULTIMOSBANEADOSTITLE;
+
+        $usuario = new Usuario();
+
+        $baneados = [];
+
+        $baneados = $usuario->traerListaDeUltimoBaneados();
+
+        $d["baneados"] = $baneados;
+
+        $this->set($d);
+        $this->render(Constantes::ULTIMOSBANEADOSVIEW);
+    }
+
+    function estadisticas()
+    {
+        $this->layout = "layoutDashBoard";
+        $d["title"] = Constantes::ESTADISTICASDASHBOARDTITLE;
+
+        $this->set($d);
+        $this->render(Constantes::ESTADISTICASDASHBOARDVIEW);
+    }
+
 
 }

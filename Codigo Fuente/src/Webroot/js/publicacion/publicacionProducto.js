@@ -1,6 +1,19 @@
+const cantMaxCharsReview = 200;
+const pageSize = 4;
+
+var pageNumber = 1;
+
 var map = $('#map');
 var carouselProductosRelacionados = $("#carouselProductosRelacionados");
 var googleMap;
+var rateYo = $('#rateYo');
+var reviewMessage = $('#review_message');
+var spanReviewCharCounter = $('#spanReviewCharCounter');
+var btnSubmitReview = $('#btnSubmitReview');
+var divAddReview = $('#divAddReview');
+var divReviewsContainer = $('#divReviewsContainer');
+var divShowMoreReviews = $('#divShowMoreReviews');
+var cursorPointerShowMoreReviews = $('#cursorPointerShowMoreReviews');
 
 /* JS Document */
 
@@ -333,3 +346,165 @@ function initMap() {
 		map: googleMap
 	});
 }
+
+/*Funciones de carga de reviews*/
+
+function dibujarReview(review, esNueva) {
+	if(esNueva && window.cantidadReviews <= 0) {
+		divReviewsContainer.empty();
+	}
+
+	var divReview = $('<div class="review mt-4 w-100 pl-0 border-bottom">');
+
+	var divReviewDate = $('<div class="review_date">');
+	divReviewDate.append(moment(review.fechaAlta, 'YYYY-MM-DD').format('DD/MM/YYYY'));
+
+	var divUserName = $('<div class="user_name mb-1">');
+	divUserName.append(review.nombreCompletoUsuario);
+
+	var divUserRating = $('<div class="user_rating mt-0 mb-3">');
+
+	var divFlexStars = $('<div class="d-flex" style="color: #0099df;">');
+
+	for (let i = 1; i <= 5; i++) {
+		if(review.calificacion  - i < 0) {
+			var iFarFaStar = $('<i class="far fa-star" aria-hidden="true">');
+			divFlexStars.append(iFarFaStar);
+		} else {
+			var iFasFaStar = $('<i class="fas fa-star" aria-hidden="true">');
+			divFlexStars.append(iFasFaStar);
+		}
+	}
+
+	divUserRating.append(divFlexStars);
+
+	var pDetalleReview = $('<p class="text-justify">');
+	pDetalleReview.text(review.detalleReview);
+
+	divReview.append(divReviewDate);
+	divReview.append(divUserName);
+	divReview.append(divUserRating);
+	divReview.append(pDetalleReview);
+
+	if(esNueva) {
+		divReviewsContainer.prepend(divReview);
+	} else {
+		divReviewsContainer.append(divReview);
+	}
+}
+
+function cargarReviews() {
+	var obj = {};
+	obj.productoId = window.productoId;
+	obj.pageSize = pageSize;
+	obj.pageNumber = pageNumber;
+	llamadaAjax(pathGetReviews, JSON.stringify(obj), true, 'cargaReviewsExitosa', 'cargaReviewsFallida');
+}
+
+function cargaReviewsExitosa(reviews) {
+	pageNumber++;
+
+	if(window.cantidadReviews - pageNumber * pageSize < 0) {
+		divShowMoreReviews.remove();
+	}
+
+	$.each(reviews, function (i, review) {
+		dibujarReview(review, false);
+	});
+}
+
+function cargaReviewsFallida(err) {
+	alertify.alert('Error al cargar reviews', err);
+}
+
+cursorPointerShowMoreReviews.click(function () {
+	cargarReviews();
+});
+
+function inicializarReviews() {
+	if(window.cantidadReviews <= 0) {
+		var h6 = $('<h6 class="text-black-50 text-center mx-auto">');
+		h6.text('Todavía no hay ninguna reseña en esta publicación');
+
+		divReviewsContainer.append(h6);
+	} else {
+		if(window.cantidadReviews > pageSize) {
+			divShowMoreReviews.removeClass('d-none').addClass('d-flex');
+		}
+		cargarReviews();
+	}
+}
+
+inicializarReviews();
+
+/*Fin de funciones de carga de reviews*/
+
+/*Implementación de estrellas en review*/
+
+rateYo.rateYo({
+	starWidth: '25px',
+	normalFill: '#ebebeb',
+	ratedFill: '#0099df',
+	fullStar: true
+});
+
+/*Fin de implementación de estrellas en review*/
+
+/*Contador de caracteres en textarea de review*/
+
+reviewMessage.keyup(function () {
+	var txt = $(this).val();
+	var txtLength = txt.length;
+
+	if(txtLength <= cantMaxCharsReview) {
+		spanReviewCharCounter.text(txtLength);
+	} else {
+		$(this).val(txt.substring(0, cantMaxCharsReview));
+		spanReviewCharCounter.text(cantMaxCharsReview);
+	}
+});
+
+/*Fin de contador de caracteres en textarea de review*/
+
+/*Submit de Review*/
+
+function validarTextReview() {
+	var textReview = reviewMessage.val();
+	var validacion = false;
+
+	if (textReview === null || textReview.length === 0 || textReview === "") {
+		$('#errorReview').fadeIn('slow').find('span').text('Ingrese una reseña');
+	} else {
+		validacion = true;
+	}
+
+	return validacion;
+}
+
+btnSubmitReview.click(function () {
+	$('.error').fadeOut().find('span').empty();
+	if(validarTextReview()) {
+		$(this).prop('disabled', true);
+		reviewMessage.prop('disabled', true);
+		rateYo.rateYo('option', 'readOnly', true);
+		var obj = {};
+		obj.calificacion = rateYo.rateYo('rating');
+		obj.detalle = reviewMessage.val();
+		obj.productoId = window.productoId;
+		llamadaAjax(pathGuardarReview, JSON.stringify(obj), true, 'agregarReviewALista', 'guardarReviewFallido');
+	}
+});
+
+function agregarReviewALista(review) {
+	divAddReview.remove();
+	dibujarReview(review, true);
+}
+
+function guardarReviewFallido(err) {
+	$(this).prop('disabled', false);
+	reviewMessage.prop('disabled', false);
+	rateYo.rateYo('option', 'readOnly', false);
+	alertify.alert('Fallo al guardar la reseña', err);
+}
+
+/*Fin de Submit de Review*/

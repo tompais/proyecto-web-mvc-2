@@ -591,6 +591,26 @@ class Usuario extends Model
         return $this->update($array);
     }
 
+    public function traerListaDeUltimoBaneados(){
+
+        $baneados = array();
+
+        $rows = $this->pageRows(0, 15, "FechaBaneo is not null order by Id desc");
+
+        foreach($rows as $row)
+        {
+            $usuario = new Usuario();
+            $usuario->db->disconnect();
+            $usuario->setId($row["Id"]);
+            $usuario->setFechaBaneo($row["FechaBaneo"]);
+            $usuario->setUsername($row["Username"]);
+            $baneados[] = $usuario;
+        }
+
+        return $baneados;
+
+    }
+
 }
 
 ?>

@@ -50,7 +50,7 @@
                     <i class="fa fa-question-circle"></i> ¿Estas seguro que deseas cerrar sesion?
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-secondary"  data-dismiss="modal">Cancelar</button>
                     <form action="<?php echo getBaseAddress() . "DashBoard/cerrarSession" ?>" method="post">
                         <button type="submit" class="btn btn-primary">Cerrar Sesion</button>
                     </form>
