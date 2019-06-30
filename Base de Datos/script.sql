@@ -196,8 +196,11 @@ CREATE TABLE Review(
     Calificacion integer not null,
     Detalle varchar(200) not null,
     ProductoId integer not null,
+    UsuarioId integer not null,
+    FechaAlta date not null,
     constraint PK_Review primary key (Id),
-    constraint FK_Review_Producto foreign key (ProductoId) references Producto (Id)
+    constraint FK_Review_Producto foreign key (ProductoId) references Producto (Id),
+    constraint FK_Review_Usuario foreign key (UsuarioId) references Usuario (Id)
 );
 
 -- Creación Tabla Facturación --
