@@ -18,4 +18,7 @@ class RegistroCompraDto
     public $nombreImagenPrincipal;
     public $tipoMetodoEntrega;
     public $detalleEntrega;
+    public $compradorId;
+    public $comprador;
+    public $productoId;
 }

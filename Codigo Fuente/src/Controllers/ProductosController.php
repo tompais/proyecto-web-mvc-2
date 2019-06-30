@@ -229,13 +229,25 @@ class ProductosController extends Controller
 
         $imagenes = $imagen->traerListaImagenes($producto->getId());
 
-        $codicion = "";
+        $condicion = "";
         $categoriaId = $producto->getCategoriaId();
         $idProducto = $producto->getId();
+
+        $d["usuarioComproEsteProducto"] = false;
+
+        $registroCompra = new RegistroCompra();
+        $review = new Review();
+
+        $review->setProductoId($idProducto);
 
         if(isset($_SESSION["session"])){
             $idUsuario = unserialize($_SESSION["session"])->getId();
             $condicion = "UsuarioId <> $idUsuario AND FechaBaja IS NULL AND CategoriaId = $categoriaId AND Id <> $idProducto";
+
+            $d["usuarioComproEsteProducto"] = $registroCompra->realizoUsuarioCompraProducto($idUsuario, $idProducto);
+
+            $review->setUsuarioId($idUsuario);
+            $d["usuarioRealizoReviewEsteProducto"] = $review->realizoUsuarioReview();
         }else{
             $condicion = "FechaBaja IS NULL AND CategoriaId = $categoriaId AND Id <> $idProducto";
         }
@@ -250,6 +262,7 @@ class ProductosController extends Controller
             $imagenesProductosRelacionados[$productoRelacionado->getId()] = $imagenProductoRelacionado;
         }
 
+        $d["cantidadReviews"] = $review->getCantReviewsEnPublicacion();
         $d["imagenes"] = $imagenes;
         $d["imagenesProductosRelacionados"] = $imagenesProductosRelacionados;
         $d["producto"] = $producto;
@@ -257,7 +270,6 @@ class ProductosController extends Controller
         $d["usuario"] = $usuario;
         $d["geolocalizacion"] = $geolocalizacion;
         $d["productosRelacionados"] = $productosRelacionados;
-
 
         $this->set($d);
         $this->render(Constantes::PUBLICACIONVIEW);
@@ -305,5 +317,73 @@ class ProductosController extends Controller
         $paginationDataSourceDto->items = $publicaciones;
 
         echo json_encode($paginationDataSourceDto);
+    }
+
+    function guardarReview($json)
+    {
+        header("Content-type: application/json");
+
+        $data = json_decode($json["data"]);
+
+        $review = new Review();
+        $registroCompra = new RegistroCompra();
+
+        $review->setProductoId($data->productoId);
+        $review->setCalificacion($data->calificacion);
+        $review->setDetalle($data->detalle);
+        $review->setUsuarioId(unserialize($_SESSION["session"])->getId());
+
+        if(!$registroCompra->realizoUsuarioCompraProducto($review->getUsuarioId(), $review->getProductoId())) {
+            throw new UsuarioNuncaRealizoCompraException("Nunca ha realizado una compra de este producto anteriormente", CodigoError::UsuarioNuncaRealizoCompra);
+        }
+
+        if($review->realizoUsuarioReview()) {
+            throw new ReviewRealizadaPreviamenteException("Ya ha realizado una review anteriormente en esta publicación", CodigoError::ReviewRealizadaPreviamente);
+        }
+
+        if(!$review->ingresarReview()) {
+            throw new SQLInsertException("No se ha podido ingresar la review", CodigoError::ErrorInsertSQL);
+        }
+
+        $usuario = new Usuario();
+
+        $usuario->traerUsuario($review->getUsuarioId());
+
+        $reviewViewModel = new ReviewViewModel();
+
+        $reviewViewModel->fechaAlta = $review->getFechaAlta();
+        $reviewViewModel->calificacion = $review->getCalificacion();
+        $reviewViewModel->detalleReview = $review->getDetalle();
+        $reviewViewModel->nombreCompletoUsuario = $usuario->getNombre() . " " . $usuario->getApellido();
+
+        echo json_encode($reviewViewModel);
+    }
+
+    function getReviews($json)
+    {
+        header("Content-type: application/json");
+
+        $data = json_decode($json["data"]);
+
+        $review = new Review();
+
+        $review->setProductoId($data->productoId);
+
+        $reviews = $review->getReviewsWithPaginatorByProductoId($data->pageNumber, $data->pageSize);
+
+        $reviewViewModels = [];
+
+        foreach ($reviews as $r) {
+            $reviewViewModel = new ReviewViewModel();
+
+            $reviewViewModel->nombreCompletoUsuario = $r->getUsuario()->getNombre() . " " . $r->getUsuario()->getApellido();
+            $reviewViewModel->detalleReview = $r->getDetalle();
+            $reviewViewModel->calificacion = $r->getCalificacion();
+            $reviewViewModel->fechaAlta = $r->getFechaAlta();
+
+            $reviewViewModels[] = $reviewViewModel;
+        }
+
+        echo json_encode($reviewViewModels);
     }
 }

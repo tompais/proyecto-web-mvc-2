@@ -43,11 +43,15 @@ class CompraController extends Controller
 
             $registroCompraDto->cantidad = $fila->cantidad;
 
+            $registroCompraDto->productoId = $producto->getId();
+
             $registroCompraDto->nombreProducto = $producto->getNombre();
 
             $registroCompraDto->precioUnitario = $producto->getPrecio();
 
             $registroCompraDto->vendedorId = $producto->getUsuarioId();
+
+            $registroCompraDto->compradorId = unserialize($_SESSION["session"])->getId();
 
             if(!$imagen->traerImagenPrincipal($fila->id)) {
                 throw new ImagenPrincipalNoEncontradaException("No se ha la imagen principal para el producto con id " . $fila->id, CodigoError::ImagenPrincipalNoEncontrada);
@@ -86,6 +90,8 @@ class CompraController extends Controller
             $registroCompra->setTipoMetodoEntrega($registroCompraDto->tipoMetodoEntrega);
             $registroCompra->setDetalleEntrega($registroCompraDto->detalleEntrega);
             $registroCompra->setVendedorId($registroCompraDto->vendedorId);
+            $registroCompra->setCompradorId($registroCompraDto->compradorId);
+            $registroCompra->setProductoId($registroCompraDto->productoId);
 
             if(!$registroCompra->insertarRegistroCompra())
                 throw new SQLInsertException(CodigoError::ErrorInsertSQL, "No se ha podido registrar el producto de id " . $registroCompra->getProductoId() . " comprado");
