@@ -5,7 +5,7 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="#">Dashboard</a>
+                <a href="<?php echo getBaseAddress(). "DashBoard/inicio"?>">Dashboard</a>
             </li>
             <li class="breadcrumb-item active">Facturaciones</li>
         </ol>
