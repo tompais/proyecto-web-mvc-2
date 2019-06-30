@@ -14,6 +14,7 @@ var divAddReview = $('#divAddReview');
 var divReviewsContainer = $('#divReviewsContainer');
 var divShowMoreReviews = $('#divShowMoreReviews');
 var cursorPointerShowMoreReviews = $('#cursorPointerShowMoreReviews');
+var divNivelVendedorRateYo = $('#divNivelVendedorRateYo');
 
 var btnPregunta = $("#btnPregunta");
 var pregunta = $("#pregunta");
@@ -515,6 +516,7 @@ function guardarReviewFallido(err) {
 
 /*Fin de Submit de Review*/
 
+<<<<<<< HEAD
 function cargarPreguntaExitosa(pregunta)
 {
 	var divContenedor = $("<div class='user_review_container d-flex flex-column flex-sm-row'></div>");
@@ -652,3 +654,23 @@ function mostrarMas(idProducto)
 	obj.idProducto = idProducto;
 	llamadaAjax(pathMostrarMas, JSON.stringify(obj), true, "cargarMasComentarios", "dummy");
 }
+=======
+/*Implementación de nivel de vendedor con estrellas*/
+
+divNivelVendedorRateYo.rateYo({
+	starWidth: '20px',
+	normalFill: '#ebebeb',
+	ratedFill: '#0099df',
+	readOnly: true
+});
+
+function inicializarNivelVendedor() {
+	if(window.nivelVendedor >= 0) {
+		divNivelVendedorRateYo.rateYo('option', 'rating', parseFloat(window.nivelVendedor).toFixed(2));
+	}
+}
+
+inicializarNivelVendedor();
+
+/*Fin de implementación de nivel de vendedor con estrellas*/
+>>>>>>> 6bb34f84db1ea662f739c713b34983eb111f6e79
