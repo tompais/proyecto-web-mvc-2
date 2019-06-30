@@ -262,6 +262,13 @@ class ProductosController extends Controller
             $imagenesProductosRelacionados[$productoRelacionado->getId()] = $imagenProductoRelacionado;
         }
 
+        $sumReviews = $cantReviews = 0;
+
+        foreach ($producto->traerListaProductosByUsuarioId() as $p) {
+            $sumReviews += $review->getSumaCalificacionesByProductoId($p->getId());
+            $cantReviews += $review->getCantReviewsByProductoId($p->getId());
+        }
+
         $d["cantidadReviews"] = $review->getCantReviewsEnPublicacion();
         $d["imagenes"] = $imagenes;
         $d["imagenesProductosRelacionados"] = $imagenesProductosRelacionados;
@@ -270,6 +277,7 @@ class ProductosController extends Controller
         $d["usuario"] = $usuario;
         $d["geolocalizacion"] = $geolocalizacion;
         $d["productosRelacionados"] = $productosRelacionados;
+        $d["nivelVendedor"] = !$cantReviews ? -1 : $sumReviews/$cantReviews;
 
         $this->set($d);
         $this->render(Constantes::PUBLICACIONVIEW);

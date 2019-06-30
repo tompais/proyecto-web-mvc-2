@@ -12,6 +12,7 @@
     const pathGuardarReview = "<?php echo getBaseAddress() . "Productos/guardarReview"; ?>";
     var cantidadReviews = <?php echo $cantidadReviews; ?>;
     const pathGetReviews = "<?php echo getBaseAddress() . "Productos/getReviews" ?>";
+    var nivelVendedor = <?php echo $nivelVendedor; ?>;
 </script>
 <?php
 $patHomePublicacion = getBaseAddress() . 'Productos/publicacion/';
@@ -82,13 +83,27 @@ $patHomePublicacion = getBaseAddress() . 'Productos/publicacion/';
 
                 <div class="product_price mt-5" style="font-size: 24px">Precio:
                     $<?php echo $producto->getPrecio() ?></div>
-                <br>
                 <div class="product_price mt-5" style="font-size: 24px">Cantidad: <?php echo $producto->getCantidad() ?>
                     (disponibles)
                 </div>
 
-                <br>
-                <br>
+                <div class="d-flex flex-column my-4">
+                    <?php
+                    if ($nivelVendedor < 0){
+                        echo '<h6 class="text-black-50">El usuario no ha recibido ninguna calificación</h6>';
+                    } else {
+                        if ($nivelVendedor >= 0 && $nivelVendedor <= 1.5) {
+                            echo "<h5>Nivel de Vendedor: <span class='text-danger'>Pa' atrás</span></h5>";
+                        } else if ($nivelVendedor > 1.5 && $nivelVendedor <= 3.5) {
+                            echo "<h5>Nivel de Vendedor: <span class='text-warning'>Medio pelo</span></h5>";
+                        } else if($nivelVendedor > 3.5 && $nivelVendedor <= 5) {
+                            echo "<h5>Nivel de Vendedor: <span class='text-success'>Top</span></h5>";
+                        }
+                        echo '<div id="divNivelVendedorRateYo" style="z-index: 0;"></div>';
+                    }
+                    ?>
+                </div>
+
                 <div id="<?php echo $producto->getId(); ?>">
 
                     <?php
@@ -96,7 +111,7 @@ $patHomePublicacion = getBaseAddress() . 'Productos/publicacion/';
                         if ($producto->getCantidad() == 0) {
                             echo '<button class="btn btn-primary btn-block"
                                   id="btnAddToCart" disabled=""><i
-                                  class="fas fa-ban mr-2s"></i>
+                                  class="fas fa-ban mr-2"></i>
                                   <span>SIN STOCK</span>
                               </button>';
                         } elseif (isset($_SESSION["carrito"]) and in_array($producto->getId(), $_SESSION["carrito"])) {

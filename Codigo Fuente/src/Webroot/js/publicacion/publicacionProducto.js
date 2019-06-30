@@ -14,6 +14,7 @@ var divAddReview = $('#divAddReview');
 var divReviewsContainer = $('#divReviewsContainer');
 var divShowMoreReviews = $('#divShowMoreReviews');
 var cursorPointerShowMoreReviews = $('#cursorPointerShowMoreReviews');
+var divNivelVendedorRateYo = $('#divNivelVendedorRateYo');
 
 /* JS Document */
 
@@ -508,3 +509,22 @@ function guardarReviewFallido(err) {
 }
 
 /*Fin de Submit de Review*/
+
+/*Implementación de nivel de vendedor con estrellas*/
+
+divNivelVendedorRateYo.rateYo({
+	starWidth: '20px',
+	normalFill: '#ebebeb',
+	ratedFill: '#0099df',
+	readOnly: true
+});
+
+function inicializarNivelVendedor() {
+	if(window.nivelVendedor >= 0) {
+		divNivelVendedorRateYo.rateYo('option', 'rating', parseFloat(window.nivelVendedor).toFixed(2));
+	}
+}
+
+inicializarNivelVendedor();
+
+/*Fin de implementación de nivel de vendedor con estrellas*/
