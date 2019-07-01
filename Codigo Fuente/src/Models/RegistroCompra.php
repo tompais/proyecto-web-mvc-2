@@ -21,6 +21,56 @@ class RegistroCompra extends Model
     private $productoId;
     private $compradorId;
     private $comprador;
+    private $estadoFacturacionId;
+    private $estadoFacturacion;
+
+    /**
+     * @return Database
+     */
+    public function getDb()
+    {
+        return $this->db;
+    }
+
+    /**
+     * @param Database $db
+     */
+    public function setDb($db)
+    {
+        $this->db = $db;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEstadoFacturacionId()
+    {
+        return $this->estadoFacturacionId;
+    }
+
+    /**
+     * @param mixed $estadoFacturacionId
+     */
+    public function setEstadoFacturacionId($estadoFacturacionId)
+    {
+        $this->estadoFacturacionId = $estadoFacturacionId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEstadoFacturacion()
+    {
+        return $this->estadoFacturacion;
+    }
+
+    /**
+     * @param mixed $estadoFacturacion
+     */
+    public function setEstadoFacturacion($estadoFacturacion)
+    {
+        $this->estadoFacturacion = $estadoFacturacion;
+    }
 
     /**
      * @return mixed
@@ -242,7 +292,8 @@ class RegistroCompra extends Model
             "DetalleEntrega" => $this->getDetalleEntrega(),
             "VendedorId" => $this->getVendedorId(),
             "ProductoId" => $this->getProductoId(),
-            "CompradorId" => $this->getCompradorId()
+            "CompradorId" => $this->getCompradorId(),
+            "EstadoFacturacionId" => 1
         ];
 
         $id = $this->insert($array);
@@ -291,4 +342,107 @@ class RegistroCompra extends Model
     {
         return $this->pageRows(0, 1, "ProductoId = $idProducto AND CompradorId = $idUsuario") ? true : false;
     }
+
+    public function traerListaDeRegistroCompraPorVendedor ($pk)
+    {
+        $registroCompras = array();
+
+        $rows = $this->pageRows(0, PHP_INT_MAX, "VendedorId = $pk and EstadoFacturacionId = 1");
+
+        foreach ($rows as $row) {
+
+            $registroCompra = new RegistroCompra();
+            $registroCompra->db->disconnect();
+
+            $registroCompra->setCompraId($row["CompraId"]);
+
+            $registroCompra->setCompra(new Compra());
+            $registroCompra->getCompra()->traerCompra($registroCompra->getCompraId());
+            $registroCompra->getCompra()->db->disconnect();
+
+            $mesCompra = date("m",strtotime($registroCompra->getCompra()->getFechaCompra()));
+
+            if ($mesCompra == date("m")){
+
+                $registroCompra->setId($row["Id"]);
+                $registroCompra->setCompradorId($row["CompradorId"]);
+                $registroCompra->setCantidad($row["Cantidad"]);
+                $registroCompra->setNombreProducto($row["NombreProducto"]);
+                $registroCompra->setPrecioUnitario($row["PrecioUnitario"]);
+                $registroCompra->setVendedorId($row["VendedorId"]);
+                $registroCompras[] = $registroCompra;
+            }
+        }
+
+        return $registroCompras;
+    }
+
+    public function traerListaDeRegistroComprasPorMes()
+    {
+        $registroCompras = array();
+
+        $rows = $this->pageRows(0, PHP_INT_MAX, " EstadoFacturacionId = 1 order by VendedorId asc  ");
+
+        foreach ($rows as $row) {
+
+            $registroCompra = new RegistroCompra();
+            $registroCompra->db->disconnect();
+
+            $registroCompra->setCompraId($row["CompraId"]);
+
+            $registroCompra->setCompra(new Compra());
+            $registroCompra->getCompra()->traerCompra($registroCompra->getCompraId());
+            $registroCompra->getCompra()->db->disconnect();
+
+            $mesCompra = date("m",strtotime($registroCompra->getCompra()->getFechaCompra()));
+
+            if ($mesCompra == date("m")){
+
+                $registroCompra->setId($row["Id"]);
+                $registroCompra->setVendedorId($row["VendedorId"]);
+                $registroCompra->setCantidad($row["Cantidad"]);
+                $registroCompra->setNombreProducto($row["NombreProducto"]);
+                $registroCompra->setPrecioUnitario($row["PrecioUnitario"]);
+                $registroCompras[] = $registroCompra;
+            }
+        }
+
+        return $registroCompras;
+    }
+
+    public function actualizarFacturado($pk)
+    {
+
+        $rows = $this->pageRows(0, PHP_INT_MAX, "VendedorId = $pk and EstadoFacturacionId = 1 ");
+
+        if ($rows) {
+            foreach ($rows as $row) {
+                $row["EstadoFacturacionId"] = 2;
+
+                if (!$this->update($row)) {
+                    $rows = null;
+                    break;
+                }
+            }
+        }
+
+    }
+
+    public function actualizarFacturadoMensual($array)
+    {
+
+        foreach ($array as $vendedorId) {
+
+            $row = $this->pageRows(0, PHP_INT_MAX, "VendedorId = $vendedorId and EstadoFacturacionId = 1 ");
+
+            $row[0]["EstadoFacturacionId"] = 2;
+
+            if (!$this->update($row[0])) {
+                $row = null;
+                break;
+            }
+        }
+
+    }
+
 }

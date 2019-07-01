@@ -30,6 +30,7 @@ abstract class Constantes
     const FACTURACIONEXITOSAVIEW = "facturacionExitosa";
     const ULTIMOSBANEADOSVIEW = "ultimosBaneados";
     const ESTADISTICASDASHBOARDVIEW = "estadisticasDashboard";
+    const FACTURACIONMENSUALDASHBOARDVIEW  = "facturacionMensualDashboard";
     //Acciones
     const CERRARSESIONACTION = "cerrarSession";
 
@@ -55,6 +56,7 @@ abstract class Constantes
     const FACTURACIONEXITOSATITLE = "Facturacion exitosa";
     const ULTIMOSBANEADOSTITLE = "Ultimos baneados";
     const ESTADISTICASDASHBOARDTITLE = "Estadisticas";
+    const FACTURACIONMENSUALDASHBOARDTITLE = "Facturaciones Mensuales";
 
     const OLVIDEPASSWORDTITLE = "Olvidé Mi Contraseña";
 
