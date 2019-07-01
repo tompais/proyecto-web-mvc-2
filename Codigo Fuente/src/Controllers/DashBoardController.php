@@ -182,7 +182,7 @@ class DashBoardController extends Controller
         $cont = 0;
         $arrayTotales = $data->facturacionesTotal;
 
-        //$registroCompra->actualizarFacturadoMensual($data->vendedoresId);
+        $registroCompra->actualizarFacturadoMensual($data->vendedoresId);
 
         while ($cont < count($arrayTotales)){
 
