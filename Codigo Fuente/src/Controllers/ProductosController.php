@@ -403,7 +403,7 @@ class ProductosController extends Controller
     {
         header("Content-type: application/json");
 
-        $data = json_decode(utf8_decode($json['data']));
+        $data = json_decode($json['data']);
 
         $comentario = New Comentario();
 
@@ -436,7 +436,7 @@ class ProductosController extends Controller
     {
         header("Content-type: application/json");
 
-        $data = json_decode(utf8_decode($json['data']));
+        $data = json_decode($json['data']);
 
         $comentario = New Comentario();
 
@@ -463,7 +463,7 @@ class ProductosController extends Controller
     {
         header("Content-type: application/json");
 
-        $data = json_decode(utf8_decode($json['data']));
+        $data = json_decode($json['data']);
 
         $comentario = New Comentario();
 
