@@ -164,9 +164,16 @@ CREATE TABLE Compra(
     CompradorId integer not null,
     FechaCompra datetime not null,
     Total integer not null,
-    Facturada varchar (20) not null,
     constraint PK_Compra primary key (Id),
     constraint FK_Compra_Usuario foreign key (CompradorId) references Usuario (Id)
+);
+
+-- Creacion tabla Facturacion --
+
+CREATE TABLE EstadoFacturacion (	
+	Id int auto_increment NOT NULL,
+    Estado VARCHAR(20) UNIQUE NOT NULL,
+    constraint PK_Facturacion primary key (Id)
 );
 
 
@@ -184,10 +191,12 @@ CREATE TABLE RegistroCompra(
     Cantidad integer not null,
     TipoMetodoEntrega varchar(50) not null,
     DetalleEntrega varchar(50) not null,
+    EstadoFacturacionId int not null,
     constraint PK_RegistroCompra primary key (Id, CompraId),
     constraint FK_RegistroCompra_Compra foreign key (CompraId) references Compra (Id),
     constraint FK_RegistroCompra_Producto foreign key (ProductoId) references Producto (Id),
-    constraint FK_RegistroCompra_Comprador foreign key (CompradorId) references Usuario (Id)
+    constraint FK_RegistroCompra_Comprador foreign key (CompradorId) references Usuario (Id),
+    constraint FK_RegistroCompra_EstadoFacturacion foreign key (EstadoFacturacionId) references EstadoFacturacion (Id)
 );
 
 -- Creación tabla Review --
@@ -6330,4 +6339,9 @@ INSERT INTO Estado (Nombre) VALUES  ("Nuevo"),
 
 INSERT INTO Metodo (Tipo) VALUES ("Punto de Entrega"),
 								 ("Acuerdo Mutuo");		
+                                 
+-- Insercion en la tabla Facturacion --		
+
+INSERT INTO EstadoFacturacion (Estado) VALUES ("No Facturada"),
+											  ("Facturada");		                                 
 

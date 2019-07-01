@@ -13,7 +13,7 @@
         <?php
 
         if (!$baneados){
-            echo '<h5 class="text-center text-black-50">No hay usuarios baneados para el mes '.date("m").'</h5>';
+            echo '<h5 class="text-center text-black-50">No hay usuarios baneados recientemente</h5>';
         }
         else {
             foreach ($baneados as $baneado){

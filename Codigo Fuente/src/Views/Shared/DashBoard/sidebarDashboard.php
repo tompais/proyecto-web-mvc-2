@@ -16,4 +16,9 @@
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Estadisticas</span></a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="<?php echo getBaseAddress() . "DashBoard/facturarMensual" ?>">
+            <i class="fas fa-money-check"></i>
+            <span>Facturaciones</span></a>
+    </li>
 </ul>
