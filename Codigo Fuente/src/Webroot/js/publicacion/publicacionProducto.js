@@ -18,7 +18,7 @@ var divNivelVendedorRateYo = $('#divNivelVendedorRateYo');
 
 var btnPregunta = $("#btnPregunta");
 var pregunta = $("#pregunta");
-var productoId = $("#productoId");
+var producId = $("#productoId");
 var divComentarios = $("#divComentarios");
 var inicio = 4;
 
@@ -562,7 +562,7 @@ function cargarRespuestaExitosa(respuesta)
 function preguntar() {
 	var obj = {};
 	obj.pregunta = pregunta.val();
-	obj.productoId = productoId.val();
+	obj.productoId = producId.val();
 	llamadaAjax(pathPreguntar, JSON.stringify(obj), true, "cargarPreguntaExitosa", "dummy");
 }
 
