@@ -280,7 +280,7 @@ class ProductosController extends Controller
         $d["geolocalizacion"] = $geolocalizacion;
         $d["productosRelacionados"] = $productosRelacionados;
         $d["comentarios"] = $comentario->traerUltimosComentarios(0, $publicacion[0]);
-        $d["totalComentarios"] = $comentario->contarComentarios();
+        $d["totalComentarios"] = $comentario->contarComentarios($publicacion[0]);
         $d["nivelVendedor"] = !$cantReviews ? -1 : $sumReviews/$cantReviews;
 
         $this->set($d);
@@ -478,8 +478,8 @@ class ProductosController extends Controller
             $comentarioDto->id = $coment->getId();
             $comentarioDto->pregunta = $coment->getPregunta();
             $comentarioDto->respuesta = $coment->getRespuesta();
-            $comentarioDto->fechaPregunta = $coment->getFechaPregunta();
-            $comentarioDto->fechaRespuesta = $coment->getFechaRespuesta();
+            $comentarioDto->fechaPregunta = date("d/m/Y", strtotime($coment->getFechaPregunta()));
+            $comentarioDto->fechaRespuesta = date("d/m/Y", strtotime($coment->getFechaRespuesta()));
             $comentarioDto->usuarioUsername = $coment->getUsuarioUsername();
 
             $comentariosDto[] = $comentarioDto;

@@ -15,6 +15,7 @@
     var idSesion = <?php echo isset($_SESSION["session"])?unserialize($_SESSION["session"])->getId():0; ?>;
     var usuarioId = <?php echo $producto->getUsuarioId(); ?>;
     var totalComentarios = <?php echo $totalComentarios; ?>;
+    console.log(totalComentarios);
     const pathPreguntar = "<?php echo getBaseAddress() . "Productos/realizarPregunta "; ?>";
     const pathResponder = "<?php echo getBaseAddress() . "Productos/realizarRespuesta "; ?>";
     const pathMostrarMas = "<?php echo getBaseAddress() . "Productos/mostrarMas "; ?>";
@@ -349,7 +350,7 @@ $patHomePublicacion = getBaseAddress() . 'Productos/publicacion/';
                             $i++;
                         }
 
-                        if($i == 4 && ($totalComentarios - 4) > 0)
+                        if(($i == 4) && (($totalComentarios - 4) > 0))
                         {
                             echo "<div id='masComentarios'></div>
                                 </div>

@@ -140,9 +140,9 @@ class Comentario extends Model
         return $comentarios;
     }
 
-    public function contarComentarios()
+    public function contarComentarios($pk)
     {
-        return $this->total();
+        return $this->total("ProductoId = $pk");
     }
 }
 
