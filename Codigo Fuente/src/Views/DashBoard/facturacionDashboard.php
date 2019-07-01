@@ -47,6 +47,7 @@
 
                                                 $total = ($registroCompra->getPrecioUnitario()*$registroCompra->getCantidad());
                                                 $totalFacturacion += (($total*4)/100);
+                                                $totalFacturacionPorCompra = (($total*4)/100);
 
                                                 echo '<tr class="text-center">
                                                         <td>' . $registroCompra->getId() . '</td>                                    
@@ -54,7 +55,7 @@
                                                         <td>' . $registroCompra->getCantidad() . '</td>
                                                         <td>' .  date("Y-m-d", strtotime($registroCompra->getCompra()->getFechaCompra())). '</td>
                                                         <td>$ ' . $total . '</td>
-                                                        <td>$ ' . $totalFacturacion . '</td>
+                                                        <td>$ ' . $totalFacturacionPorCompra . '</td>
                                                     </tr>';
                                         }
                 

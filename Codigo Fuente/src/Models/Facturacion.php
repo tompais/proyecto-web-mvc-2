@@ -109,7 +109,18 @@ class Facturacion extends Model
     public function insertarFacturacion()
     {
         $array = [
+            "UsuarioId" => $this->getUsuarioId(),
+            "Mes" => date("m"),
+            "Anio" => date("Y"),
+            "Total" => $this->getTotal(),
+        ];
+        $this->setId($this->insert($array));
+        return $this->getId();
+    }
 
+    public function insertarFacturacionMensuales()
+    {
+        $array = [
             "UsuarioId" => $this->getUsuarioId(),
             "Mes" => date("m"),
             "Anio" => date("Y"),

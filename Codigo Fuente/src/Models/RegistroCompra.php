@@ -381,7 +381,7 @@ class RegistroCompra extends Model
     {
         $registroCompras = array();
 
-        $rows = $this->pageRows(0, PHP_INT_MAX, " EstadoFacturacionId = 1 ");
+        $rows = $this->pageRows(0, PHP_INT_MAX, " EstadoFacturacionId = 1 order by VendedorId asc  ");
 
         foreach ($rows as $row) {
 

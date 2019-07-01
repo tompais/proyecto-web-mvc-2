@@ -48,7 +48,7 @@
                     foreach ($registroCompras as $registroCompra) {
 
                         $total = ($registroCompra->getPrecioUnitario()*$registroCompra->getCantidad());
-                        $totalFacturacion += (($total*4)/100);
+                        $totalFacturacion = (($total*4)/100);
 
                         echo '<tr class="text-center">
                                     <td>' . $registroCompra->getId() . '</td>                                    
@@ -58,12 +58,14 @@
                                     <td>' .  date("Y-m-d", strtotime($registroCompra->getCompra()->getFechaCompra())). '</td>
                                     <td>$ ' . $total . '</td>
                                     <td>$ ' . $totalFacturacion . '</td>
+                                    <td class="d-none">' . $totalFacturacion . '</td>
                                 </tr>';
 
                     }
 
                     echo ' </tbody>
                                </table>
+                                    
                                     <input type="hidden" id="inputTotalFacturacion" name="totalFacturacion" value="' . $totalFacturacion . '">              
                                     <button class="btn btn-primary float-right mr-3" id="btnFacturar"><i class="fas fa-money-check mr-2"></i>Generar Facturacion</button>
                            </div>';

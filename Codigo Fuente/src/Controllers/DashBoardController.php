@@ -178,10 +178,27 @@ class DashBoardController extends Controller
 
         $registroCompra = new RegistroCompra();
         $facturacion = new Facturacion();
+        $vendedorId = 0;
+        $cont = 0;
+        $arrayTotales = $data->facturacionesTotal;
 
-        $registroCompra->actualizarFacturadoMensual($data->vendedoresId);
+        //$registroCompra->actualizarFacturadoMensual($data->vendedoresId);
 
-        $facturacion->insertarFacturacion();
+        while ($cont < count($arrayTotales)){
+
+                $vendedorId = $data->vendedoresId[$cont];
+
+            $totalesFacturar = 0;
+            $facturacion->setUsuarioId($data->vendedoresId[$cont]);
+
+            while ($cont < count($arrayTotales) && $vendedorId == $data->vendedoresId[$cont]){
+                $totalesFacturar += $arrayTotales[$cont];
+                $cont ++;
+            }
+
+            $facturacion->setTotal($totalesFacturar);
+            $facturacion->insertarFacturacion();
+        }
 
         echo json_encode(true);
 
