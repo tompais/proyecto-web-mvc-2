@@ -82,14 +82,15 @@ class DashBoardController extends Controller
         $usuario = new Usuario();
         $usuario->traerUsuarioPorUserName($param[0]);
 
-        $regitroCompra = new RegistroCompra();
-        $cantidadDeVentas = $regitroCompra->traerCantidadDeRegistoCompras($usuario->getId());
-
+        if ($usuario->getId() != null){
+            $regitroCompra = new RegistroCompra();
+            $cantidadDeVentas = $regitroCompra->traerCantidadDeRegistoCompras($usuario->getId());
+            $d["cantidadDeVentas"] = $cantidadDeVentas;
+        }
 
 
         $d["palabraBuscada"] = $param[0];
         $d["usuario"] = $usuario;
-        $d["cantidadDeVentas"] = $cantidadDeVentas;
 
         $this->set($d);
         $this->render(Constantes::BUSCARUSUARIODAHBOARDVIEW);
