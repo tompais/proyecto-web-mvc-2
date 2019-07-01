@@ -445,4 +445,10 @@ class RegistroCompra extends Model
 
     }
 
+    public function traerCantidadDeRegistoCompras($vendedorId)
+    {
+        return  $this->total("VendedorId = $vendedorId and EstadoFacturacionId = 1");
+    }
+
+
 }
