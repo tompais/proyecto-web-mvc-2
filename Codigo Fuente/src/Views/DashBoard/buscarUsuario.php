@@ -19,8 +19,9 @@
         <?php
 
         if ($usuario->getUsername() == ""){
-            echo '<h5 class="text-center text-black-50">No se ha encontrado el usuario buscado</h5>';
+            echo '<h5 class="text-center text-black-50">No se ha encontrado un usuario de username '.$palabraBuscada.' </h5>';
         }
+
         else {
             echo ' <div class="panel panel-default mt-3 border">
                 <table class="table table-hover mb-0">
@@ -42,13 +43,13 @@
                         <td class="text-right text-nowrap">
                         <div class="row float-right mr-3">';
 
-                         if ($cantidadDeVentas != 0){
+                            if ($cantidadDeVentas != 0){
                             echo '<form method="post" action="'.getBaseAddress()."DashBoard/facturar".'" class="mr-3">
                                     <input type="hidden" id="inputUsuarioFacturarId" name="usuarioFacturarId" value="'.$usuario->getId().'" >
                                     <input type="hidden" id="inputPalabraBuscada" name="palabraBuscada" value="'.$palabraBuscada.'" >
                                     <button class="btn btn-primary ml-3" id="btnFacturar" type="submit"><i class="fas fa-money-check mr-2"></i>Facturar</button>
-                                 </form>';
-                         }
+                                 </form>';}
+
 
                            if ($usuario->getFechaBaneo() != null){
                                echo '<button class="btn btn-xs btn-success" id="btnDesbanear"><i class="fas fa-user-check mr-2"></i>Desbanear</button>';
