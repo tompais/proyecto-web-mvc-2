@@ -21,6 +21,7 @@
         if ($usuario->getUsername() == ""){
             echo '<h5 class="text-center text-black-50">No se ha encontrado un usuario de username '.$palabraBuscada.' </h5>';
         }
+
         else {
             echo ' <div class="panel panel-default mt-3 border">
                 <table class="table table-hover mb-0">

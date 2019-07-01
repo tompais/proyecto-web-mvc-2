@@ -19,6 +19,8 @@
                     </button>
                 </div>
         </div>
+        <div id="errorUsuarioBuscado" class="error"><i class="fas fa-exclamation-triangle"></i> Ingrese un username valido</div>
+
     </div>
 
     <!-- Navbar -->
