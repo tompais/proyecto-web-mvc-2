@@ -242,10 +242,9 @@ class DashBoardController extends Controller
     {
         $this->layout = "layoutDashBoard";
         $d["title"] = Constantes::ESTADISTICASDASHBOARDTITLE;
-
+        
         $this->set($d);
         $this->render(Constantes::ESTADISTICASDASHBOARDVIEW);
     }
-
 
 }

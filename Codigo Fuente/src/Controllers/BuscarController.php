@@ -50,9 +50,13 @@ class   BuscarController extends Controller
 
         $paginationDataSourceDto = new PaginationDataSourceDto();
 
+        $estadistica = new Estadistica();
+
         $paginationDataSourceDto->items = [];
 
         $productos = $producto->getListaProdutosActivosDeOtrosUsuariosPorNombre($data[0], $data["pageNumber"], $data["pageSize"]);
+
+        $estadistica->insertarProductosBuscados($productos);
 
         $imagen = new Imagen();
 

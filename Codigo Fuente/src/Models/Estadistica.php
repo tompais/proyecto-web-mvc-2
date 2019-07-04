@@ -71,4 +71,38 @@ class Estadistica extends Model
     {
         $this->cantidad = $cantidad;
     }
+
+    public function insertarProductosBuscados($productos){
+        foreach ($productos as $producto){
+            $row = $this->pageRows(0, 1, "ProductoId = " . $producto->getId(). " AND TipoEstadistica = 1");
+            if(!$row){
+                $array = [
+                    "ProductoId" => $producto->getId(),
+                    "Cantidad" => 1,
+                    "TipoEstadistica" => 1
+                ];
+                $this->insert($array);
+            }else{
+                $row[0]["Cantidad"] = $row[0]["Cantidad"] + 1;
+
+                if (!$this->update($row[0])) {
+                    $row = null;
+                    break;
+                }
+            }
+        }
+    }
+
+    public function traerLosProductosMasBuscados($cantidad){
+        $rows = $this->pageRows(0, $cantidad, "TipoEstadistica = 1 ORDER by Cantidad DESC");
+        $productos = array();
+        foreach ($rows as $row) {
+            $producto = new Producto();
+            $producto->traerProducto($row["ProductoId"]);
+            $producto->setCantidad($row["Cantidad"]);
+            $productos[] = $producto;
+        }
+
+        return $productos;
+    }
 }
