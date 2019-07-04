@@ -240,6 +240,14 @@ CREATE TABLE Comentario (
     constraint FK_Comentario_Usuario foreign key (UsuarioId) references Usuario (Id)
 );
 
+-- Tabla para estadisticas --
+
+CREATE TABLE Estadistica (
+    Id integer auto_increment not null unique,
+    ProductoId int not null,
+    Cantidad int not null
+);
+
 -- Insercion en la tabla Provincia --
 
 INSERT INTO Provincia (ID,Nombre) VALUES(1,'BUENOS AIRES');
