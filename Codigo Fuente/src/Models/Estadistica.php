@@ -6,6 +6,23 @@ class Estadistica extends Model
     private $id;
     private $productoId;
     private $cantidad;
+    private $tipoEstadistica;
+
+    /**
+     * @return mixed
+     */
+    public function getTipoEstadistica()
+    {
+        return $this->tipoEstadistica;
+    }
+
+    /**
+     * @param mixed $tipoEstadistica
+     */
+    public function setTipoEstadistica($tipoEstadistica)
+    {
+        $this->tipoEstadistica = $tipoEstadistica;
+    }
 
     /**
      * @return mixed
@@ -54,5 +71,4 @@ class Estadistica extends Model
     {
         $this->cantidad = $cantidad;
     }
-
 }
