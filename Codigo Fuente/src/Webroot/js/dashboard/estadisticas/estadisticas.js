@@ -1,6 +1,8 @@
 var divProductosBuscados = $('#productosMasBuscados');
 var divCategoriasFavoritas = $('#categoriasFavoritas');
 var buttonProductosMasBuscados = $('#botonProductos');
+var divGraficoProductosMasBuscados = $('#graficoProductosBuscados');
+var divGraficoCategoriasFavoritas = $('#graficoCategoriasFavoritas');
 var buttonCategoriasMasBuscados = $('#botonCategorias');
 
 $(document).ready(function ($) {
@@ -10,7 +12,7 @@ $(document).ready(function ($) {
 
 function productosMasBuscados() {
     var obj ={};
-    llamadaAjax(pathHome + 'Dashboard/productosMasBuscados', JSON.stringify(obj), true, "graficoProductosMasBuscados", "dummy");
+    llamadaAjax(pathHome + 'Dashboard/productosMasBuscados', JSON.stringify(obj), true, "graficoProductosMasBuscados", "mostrarMensaje");
 }
 
 function obtenerNombres(productosDto) {
@@ -35,60 +37,75 @@ function graficoProductosMasBuscados(productosDto) {
     var nombresProductos = obtenerNombres(productosDto);
     var cantidadesProductos = obtenerCantidades(productosDto);
     var cantidadMaxima = parseInt(cantidadesProductos[0]);
+        // Bar Chart Example
+        var ctx = document.getElementById("myBarChart");
 
-// Bar Chart Example
-    var ctx = document.getElementById("myBarChart");
+        var myLineChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: nombresProductos,
 
-    var myLineChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: nombresProductos,
-
-            datasets: [{
-                label: "Revenue",
-                backgroundColor: "rgba(2,117,216,1)",
-                borderColor: "rgba(2,117,216,1)",
-                data: cantidadesProductos,
-            }],
-        },
-        options: {
-            scales: {
-                xAxes: [{
-                    time: {
-                        unit: 'month'
-                    },
-                    gridLines: {
-                        display: false
-                    },
-                    ticks: {
-                        maxTicksLimit: 6
-                    }
-                }],
-                yAxes: [{
-                    ticks: {
-                        min: 0,
-                        max: cantidadMaxima + cantidadMaxima * 20 /100,
-                        maxTicksLimit: cantidadMaxima * 2
-                    },
-                    gridLines: {
-                        display: true
-                    }
+                datasets: [{
+                    label: "Revenue",
+                    backgroundColor: "rgba(2,117,216,1)",
+                    borderColor: "rgba(2,117,216,1)",
+                    data: cantidadesProductos,
                 }],
             },
-            legend: {
-                display: false
+            options: {
+                scales: {
+                    xAxes: [{
+                        time: {
+                            unit: 'month'
+                        },
+                        gridLines: {
+                            display: false
+                        },
+                        ticks: {
+                            maxTicksLimit: 6
+                        }
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            min: 0,
+                            max: cantidadMaxima + cantidadMaxima * 30 /100,
+                            maxTicksLimit: cantidadMaxima * 2
+                        },
+                        gridLines: {
+                            display: true
+                        }
+                    }],
+                },
+                legend: {
+                    display: false
+                }
             }
-        }
-    });
-    divProductosBuscados.show();
-    buttonProductosMasBuscados.text('Ocultar');
-    buttonProductosMasBuscados.attr('onclick', 'ocultarGraficoProductos()');
+        });
+        divProductosBuscados.show();
+        buttonProductosMasBuscados.text('Ocultar');
+        buttonProductosMasBuscados.attr('onclick', 'ocultarGraficoProductos()');
 }
 
 function ocultarGraficoProductos() {
     divProductosBuscados.hide();
     buttonProductosMasBuscados.text('Mostrar');
     buttonProductosMasBuscados.attr('onclick', 'productosMasBuscados()');
+}
+
+function mostrarMensaje() {
+    var elementoP = divProductosBuscados.find('.mensajeError');
+    divProductosBuscados.show();
+    divGraficoProductosMasBuscados.hide();
+    if(elementoP.attr('class') === undefined){
+        var elementoParam = $('<p class="small text-center text-muted my-5 mensajeError">');
+        var elementoEm = $('<em>');
+        elementoEm.text('No hay estadiscticas para productos más buscados');
+        elementoParam.append(elementoEm);
+        divProductosBuscados.append(elementoParam);
+    }
+    buttonProductosMasBuscados.text('Ocultar');
+    buttonProductosMasBuscados.attr('onclick', 'ocultarGraficoProductos()');
+
 }
 
 
