@@ -27,7 +27,7 @@ btnBuscarUsuario.click(function () {
 });
 
 $("input").keypress(function (e) {
-    if(e.keyCode === 13) {
+    if(e.keyCode === 13 && validarUsuarioBuscado()) {
         window.location.href = pathHome + "DashBoard/buscar/" + inputUsuarioBuscado.val();
     }
 });
