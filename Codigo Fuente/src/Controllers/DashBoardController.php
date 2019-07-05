@@ -242,9 +242,27 @@ class DashBoardController extends Controller
     {
         $this->layout = "layoutDashBoard";
         $d["title"] = Constantes::ESTADISTICASDASHBOARDTITLE;
-        
+
         $this->set($d);
         $this->render(Constantes::ESTADISTICASDASHBOARDVIEW);
     }
 
+    function productosMasBuscados($data){
+        header("Content-type: application/json");
+        $estadistica = new Estadistica();
+
+        $productos = $estadistica->traerLosProductosMasBuscados(6);
+
+        $productosDto = array();
+
+        foreach ($productos as $producto){
+            $productoDto = new ProductoDto();
+
+            $productoDto->nombre = $producto->getNombre();
+            $productoDto->cantidad = $producto->getCantidad();
+
+            $productosDto[] = $productoDto;
+        }
+        echo json_encode($productosDto);
+    }
 }
