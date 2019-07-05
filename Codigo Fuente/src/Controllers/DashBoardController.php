@@ -247,5 +247,51 @@ class DashBoardController extends Controller
         $this->render(Constantes::ESTADISTICASDASHBOARDVIEW);
     }
 
+    function productosMasBuscados($data){
+        header("Content-type: application/json");
+        $estadistica = new Estadistica();
 
+        $productos = $estadistica->traerLosProductosMasBuscados(6);
+
+        $productosDto = array();
+
+        foreach ($productos as $producto){
+            $productoDto = new ProductoDto();
+
+            $productoDto->nombre = $producto->getNombre();
+            $productoDto->cantidad = $producto->getCantidad();
+
+            $productosDto[] = $productoDto;
+        }
+        if(!$productosDto){
+            throw new ProductoNoEncontradoException("No hay productos para estadisticas", CodigoError::ProductoNoEncontrado);
+        }else{
+            echo json_encode($productosDto);
+        }
+
+    }
+
+    function categoriasFavoritas($data){
+        header("Content-type: application/json");
+        $estadistica = new Estadistica();
+
+        $categorias = $estadistica->traerLasCategoriasMasBuscados(6);
+
+        $productosDto = array();
+
+        foreach ($categorias as $categoria){
+            $productoDto = new ProductoDto();
+            $categoriaModel = new Categoria();
+            $categoriaModel->traerCategoria($categoria->getCategoriaId());
+            $productoDto->nombre = $categoriaModel->getNombre();
+            $productoDto->cantidad = $categoria->getCantidad();
+
+            $productosDto[] = $productoDto;
+        }
+        if(!$productosDto){
+            throw new ProductoNoEncontradoException("No hay productos para estadisticas", CodigoError::ProductoNoEncontrado);
+        }else{
+            echo json_encode($productosDto);
+        }
+    }
 }
