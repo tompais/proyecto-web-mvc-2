@@ -68,7 +68,7 @@ function graficoProductosMasBuscados(productosDto) {
                     ticks: {
                         min: 0,
                         max: cantidadMaxima + cantidadMaxima * 20 /100,
-                        maxTicksLimit: 5
+                        maxTicksLimit: cantidadMaxima * 2
                     },
                     gridLines: {
                         display: true
