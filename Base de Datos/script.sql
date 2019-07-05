@@ -253,6 +253,7 @@ CREATE TABLE TipoEstadistica (
 CREATE TABLE Estadistica (
     Id integer auto_increment not null unique,
     ProductoId int not null,
+    CategoriaId int not null,
     Cantidad int not null,
     TipoEstadistica int not null,
     constraint PK_Estadistica primary key (Id),

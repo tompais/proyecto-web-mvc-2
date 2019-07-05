@@ -78,6 +78,7 @@ class Estadistica extends Model
             if(!$row){
                 $array = [
                     "ProductoId" => $producto->getId(),
+                    "CategoriaId" => $producto->getCategoriaId(),
                     "Cantidad" => 1,
                     "TipoEstadistica" => 1
                 ];
@@ -105,4 +106,41 @@ class Estadistica extends Model
 
         return $productos;
     }
+
+    public function insertarCategoriasBuscadas($productos){
+
+        foreach ($productos as $producto){
+            $row = $this->pageRows(0, 1, "CategoriaId = " . $producto->getCategoriaId(). " AND TipoEstadistica = 2");
+            if(!$row){
+                $array = [
+                    "ProductoId" => $producto->getId(),
+                    "Cantidad" => 1,
+                    "CategoriaId" => $producto->getCategoriaId(),
+                    "TipoEstadistica" => 2
+                ];
+                $this->insert($array);
+            }else{
+                $row[0]["Cantidad"] = $row[0]["Cantidad"] + 1;
+
+                if (!$this->update($row[0])) {
+                    $row = null;
+                    break;
+                }
+            }
+        }
+    }
+
+    public function traerLasCategoriasMasBuscados($cantidad){
+        $rows = $this->pageRows(0, $cantidad, "TipoEstadistica = 2 ORDER by Cantidad DESC");
+        $productos = array();
+        foreach ($rows as $row) {
+            $producto = new Producto();
+            $producto->traerProducto($row["ProductoId"]);
+            $producto->setCantidad($row["Cantidad"]);
+            $productos[] = $producto;
+        }
+
+        return $productos;
+    }
+
 }

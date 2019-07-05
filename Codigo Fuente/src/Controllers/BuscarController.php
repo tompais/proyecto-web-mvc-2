@@ -58,6 +58,8 @@ class   BuscarController extends Controller
 
         $estadistica->insertarProductosBuscados($productos);
 
+        $estadistica->insertarCategoriasBuscadas($productos);
+
         $imagen = new Imagen();
 
         $publicaciones = [];
