@@ -19,14 +19,14 @@
 
             <div class="card-header">
                 <i class="fas fa-table"></i>
-                Facturaciones de mes <?php echo date("m") ?>
+                Facturaciones de mes <?php echo (int) date("m") ?>
             </div>
 
             <div class="card-body">
 
                 <?php
                 if (!$registroCompras) {
-                    echo '<h5 class="text-center text-black-50"> No hay compras a facturar para el mes ' . date("m") . ' </h5>';
+                    echo '<h5 class="text-center text-black-50"> No hay compras a facturar para el mes ' . (int)date("m") . ' </h5>';
                 } else {
                     echo "<div class='table-responsive'>
                                     <table class='table table-bordered' id='dataTable' width='100%' cellspacing='0'>        
