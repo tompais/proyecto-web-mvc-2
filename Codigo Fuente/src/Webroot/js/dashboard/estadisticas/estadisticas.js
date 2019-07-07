@@ -92,14 +92,14 @@ function ocultarGraficoProductos() {
     buttonProductosMasBuscados.attr('onclick', 'productosMasBuscados()');
 }
 
-function mostrarMensajeProductoVacio() {
+function mostrarMensajeProductoVacio(err) {
     var elementoP = divProductosBuscados.find('.mensajeError');
     divProductosBuscados.show();
     divGraficoProductosMasBuscados.hide();
     if(elementoP.attr('class') === undefined){
         var elementoParam = $('<p class="small text-center text-muted my-5 mensajeError">');
         var elementoEm = $('<em>');
-        elementoEm.text('No hay estadíscticas para productos más buscados');
+        elementoEm.text(err);
         elementoParam.append(elementoEm);
         divProductosBuscados.append(elementoParam);
     }
@@ -157,4 +157,19 @@ function ocultarGraficoCategorias() {
     divCategoriasFavoritas.hide();
     buttonCategoriasMasBuscadas.text('Mostrar');
     buttonCategoriasMasBuscadas.attr('onclick', 'categoriasMasBuscadas()');
+}
+
+
+
+
+//console.log(dataURL);
+
+function exportarGraficoPdf() {
+
+    var doc = new jsPDF('p','mm','a4');
+    doc.addHTML($('#myBarChart'), 15, 15, {
+        'background': '#FF9030',
+    }, function() {
+        doc.save('dashboard.pdf');
+    });
 }

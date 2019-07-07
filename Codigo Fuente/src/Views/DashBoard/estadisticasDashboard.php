@@ -45,4 +45,8 @@
     <!-- /.container-fluid -->
 
 </div>
+
+
 <script src="<?php echo getBaseAddress() . "Webroot/js/dashboard/estadisticas/estadisticas.js"; ?>"></script>
+
+
