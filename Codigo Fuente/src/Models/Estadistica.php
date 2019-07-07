@@ -112,12 +112,14 @@ class Estadistica extends Model
     public function insertarCategoriasBuscadas($productos){
 
         foreach ($productos as $producto){
-            $row = $this->pageRows(0, 1, "CategoriaId = " . $producto->getCategoriaId(). " AND TipoEstadistica = 2");
+            $categoria = new Categoria();
+            $categoria->traerCategoria($producto->getCategoriaId());
+            $nombreCategoria = $categoria->getNombre();
+            $row = $this->pageRows(0, 1, "Nombre = '$nombreCategoria' AND TipoEstadistica = 2");
             if(!$row){
                 $array = [
-                    "ProductoId" => $producto->getId(),
+                    "Nombre" => $nombreCategoria,
                     "Cantidad" => 1,
-                    "CategoriaId" => $producto->getCategoriaId(),
                     "TipoEstadistica" => 2
                 ];
                 $this->insert($array);
@@ -134,15 +136,15 @@ class Estadistica extends Model
 
     public function traerLasCategoriasMasBuscados($cantidad){
         $rows = $this->pageRows(0, $cantidad, "TipoEstadistica = 2 ORDER by Cantidad DESC");
-        $productos = array();
+        $estadisticas = array();
         foreach ($rows as $row) {
-            $producto = new Producto();
-            $producto->traerProducto($row["ProductoId"]);
-            $producto->setCantidad($row["Cantidad"]);
-            $productos[] = $producto;
+            $estadistica = new Estadistica();
+            $estadistica->setNombre($row["Nombre"]);
+            $estadistica->setCantidad($row["Cantidad"]);
+            $estadisticas[] = $estadistica;
         }
 
-        return $productos;
+        return $estadisticas;
     }
 
 }
