@@ -20,7 +20,7 @@
                     <div class="card-footer small text-muted"></div>
                 </div>
                 <div>
-                    <button id="botonExportarProducto">Exportar pdf</button>
+                    <button onclick="exportarGraficoProductosPdf()">Exportar pdf</button>
                 </div>
             </div>
         </div>
@@ -41,6 +41,9 @@
                         <canvas id="myPieChart" width="100%" height="100"></canvas>
                     </div>
                     <div class="card-footer small text-muted"></div>
+                </div>
+                <div>
+                    <button onclick="exportarGraficoCategoriasPdf()">Exportar pdf</button>
                 </div>
             </div>
         </div>

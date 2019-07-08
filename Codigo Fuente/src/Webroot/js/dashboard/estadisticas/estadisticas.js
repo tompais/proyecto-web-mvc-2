@@ -168,4 +168,11 @@ function exportarGraficoProductosPdf() {
     doc.save('Estadistica producto.pdf');
 }
 
+function exportarGraficoCategoriasPdf() {
+    var myPieChar = $('#myPieChart')[0];
+    var pieChartDataUrl = myPieChar.toDataURL("img/png");
+    var doc = new jsPDF('l', 'mm', 'a4');
+    doc.addImage(pieChartDataUrl, 'JPEG', 50, 50, 200, 100);
+    doc.save('Estadistica categorias.pdf');
+}
 
