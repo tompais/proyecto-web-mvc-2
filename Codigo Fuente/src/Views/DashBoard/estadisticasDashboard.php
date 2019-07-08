@@ -17,10 +17,10 @@
                     <div class="card-body">
                         <canvas id="myBarChart" width="100%" height="50"></canvas>
                     </div>
+                    <div class="row justify-content-center mb-3">
+                        <button class="btn btn-primary" onclick="exportarGraficoProductosPdf()">Exportar a pdf</button>
+                    </div>
                     <div class="card-footer small text-muted"></div>
-                </div>
-                <div>
-                    <button onclick="exportarGraficoProductosPdf()">Exportar pdf</button>
                 </div>
             </div>
         </div>
@@ -40,11 +40,12 @@
                     <div class="card-body">
                         <canvas id="myPieChart" width="100%" height="100"></canvas>
                     </div>
+                    <div class="row justify-content-center mb-3">
+                        <button class="btn btn-primary" onclick="exportarGraficoCategoriasPdf()">Exportar a pdf</button>
+                    </div>
                     <div class="card-footer small text-muted"></div>
                 </div>
-                <div>
-                    <button onclick="exportarGraficoCategoriasPdf()">Exportar pdf</button>
-                </div>
+
             </div>
         </div>
     </div>
