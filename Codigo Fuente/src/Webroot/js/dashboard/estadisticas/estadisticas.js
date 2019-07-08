@@ -161,17 +161,12 @@ function ocultarGraficoCategorias() {
 }
 
 
-
-$('#botonExportarProducto').click(function(){
-    $('#elementOut').append($('#myBarChart'));
-    html2canvas($('#elementOut')).then(function(canvas){
-
-        var imgData = canvas.toDataURL(
-            'image/png');
-        var doc = new jsPDF('p', 'mm');
-        doc.addImage(imgData, 'PNG', 10, 10);
-        doc.save('sample-file.pdf');
-    });
+$('#botonExportarProducto').click(function () {
+    var myBarChart = $('#myBarChart')[0];
+    var barChartDataUrl = myBarChart.toDataURL("img/png");
+    var doc = new jsPDF('l', 'mm', 'a4');
+    doc.addImage(barChartDataUrl, 'JPEG', 50, 50, 200, 100);
+    doc.save('estadistica.pdf');
 });
 
 
