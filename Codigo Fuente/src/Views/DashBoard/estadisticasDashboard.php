@@ -14,13 +14,13 @@
                     <div class="card-header">
                         <i class="fas fa-chart-bar"></i>
                         Gráfico más buscados</div>
-                    <div class="card-body">
+                    <div class="card-body" id="contenedorCanvasProductos">
                         <canvas id="myBarChart" width="100%" height="50"></canvas>
                     </div>
+                    <div class="row justify-content-center mb-3">
+                        <button class="btn btn-primary" onclick="exportarGraficoProductosPdf()">Exportar a pdf</button>
+                    </div>
                     <div class="card-footer small text-muted"></div>
-                </div>
-                <div>
-                    <button id="botonExportarProducto">Exportar pdf</button>
                 </div>
             </div>
         </div>
@@ -37,11 +37,15 @@
                     <div class="card-header">
                         <i class="fas fa-chart-pie"></i>
                         Gráfico categorías</div>
-                    <div class="card-body">
+                    <div class="card-body" id="contenedorCanvasCategorias">
                         <canvas id="myPieChart" width="100%" height="100"></canvas>
+                    </div>
+                    <div class="row justify-content-center mb-3">
+                        <button class="btn btn-primary" onclick="exportarGraficoCategoriasPdf()">Exportar a pdf</button>
                     </div>
                     <div class="card-footer small text-muted"></div>
                 </div>
+
             </div>
         </div>
     </div>
