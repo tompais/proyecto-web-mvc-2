@@ -38,7 +38,8 @@ function graficoProductosMasBuscados(productosDto) {
     var cantidadesProductos = obtenerCantidades(productosDto);
     var cantidadMaxima = parseInt(cantidadesProductos[0]);
         // Bar Chart Example
-        var ctx = document.getElementById("myBarChart");
+    resetCanvasProductos();
+    var ctx = document.getElementById('myBarChart');
 
         var myLineChart = new Chart(ctx, {
             type: 'bar',
@@ -46,7 +47,7 @@ function graficoProductosMasBuscados(productosDto) {
                 labels: nombresProductos,
 
                 datasets: [{
-                    label: "Revenue",
+                    label: "Cantidad",
                     backgroundColor: "rgba(2,117,216,1)",
                     borderColor: "rgba(2,117,216,1)",
                     data: cantidadesProductos,
@@ -68,8 +69,8 @@ function graficoProductosMasBuscados(productosDto) {
                     yAxes: [{
                         ticks: {
                             min: 0,
-                            max: cantidadMaxima + cantidadMaxima * 30 /100,
-                            maxTicksLimit: cantidadMaxima * 2
+                            max: cantidadMaxima + cantidadMaxima * 40 /100,
+                            maxTicksLimit: cantidadMaxima * 3
                         },
                         gridLines: {
                             display: true
@@ -160,13 +161,28 @@ function ocultarGraficoCategorias() {
     buttonCategoriasMasBuscadas.attr('onclick', 'categoriasMasBuscadas()');
 }
 
-
-$('#botonExportarProducto').click(function () {
-    var myBarChart = $('#myBarChart')[0];
-    var barChartDataUrl = myBarChart.toDataURL("img/png");
+function exportarGraficoProductosPdf() {
+    var myBarChar = $('#myBarChart')[0];
+    var barChartDataUrl = myBarChar.toDataURL("img/png");
     var doc = new jsPDF('l', 'mm', 'a4');
     doc.addImage(barChartDataUrl, 'JPEG', 50, 50, 200, 100);
-    doc.save('estadistica.pdf');
-});
+    doc.save('Estadistica producto.pdf');
+}
 
+function exportarGraficoCategoriasPdf() {
+    var myPieChar = $('#myPieChart')[0];
+    var pieChartDataUrl = myPieChar.toDataURL("img/png");
+    var doc = new jsPDF('l', 'mm', 'a4');
+    doc.addImage(pieChartDataUrl, 'JPEG', 50, 50, 200, 100);
+    doc.save('Estadistica categorias.pdf');
+}
 
+function resetCanvasProductos() {
+    $('#myBarChart').remove(); // this is my <canvas> element
+    $('#contenedorCanvasProductos').append('<canvas id="myBarChart" width="100%" height="50">');
+}
+
+function resetCanvasCategorias() {
+    $('#myPieChart').remove(); // this is my <canvas> element
+    $('#contenedorCanvasCategorias').append('<canvas id="myPieChart" width="100%" height="50">');
+}
