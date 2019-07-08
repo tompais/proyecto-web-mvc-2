@@ -298,7 +298,7 @@ class RegistroCompra extends Model
 
         $id = $this->insert($array);
 
-        if($id)
+        if ($id)
             $this->setId($id);
 
         return $id;
@@ -310,8 +310,7 @@ class RegistroCompra extends Model
 
         $rows = $this->pageRows(0, PHP_INT_MAX, "CompraId = $pk");
 
-        foreach($rows as $row)
-        {
+        foreach ($rows as $row) {
             $registroCompra = new RegistroCompra();
             $registroCompra->db->disconnect();
             $registroCompra->setId($row["Id"]);
@@ -343,7 +342,7 @@ class RegistroCompra extends Model
         return $this->pageRows(0, 1, "ProductoId = $idProducto AND CompradorId = $idUsuario") ? true : false;
     }
 
-    public function traerListaDeRegistroCompraPorVendedor ($pk)
+    public function traerListaDeRegistroCompraPorVendedor($pk)
     {
         $registroCompras = array();
 
@@ -360,9 +359,9 @@ class RegistroCompra extends Model
             $registroCompra->getCompra()->traerCompra($registroCompra->getCompraId());
             $registroCompra->getCompra()->db->disconnect();
 
-            $mesCompra = date("m",strtotime($registroCompra->getCompra()->getFechaCompra()));
+            $mesCompra = date("m", strtotime($registroCompra->getCompra()->getFechaCompra()));
 
-            if ($mesCompra == date("m")){
+            if ($mesCompra == date("m")) {
 
                 $registroCompra->setId($row["Id"]);
                 $registroCompra->setCompradorId($row["CompradorId"]);
@@ -377,34 +376,24 @@ class RegistroCompra extends Model
         return $registroCompras;
     }
 
-    public function traerListaDeRegistroComprasPorMes()
+    public function traerListaDeRegistroComprasPorCompraId($compraId)
     {
         $registroCompras = array();
 
-        $rows = $this->pageRows(0, PHP_INT_MAX, " EstadoFacturacionId = 1 order by VendedorId asc  ");
+        $rows = $this->pageRows("", "", "EstadoFacturacionId = 1 AND CompraId = $compraId ORDER BY VendedorId");
 
         foreach ($rows as $row) {
 
             $registroCompra = new RegistroCompra();
             $registroCompra->db->disconnect();
 
+            $registroCompra->setId($row["Id"]);
             $registroCompra->setCompraId($row["CompraId"]);
-
-            $registroCompra->setCompra(new Compra());
-            $registroCompra->getCompra()->traerCompra($registroCompra->getCompraId());
-            $registroCompra->getCompra()->db->disconnect();
-
-            $mesCompra = date("m",strtotime($registroCompra->getCompra()->getFechaCompra()));
-
-            if ($mesCompra == date("m")){
-
-                $registroCompra->setId($row["Id"]);
-                $registroCompra->setVendedorId($row["VendedorId"]);
-                $registroCompra->setCantidad($row["Cantidad"]);
-                $registroCompra->setNombreProducto($row["NombreProducto"]);
-                $registroCompra->setPrecioUnitario($row["PrecioUnitario"]);
-                $registroCompras[] = $registroCompra;
-            }
+            $registroCompra->setVendedorId($row["VendedorId"]);
+            $registroCompra->setCantidad($row["Cantidad"]);
+            $registroCompra->setNombreProducto($row["NombreProducto"]);
+            $registroCompra->setPrecioUnitario($row["PrecioUnitario"]);
+            $registroCompras[] = $registroCompra;
         }
 
         return $registroCompras;
@@ -447,8 +436,6 @@ class RegistroCompra extends Model
 
     public function traerCantidadDeRegistoCompras($vendedorId)
     {
-        return  $this->total("VendedorId = $vendedorId and EstadoFacturacionId = 1");
+        return $this->total("VendedorId = $vendedorId and EstadoFacturacionId = 1");
     }
-
-
 }

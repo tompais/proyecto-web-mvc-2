@@ -140,4 +140,29 @@ class Compra extends Model
         $this->setFechaCompra($compra["FechaCompra"]);
     }
 
+    public function traerFechaCompraMasAntigua()
+    {
+        return ($row = $this->pageRows(0, 1, "DATE(FechaCompra) <= '" . date("Y-m-d", time()) . "' ORDER BY FechaCompra")) ? $row[0]["FechaCompra"] : null;
+    }
+
+    public function traerComprasByRangoFecha($fechaDesde, $fechaHasta)
+    {
+        $compras = [];
+        $rows = $this->pageRows("", "", "DATE(FechaCompra) BETWEEN '$fechaDesde' AND '$fechaHasta'");
+
+        foreach ($rows as $row) {
+            $compra = new Compra();
+            $compra->db->disconnect();
+
+            $compra->setId($row["Id"]);
+            $compra->setCompradorId($row["CompradorId"]);
+            $compra->setFechaCompra($row["FechaCompra"]);
+            $compra->setTotal($row["Total"]);
+
+            $compras[] = $compra;
+        }
+
+        return $compras;
+    }
+
 }
