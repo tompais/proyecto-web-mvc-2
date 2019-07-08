@@ -251,22 +251,22 @@ class DashBoardController extends Controller
         header("Content-type: application/json");
         $estadistica = new Estadistica();
 
-        $productos = $estadistica->traerLosProductosMasBuscados(6);
+        $estadisticas = $estadistica->traerLosProductosMasBuscados(6);
 
-        $productosDto = array();
+        $estadisticasDto = array();
 
-        foreach ($productos as $producto){
-            $productoDto = new ProductoDto();
+        foreach ($estadisticas as $estadistica){
+            $estadisticaDto = new EstadisticaDto();
 
-            $productoDto->nombre = $producto->getNombre();
-            $productoDto->cantidad = $producto->getCantidad();
+            $estadisticaDto->nombre = $estadistica->getNombre();
+            $estadisticaDto->cantidad = $estadistica->getCantidad();
 
-            $productosDto[] = $productoDto;
+            $estadisticasDto[] = $estadisticaDto;
         }
-        if(!$productosDto){
+        if(!$estadisticasDto){
             throw new ProductoNoEncontradoException("No hay productos para estadisticas", CodigoError::ProductoNoEncontrado);
         }else{
-            echo json_encode($productosDto);
+            echo json_encode($estadisticasDto);
         }
 
     }
@@ -275,23 +275,22 @@ class DashBoardController extends Controller
         header("Content-type: application/json");
         $estadistica = new Estadistica();
 
-        $categorias = $estadistica->traerLasCategoriasMasBuscados(6);
+        $estadisticas = $estadistica->traerLasCategoriasMasBuscados(6);
 
-        $productosDto = array();
+        $estadisticasDto = array();
 
-        foreach ($categorias as $categoria){
-            $productoDto = new ProductoDto();
-            $categoriaModel = new Categoria();
-            $categoriaModel->traerCategoria($categoria->getCategoriaId());
-            $productoDto->nombre = $categoriaModel->getNombre();
-            $productoDto->cantidad = $categoria->getCantidad();
+        foreach ($estadisticas as $estadistica){
+            $estadisticaDto = new EstadisticaDto();
 
-            $productosDto[] = $productoDto;
+            $estadisticaDto->nombre = $estadistica->getNombre();
+            $estadisticaDto->cantidad = $estadistica->getCantidad();
+
+            $estadisticasDto[] = $estadisticaDto;
         }
-        if(!$productosDto){
+        if(!$estadisticasDto){
             throw new ProductoNoEncontradoException("No hay productos para estadisticas", CodigoError::ProductoNoEncontrado);
         }else{
-            echo json_encode($productosDto);
+            echo json_encode($estadisticasDto);
         }
     }
 }

@@ -84,6 +84,7 @@ function graficoProductosMasBuscados(productosDto) {
         divProductosBuscados.show();
         buttonProductosMasBuscados.text('Ocultar');
         buttonProductosMasBuscados.attr('onclick', 'ocultarGraficoProductos()');
+
 }
 
 function ocultarGraficoProductos() {
@@ -92,14 +93,14 @@ function ocultarGraficoProductos() {
     buttonProductosMasBuscados.attr('onclick', 'productosMasBuscados()');
 }
 
-function mostrarMensajeProductoVacio() {
+function mostrarMensajeProductoVacio(err) {
     var elementoP = divProductosBuscados.find('.mensajeError');
     divProductosBuscados.show();
     divGraficoProductosMasBuscados.hide();
     if(elementoP.attr('class') === undefined){
         var elementoParam = $('<p class="small text-center text-muted my-5 mensajeError">');
         var elementoEm = $('<em>');
-        elementoEm.text('No hay estadíscticas para productos más buscados');
+        elementoEm.text(err);
         elementoParam.append(elementoEm);
         divProductosBuscados.append(elementoParam);
     }
@@ -158,3 +159,19 @@ function ocultarGraficoCategorias() {
     buttonCategoriasMasBuscadas.text('Mostrar');
     buttonCategoriasMasBuscadas.attr('onclick', 'categoriasMasBuscadas()');
 }
+
+
+
+$('#botonExportarProducto').click(function(){
+    $('#elementOut').append($('#myBarChart'));
+    html2canvas($('#elementOut')).then(function(canvas){
+
+        var imgData = canvas.toDataURL(
+            'image/png');
+        var doc = new jsPDF('p', 'mm');
+        doc.addImage(imgData, 'PNG', 10, 10);
+        doc.save('sample-file.pdf');
+    });
+});
+
+

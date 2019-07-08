@@ -19,6 +19,9 @@
                     </div>
                     <div class="card-footer small text-muted"></div>
                 </div>
+                <div>
+                    <button id="botonExportarProducto">Exportar pdf</button>
+                </div>
             </div>
         </div>
 
@@ -43,6 +46,15 @@
         </div>
     </div>
     <!-- /.container-fluid -->
+    <div class="d-none" id="elementOut">
+
+    </div>
 
 </div>
+
+<script src="<?php echo getBaseAddress() . "Webroot/js/dashboard/estadisticas/html2canvas.js"; ?>"></script>
+<script src="<?php echo getBaseAddress() . "Webroot/js/dashboard/estadisticas/jspdf.min.js"; ?>"></script>
 <script src="<?php echo getBaseAddress() . "Webroot/js/dashboard/estadisticas/estadisticas.js"; ?>"></script>
+
+
+
