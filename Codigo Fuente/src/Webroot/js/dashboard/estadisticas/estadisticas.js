@@ -160,13 +160,12 @@ function ocultarGraficoCategorias() {
     buttonCategoriasMasBuscadas.attr('onclick', 'categoriasMasBuscadas()');
 }
 
-
-$('#botonExportarProducto').click(function () {
-    var myBarChart = $('#myBarChart')[0];
-    var barChartDataUrl = myBarChart.toDataURL("img/png");
+function exportarGraficoProductosPdf() {
+    var myBarChar = $('#myBarChart')[0];
+    var barChartDataUrl = myBarChar.toDataURL("img/png");
     var doc = new jsPDF('l', 'mm', 'a4');
     doc.addImage(barChartDataUrl, 'JPEG', 50, 50, 200, 100);
-    doc.save('estadistica.pdf');
-});
+    doc.save('Estadistica producto.pdf');
+}
 
 
