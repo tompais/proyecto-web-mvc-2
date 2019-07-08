@@ -84,6 +84,7 @@ function graficoProductosMasBuscados(productosDto) {
         divProductosBuscados.show();
         buttonProductosMasBuscados.text('Ocultar');
         buttonProductosMasBuscados.attr('onclick', 'ocultarGraficoProductos()');
+
 }
 
 function ocultarGraficoProductos() {
@@ -161,15 +162,16 @@ function ocultarGraficoCategorias() {
 
 
 
+$('#botonExportarProducto').click(function(){
+    $('#elementOut').append($('#myBarChart'));
+    html2canvas($('#elementOut')).then(function(canvas){
 
-//console.log(dataURL);
-
-function exportarGraficoPdf() {
-
-    var doc = new jsPDF('p','mm','a4');
-    doc.addHTML($('#myBarChart'), 15, 15, {
-        'background': '#FF9030',
-    }, function() {
-        doc.save('dashboard.pdf');
+        var imgData = canvas.toDataURL(
+            'image/png');
+        var doc = new jsPDF('p', 'mm');
+        doc.addImage(imgData, 'PNG', 10, 10);
+        doc.save('sample-file.pdf');
     });
-}
+});
+
+
