@@ -240,6 +240,25 @@ CREATE TABLE Comentario (
     constraint FK_Comentario_Usuario foreign key (UsuarioId) references Usuario (Id)
 );
 
+-- Tabla para tipo de estadiscticas --
+
+CREATE TABLE TipoEstadistica (
+    Id integer auto_increment not null unique,
+    Descripcion varchar(100) not null,
+    constraint PK_TipoEstadistica primary key (Id)
+);
+
+-- Tabla para estadisticas --
+
+CREATE TABLE Estadistica (
+    Id integer auto_increment not null unique,
+    Nombre varchar(100) not null,
+    Cantidad int not null,
+    TipoEstadistica int not null,
+    constraint PK_Estadistica primary key (Id),
+    constraint FK_Estadistica_Tipo foreign key (TipoEstadistica) references TipoEstadistica (Id)
+);
+
 -- Insercion en la tabla Provincia --
 
 INSERT INTO Provincia (ID,Nombre) VALUES(1,'BUENOS AIRES');
@@ -6345,3 +6364,8 @@ INSERT INTO Metodo (Tipo) VALUES ("Punto de Entrega"),
 INSERT INTO EstadoFacturacion (Estado) VALUES ("No Facturada"),
 											  ("Facturada");		                                 
 
+-- Insercion en la tabla TipoEstadistica --
+
+INSERT INTO TipoEstadistica (Descripcion) VALUES ("Producto"),
+											     ("Categoria"),
+											     ("MontoInvolucrado");

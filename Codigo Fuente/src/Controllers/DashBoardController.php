@@ -135,11 +135,9 @@ class DashBoardController extends Controller
         $d["title"] = Constantes::FACTURACIONDASHBOARDTITLE;
 
         $registroCompra = new RegistroCompra();
-        $registroCompras = [];
 
-        $registroCompras = $registroCompra->traerListaDeRegistroCompraPorVendedor($param["usuarioFacturarId"]);
+        $d["registroCompras"] = $registroCompra->traerListaDeRegistroCompraPorVendedor($param["usuarioFacturarId"]);
 
-        $d["registroCompras"] = $registroCompras;
         $d["palabraBuscada"] = $param["palabraBuscada"];
 
         $this->set($d);
@@ -151,14 +149,47 @@ class DashBoardController extends Controller
         $this->layout = "layoutDashBoard";
         $d["title"] = Constantes::FACTURACIONMENSUALDASHBOARDTITLE;
 
-        $registroCompra = new RegistroCompra();
-        $registroCompras = [];
-        $registroCompras  = $registroCompra->traerListaDeRegistroComprasPorMes();
-
-        $d["registroCompras"] = $registroCompras;
+        $compra = new Compra();
+        $d["fechaCompraMasAntigua"] = $compra->traerFechaCompraMasAntigua();
 
         $this->set($d);
         $this->render(Constantes::FACTURACIONMENSUALDASHBOARDVIEW);
+    }
+
+    function getFacturacionesPendientes($json)
+    {
+        header("Content-type: application/json");
+        $data = json_decode($json["data"]);
+
+        $compra = new Compra();
+        $registroCompra = new RegistroCompra();
+        $compras = $compra->traerComprasByRangoFecha($data->fechaDesde, $data->fechaHasta);
+
+        $registrosCompraPorMes = [];
+
+        foreach ($compras as $c) {
+            $registroCompras = $registroCompra->traerListaDeRegistroComprasPorCompraId($c->getId());
+            $registroComprasDto = [];
+
+            foreach ($registroCompras as $rc) {
+                $registroCompraDto = new RegistroCompraDto();
+                $registroCompraDto->id = $rc->getId();
+                $registroCompraDto->compraId = $rc->getCompraId();
+                $registroCompraDto->vendedorId = $rc->getVendedorId();
+                $registroCompraDto->cantidad = $rc->getCantidad();
+                $registroCompraDto->nombreProducto = $rc->getNombreProducto();
+                $registroCompraDto->precioUnitario = $rc->getPrecioUnitario();
+                $registroCompraDto->compra = new CompraDto();
+                $registroCompraDto->compra->fechaCompra = $c->getFechaCompra();
+                $registroComprasDto[] = $registroCompraDto;
+            }
+
+            if($registroComprasDto) {
+                $registrosCompraPorMes[date("m/Y", strtotime($c->getFechaCompra()))] = $registroComprasDto;
+            }
+        }
+
+        echo json_encode($registrosCompraPorMes);
     }
 
     function generarFacturacion($param)
@@ -247,5 +278,50 @@ class DashBoardController extends Controller
         $this->render(Constantes::ESTADISTICASDASHBOARDVIEW);
     }
 
+    function productosMasBuscados($data){
+        header("Content-type: application/json");
+        $estadistica = new Estadistica();
 
+        $estadisticas = $estadistica->traerLosProductosMasBuscados(6);
+
+        $estadisticasDto = array();
+
+        foreach ($estadisticas as $estadistica){
+            $estadisticaDto = new EstadisticaDto();
+
+            $estadisticaDto->nombre = $estadistica->getNombre();
+            $estadisticaDto->cantidad = $estadistica->getCantidad();
+
+            $estadisticasDto[] = $estadisticaDto;
+        }
+        if(!$estadisticasDto){
+            throw new ProductoNoEncontradoException("No hay productos para estadisticas", CodigoError::ProductoNoEncontrado);
+        }else{
+            echo json_encode($estadisticasDto);
+        }
+
+    }
+
+    function categoriasFavoritas($data){
+        header("Content-type: application/json");
+        $estadistica = new Estadistica();
+
+        $estadisticas = $estadistica->traerLasCategoriasMasBuscados(6);
+
+        $estadisticasDto = array();
+
+        foreach ($estadisticas as $estadistica){
+            $estadisticaDto = new EstadisticaDto();
+
+            $estadisticaDto->nombre = $estadistica->getNombre();
+            $estadisticaDto->cantidad = $estadistica->getCantidad();
+
+            $estadisticasDto[] = $estadisticaDto;
+        }
+        if(!$estadisticasDto){
+            throw new ProductoNoEncontradoException("No hay productos para estadisticas", CodigoError::ProductoNoEncontrado);
+        }else{
+            echo json_encode($estadisticasDto);
+        }
+    }
 }

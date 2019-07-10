@@ -22,7 +22,7 @@
 
                 <?php
                         if (!$registroCompras) {
-                            echo '<h5 class="text-center text-black-50">El usario no posee compras a facturar </h5>';
+                            echo '<h5 class="text-center text-black-50">El usuario no posee compras a facturar </h5>';
                         }
                         else{
                             echo "<div class='table-responsive'>
