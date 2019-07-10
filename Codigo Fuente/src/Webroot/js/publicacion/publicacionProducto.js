@@ -459,7 +459,36 @@ rateYo.rateYo({
 
 /*Contador de caracteres en textarea de review*/
 
-reviewMessage.keyup(function () {
+function submitReview() {
+	$('.error').fadeOut().find('span').empty();
+	if (validarTextReview()) {
+		$(this).prop('disabled', true);
+		reviewMessage.prop('disabled', true);
+		rateYo.rateYo('option', 'readOnly', true);
+		var obj = {};
+		obj.calificacion = rateYo.rateYo('rating');
+		obj.detalle = reviewMessage.val();
+		obj.productoId = window.productoId;
+		llamadaAjax(pathGuardarReview, JSON.stringify(obj), true, 'agregarReviewALista', 'guardarReviewFallido');
+	}
+}
+
+reviewMessage.keypress(function (e) {
+	if(e.keyCode == 13) {
+		e.preventDefault();
+		e.stopPropagation();
+		return false;
+	}
+});
+
+reviewMessage.keyup(function (e) {
+	if(e.keyCode == 13) {
+		e.preventDefault();
+		e.stopPropagation();
+		submitReview();
+		return false;
+	}
+
 	var txt = $(this).val();
 	var txtLength = txt.length;
 
@@ -468,6 +497,7 @@ reviewMessage.keyup(function () {
 	} else {
 		$(this).val(txt.substring(0, cantMaxCharsReview));
 		spanReviewCharCounter.text(cantMaxCharsReview);
+
 	}
 });
 
@@ -489,17 +519,7 @@ function validarTextReview() {
 }
 
 btnSubmitReview.click(function () {
-	$('.error').fadeOut().find('span').empty();
-	if(validarTextReview()) {
-		$(this).prop('disabled', true);
-		reviewMessage.prop('disabled', true);
-		rateYo.rateYo('option', 'readOnly', true);
-		var obj = {};
-		obj.calificacion = rateYo.rateYo('rating');
-		obj.detalle = reviewMessage.val();
-		obj.productoId = window.productoId;
-		llamadaAjax(pathGuardarReview, JSON.stringify(obj), true, 'agregarReviewALista', 'guardarReviewFallido');
-	}
+	submitReview();
 });
 
 function agregarReviewALista(review) {

@@ -12,7 +12,7 @@
     const pathGuardarReview = "<?php echo getBaseAddress() . "Productos/guardarReview"; ?>";
     var cantidadReviews = <?php echo $cantidadReviews; ?>;
     const pathGetReviews = "<?php echo getBaseAddress() . "Productos/getReviews" ?>";
-    var idSesion = <?php echo isset($_SESSION["session"])?unserialize($_SESSION["session"])->getId():0; ?>;
+    var idSesion = <?php echo isset($_SESSION["session"]) ? unserialize($_SESSION["session"])->getId() : 0; ?>;
     var usuarioId = <?php echo $producto->getUsuarioId(); ?>;
     var totalComentarios = <?php echo $totalComentarios; ?>;
     const pathPreguntar = "<?php echo getBaseAddress() . "Productos/realizarPregunta "; ?>";
@@ -95,14 +95,14 @@ $patHomePublicacion = getBaseAddress() . 'Productos/publicacion/';
 
                 <div class="d-flex flex-column my-4">
                     <?php
-                    if ($nivelVendedor < 0){
+                    if ($nivelVendedor < 0) {
                         echo '<h6 class="text-black-50">El usuario no ha recibido ninguna calificación</h6>';
                     } else {
                         if ($nivelVendedor >= 0 && $nivelVendedor <= 1.5) {
                             echo "<h5>Nivel de Vendedor: <span class='text-danger'>Pa' atrás</span></h5>";
                         } else if ($nivelVendedor > 1.5 && $nivelVendedor <= 3.5) {
                             echo "<h5>Nivel de Vendedor: <span class='text-warning'>Medio pelo</span></h5>";
-                        } else if($nivelVendedor > 3.5 && $nivelVendedor <= 5) {
+                        } else if ($nivelVendedor > 3.5 && $nivelVendedor <= 5) {
                             echo "<h5>Nivel de Vendedor: <span class='text-success'>Top</span></h5>";
                         }
                         echo '<div id="divNivelVendedorRateYo" style="z-index: 0;"></div>';
@@ -249,14 +249,15 @@ $patHomePublicacion = getBaseAddress() . 'Productos/publicacion/';
                         <!-- Show More -->
 
                         <div id="divShowMoreReviews" class="d-none mt-4 justify-content-center align-items-center">
-                            <h6 id="cursorPointerShowMoreReviews" class="text-primary" style="cursor: pointer;">Mostrar más</h6>
+                            <h6 id="cursorPointerShowMoreReviews" class="text-primary" style="cursor: pointer;">Mostrar
+                                más</h6>
                         </div>
 
                         <!-- Add Review -->
 
                         <?php
 
-                        if(isset($_SESSION["session"]) && unserialize($_SESSION["session"])->getId() != $producto->getUsuarioId() && $usuarioComproEsteProducto && !$usuarioRealizoReviewEsteProducto)
+                        if (isset($_SESSION["session"]) && unserialize($_SESSION["session"])->getId() != $producto->getUsuarioId() && $usuarioComproEsteProducto && !$usuarioRealizoReviewEsteProducto)
                             echo '<div id="divAddReview" class="d-flex flex-column mt-4">
                             <div class="add_review mt-0">
                                 <div id="review_form">
@@ -295,8 +296,7 @@ $patHomePublicacion = getBaseAddress() . 'Productos/publicacion/';
 
                         echo "<div class='d-flex flex-column'>";
 
-                        if(isset($_SESSION["session"]) && unserialize($_SESSION["session"])->getId() != $usuarioId)
-                        {
+                        if (isset($_SESSION["session"]) && unserialize($_SESSION["session"])->getId() != $usuarioId) {
                             echo "<div class='form-group'>
                                         <div>
                                             <textarea id='pregunta' class='form-control input_review' placeholder='Escriba su pregunta...' rows='4'></textarea>
@@ -312,8 +312,7 @@ $patHomePublicacion = getBaseAddress() . 'Productos/publicacion/';
                                 </div> <div id='divComentarios'></div>";
                         }
 
-                        foreach($comentarios as $comentario)
-                        {
+                        foreach ($comentarios as $comentario) {
                             $fechaPregunta = date("d/m/Y", strtotime($comentario->getFechaPregunta()));
                             $username = $comentario->getUsuarioUsername();
                             $pregunta = $comentario->getPregunta();
@@ -331,9 +330,8 @@ $patHomePublicacion = getBaseAddress() . 'Productos/publicacion/';
                                             <p class='text-justify'>$pregunta</p>
                                         </div>
                                     </div><div id='respondido$idPregunta'></div>";
-                                    
-                            if(isset($_SESSION["session"]) && unserialize($_SESSION["session"])->getId() == $usuarioId && !$respuesta)
-                            {
+
+                            if (isset($_SESSION["session"]) && unserialize($_SESSION["session"])->getId() == $usuarioId && !$respuesta) {
                                 echo "<div class='form-group' id='res$idPregunta'>
                                         <div>
                                             <textarea id='respuesta$idPregunta' class='form-control input_review' placeholder='Escriba su respuesta...' rows='4'></textarea>
@@ -343,17 +341,15 @@ $patHomePublicacion = getBaseAddress() . 'Productos/publicacion/';
                                             </button>
                                         </div>
                                     </div>";
-                            }
-                            else
-                            if($respuesta)
-                                echo "<div class='review_date'>$fechaRespuesta</div><p class='text-justify user_name'>$respuesta</p>";
-                        
-                        
+                            } else
+                                if ($respuesta)
+                                    echo "<div class='review_date'>$fechaRespuesta</div><p class='text-justify user_name'>$respuesta</p>";
+
+
                             $i++;
                         }
 
-                        if(($i == 4) && (($totalComentarios - 4) > 0))
-                        {
+                        if (($i == 4) && (($totalComentarios - 4) > 0)) {
                             echo "<div id='masComentarios'></div>
                                 </div>
                                 <div id='divMostrarMas' class='mt-4 justify-content-center align-items-center'>
