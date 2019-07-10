@@ -229,11 +229,11 @@ CREATE TABLE Facturacion (
 
 CREATE TABLE Comentario (
     Id integer auto_increment not null unique,
-    Pregunta varchar(100) not null,
+    Pregunta varchar(200) not null,
     UsuarioId int not null,
     ProductoId int not null,
     UsuarioUsername varchar(30) not null,
-    Respuesta varchar(100),
+    Respuesta varchar(200),
     FechaPregunta date not null,
     FechaRespuesta date,
     constraint PK_Comentario primary key (Id, UsuarioID),
