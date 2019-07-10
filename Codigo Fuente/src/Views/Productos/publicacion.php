@@ -294,7 +294,7 @@ $patHomePublicacion = getBaseAddress() . 'Productos/publicacion/';
                         $usuarioId = $producto->getUsuarioId();
                         $i = 0;
 
-                        echo "<div class='d-flex flex-column'>";
+                        echo "<div class='user_review_container d-flex flex-column mb-0'>";
 
                         if (isset($_SESSION["session"]) && unserialize($_SESSION["session"])->getId() != $usuarioId) {
                             echo "<div class='form-group'>
@@ -306,56 +306,63 @@ $patHomePublicacion = getBaseAddress() . 'Productos/publicacion/';
                                             <div class='d-flex justify-content-end mb-0'>
                                             <p class='mb-0'><span id='spanComentarioCharCounter'>0</span>/200</p>
                                             </div>
+                                            <div id='errorPregunta' class='error'><i class='fas fa-exclamation-triangle mr-2'></i><span></span></div>
                                             <button id='btnPregunta' type='button' class='mt-3 float-right btn btn-primary'>Preguntar
                                             </button>
                                         </div>
                                 </div> <div id='divComentarios'></div>";
                         }
 
-                        foreach ($comentarios as $comentario) {
-                            $fechaPregunta = date("d/m/Y", strtotime($comentario->getFechaPregunta()));
-                            $username = $comentario->getUsuarioUsername();
-                            $pregunta = $comentario->getPregunta();
-                            $respuesta = $comentario->getRespuesta();
-                            $fechaRespuesta = date("d/m/Y", strtotime($comentario->getFechaRespuesta()));
-                            $idPregunta = $comentario->getId();
+                        if(!$comentarios)
+                            echo '<h6 class="text-black-50 text-center mx-auto" id="sinComentarios">No existen comentarios para este producto</h6>';
+                        else{
+                            foreach ($comentarios as $comentario) {
+                                $fechaPregunta = date("d/m/Y", strtotime($comentario->getFechaPregunta()));
+                                $username = $comentario->getUsuarioUsername();
+                                $pregunta = $comentario->getPregunta();
+                                $respuesta = $comentario->getRespuesta();
+                                $fechaRespuesta = date("d/m/Y", strtotime($comentario->getFechaRespuesta()));
+                                $idPregunta = $comentario->getId();
 
-                            echo "<div class='user_review_container d-flex flex-column flex-sm-row'>
-                                        <div class='user'>
-                                            <div class='user_pic'></div>
-                                        </div>
-                                        <div class='review pl-3'>
-                                            <div class='review_date'>$fechaPregunta</div>
-                                            <div class='user_name mb-1'>$username</div>
-                                            <p class='text-justify'>$pregunta</p>
-                                        </div>
-                                    </div><div id='respondido$idPregunta'></div>";
+                                echo "<div class='user_review_container d-flex flex-column flex-sm-row'>
+                                            <div class='review pl-0'>
+                                                <div class='review_date'>$fechaPregunta</div>
+                                                <div class='user_name mb-1'>$username</div>
+                                                <p class='text-justify'>$pregunta</p>
+                                            </div>
+                                        </div><div id='respondido$idPregunta'></div>";
 
-                            if (isset($_SESSION["session"]) && unserialize($_SESSION["session"])->getId() == $usuarioId && !$respuesta) {
-                                echo "<div class='form-group' id='res$idPregunta'>
-                                        <div>
-                                            <textarea id='respuesta$idPregunta' class='form-control input_review' placeholder='Escriba su respuesta...' rows='4'></textarea>
-                                        </div>
-                                        <div class='text-left text-sm-right'>
-                                            <button onclick='responder($idPregunta)' type='button' class='mt-3 float-right btn btn-primary'>Responder
-                                            </button>
-                                        </div>
+                                if (isset($_SESSION["session"]) && unserialize($_SESSION["session"])->getId() == $usuarioId && !$respuesta) {
+                                    echo "<div class='form-group' id='res$idPregunta'>
+                                            <div>
+                                                <textarea id='respuesta$idPregunta' rows='2' class='form-control input_review contadorRespuesta' placeholder='Escriba su respuesta...' rows='4'></textarea>
+                                            </div>
+                                            <div class='text-left text-sm-right'>
+                                                <div class='d-flex justify-content-end mb-0'>
+                                                <p class='mb-0'><span id='spanRespuestaCharCounter$idPregunta'>0</span>/200</p>
+                                                </div>
+                                                <div id='errorRespuesta$idPregunta' class='error'><i class='fas fa-exclamation-triangle mr-2'></i><span></span></div>
+                                                <button onclick='responder($idPregunta)' type='button' class='mt-3 float-right btn btn-primary'>Responder
+                                                </button>
+                                            </div>
+                                        </div>";
+                                } else
+                                    if ($respuesta)
+                                        echo "<div class='review_date'>$fechaRespuesta</div><div class='user_name mb-1 text-primary'>Respuesta:</div><p class='text-justify user_name'>$respuesta</p>";
+
+
+                                $i++;
+                            }
+
+                            if (($i == 4) && (($totalComentarios - 4) > 0)) {
+                                echo "<div id='masComentarios'></div>
+                                    <div id='divMostrarMas' class='mt-4 justify-content-center align-items-center'>
+                                        <h6 id='cursorMasComentarios' onclick='mostrarMas($id)' class='text-primary' style='cursor: pointer;'>Mostrar más</h6>
                                     </div>";
-                            } else
-                                if ($respuesta)
-                                    echo "<div class='review_date'>$fechaRespuesta</div><p class='text-justify user_name'>$respuesta</p>";
-
-
-                            $i++;
+                            }
                         }
 
-                        if (($i == 4) && (($totalComentarios - 4) > 0)) {
-                            echo "<div id='masComentarios'></div>
-                                </div>
-                                <div id='divMostrarMas' class='mt-4 justify-content-center align-items-center'>
-                                    <h6 id='cursorMasComentarios' onclick='mostrarMas($id)' class='text-primary' style='cursor: pointer;'>Mostrar más</h6>
-                                </div>";
-                        }
+                        echo "</div>";
 
                         ?>
 
