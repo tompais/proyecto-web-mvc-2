@@ -518,6 +518,8 @@ function guardarReviewFallido(err) {
 
 function cargarPreguntaExitosa(pregunta)
 {
+	$("#pregunta").val('');
+
 	var divContenedor = $("<div class='user_review_container d-flex flex-column flex-sm-row'></div>");
 
 	var divUser = $("<div class='user'><div class='user_pic'></div></div>");
@@ -653,6 +655,18 @@ function mostrarMas(idProducto)
 	obj.idProducto = idProducto;
 	llamadaAjax(pathMostrarMas, JSON.stringify(obj), true, "cargarMasComentarios", "dummy");
 }
+
+pregunta.keyup(function () {
+	var txt = $(this).val();
+	var txtLength = txt.length;
+
+	if(txtLength <= cantMaxCharsReview) {
+		spanReviewCharCounter.text(txtLength);
+	} else {
+		$(this).val(txt.substring(0, cantMaxCharsReview));
+		spanReviewCharCounter.text(cantMaxCharsReview);
+	}
+});
 
 /*Implementación de nivel de vendedor con estrellas*/
 

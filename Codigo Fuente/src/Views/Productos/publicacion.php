@@ -15,7 +15,6 @@
     var idSesion = <?php echo isset($_SESSION["session"])?unserialize($_SESSION["session"])->getId():0; ?>;
     var usuarioId = <?php echo $producto->getUsuarioId(); ?>;
     var totalComentarios = <?php echo $totalComentarios; ?>;
-    console.log(totalComentarios);
     const pathPreguntar = "<?php echo getBaseAddress() . "Productos/realizarPregunta "; ?>";
     const pathResponder = "<?php echo getBaseAddress() . "Productos/realizarRespuesta "; ?>";
     const pathMostrarMas = "<?php echo getBaseAddress() . "Productos/mostrarMas "; ?>";
@@ -304,6 +303,9 @@ $patHomePublicacion = getBaseAddress() . 'Productos/publicacion/';
                                         </div>
                                         <div class='text-left text-sm-right'>
                                             <input type='hidden' id='productoId' value='$id' />
+                                            <div class='d-flex justify-content-end mb-0'>
+                                            <p class='mb-0'><span id='spanComentarioCharCounter'>0</span>/200</p>
+                                            </div>
                                             <button id='btnPregunta' type='button' class='mt-3 float-right btn btn-primary'>Preguntar
                                             </button>
                                         </div>
