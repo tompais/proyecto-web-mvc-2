@@ -284,7 +284,7 @@ $patHomePublicacion = getBaseAddress() . 'Productos/publicacion/';
 
                     <div id="tab_5" class="tab_container">
 
-                        <div class="tab_title reviews_title">
+                        <div class="tab_title reviews_title mb-0">
                             <h4>Comentarios</h4>
                         </div>
 
@@ -297,7 +297,7 @@ $patHomePublicacion = getBaseAddress() . 'Productos/publicacion/';
                         echo "<div class='user_review_container d-flex flex-column mb-0'>";
 
                         if (isset($_SESSION["session"]) && unserialize($_SESSION["session"])->getId() != $usuarioId) {
-                            echo "<div class='form-group'>
+                            echo "<div class='form-group mt-4'>
                                         <div>
                                             <textarea id='pregunta' class='form-control input_review' placeholder='Escriba su pregunta...' rows='4'></textarea>
                                         </div>
@@ -321,11 +321,10 @@ $patHomePublicacion = getBaseAddress() . 'Productos/publicacion/';
                                 $username = $comentario->getUsuarioUsername();
                                 $pregunta = $comentario->getPregunta();
                                 $respuesta = $comentario->getRespuesta();
-                                $fechaRespuesta = date("d/m/Y", strtotime($comentario->getFechaRespuesta()));
                                 $idPregunta = $comentario->getId();
 
-                                echo "<div class='user_review_container d-flex flex-column flex-sm-row'>
-                                            <div class='review pl-0'>
+                                echo "<div class='user_review_container my-0 d-flex flex-column flex-sm-row'>
+                                            <div class='review pl-0 mt-4'>
                                                 <div class='review_date'>$fechaPregunta</div>
                                                 <div class='user_name mb-1'>$username</div>
                                                 <p class='text-justify'>$pregunta</p>
@@ -348,7 +347,7 @@ $patHomePublicacion = getBaseAddress() . 'Productos/publicacion/';
                                         </div>";
                                 } else
                                     if ($respuesta)
-                                        echo "<div class='review_date'>$fechaRespuesta</div><div class='user_name mb-1 text-primary'>Respuesta:</div><p class='text-justify user_name'>$respuesta</p>";
+                                        echo "<div class='user_name mb-1 text-primary'>Respuesta:</div><p class='text-justify user_name'>$respuesta</p>";
 
 
                                 $i++;

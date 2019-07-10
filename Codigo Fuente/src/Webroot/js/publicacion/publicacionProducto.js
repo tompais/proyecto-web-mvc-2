@@ -548,9 +548,9 @@ function cargarPreguntaExitosa(pregunta)
 
 	$("#pregunta").val('');
 
-	var divContenedor = $("<div class='user_review_container d-flex flex-column flex-sm-row'></div>");
+	var divContenedor = $("<div class='user_review_container my-0 d-flex flex-column flex-sm-row'></div>");
 
-	var divPregunta = $("<div class='review pl-0'></div>");
+	var divPregunta = $("<div class='review pl-0 mt-4'></div>");
 
 	var divFechaPregunta = $("<div class='review_date'></div>");
 	divFechaPregunta.append(pregunta.fechaPregunta);
@@ -576,13 +576,9 @@ function cargarRespuestaExitosa(respuesta)
 
 	var divRespuesta = $("#respondido" + respuesta.id);
 
-	var divFechaRespuesta = $("<div class='review_date'></div>");
-	divFechaRespuesta.append(respuesta.fechaRespuesta);
-
 	var pRespuesta = $("<p class='text-justify user_name'></p>");
 	pRespuesta.text(respuesta.respuesta);
 
-	divRespuesta.append(divFechaRespuesta);
 	divRespuesta.append("<div class='user_name mb-1 text-primary'>Respuesta:</div>");
 	divRespuesta.append(pRespuesta);
 }
@@ -629,9 +625,9 @@ function cargarMasComentarios(comentarios)
 {
 	var divMasComentarios = $("#masComentarios");
 	$.each(comentarios, function(index, comentario){
-		var divContenedor = $("<div class='user_review_container d-flex flex-column flex-sm-row'></div>");
+		var divContenedor = $("<div class='user_review_container my-0 d-flex flex-row flex-sm-row'></div>");
 
-		var divPregunta = $("<div class='review pl-0'></div>");
+		var divPregunta = $("<div class='review pl-0 mt-4'></div>");
 
 		var divFechaPregunta = $("<div class='review_date'></div>");
 		divFechaPregunta.append(comentario.fechaPregunta);
@@ -676,13 +672,9 @@ function cargarMasComentarios(comentarios)
 		else
 		if(comentario.respuesta)
 		{
-			var divFechaRespuesta = $("<div class='review_date'></div>");
-			divFechaRespuesta.append(comentario.fechaRespuesta);
-
 			var pRespuesta = $("<p class='text-justify user_name'></p>");
 			pRespuesta.text(comentario.respuesta);
 
-			divMasComentarios.append(divFechaRespuesta);
 			divMasComentarios.append("<div class='user_name mb-1 text-primary'>Respuesta:</div>");
 			divMasComentarios.append(pRespuesta);
 		}
