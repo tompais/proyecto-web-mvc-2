@@ -72,6 +72,30 @@
 
             </div>
         </div>
+
+        <ol class="breadcrumb justify-content-between">
+            <li>Productos con mayor monto acumulado</li>
+            <li class="breadcrumb-item text">
+                <button class="btn btn-primary" onclick="montosMasAcumulados()" id="botonAcumulados">Mostrar</button>
+            </li>
+        </ol>
+        <div id="masAcumulado" class="row justify-content-center">
+            <div class="col-lg-8" id="graficoMasAcumulados">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <i class="fas fa-chart-pie"></i>
+                        Gráfico montos involucrados</div>
+                    <div class="card-body" id="contenedorCanvasAcumulados">
+                        <canvas id="myPieChartAcumulados" width="100%" height="100"></canvas>
+                    </div>
+                    <div class="row justify-content-center mb-3">
+                        <button class="btn btn-primary" onclick="exportarGraficoAcumuladosPdf()">Exportar a pdf</button>
+                    </div>
+                    <div class="card-footer small text-muted"></div>
+                </div>
+
+            </div>
+        </div>
     </div>
     <!-- /.container-fluid -->
 

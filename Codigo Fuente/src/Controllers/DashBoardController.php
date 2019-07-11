@@ -347,4 +347,29 @@ class DashBoardController extends Controller
             echo json_encode($estadisticasDto);
         }
     }
+
+    function montosInvolucrados($data)
+    {
+        header("Content-type: application/json");
+        $estadistica = new Estadistica();
+        header("Content-type: application/json");
+
+        $estadisticas = $estadistica->traerEstadisticas(6, 3);
+
+        $estadisticasDto = array();
+
+        foreach ($estadisticas as $estadistica) {
+            $estadisticaDto = new EstadisticaDto();
+
+            $estadisticaDto->nombre = $estadistica->getNombre();
+            $estadisticaDto->cantidad = $estadistica->getCantidad();
+
+            $estadisticasDto[] = $estadisticaDto;
+        }
+        if (!$estadisticasDto) {
+            throw new ProductoNoEncontradoException("No hay productos para estadisticas", CodigoError::ProductoNoEncontrado);
+        } else {
+            echo json_encode($estadisticasDto);
+        }
+    }
 }

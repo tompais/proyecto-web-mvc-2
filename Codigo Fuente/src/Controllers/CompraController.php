@@ -41,6 +41,8 @@ class CompraController extends Controller
 
             $estadistica->insertarProductoMasVendidos($producto->getNombre(), $fila->cantidad);
 
+            $estadistica->insertarMontosAcumulados($producto->getNombre(), $fila->cantidad * $producto->getPrecio());
+
             $producto->setCantidad($producto->getCantidad() - $fila->cantidad);
 
             $registroCompraDto = new RegistroCompraDto();

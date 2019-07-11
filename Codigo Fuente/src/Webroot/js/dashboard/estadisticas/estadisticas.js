@@ -7,11 +7,15 @@ var buttonCategoriasMasBuscadas = $('#botonCategorias');
 var divProductosVendidos = $('#masVendido');
 var buttonProductosMasVendidos = $('#botonVendidos');
 var divGraficoMasVendidos = $('#graficoMasVendidos');
+var divMontosInvolucrados = $('#masAcumulado');
+var divGraficoMasInvolucrados = $('#graficoMasAcumulados');
+var buttonMontosInvolucrados = $('#botonAcumulados');
 
 $(document).ready(function ($) {
     divProductosBuscados.hide();
     divCategoriasFavoritas.hide();
     divProductosVendidos.hide();
+    divMontosInvolucrados.hide();
 });
 
 function productosMasBuscados() {
@@ -191,7 +195,7 @@ function resetCanvasCategorias() {
     $('#contenedorCanvasCategorias').append('<canvas id="myPieChart" width="100%" height="50">');
 }
 
-function resetProductosVendidos() {
+function resetCanvasProductosVendidos() {
     $('#myPieChartVendidos').remove(); // this is my <canvas> element
     $('#contenedorCanvasVendidos').append('<canvas id="myPieChartVendidos" width="100%" height="50">');
 }
@@ -265,17 +269,107 @@ function ocultarGraficoProductosVendidos() {
 }
 
 function mostrarMensajeProductoVendidoVacio(err) {
-    var elementoP = divProductosBuscados.find('.mensajeError');
-    divProductosBuscados.show();
-    divGraficoProductosMasBuscados.hide();
+    var elementoP = divProductosVendidos.find('.mensajeError');
+    divProductosVendidos.show();
+    divGraficoMasVendidos.hide();
     if(elementoP.attr('class') === undefined){
         var elementoParam = $('<p class="small text-center text-muted my-5 mensajeError">');
         var elementoEm = $('<em>');
         elementoEm.text(err);
         elementoParam.append(elementoEm);
-        divProductosBuscados.append(elementoParam);
+        divProductosVendidos.append(elementoParam);
     }
-    buttonProductosMasBuscados.text('Ocultar');
-    buttonProductosMasBuscados.attr('onclick', 'ocultarGraficoProductos()');
+    buttonProductosMasVendidos.text('Ocultar');
+    buttonProductosMasVendidos.attr('onclick', 'ocultarGraficoProductos()');
+
+}
+
+function resetCanvasMontosInvolucrados() {
+    $('#myPieChartAcumulados').remove(); // this is my <canvas> element
+    $('#contenedorCanvasAcumulados').append('<canvas id="myPieChartAcumulados" width="100%" height="50">');
+}
+
+function montosMasAcumulados() {
+    var obj ={};
+    llamadaAjax(pathHome + 'Dashboard/montosInvolucrados', JSON.stringify(obj), true, "graficoMontosInvolucrados", "mostrarMensajeMontoAcumuladoVacio");
+}
+
+function graficoMontosInvolucrados(productosDto) {
+    Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+    Chart.defaults.global.defaultFontColor = '#292b2c';
+    var nombresProductos = obtenerNombres(productosDto);
+    var cantidadesProductos = obtenerCantidades(productosDto);
+    var cantidadMaxima = parseInt(cantidadesProductos[0]);
+    // Bar Chart Example
+    resetCanvasMontosInvolucrados();
+    var ctx = document.getElementById('myPieChartAcumulados');
+
+    var myLineChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: nombresProductos,
+
+            datasets: [{
+                label: "Cantidad",
+                backgroundColor: "rgba(2,117,216,1)",
+                borderColor: "rgba(2,117,216,1)",
+                data: cantidadesProductos,
+            }],
+        },
+        options: {
+            scales: {
+                xAxes: [{
+                    time: {
+                        unit: 'month'
+                    },
+                    gridLines: {
+                        display: false
+                    },
+                    ticks: {
+                        maxTicksLimit: 6
+                    }
+                }],
+                yAxes: [{
+                    ticks: {
+                        min: 0,
+                        max: cantidadMaxima + cantidadMaxima * 40 /100,
+                        maxTicksLimit: cantidadMaxima * 3
+                    },
+                    gridLines: {
+                        display: true
+                    }
+                }],
+            },
+            legend: {
+                display: false
+            }
+        }
+    });
+    divMontosInvolucrados.show();
+    divGraficoMasInvolucrados.show();
+    buttonMontosInvolucrados.text('Ocultar');
+    buttonMontosInvolucrados.attr('onclick', 'ocultarGraficoMontosInvolucrados()');
+
+}
+
+function ocultarGraficoMontosInvolucrados() {
+    divMontosInvolucrados.hide();
+    buttonMontosInvolucrados.text('Mostrar');
+    buttonMontosInvolucrados.attr('onclick', 'montosMasAcumulados()');
+}
+
+function mostrarMensajeMontoAcumuladoVacio(err) {
+    var elementoP = divMontosInvolucrados.find('.mensajeError');
+    divMontosInvolucrados.show();
+    divGraficoMasInvolucrados.hide();
+    if(elementoP.attr('class') === undefined){
+        var elementoParam = $('<p class="small text-center text-muted my-5 mensajeError">');
+        var elementoEm = $('<em>');
+        elementoEm.text(err);
+        elementoParam.append(elementoEm);
+        divMontosInvolucrados.append(elementoParam);
+    }
+    buttonMontosInvolucrados.text('Ocultar');
+    buttonMontosInvolucrados.attr('onclick', 'ocultarGraficoMontosInvolucrados()');
 
 }

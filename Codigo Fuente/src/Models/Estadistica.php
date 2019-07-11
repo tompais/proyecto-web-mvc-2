@@ -152,4 +152,23 @@ class Estadistica extends Model
 
         return $estadisticas;
     }
+
+    public function insertarMontosAcumulados($nombreProducto, $montoAcumulado){
+        $row = $this->pageRows(0, 1, "Nombre = '$nombreProducto' AND TipoEstadistica = 3");
+
+        if(!$row){
+            $array = [
+                "Nombre" => $nombreProducto,
+                "Cantidad" => $montoAcumulado,
+                "TipoEstadistica" => 3
+            ];
+            $this->insert($array);
+        }else{
+            $row[0]["Cantidad"] += $montoAcumulado;
+
+            if (!$this->update($row[0])) {
+                $row = null;
+            }
+        }
+    }
 }
