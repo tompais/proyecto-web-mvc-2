@@ -96,19 +96,6 @@ class Estadistica extends Model
         }
     }
 
-    public function traerLosProductosMasBuscados($cantidad){
-        $rows = $this->pageRows(0, $cantidad, "TipoEstadistica = 1 ORDER by Cantidad DESC");
-        $estadisticas = array();
-        foreach ($rows as $row) {
-            $estadistica = new Estadistica();
-            $estadistica->setNombre($row["Nombre"]);
-            $estadistica->setCantidad($row["Cantidad"]);
-            $estadisticas[] = $estadistica;
-        }
-
-        return $estadisticas;
-    }
-
     public function insertarCategoriasBuscadas($productos){
 
         foreach ($productos as $producto){
@@ -134,8 +121,27 @@ class Estadistica extends Model
         }
     }
 
-    public function traerLasCategoriasMasBuscados($cantidad){
-        $rows = $this->pageRows(0, $cantidad, "TipoEstadistica = 2 ORDER by Cantidad DESC");
+    public function insertarProductoMasVendidos($nombreProducto, $cantidadVendida){
+        $row = $this->pageRows(0, 1, "Nombre = '$nombreProducto' AND TipoEstadistica = 4");
+
+        if(!$row){
+            $array = [
+                "Nombre" => $nombreProducto,
+                "Cantidad" => $cantidadVendida,
+                "TipoEstadistica" => 4
+            ];
+            $this->insert($array);
+        }else{
+            $row[0]["Cantidad"] += $cantidadVendida;
+
+            if (!$this->update($row[0])) {
+                $row = null;
+            }
+        }
+    }
+
+    public function traerEstadisticas($cantidad, $tipoEstadistica){
+        $rows = $this->pageRows(0, $cantidad, "TipoEstadistica = '$tipoEstadistica' ORDER by Cantidad DESC");
         $estadisticas = array();
         foreach ($rows as $row) {
             $estadistica = new Estadistica();
@@ -147,4 +153,22 @@ class Estadistica extends Model
         return $estadisticas;
     }
 
+    public function insertarMontosAcumulados($nombreProducto, $montoAcumulado){
+        $row = $this->pageRows(0, 1, "Nombre = '$nombreProducto' AND TipoEstadistica = 3");
+
+        if(!$row){
+            $array = [
+                "Nombre" => $nombreProducto,
+                "Cantidad" => $montoAcumulado,
+                "TipoEstadistica" => 3
+            ];
+            $this->insert($array);
+        }else{
+            $row[0]["Cantidad"] += $montoAcumulado;
+
+            if (!$this->update($row[0])) {
+                $row = null;
+            }
+        }
+    }
 }

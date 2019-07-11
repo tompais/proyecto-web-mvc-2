@@ -6366,6 +6366,7 @@ INSERT INTO EstadoFacturacion (Estado) VALUES ("No Facturada"),
 
 -- Insercion en la tabla TipoEstadistica --
 
-INSERT INTO TipoEstadistica (Descripcion) VALUES ("Producto"),
-											     ("Categoria"),
-											     ("MontoInvolucrado");
+INSERT INTO TipoEstadistica (Descripcion) VALUES ("ProductoFavorito"),
+											     ("CategoriaFavorita"),
+											     ("MontoInvolucrado"),
+											     ("MasVendidos");
