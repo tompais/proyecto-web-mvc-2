@@ -48,6 +48,30 @@
 
             </div>
         </div>
+
+        <ol class="breadcrumb justify-content-between">
+            <li>Productos más vendidos</li>
+            <li class="breadcrumb-item text">
+                <button class="btn btn-primary" onclick="productosMasVendidos()" id="botonVendidos">Mostrar</button>
+            </li>
+        </ol>
+        <div id="masVendido" class="row justify-content-center">
+            <div class="col-lg-8" id="graficoMasVendidos">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <i class="fas fa-chart-pie"></i>
+                        Gráfico más vendidos</div>
+                    <div class="card-body" id="contenedorCanvasVendidos">
+                        <canvas id="myPieChartVendidos" width="100%" height="100"></canvas>
+                    </div>
+                    <div class="row justify-content-center mb-3">
+                        <button class="btn btn-primary" onclick="exportarGraficoVendidosPdf()">Exportar a pdf</button>
+                    </div>
+                    <div class="card-footer small text-muted"></div>
+                </div>
+
+            </div>
+        </div>
     </div>
     <!-- /.container-fluid -->
 

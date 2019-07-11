@@ -4,10 +4,14 @@ var buttonProductosMasBuscados = $('#botonProductos');
 var divGraficoProductosMasBuscados = $('#graficoProductosBuscados');
 var divGraficoCategoriasFavoritas = $('#graficoCategoriasFavoritas');
 var buttonCategoriasMasBuscadas = $('#botonCategorias');
+var divProductosVendidos = $('#masVendido');
+var buttonProductosMasVendidos = $('#botonVendidos');
+var divGraficoMasVendidos = $('#graficoMasVendidos');
 
 $(document).ready(function ($) {
     divProductosBuscados.hide();
     divCategoriasFavoritas.hide();
+    divProductosVendidos.hide();
 });
 
 function productosMasBuscados() {
@@ -185,4 +189,93 @@ function resetCanvasProductos() {
 function resetCanvasCategorias() {
     $('#myPieChart').remove(); // this is my <canvas> element
     $('#contenedorCanvasCategorias').append('<canvas id="myPieChart" width="100%" height="50">');
+}
+
+function resetProductosVendidos() {
+    $('#myPieChartVendidos').remove(); // this is my <canvas> element
+    $('#contenedorCanvasVendidos').append('<canvas id="myPieChartVendidos" width="100%" height="50">');
+}
+function productosMasVendidos() {
+    var obj ={};
+    llamadaAjax(pathHome + 'Dashboard/productosMasVendidos', JSON.stringify(obj), true, "graficoProductosMasVendidos", "mostrarMensajeProductoVendidoVacio");
+}
+
+function graficoProductosMasVendidos(productosDto) {
+    Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+    Chart.defaults.global.defaultFontColor = '#292b2c';
+    var nombresProductos = obtenerNombres(productosDto);
+    var cantidadesProductos = obtenerCantidades(productosDto);
+    var cantidadMaxima = parseInt(cantidadesProductos[0]);
+    // Bar Chart Example
+    resetCanvasProductosVendidos();
+    var ctx = document.getElementById('myPieChartVendidos');
+
+    var myLineChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: nombresProductos,
+
+            datasets: [{
+                label: "Cantidad",
+                backgroundColor: "rgba(2,117,216,1)",
+                borderColor: "rgba(2,117,216,1)",
+                data: cantidadesProductos,
+            }],
+        },
+        options: {
+            scales: {
+                xAxes: [{
+                    time: {
+                        unit: 'month'
+                    },
+                    gridLines: {
+                        display: false
+                    },
+                    ticks: {
+                        maxTicksLimit: 6
+                    }
+                }],
+                yAxes: [{
+                    ticks: {
+                        min: 0,
+                        max: cantidadMaxima + cantidadMaxima * 40 /100,
+                        maxTicksLimit: cantidadMaxima * 3
+                    },
+                    gridLines: {
+                        display: true
+                    }
+                }],
+            },
+            legend: {
+                display: false
+            }
+        }
+    });
+    divProductosVendidos.show();
+    divGraficoMasVendidos.show();
+    buttonProductosMasVendidos.text('Ocultar');
+    buttonProductosMasVendidos.attr('onclick', 'ocultarGraficoProductosVendidos()');
+
+}
+
+function ocultarGraficoProductosVendidos() {
+    divProductosVendidos.hide();
+    buttonProductosMasVendidos.text('Mostrar');
+    buttonProductosMasVendidos.attr('onclick', 'productosMasVendidos()');
+}
+
+function mostrarMensajeProductoVendidoVacio(err) {
+    var elementoP = divProductosBuscados.find('.mensajeError');
+    divProductosBuscados.show();
+    divGraficoProductosMasBuscados.hide();
+    if(elementoP.attr('class') === undefined){
+        var elementoParam = $('<p class="small text-center text-muted my-5 mensajeError">');
+        var elementoEm = $('<em>');
+        elementoEm.text(err);
+        elementoParam.append(elementoEm);
+        divProductosBuscados.append(elementoParam);
+    }
+    buttonProductosMasBuscados.text('Ocultar');
+    buttonProductosMasBuscados.attr('onclick', 'ocultarGraficoProductos()');
+
 }

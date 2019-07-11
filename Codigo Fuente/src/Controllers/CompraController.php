@@ -24,6 +24,8 @@ class CompraController extends Controller
 
         $metodo = new Metodo();
 
+        $estadistica = new Estadistica();
+
         $registrosComprasDto = [];
 
         foreach ($data as $fila) {
@@ -36,6 +38,8 @@ class CompraController extends Controller
             if(($producto->getCantidad() - $fila->cantidad) < 0) {
                 throw new CantidadProductoNegativaException("La cantidad pedida del producto con id " . $fila->id . " supera al stock disponible", CodigoError::CantidadProductoNegativa);
             }
+
+            $estadistica->insertarProductoMasVendidos($producto->getNombre(), $fila->cantidad);
 
             $producto->setCantidad($producto->getCantidad() - $fila->cantidad);
 

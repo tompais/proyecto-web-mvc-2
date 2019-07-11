@@ -282,7 +282,7 @@ class DashBoardController extends Controller
         header("Content-type: application/json");
         $estadistica = new Estadistica();
 
-        $estadisticas = $estadistica->traerLosProductosMasBuscados(6);
+        $estadisticas = $estadistica->traerEstadisticas(6, 1);
 
         $estadisticasDto = array();
 
@@ -306,7 +306,30 @@ class DashBoardController extends Controller
         header("Content-type: application/json");
         $estadistica = new Estadistica();
 
-        $estadisticas = $estadistica->traerLasCategoriasMasBuscados(6);
+        $estadisticas = $estadistica->traerEstadisticas(6, 2);
+
+        $estadisticasDto = array();
+
+        foreach ($estadisticas as $estadistica){
+            $estadisticaDto = new EstadisticaDto();
+
+            $estadisticaDto->nombre = $estadistica->getNombre();
+            $estadisticaDto->cantidad = $estadistica->getCantidad();
+
+            $estadisticasDto[] = $estadisticaDto;
+        }
+        if(!$estadisticasDto){
+            throw new ProductoNoEncontradoException("No hay categorias para estadisticas", CodigoError::ProductoNoEncontrado);
+        }else{
+            echo json_encode($estadisticasDto);
+        }
+    }
+
+    function productosMasVendidos($data){
+        header("Content-type: application/json");
+        $estadistica = new Estadistica();
+
+        $estadisticas = $estadistica->traerEstadisticas(6, 4);
 
         $estadisticasDto = array();
 
