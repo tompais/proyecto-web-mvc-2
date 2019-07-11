@@ -5,7 +5,7 @@
         <ol class="breadcrumb justify-content-between">
             <li>Productos más buscados</li>
             <li class="breadcrumb-item text">
-                <button class="btn btn-primary" onclick="productosMasBuscados()" id="botonProductos">Mostrar</button>
+                <button class="btn btn-primary" onclick="buscarEstadisticas(6,1,'myBarChart','botonProductos')" id="botonProductos">Mostrar</button>
             </li>
         </ol>
         <div id="productosMasBuscados">
@@ -28,7 +28,7 @@
         <ol class="breadcrumb justify-content-between">
             <li>Categorías favoritas</li>
             <li class="breadcrumb-item text">
-                <button class="btn btn-primary" onclick="categoriasMasBuscadas()" id="botonCategorias">Mostrar</button>
+                <button class="btn btn-primary" onclick="buscarEstadisticas(6,2,'myPieChart', 'botonCategorias')" id="botonCategorias">Mostrar</button>
             </li>
         </ol>
         <div id="categoriasFavoritas" class="row justify-content-center">
@@ -52,7 +52,7 @@
         <ol class="breadcrumb justify-content-between">
             <li>Productos más vendidos</li>
             <li class="breadcrumb-item text">
-                <button class="btn btn-primary" onclick="productosMasVendidos()" id="botonVendidos">Mostrar</button>
+                <button class="btn btn-primary" onclick="buscarEstadisticas(6,4,'myPieChartVendidos','botonVendidos')" id="botonVendidos">Mostrar</button>
             </li>
         </ol>
         <div id="masVendido" class="row justify-content-center">
@@ -76,7 +76,7 @@
         <ol class="breadcrumb justify-content-between">
             <li>Productos con mayor monto acumulado</li>
             <li class="breadcrumb-item text">
-                <button class="btn btn-primary" onclick="montosMasAcumulados()" id="botonAcumulados">Mostrar</button>
+                <button class="btn btn-primary" onclick="buscarEstadisticas(6, 3, 'myPieChartAcumulados', 'botonAcumulados')" id="botonAcumulados">Mostrar</button>
             </li>
         </ol>
         <div id="masAcumulado" class="row justify-content-center">

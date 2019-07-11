@@ -278,83 +278,13 @@ class DashBoardController extends Controller
         $this->render(Constantes::ESTADISTICASDASHBOARDVIEW);
     }
 
-    function productosMasBuscados($data){
+    function buscarEstadisticas($json){
         header("Content-type: application/json");
         $estadistica = new Estadistica();
 
-        $estadisticas = $estadistica->traerEstadisticas(6, 1);
+        $data = json_decode(utf8_decode($json['data']));
 
-        $estadisticasDto = array();
-
-        foreach ($estadisticas as $estadistica){
-            $estadisticaDto = new EstadisticaDto();
-
-            $estadisticaDto->nombre = $estadistica->getNombre();
-            $estadisticaDto->cantidad = $estadistica->getCantidad();
-
-            $estadisticasDto[] = $estadisticaDto;
-        }
-        if(!$estadisticasDto){
-            throw new ProductoNoEncontradoException("No hay productos para estadisticas", CodigoError::ProductoNoEncontrado);
-        }else{
-            echo json_encode($estadisticasDto);
-        }
-
-    }
-
-    function categoriasFavoritas($data){
-        header("Content-type: application/json");
-        $estadistica = new Estadistica();
-
-        $estadisticas = $estadistica->traerEstadisticas(6, 2);
-
-        $estadisticasDto = array();
-
-        foreach ($estadisticas as $estadistica){
-            $estadisticaDto = new EstadisticaDto();
-
-            $estadisticaDto->nombre = $estadistica->getNombre();
-            $estadisticaDto->cantidad = $estadistica->getCantidad();
-
-            $estadisticasDto[] = $estadisticaDto;
-        }
-        if(!$estadisticasDto){
-            throw new ProductoNoEncontradoException("No hay categorias para estadisticas", CodigoError::ProductoNoEncontrado);
-        }else{
-            echo json_encode($estadisticasDto);
-        }
-    }
-
-    function productosMasVendidos($data){
-        header("Content-type: application/json");
-        $estadistica = new Estadistica();
-
-        $estadisticas = $estadistica->traerEstadisticas(6, 4);
-
-        $estadisticasDto = array();
-
-        foreach ($estadisticas as $estadistica){
-            $estadisticaDto = new EstadisticaDto();
-
-            $estadisticaDto->nombre = $estadistica->getNombre();
-            $estadisticaDto->cantidad = $estadistica->getCantidad();
-
-            $estadisticasDto[] = $estadisticaDto;
-        }
-        if(!$estadisticasDto){
-            throw new ProductoNoEncontradoException("No hay productos para estadisticas", CodigoError::ProductoNoEncontrado);
-        }else{
-            echo json_encode($estadisticasDto);
-        }
-    }
-
-    function montosInvolucrados($data)
-    {
-        header("Content-type: application/json");
-        $estadistica = new Estadistica();
-        header("Content-type: application/json");
-
-        $estadisticas = $estadistica->traerEstadisticas(6, 3);
+        $estadisticas = $estadistica->traerEstadisticas($data->cantidad, $data->tipoEstadistica);
 
         $estadisticasDto = array();
 
@@ -363,12 +293,20 @@ class DashBoardController extends Controller
 
             $estadisticaDto->nombre = $estadistica->getNombre();
             $estadisticaDto->cantidad = $estadistica->getCantidad();
-
             $estadisticasDto[] = $estadisticaDto;
         }
         if (!$estadisticasDto) {
-            throw new ProductoNoEncontradoException("No hay productos para estadisticas", CodigoError::ProductoNoEncontrado);
+            throw new ProductoNoEncontradoException("No hay estadisticas para el gráfico seleccionado", CodigoError::ProductoNoEncontrado);
         } else {
+            $label = "cantidad";
+
+            if($data->tipoEstadistica == 3){
+                $label = "Monto acumulado";
+            }
+            $estadisticasDto[0]->label = $label;
+            $estadisticasDto[0]->idBoton = $data->idBoton;
+            $estadisticasDto[0]->idCanvas = $data->idCanvas;
+            $estadisticasDto[0]->tipoEstadistica = $data->tipoEstadistica;
             echo json_encode($estadisticasDto);
         }
     }
