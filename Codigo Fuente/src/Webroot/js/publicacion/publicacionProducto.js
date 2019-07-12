@@ -550,7 +550,9 @@ function cargarPreguntaExitosa(pregunta)
 
 	var divContenedor = $("<div class='user_review_container my-0 d-flex flex-column flex-sm-row'></div>");
 
-	var divPregunta = $("<div class='review pl-0 mt-4'></div>");
+	var divPregunta = $("<div class='review pl-0 row ml-1 mt-4'></div>");
+
+	var iBurbuja = $("<i class='fa-2x far fa-comment'></i>");
 
 	var divFechaPregunta = $("<div class='review_date'></div>");
 	divFechaPregunta.append(pregunta.fechaPregunta);
@@ -561,9 +563,15 @@ function cargarPreguntaExitosa(pregunta)
 	var pPregunta = $("<p class='text-justify'></p>");
 	pPregunta.text(pregunta.pregunta);
 
-	divPregunta.append(divFechaPregunta);
-	divPregunta.append(divUsername);
-	divPregunta.append(pPregunta);
+	var divCol = $("<div class='col'></div>");
+
+	divPregunta.append(iBurbuja);
+
+	divCol.append(divFechaPregunta);
+	divCol.append(divUsername);
+	divCol.append(pPregunta);
+
+	divPregunta.append(divCol);
 
 	divContenedor.append(divPregunta);
 
@@ -576,11 +584,19 @@ function cargarRespuestaExitosa(respuesta)
 
 	var divRespuesta = $("#respondido" + respuesta.id);
 
+	var iBurbuja = $("<i class='fa-2x fas fa-comment fa-flip-horizontal'></i>");
+
+	divRespuesta.append(iBurbuja);
+
+	var divCol = $("<div class='col'></div>");
+
 	var pRespuesta = $("<p class='text-justify user_name'></p>");
 	pRespuesta.text(respuesta.respuesta);
 
-	divRespuesta.append("<div class='user_name mb-1 text-primary'>Respuesta:</div>");
-	divRespuesta.append(pRespuesta);
+	divCol.append("<div class='review_date'>" + respuesta.fechaRespuesta + "</div>");
+	divCol.append(pRespuesta);
+
+	divRespuesta.append(divCol);
 }
 
 function preguntar() {
@@ -627,7 +643,12 @@ function cargarMasComentarios(comentarios)
 	$.each(comentarios, function(index, comentario){
 		var divContenedor = $("<div class='user_review_container my-0 d-flex flex-row flex-sm-row'></div>");
 
-		var divPregunta = $("<div class='review pl-0 mt-4'></div>");
+		var divPregunta = $("<div class='review pl-0 mt-4 ml-1 row'></div>");
+
+		var iBurbujaP = $("<i class='fa-2x far fa-comment'></i>");
+		divPregunta.append(iBurbujaP);
+
+		divColP = $("<div class='col'></div>");
 
 		var divFechaPregunta = $("<div class='review_date'></div>");
 		divFechaPregunta.append(comentario.fechaPregunta);
@@ -638,15 +659,17 @@ function cargarMasComentarios(comentarios)
 		var pPregunta = $("<p class='text-justify'></p>");
 		pPregunta.text(comentario.pregunta);
 
-		divPregunta.append(divFechaPregunta);
-		divPregunta.append(divUsername);
-		divPregunta.append(pPregunta);
+		divColP.append(divFechaPregunta);
+		divColP.append(divUsername);
+		divColP.append(pPregunta);
+
+		divPregunta.append(divColP);
 
 		divContenedor.append(divPregunta);
 
 		divMasComentarios.append(divContenedor);
 
-		var divRes = $("<div id='respondido" + comentario.id + "'></div>");
+		var divRes = $("<div id='respondido" + comentario.id + "' class='ml-5 row'></div>");
 
 		divMasComentarios.append(divRes);
 		
@@ -672,11 +695,22 @@ function cargarMasComentarios(comentarios)
 		else
 		if(comentario.respuesta)
 		{
+			var divContenedorRespuesta = $("<div class='ml-5 row'></div>");
+
+			var iBurbujaR = $("<i class='fa-2x fas fa-comment fa-flip-horizontal'></i>");
+			divContenedorRespuesta.append(iBurbujaR);
+
+			var divColR = $("<div class='col'></div>");
+
 			var pRespuesta = $("<p class='text-justify user_name'></p>");
 			pRespuesta.text(comentario.respuesta);
 
-			divMasComentarios.append("<div class='user_name mb-1 text-primary'>Respuesta:</div>");
-			divMasComentarios.append(pRespuesta);
+			divColR.append("<div class='review_date'>" + comentario.fechaRespuesta + "</div>");
+			divColR.append(pRespuesta);
+
+			divContenedorRespuesta.append(divColR);
+
+			divMasComentarios.append(divContenedorRespuesta);
 		}
 
 		inicio++;
