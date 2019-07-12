@@ -294,24 +294,8 @@ $patHomePublicacion = getBaseAddress() . 'Productos/publicacion/';
                         $usuarioId = $producto->getUsuarioId();
                         $i = 0;
 
-                        echo "<div class='user_review_container d-flex flex-column mb-0'>";
-
-                        if (isset($_SESSION["session"]) && unserialize($_SESSION["session"])->getId() != $usuarioId) {
-                            echo "<div class='form-group mt-4'>
-                                        <div>
-                                            <textarea id='pregunta' class='form-control input_review' placeholder='Escriba su pregunta...' rows='4'></textarea>
-                                        </div>
-                                        <div class='text-left text-sm-right'>
-                                            <input type='hidden' id='productoId' value='$id' />
-                                            <div class='d-flex justify-content-end mb-0'>
-                                            <p class='mb-0'><span id='spanComentarioCharCounter'>0</span>/200</p>
-                                            </div>
-                                            <div id='errorPregunta' class='error'><i class='fas fa-exclamation-triangle mr-2'></i><span></span></div>
-                                            <button id='btnPregunta' type='button' class='mt-3 float-right btn btn-primary'>Preguntar
-                                            </button>
-                                        </div>
-                                </div> <div id='divComentarios'></div>";
-                        }
+                        echo "<div class='user_review_container d-flex flex-column mb-0'>
+                                <div id='divComentarios'></div>";
 
                         if(!$comentarios)
                             echo '<h6 class="text-black-50 text-center mx-auto" id="sinComentarios">No existen comentarios para este producto</h6>';
@@ -322,14 +306,18 @@ $patHomePublicacion = getBaseAddress() . 'Productos/publicacion/';
                                 $pregunta = $comentario->getPregunta();
                                 $respuesta = $comentario->getRespuesta();
                                 $idPregunta = $comentario->getId();
+                                $fechaRespuesta = date("d/m/Y", strtotime($comentario->getFechaRespuesta()));
 
                                 echo "<div class='user_review_container my-0 d-flex flex-column flex-sm-row'>
-                                            <div class='review pl-0 mt-4'>
+                                            <div class='review row pl-0 ml-1 mt-4'>
+                                                <i class='fa-2x far fa-comment'></i>
+                                                <div class='col'>
                                                 <div class='review_date'>$fechaPregunta</div>
                                                 <div class='user_name mb-1'>$username</div>
                                                 <p class='text-justify'>$pregunta</p>
+                                                </div>
                                             </div>
-                                        </div><div id='respondido$idPregunta'></div>";
+                                        </div><div id='respondido$idPregunta' class='ml-5 row'></div>";
 
                                 if (isset($_SESSION["session"]) && unserialize($_SESSION["session"])->getId() == $usuarioId && !$respuesta) {
                                     echo "<div class='form-group' id='res$idPregunta'>
@@ -347,7 +335,16 @@ $patHomePublicacion = getBaseAddress() . 'Productos/publicacion/';
                                         </div>";
                                 } else
                                     if ($respuesta)
-                                        echo "<div class='user_name mb-1 text-primary'>Respuesta:</div><p class='text-justify user_name'>$respuesta</p>";
+                                    {
+                                        echo "<div class='ml-5 row'>
+                                                <i class='fa-2x fas fa-comment fa-flip-horizontal'></i>
+                                                <div class='col'>
+                                                <div class='review_date'>$fechaRespuesta</div>
+                                                <p class='text-justify user_name'>$respuesta</p>
+                                                </div>
+                                            </div>";
+
+                                    }
 
 
                                 $i++;
@@ -359,8 +356,26 @@ $patHomePublicacion = getBaseAddress() . 'Productos/publicacion/';
                                         <h6 id='cursorMasComentarios' onclick='mostrarMas($id)' class='text-primary' style='cursor: pointer;'>Mostrar más</h6>
                                     </div>";
                             }
-                        }
 
+                        }
+                        
+                        if (isset($_SESSION["session"]) && unserialize($_SESSION["session"])->getId() != $usuarioId) {
+                            echo "<div class='form-group mt-4'>
+                                        <div>
+                                            <textarea id='pregunta' class='form-control input_review' placeholder='Escriba su pregunta...' rows='2'></textarea>
+                                        </div>
+                                        <div class='text-left text-sm-right'>
+                                            <input type='hidden' id='productoId' value='$id' />
+                                            <div class='d-flex justify-content-end mb-0'>
+                                            <p class='mb-0'><span id='spanComentarioCharCounter'>0</span>/200</p>
+                                            </div>
+                                            <div id='errorPregunta' class='error'><i class='fas fa-exclamation-triangle mr-2'></i><span></span></div>
+                                            <button id='btnPregunta' type='button' class='mt-3 float-right btn btn-primary'>Preguntar
+                                            </button>
+                                        </div>
+                                </div>";
+                        }
+                        
                         echo "</div>";
 
                         ?>
