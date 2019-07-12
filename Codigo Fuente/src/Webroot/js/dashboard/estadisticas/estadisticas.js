@@ -26,20 +26,12 @@ function obtenerCantidades(productosDto) {
     return cantidades;
 }
 
-function exportarGraficoProductosPdf() {
-    var myBarChar = $('#myBarChart')[0];
+function exportarGraficoPdf(idCanvas, nombreArchivo) {
+    var myBarChar = $('#'+idCanvas)[0];
     var barChartDataUrl = myBarChar.toDataURL("img/png");
     var doc = new jsPDF('l', 'mm', 'a4');
     doc.addImage(barChartDataUrl, 'JPEG', 50, 50, 200, 100);
-    doc.save('Estadistica producto.pdf');
-}
-
-function exportarGraficoCategoriasPdf() {
-    var myPieChar = $('#myPieChart')[0];
-    var pieChartDataUrl = myPieChar.toDataURL("img/png");
-    var doc = new jsPDF('l', 'mm', 'a4');
-    doc.addImage(pieChartDataUrl, 'JPEG', 50, 50, 200, 100);
-    doc.save('Estadistica categorias.pdf');
+    doc.save(nombreArchivo);
 }
 
 function buscarEstadisticas(cantidad, tipoEstadistica, idCanvas, idBoton) {
@@ -130,6 +122,7 @@ function resetCanvas(idCanvas, idContenedorCanvas) {
     canvas.attr('id',idCanvas);// this is my <canvas> element
     $('#'+idContenedorCanvas).append(canvas);
 }
+
 function graficoTorta(estadisticasDto) {
     Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
     Chart.defaults.global.defaultFontColor = '#292b2c';
@@ -166,7 +159,6 @@ function graficoTorta(estadisticasDto) {
 }
 
 function ocultarGrafico(idDiv, idButton, tipoEstadistica, cantidad, idCanvas) {
-
     var divContenedor = $('#'+idDiv);
     var button = $('#'+idButton);
 
