@@ -357,24 +357,25 @@ $patHomePublicacion = getBaseAddress() . 'Productos/publicacion/';
                                     </div>";
                             }
 
-                            if (isset($_SESSION["session"]) && unserialize($_SESSION["session"])->getId() != $usuarioId) {
-                                echo "<div class='form-group mt-4'>
-                                            <div>
-                                                <textarea id='pregunta' class='form-control input_review' placeholder='Escriba su pregunta...' rows='2'></textarea>
-                                            </div>
-                                            <div class='text-left text-sm-right'>
-                                                <input type='hidden' id='productoId' value='$id' />
-                                                <div class='d-flex justify-content-end mb-0'>
-                                                <p class='mb-0'><span id='spanComentarioCharCounter'>0</span>/200</p>
-                                                </div>
-                                                <div id='errorPregunta' class='error'><i class='fas fa-exclamation-triangle mr-2'></i><span></span></div>
-                                                <button id='btnPregunta' type='button' class='mt-3 float-right btn btn-primary'>Preguntar
-                                                </button>
-                                            </div>
-                                    </div>";
-                            }
                         }
-
+                        
+                        if (isset($_SESSION["session"]) && unserialize($_SESSION["session"])->getId() != $usuarioId) {
+                            echo "<div class='form-group mt-4'>
+                                        <div>
+                                            <textarea id='pregunta' class='form-control input_review' placeholder='Escriba su pregunta...' rows='2'></textarea>
+                                        </div>
+                                        <div class='text-left text-sm-right'>
+                                            <input type='hidden' id='productoId' value='$id' />
+                                            <div class='d-flex justify-content-end mb-0'>
+                                            <p class='mb-0'><span id='spanComentarioCharCounter'>0</span>/200</p>
+                                            </div>
+                                            <div id='errorPregunta' class='error'><i class='fas fa-exclamation-triangle mr-2'></i><span></span></div>
+                                            <button id='btnPregunta' type='button' class='mt-3 float-right btn btn-primary'>Preguntar
+                                            </button>
+                                        </div>
+                                </div>";
+                        }
+                        
                         echo "</div>";
 
                         ?>
