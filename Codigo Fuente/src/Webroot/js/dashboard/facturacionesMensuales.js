@@ -17,7 +17,7 @@ function cargarTablas(registrosComprasPorMes) {
    } else {
       advertencia.addClass('d-none');
       $.each(registrosComprasPorMes, function (mes, registros) {
-         var divCard = $('<div class="card mb-3">');
+         var divCard = $('<div class="card mb-3 w-100">');
 
          var divCardHeader = $('<div class="card-header">');
 
