@@ -11,12 +11,13 @@ var tableId = null;
 inicializarDateRangePicker();
 
 function cargarTablas(registrosComprasPorMes) {
+   divCardsContainer.empty();
    if(registrosComprasPorMes === null || registrosComprasPorMes.length === 0) {
       advertencia.removeClass('d-none');
    } else {
       advertencia.addClass('d-none');
       $.each(registrosComprasPorMes, function (mes, registros) {
-         var divCard = $('<div class="card mb-3">');
+         var divCard = $('<div class="card mb-3 w-100">');
 
          var divCardHeader = $('<div class="card-header">');
 
@@ -198,7 +199,7 @@ function facturacionExitoso (dummy) {
    tableId = null;
    btnFacturar = null;
    if(divCardsContainer.length === 1) {
-      divCardsContainer.removeClass('d-flex').addClass('d-none');
+      divCardsContainer.removeClass('d-flex').addClass('d-none').empty();
       advertencia.removeClass('d-none');
    }
    alertify.alert('Facturación exitosa', 'Se ha realizado la facturación correspondiente');

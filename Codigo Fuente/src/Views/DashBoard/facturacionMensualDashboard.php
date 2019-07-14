@@ -30,7 +30,7 @@
 
         <h4 id="advertencia" class="d-none text-black-50 text-center mx-auto">No hay facturaciones pendientes</h4>
         <!-- DataTables Example -->
-        <div id="divCardsContainer" class="d-none justify-content-center align-items-center">
+        <div id="divCardsContainer" class="d-none flex-column justify-content-center align-items-center">
         </div>
 
 
