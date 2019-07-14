@@ -148,7 +148,7 @@ function inicializarDateRangePicker() {
       inputRangoFacturacion.daterangepicker({
          showDropdowns: true,
          opens: 'left',
-         minDate: Math.round(moment.duration(moment().diff(moment(fechaMasAntiguaCompra, 'YYYY-MM-DD HH:mm:ss'))).asDays()) >= 7 ? moment().subtract(7, 'days') : moment(fechaMasAntiguaCompra, 'YYYY-MM-DD HH:mm:ss').format('DD/MM/YYYY'),
+         minDate: moment(fechaMasAntiguaCompra, 'YYYY-MM-DD HH:mm:ss').format('DD/MM/YYYY'),
          maxDate: moment().format('DD/MM/YYYY'),
          locale: {
             format: 'DD/MM/YYYY',
