@@ -278,49 +278,35 @@ class DashBoardController extends Controller
         $this->render(Constantes::ESTADISTICASDASHBOARDVIEW);
     }
 
-    function productosMasBuscados($data){
+    function buscarEstadisticas($json){
         header("Content-type: application/json");
         $estadistica = new Estadistica();
 
-        $estadisticas = $estadistica->traerLosProductosMasBuscados(6);
+        $data = json_decode(utf8_decode($json['data']));
+
+        $estadisticas = $estadistica->traerEstadisticas($data->cantidad, $data->tipoEstadistica);
 
         $estadisticasDto = array();
 
-        foreach ($estadisticas as $estadistica){
+        foreach ($estadisticas as $estadistica) {
             $estadisticaDto = new EstadisticaDto();
 
             $estadisticaDto->nombre = $estadistica->getNombre();
             $estadisticaDto->cantidad = $estadistica->getCantidad();
-
             $estadisticasDto[] = $estadisticaDto;
         }
-        if(!$estadisticasDto){
-            throw new ProductoNoEncontradoException("No hay productos para estadisticas", CodigoError::ProductoNoEncontrado);
-        }else{
-            echo json_encode($estadisticasDto);
-        }
+        if (!$estadisticasDto) {
+            throw new ProductoNoEncontradoException("No hay estadisticas para el gráfico seleccionado", CodigoError::ProductoNoEncontrado);
+        } else {
+            $label = "cantidad";
 
-    }
-
-    function categoriasFavoritas($data){
-        header("Content-type: application/json");
-        $estadistica = new Estadistica();
-
-        $estadisticas = $estadistica->traerLasCategoriasMasBuscados(6);
-
-        $estadisticasDto = array();
-
-        foreach ($estadisticas as $estadistica){
-            $estadisticaDto = new EstadisticaDto();
-
-            $estadisticaDto->nombre = $estadistica->getNombre();
-            $estadisticaDto->cantidad = $estadistica->getCantidad();
-
-            $estadisticasDto[] = $estadisticaDto;
-        }
-        if(!$estadisticasDto){
-            throw new ProductoNoEncontradoException("No hay productos para estadisticas", CodigoError::ProductoNoEncontrado);
-        }else{
+            if($data->tipoEstadistica == 3){
+                $label = "Monto acumulado";
+            }
+            $estadisticasDto[0]->label = $label;
+            $estadisticasDto[0]->idBoton = $data->idBoton;
+            $estadisticasDto[0]->idCanvas = $data->idCanvas;
+            $estadisticasDto[0]->tipoEstadistica = $data->tipoEstadistica;
             echo json_encode($estadisticasDto);
         }
     }

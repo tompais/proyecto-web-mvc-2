@@ -1,4 +1,5 @@
 const cantMaxCharsReview = 200;
+const cantMaxCharsPregunta = 200;
 const pageSize = 4;
 
 var pageNumber = 1;
@@ -21,6 +22,10 @@ var pregunta = $("#pregunta");
 var producId = $("#productoId");
 var divComentarios = $("#divComentarios");
 var inicio = 4;
+var spanComentarioCharCounter = $('#spanComentarioCharCounter');
+var respuesta = null;
+var spanRespuestaCharCounter = null;
+var errorRespuesta = null;
 
 /* JS Document */
 
@@ -538,11 +543,16 @@ function guardarReviewFallido(err) {
 
 function cargarPreguntaExitosa(pregunta)
 {
-	var divContenedor = $("<div class='user_review_container d-flex flex-column flex-sm-row'></div>");
+	spanComentarioCharCounter.text("0");
+	$("#sinComentarios").remove();
 
-	var divUser = $("<div class='user'><div class='user_pic'></div></div>");
+	$("#pregunta").val('');
 
-	var divPregunta = $("<div class='review pl-3'></div>");
+	var divContenedor = $("<div class='user_review_container my-0 d-flex flex-column flex-sm-row'></div>");
+
+	var divPregunta = $("<div class='review pl-0 row ml-1 mt-4'></div>");
+
+	var iBurbuja = $("<i class='fa-2x far fa-comment'></i>");
 
 	var divFechaPregunta = $("<div class='review_date'></div>");
 	divFechaPregunta.append(pregunta.fechaPregunta);
@@ -553,11 +563,16 @@ function cargarPreguntaExitosa(pregunta)
 	var pPregunta = $("<p class='text-justify'></p>");
 	pPregunta.text(pregunta.pregunta);
 
-	divPregunta.append(divFechaPregunta);
-	divPregunta.append(divUsername);
-	divPregunta.append(pPregunta);
+	var divCol = $("<div class='col'></div>");
 
-	divContenedor.append(divUser);
+	divPregunta.append(iBurbuja);
+
+	divCol.append(divFechaPregunta);
+	divCol.append(divUsername);
+	divCol.append(pPregunta);
+
+	divPregunta.append(divCol);
+
 	divContenedor.append(divPregunta);
 
 	divComentarios.prepend(divContenedor);
@@ -569,14 +584,19 @@ function cargarRespuestaExitosa(respuesta)
 
 	var divRespuesta = $("#respondido" + respuesta.id);
 
-	var divFechaRespuesta = $("<div class='review_date'></div>");
-	divFechaRespuesta.append(respuesta.fechaRespuesta);
+	var iBurbuja = $("<i class='fa-2x fas fa-comment fa-flip-horizontal'></i>");
+
+	divRespuesta.append(iBurbuja);
+
+	var divCol = $("<div class='col'></div>");
 
 	var pRespuesta = $("<p class='text-justify user_name'></p>");
 	pRespuesta.text(respuesta.respuesta);
 
-	divRespuesta.append(divFechaRespuesta);
-	divRespuesta.append(pRespuesta);
+	divCol.append("<div class='review_date'>" + respuesta.fechaRespuesta + "</div>");
+	divCol.append(pRespuesta);
+
+	divRespuesta.append(divCol);
 }
 
 function preguntar() {
@@ -587,25 +607,48 @@ function preguntar() {
 }
 
 function responder(idPregunta) {
-	var obj = {};
-	obj.respuesta = $("#respuesta" + idPregunta).val();
-	obj.id = idPregunta;
-	llamadaAjax(pathResponder, JSON.stringify(obj), true, "cargarRespuestaExitosa", "dummy");
+
+	if(respuesta != null)
+		var textRespuesta = respuesta.val();
+	else
+		var textRespuesta = $("#respuesta" + idPregunta).val();
+
+	if (textRespuesta === null || textRespuesta.length === 0 || textRespuesta === "")
+		$("#errorRespuesta" + idPregunta).fadeIn('slow').find('span').text('Ingrese una respuesta');
+	else{
+		$('.error').fadeOut().find('span').empty();
+		var obj = {};
+		obj.respuesta = $("#respuesta" + idPregunta).val();
+		obj.id = idPregunta;
+		llamadaAjax(pathResponder, JSON.stringify(obj), true, "cargarRespuestaExitosa", "dummy");
+	}
+
+
 }
 
 btnPregunta.click(function () {
-    preguntar();
+	var textPregunta = pregunta.val();
+
+	if (textPregunta === null || textPregunta.length === 0 || textPregunta === "")
+		$('#errorPregunta').fadeIn('slow').find('span').text('Ingrese una pregunta');
+	else{
+		$('.error').fadeOut().find('span').empty();
+		preguntar();
+	}
 });
 
 function cargarMasComentarios(comentarios)
 {
 	var divMasComentarios = $("#masComentarios");
 	$.each(comentarios, function(index, comentario){
-		var divContenedor = $("<div class='user_review_container d-flex flex-column flex-sm-row'></div>");
+		var divContenedor = $("<div class='user_review_container my-0 d-flex flex-row flex-sm-row'></div>");
 
-		var divUser = $("<div class='user'><div class='user_pic'></div></div>");
+		var divPregunta = $("<div class='review pl-0 mt-4 ml-1 row'></div>");
 
-		var divPregunta = $("<div class='review pl-3'></div>");
+		var iBurbujaP = $("<i class='fa-2x far fa-comment'></i>");
+		divPregunta.append(iBurbujaP);
+
+		divColP = $("<div class='col'></div>");
 
 		var divFechaPregunta = $("<div class='review_date'></div>");
 		divFechaPregunta.append(comentario.fechaPregunta);
@@ -616,16 +659,17 @@ function cargarMasComentarios(comentarios)
 		var pPregunta = $("<p class='text-justify'></p>");
 		pPregunta.text(comentario.pregunta);
 
-		divPregunta.append(divFechaPregunta);
-		divPregunta.append(divUsername);
-		divPregunta.append(pPregunta);
+		divColP.append(divFechaPregunta);
+		divColP.append(divUsername);
+		divColP.append(pPregunta);
 
-		divContenedor.append(divUser);
+		divPregunta.append(divColP);
+
 		divContenedor.append(divPregunta);
 
 		divMasComentarios.append(divContenedor);
 
-		var divRes = $("<div id='" + comentario.id + "'></div>");
+		var divRes = $("<div id='respondido" + comentario.id + "' class='ml-5 row'></div>");
 
 		divMasComentarios.append(divRes);
 		
@@ -633,13 +677,15 @@ function cargarMasComentarios(comentarios)
 		{
 			var divContenedorResponder = $("<div class='form-group' id='res" + comentario.id + "'>");
 
-			var divTextarea = $("<div><textarea id='respuesta" + comentario.id + "' class='form-control input_review' placeholder='Escriba su respuesta...' rows='4'></textarea></div>");
+			var divTextarea = $("<div><textarea id='respuesta" + comentario.id + "' rows='2' class='form-control input_review contadorRespuesta' placeholder='Escriba su respuesta...'></textarea></div>");
 
 			divContenedorResponder.append(divTextarea);
 
 			var divBoton = $("<div class='text-left text-sm-right'></div>");
+			var spanYContador = $("<p class='mb-0'><span id='spanRespuestaCharCounter" + comentario.id + "'>0</span>/200</p></div><div id='errorRespuesta" + comentario.id + "' class='error'><i class='fas fa-exclamation-triangle mr-2'></i><span></span></div>");
 			var boton = $("<button onclick='responder(" + comentario.id + ")' type='button' class='mt-3 float-right btn btn-primary'>Responder</button>");
 
+			divBoton.append(spanYContador);
 			divBoton.append(boton);
 
 			divContenedorResponder.append(divBoton);
@@ -649,14 +695,22 @@ function cargarMasComentarios(comentarios)
 		else
 		if(comentario.respuesta)
 		{
-			var divFechaRespuesta = $("<div class='review_date'></div>");
-			divFechaRespuesta.append(comentario.fechaRespuesta);
+			var divContenedorRespuesta = $("<div class='ml-5 row'></div>");
+
+			var iBurbujaR = $("<i class='fa-2x fas fa-comment fa-flip-horizontal'></i>");
+			divContenedorRespuesta.append(iBurbujaR);
+
+			var divColR = $("<div class='col'></div>");
 
 			var pRespuesta = $("<p class='text-justify user_name'></p>");
 			pRespuesta.text(comentario.respuesta);
 
-			divMasComentarios.append(divFechaRespuesta);
-			divMasComentarios.append(pRespuesta);
+			divColR.append("<div class='review_date'>" + comentario.fechaRespuesta + "</div>");
+			divColR.append(pRespuesta);
+
+			divContenedorRespuesta.append(divColR);
+
+			divMasComentarios.append(divContenedorRespuesta);
 		}
 
 		inicio++;
@@ -674,6 +728,43 @@ function mostrarMas(idProducto)
 	llamadaAjax(pathMostrarMas, JSON.stringify(obj), true, "cargarMasComentarios", "dummy");
 }
 
+pregunta.keyup(function () {
+	var txt = $(this).val();
+	var txtLength = txt.length;
+
+	if(txtLength <= cantMaxCharsPregunta) {
+		spanComentarioCharCounter.text(txtLength);
+	} else {
+		$(this).val(txt.substring(0, cantMaxCharsPregunta));
+		spanComentarioCharCounter.text(cantMaxCharsPregunta);
+	}
+});
+
+$(document).on("click", ".contadorRespuesta", function(){
+	var id = $(this).attr("id");
+	console.log(id);
+
+	respuesta = $("#" + id);
+
+	spanRespuestaCharCounter = $("#" + id.replace("respuesta", "spanRespuestaCharCounter"));
+	contarRespuesta();
+
+	errorRespuesta = $("#" + id.replace("respuesta", "errorRespuesta"));
+});
+
+function contarRespuesta(){
+	respuesta.keyup(function () {
+		var txt = $(this).val();
+		var txtLength = txt.length;
+
+		if(txtLength <= cantMaxCharsPregunta) {
+			spanRespuestaCharCounter.text(txtLength);
+		} else {
+			$(this).val(txt.substring(0, cantMaxCharsPregunta));
+			spanRespuestaCharCounter.text(cantMaxCharsPregunta);
+		}
+	});
+}
 /*Implementación de nivel de vendedor con estrellas*/
 
 divNivelVendedorRateYo.rateYo({
