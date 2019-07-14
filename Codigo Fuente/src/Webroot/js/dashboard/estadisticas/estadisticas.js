@@ -86,7 +86,7 @@ function graficoBarras(estadisticasDto) {
                 yAxes: [{
                     ticks: {
                         min: 0,
-                        max: cantidadMaxima + cantidadMaxima * 40 /100,
+                        max: cantidadMaxima,
                         maxTicksLimit: cantidadMaxima * 3
                     },
                     gridLines: {

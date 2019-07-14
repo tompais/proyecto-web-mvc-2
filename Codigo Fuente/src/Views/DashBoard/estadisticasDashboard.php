@@ -9,7 +9,7 @@
             </li>
         </ol>
         <div id="productosMasBuscados" class="row justify-content-center">
-            <div class="col-lg-8" id="graficoProductosBuscados">
+            <div class="col-lg" id="graficoProductosBuscados">
                 <div class="card mb-3">
                     <div class="card-header">
                         <i class="fas fa-chart-bar"></i>
@@ -33,7 +33,7 @@
             </li>
         </ol>
         <div id="categoriasFavoritas" class="row justify-content-center">
-            <div class="col-lg-8" id="graficoCategoriasFavoritas">
+            <div class="col-lg" id="graficoCategoriasFavoritas">
                 <div class="card mb-3">
                     <div class="card-header">
                         <i class="fas fa-chart-pie"></i>
@@ -58,7 +58,7 @@
             </li>
         </ol>
         <div id="masVendido" class="row justify-content-center">
-            <div class="col-lg-8" id="graficoMasVendidos">
+            <div class="col-lg" id="graficoMasVendidos">
                 <div class="card mb-3">
                     <div class="card-header">
                         <i class="fas fa-chart-pie"></i>
@@ -83,7 +83,7 @@
             </li>
         </ol>
         <div id="masAcumulado" class="row justify-content-center">
-            <div class="col-lg-8" id="graficoMasAcumulados">
+            <div class="col-lg" id="graficoMasAcumulados">
                 <div class="card mb-3">
                     <div class="card-header">
                         <i class="fas fa-chart-pie"></i>

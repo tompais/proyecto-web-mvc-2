@@ -3,7 +3,7 @@ var divProductosContainer = $('#divProductosContainer');
 
 
 paginador.pagination({
-    dataSource: pathHome + 'Buscar/getPublicaciones/' + palabra,
+    dataSource: pathHome + 'Buscar/getPublicaciones/' + btoa(encodeURI(palabra)).replace(/=/gi, ''),
     autoHidePrevious: true,
     autoHideNext: true,
     pageSize: 6,
