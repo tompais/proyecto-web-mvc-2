@@ -15,6 +15,7 @@ function inicializarDatePicker() {
         singleDatePicker: true,
         showDropdowns: true,
         opens: "left",
+        minDate: moment(),
         minYear: parseInt(moment().format('YYYY'), 10),
         startDate: moment().format("DD/MM/YYYY"),
         locale: {
