@@ -6,7 +6,7 @@
  * Time: 17:39
  */
 
-class BuscarController extends Controller
+class   BuscarController extends Controller
 {
     function buscarProductoPorNombre($json)
     {
@@ -50,9 +50,15 @@ class BuscarController extends Controller
 
         $paginationDataSourceDto = new PaginationDataSourceDto();
 
+        $estadistica = new Estadistica();
+
         $paginationDataSourceDto->items = [];
 
-        $productos = $producto->getListaProdutosActivosDeOtrosUsuariosPorNombre($data[0], $data["pageNumber"], $data["pageSize"]);
+        $productos = $producto->getListaProdutosActivosDeOtrosUsuariosPorNombre(urldecode(base64_decode($data[0])), $data["pageNumber"], $data["pageSize"]);
+
+        $estadistica->insertarProductosBuscados($productos);
+
+        $estadistica->insertarCategoriasBuscadas($productos);
 
         $imagen = new Imagen();
 

@@ -490,19 +490,20 @@ section
 	background: #eceff6;
 	border-radius: 50%;
 }
-.checkout_items
-{
+.contenedorCarrito{
 	display: -webkit-box;
 	display: -moz-box;
 	display: -ms-flexbox;
 	display: -webkit-flex;
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	justify-content: center;
 	align-items: center;
-	position: absolute;
-	top: 8px;
-	left: 290px;
+}
+.checkout_items
+{
+	line-height: 20px;
+	text-align: center;
 	width: 20px;
 	height: 20px;
 	border-radius: 50%;
@@ -936,7 +937,7 @@ section
 }
 .product_price span
 {
-	font-size: 12px;
+	font-size: 12px !important;
 	margin-left: 10px;
 	color: #b5aec4;
 	text-decoration: line-through;
@@ -1584,6 +1585,63 @@ section
 	.easy-autocomplete{
 		width: 75% !important
 	}
+}
+@media only screen and (min-width: 200px) and (max-width: 991px) {
+	.contenedorCarrito{
+		display: -webkit-box;
+		display: -moz-box;
+		display: -ms-flexbox;
+		display: -webkit-flex;
+		display: inline-flex;
+		flex-direction: row-reverse;
+		justify-content: flex-start;
+		/*
+		align-items: center;
+		display: -webkit-box;
+		display: -moz-box;
+		display: -ms-flexbox;
+		display: -webkit-flex;
+		display: flex;
+		flex-direction: row-reverse;
+		justify-content: flex-start;
+		*/
+	}
+	.checkout_items{
+		text-align: center;
+		line-height: 20px;
+		width: 20px;
+		height: 20px;
+		border-radius: 50%;
+		background: #0099df;
+		font-size: 12px;
+		color: #FFFFFF;
+	}
+	/*
+	#imagenTablaCarrito{
+		width: 50px;
+	}
+
+	#nombreProductoTabla{
+		font-size: 0.5em;
+	}
+	th{
+		font-size: 0.7em;
+	}
+	td{
+		font-size: 0.5em;
+	}
+	#botonMenos{
+		display: inline-block;
+		width: 10px;
+		margin: 0;
+	}
+	#botonMas{
+		display: inline-block;
+		width: 10px;
+		margin-left: 0;
+	}
+	*/
+
 }
 
 

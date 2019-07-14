@@ -2,6 +2,10 @@
 4. Breadcrumbs
 *********************************/
 
+#map {
+	height: 300px;
+}
+
 .breadcrumbs
 {
 	width: 100%;
@@ -144,8 +148,8 @@
 .product_price
 {
 	display: inline-block;
-	font-size: 24px;
-	color: #0099df;
+	font-size: 14px;
+	color: #000000;
 	font-weight: 500;
 	line-height: 30px;
 	margin-top: 2px;
@@ -489,10 +493,6 @@
 .add_review
 {
 	margin-top: 94px;
-}
-#review_form > div
-{
-	margin-bottom: 40px;
 }
 #review_form div:nth-child(2) h1
 {

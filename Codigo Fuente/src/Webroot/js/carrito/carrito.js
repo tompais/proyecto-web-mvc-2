@@ -1,23 +1,4 @@
-function actualizarCarritoCompras(cantidadEnCarrito){
 
-    var contadorCarritoHeader = $('#checkout_items');
-    var contadorCarritoHamburguesa = $('#contadorCarritoHamburguesa');
-
-    contadorCarritoHeader.show();
-    contadorCarritoHamburguesa.show();
-
-    if(cantidadEnCarrito < 1){
-
-        contadorCarritoHamburguesa.hide();
-        contadorCarritoHeader.hide();
-    }else{
-
-        contadorCarritoHeader.addClass("checkout_items");
-
-        contadorCarritoHeader.text(cantidadEnCarrito);
-        contadorCarritoHamburguesa.text(cantidadEnCarrito);
-    }
-}
 
 function actualizarCantidad(producto) {
     var divCard = $('#' + producto.id);
@@ -99,20 +80,42 @@ function eliminarProducto(id) {
     llamadaAjax(pathHome + 'Carrito/eliminarDelCarrito', JSON.stringify(obj), true, "actualizarPaginaCarrito", "dummy");
 }
 
+function actualizarCarrito(cantidad){
+    var contadorCarritoHeader = $('#checkout_items');
+    var contadorCarritoHamburguesa = $('#contadorCarritoHamburguesa');
+
+    contadorCarritoHeader.show();
+    contadorCarritoHamburguesa.show();
+
+    if(cantidad < 1){
+
+        contadorCarritoHamburguesa.hide();
+        contadorCarritoHeader.hide();
+    }else{
+
+        contadorCarritoHeader.addClass("checkout_items");
+
+        contadorCarritoHeader.text(cantidad);
+        contadorCarritoHamburguesa.text(cantidad);
+    }
+}
+
 function actualizarPaginaCarrito(idProducto) {
     var fila = $('#' + idProducto);
     fila.remove();
     var carritoCompras = $('#checkout_items');
-    var cantidaEnCarrito = parseInt(carritoCompras.text())-1;
+    var cantidadEnCarrito = parseInt(carritoCompras.text())-1;
     actualizarTotal();
-    actualizarCarritoCompras(cantidaEnCarrito);
-    if(cantidaEnCarrito == 0){
+    actualizarCarrito(cantidadEnCarrito);
+    if(cantidadEnCarrito === 0){
         ocultarTabla();
         mostrarMensaje();
         ocultarBotonComprar();
     }
 
 }
+
+
 
 function ocultarTabla() {
     var tabla = $('#tablaCarrito');

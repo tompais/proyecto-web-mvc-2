@@ -99,12 +99,13 @@ class Compra extends Model
         $array = [
             "CompradorId" => $this->getCompradorId(),
             "Total" => $this->getTotal(),
-            "FechaCompra" => $this->getFechaCompra()
+            "FechaCompra" => $this->getFechaCompra(),
+            "Facturada" => "No Facturada"
         ];
 
         $id = $this->insert($array);
 
-        if($id)
+        if ($id)
             $this->setId($id);
 
         return $id;
@@ -116,8 +117,7 @@ class Compra extends Model
 
         $rows = $this->pageRows(0, 5, "CompradorId = $pk ORDER BY FechaCompra DESC");
 
-        foreach($rows as $row)
-        {
+        foreach ($rows as $row) {
             $compra = new Compra();
             $compra->db->disconnect();
             $compra->setId($row["Id"]);
@@ -129,4 +129,40 @@ class Compra extends Model
 
         return $compras;
     }
+
+    public function traerCompra($pk)
+    {
+        $compra = $this->selectByPk($pk);
+
+        $this->setId($compra["Id"]);
+        $this->setCompradorId($compra["CompradorId"]);
+        $this->setTotal($compra["Total"]);
+        $this->setFechaCompra($compra["FechaCompra"]);
+    }
+
+    public function traerFechaCompraMasAntigua()
+    {
+        return ($row = $this->pageRows(0, 1, "DATE(FechaCompra) <= '" . date("Y-m-d", time()) . "' ORDER BY FechaCompra")) ? $row[0]["FechaCompra"] : null;
+    }
+
+    public function traerComprasByRangoFecha($fechaDesde, $fechaHasta)
+    {
+        $compras = [];
+        $rows = $this->pageRows("", "", "DATE(FechaCompra) BETWEEN '$fechaDesde' AND '$fechaHasta'");
+
+        foreach ($rows as $row) {
+            $compra = new Compra();
+            $compra->db->disconnect();
+
+            $compra->setId($row["Id"]);
+            $compra->setCompradorId($row["CompradorId"]);
+            $compra->setFechaCompra($row["FechaCompra"]);
+            $compra->setTotal($row["Total"]);
+
+            $compras[] = $compra;
+        }
+
+        return $compras;
+    }
+
 }

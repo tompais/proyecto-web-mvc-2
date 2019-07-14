@@ -340,12 +340,36 @@ class Usuario extends Model
     {
         $usuario = $this->selectByPk($pk);
 
-        $this->setNombre($usuario["Nombre"]);
-        $this->setApellido($usuario["Apellido"]);
-        $this->setUsername($usuario["Username"]);
-        $this->setEmail($usuario["Email"]);
-        $this->setTelefonoCelular($usuario["TelefonoCelular"]);
-        $this->setFechaNacimiento($usuario["FechaNacimiento"]);
+        if($usuario) {
+            $this->setNombre($usuario["Nombre"]);
+            $this->setApellido($usuario["Apellido"]);
+            $this->setUsername($usuario["Username"]);
+            $this->setEmail($usuario["Email"]);
+            $this->setTelefonoCelular($usuario["TelefonoCelular"]);
+            $this->setFechaNacimiento($usuario["FechaNacimiento"]);
+            $this->setGeolocalizacionId($usuario["GeolocalizacionId"]);
+        }
+
+        return $usuario;
+    }
+
+    public function traerUsuarioPorUserName ($username)
+    {
+        $usuario = $this->pageRows(0, 1, "Username LIKE '$username'");
+
+        if($usuario) {
+            $this->setId($usuario[0]["Id"]);
+            $this->setNombre($usuario[0]["Nombre"]);
+            $this->setApellido($usuario[0]["Apellido"]);
+            $this->setUsername($usuario[0]["Username"]);
+            $this->setEmail($usuario[0]["Email"]);
+            $this->setFechaBaneo($usuario[0]["FechaBaneo"]);
+            $this->setTelefonoCelular($usuario[0]["TelefonoCelular"]);
+            $this->setFechaNacimiento($usuario[0]["FechaNacimiento"]);
+            $this->setGeolocalizacionId($usuario[0]["GeolocalizacionId"]);
+        }
+
+        return $usuario;
     }
 
     /**
@@ -429,7 +453,7 @@ class Usuario extends Model
     public function validarRol()
     {
         return (FuncionesUtiles::esEntero($this->rolId) || FuncionesUtiles::esCadenaNumerica($this->rolId))
-            && (Roles::ADMINISTRADOR === $this->rolId || Roles::COADMINISTRADOR == $this->rolId || Roles::MODERADOR === $this->rolId || Roles::USUARIO === $this->rolId);
+            && (Roles::ADMINISTRADOR === $this->rolId || Roles::USUARIO === $this->rolId);
     }
 
     public function validarGenero()
@@ -440,7 +464,22 @@ class Usuario extends Model
 
     public function loguearUsuarioDB ()
     {
-        $row = $this->pageRows(0, 1, "(Username LIKE '$this->username' OR Email LIKE '$this->email') AND FechaBaneo IS NULL AND FechaBaja IS NULL AND UPassword LIKE '$this->upassword'");
+        $row = $this->pageRows(0, 1, "(Username LIKE '$this->username' OR Email LIKE '$this->email') AND FechaBaja IS NULL AND UPassword LIKE '$this->upassword'");
+
+        if($row) {
+            $this->setId($row[0]["Id"]);
+            $this->setEmail($row[0]["Email"]);
+            $this->setUsername($row[0]["Username"]);
+            $this->setRolId($row[0]["RolId"]);
+            $this->setFechaBaneo($row[0]["FechaBaneo"]);
+        }
+
+        return $row;
+    }
+
+    public function loguearAdminDB ()
+    {
+        $row = $this->pageRows(0, 1, "(Username LIKE '$this->username' OR Email LIKE '$this->email') AND FechaBaneo IS NULL AND FechaBaja IS NULL AND UPassword LIKE '$this->upassword' AND RolId = 1");
 
         if($row) {
             $this->setId($row[0]["Id"]);
@@ -533,7 +572,45 @@ class Usuario extends Model
         return $this->update($array);
     }
 
-}
+    public function banear ()
+    {
+        $array = [
+            "Id" => $this->getId(),
+            "FechaBaneo" => date('Y-m-d', strtotime(str_replace('/', '-', $this->getFechaBaneo())))
+        ];
+        return $this->update($array);
+    }
 
+    public function desbanear()
+    {
+        $array = [
+            "Id" => $this->getId(),
+            "FechaBaneo" => null
+        ];
+
+        return $this->update($array);
+    }
+
+    public function traerListaDeUltimoBaneados(){
+
+        $baneados = array();
+
+        $rows = $this->pageRows(0, 15, "FechaBaneo is not null order by Id desc");
+
+        foreach($rows as $row)
+        {
+            $usuario = new Usuario();
+            $usuario->db->disconnect();
+            $usuario->setId($row["Id"]);
+            $usuario->setFechaBaneo($row["FechaBaneo"]);
+            $usuario->setUsername($row["Username"]);
+            $baneados[] = $usuario;
+        }
+
+        return $baneados;
+
+    }
+
+}
 
 ?>

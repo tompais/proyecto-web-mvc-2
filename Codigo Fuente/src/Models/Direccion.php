@@ -202,6 +202,7 @@ class Direccion extends Model
 
        $this->setCalle($direccion["Calle"]);
        $this->setAltura($direccion["Altura"]);
+       $this->setLocalidadId($direccion["LocalidadId"]);
     }
 
     public function validarDireccion()

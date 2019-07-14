@@ -26,6 +26,11 @@ abstract class CodigoError
     const ImagenPrincipalNoEncontrada = 30;
     const EliminarProducto = 33;
     const EliminacionMasivaImagen = 40;
+    const MetodoNoEncontrado = 44;
+    const UsuarioBaneado = 47;
     const ProductoDuplicadoEnCarrito = 50;
     const ErrorGetSql = 51;
+    const CierreSession = 52;
+    const UsuarioNuncaRealizoCompra = 60;
+    const ReviewRealizadaPreviamente = 61;
 }

@@ -214,22 +214,74 @@ class ProductosController extends Controller
         $d["title"] = Constantes::PUBLICACIONTITLE;
 
         $producto = new Producto();
+        $productoRelacionado = new Producto();
         $categoria = new Categoria();
         $usuario = new Usuario();
+        $geolocalizacion = new Geolocalizacion();
 
         $producto->traerProducto($publicacion[0]);
         $categoria->traerCategoria($producto->getCategoriaId());
         $usuario->traerUsuario($producto->getUsuarioId());
 
+        $geolocalizacion->getGeolocalizacionById($usuario->getGeolocalizacionId());
+
         $imagen = new Imagen();
 
         $imagenes = $imagen->traerListaImagenes($producto->getId());
 
+        $condicion = "";
+        $categoriaId = $producto->getCategoriaId();
+        $idProducto = $producto->getId();
+
+        $d["usuarioComproEsteProducto"] = false;
+
+        $registroCompra = new RegistroCompra();
+        $review = new Review();
+
+        $review->setProductoId($idProducto);
+
+        if(isset($_SESSION["session"])){
+            $idUsuario = unserialize($_SESSION["session"])->getId();
+            $condicion = "UsuarioId <> $idUsuario AND FechaBaja IS NULL AND CategoriaId = $categoriaId AND Id <> $idProducto";
+
+            $d["usuarioComproEsteProducto"] = $registroCompra->realizoUsuarioCompraProducto($idUsuario, $idProducto);
+
+            $review->setUsuarioId($idUsuario);
+            $d["usuarioRealizoReviewEsteProducto"] = $review->realizoUsuarioReview();
+        }else{
+            $condicion = "FechaBaja IS NULL AND CategoriaId = $categoriaId AND Id <> $idProducto";
+        }
+
+
+        $productosRelacionados = $productoRelacionado->traerProductosRelacionados($condicion);
+        $imagenesProductosRelacionados = array();
+
+        foreach ($productosRelacionados as $productoRelacionado){
+            $imagenProductoRelacionado = new Imagen();
+            $imagenProductoRelacionado->traerImagenPrincipal($productoRelacionado->getId());
+            $imagenesProductosRelacionados[$productoRelacionado->getId()] = $imagenProductoRelacionado;
+        }
+
+        $comentario = new Comentario();
+        
+        $sumReviews = $cantReviews = 0;
+
+        foreach ($producto->traerListaProductosByUsuarioId() as $p) {
+            $sumReviews += $review->getSumaCalificacionesByProductoId($p->getId());
+            $cantReviews += $review->getCantReviewsByProductoId($p->getId());
+        }
+
+        $d["cantidadReviews"] = $review->getCantReviewsEnPublicacion();
         $d["imagenes"] = $imagenes;
+        $d["imagenesProductosRelacionados"] = $imagenesProductosRelacionados;
         $d["producto"] = $producto;
         $d["categoria"] = $categoria;
         $d["usuario"] = $usuario;
-
+        $d["geolocalizacion"] = $geolocalizacion;
+        $d["productosRelacionados"] = $productosRelacionados;
+        $d["comentarios"] = $comentario->traerUltimosComentarios(0, $publicacion[0]);
+        $d["totalComentarios"] = $comentario->contarComentarios($publicacion[0]);
+        $d["nivelVendedor"] = !$cantReviews ? -1 : $sumReviews/$cantReviews;
 
         $this->set($d);
         $this->render(Constantes::PUBLICACIONVIEW);
@@ -277,5 +329,162 @@ class ProductosController extends Controller
         $paginationDataSourceDto->items = $publicaciones;
 
         echo json_encode($paginationDataSourceDto);
+    }
+
+    function guardarReview($json)
+    {
+        header("Content-type: application/json");
+
+        $data = json_decode($json["data"]);
+
+        $review = new Review();
+        $registroCompra = new RegistroCompra();
+
+        $review->setProductoId($data->productoId);
+        $review->setCalificacion($data->calificacion);
+        $review->setDetalle($data->detalle);
+        $review->setUsuarioId(unserialize($_SESSION["session"])->getId());
+
+        if(!$registroCompra->realizoUsuarioCompraProducto($review->getUsuarioId(), $review->getProductoId())) {
+            throw new UsuarioNuncaRealizoCompraException("Nunca ha realizado una compra de este producto anteriormente", CodigoError::UsuarioNuncaRealizoCompra);
+        }
+
+        if($review->realizoUsuarioReview()) {
+            throw new ReviewRealizadaPreviamenteException("Ya ha realizado una review anteriormente en esta publicación", CodigoError::ReviewRealizadaPreviamente);
+        }
+
+        if(!$review->ingresarReview()) {
+            throw new SQLInsertException("No se ha podido ingresar la review", CodigoError::ErrorInsertSQL);
+        }
+
+        $usuario = new Usuario();
+
+        $usuario->traerUsuario($review->getUsuarioId());
+
+        $reviewViewModel = new ReviewViewModel();
+
+        $reviewViewModel->fechaAlta = $review->getFechaAlta();
+        $reviewViewModel->calificacion = $review->getCalificacion();
+        $reviewViewModel->detalleReview = $review->getDetalle();
+        $reviewViewModel->nombreCompletoUsuario = $usuario->getNombre() . " " . $usuario->getApellido();
+
+        echo json_encode($reviewViewModel);
+    }
+
+    function getReviews($json)
+    {
+        header("Content-type: application/json");
+
+        $data = json_decode($json["data"]);
+
+        $review = new Review();
+
+        $review->setProductoId($data->productoId);
+
+        $reviews = $review->getReviewsWithPaginatorByProductoId($data->pageNumber, $data->pageSize);
+
+        $reviewViewModels = [];
+
+        foreach ($reviews as $r) {
+            $reviewViewModel = new ReviewViewModel();
+
+            $reviewViewModel->nombreCompletoUsuario = $r->getUsuario()->getNombre() . " " . $r->getUsuario()->getApellido();
+            $reviewViewModel->detalleReview = $r->getDetalle();
+            $reviewViewModel->calificacion = $r->getCalificacion();
+            $reviewViewModel->fechaAlta = $r->getFechaAlta();
+
+            $reviewViewModels[] = $reviewViewModel;
+        }
+
+        echo json_encode($reviewViewModels);
+    }
+
+    function realizarPregunta($json)
+    {
+        header("Content-type: application/json");
+
+        $data = json_decode($json['data']);
+
+        $comentario = New Comentario();
+
+        $comentario->setUsuarioId(unserialize($_SESSION["session"])->getId());
+
+        $comentario->setProductoId($data->productoId);
+
+        $comentario->setPregunta($data->pregunta);
+
+        $comentario->setFechaPregunta(date("Y-m-d"));
+
+        $comentario->setUsuarioUsername(unserialize($_SESSION["session"])->getUserName());
+
+        $comentario->insertarComentario();
+
+        $comentarioDto = new ComentarioDto();
+
+        $comentarioDto->id = $comentario->getId();
+
+        $comentarioDto->pregunta = $data->pregunta;
+
+        $comentarioDto->fechaPregunta = date("d/m/Y", strtotime($comentario->getFechaPregunta()));
+
+        $comentarioDto->usuarioUsername = $comentario->getUsuarioUsername();
+
+        echo json_encode($comentarioDto);
+    }
+
+    function realizarRespuesta($json)
+    {
+        header("Content-type: application/json");
+
+        $data = json_decode($json['data']);
+
+        $comentario = New Comentario();
+
+        $comentario->setId($data->id);
+
+        $comentario->setRespuesta($data->respuesta);
+        
+        $comentario->setFechaRespuesta(date("Y-m-d"));
+
+        $comentario->insertarRespuesta();
+
+        $comentarioDto = new ComentarioDto();
+
+        $comentarioDto->id = $comentario->getId();
+
+        $comentarioDto->respuesta = $comentario->getRespuesta();
+
+        $comentarioDto->fechaRespuesta = date("d/m/Y", strtotime($comentario->getFechaRespuesta()));
+
+        echo json_encode($comentarioDto);
+    }
+
+    function mostrarMas($json)
+    {
+        header("Content-type: application/json");
+
+        $data = json_decode($json['data']);
+
+        $comentario = New Comentario();
+
+        $comentarios = $comentario->traerUltimosComentarios($data->inicio, $data->idProducto);
+
+        $comentariosDto = [];
+
+        foreach($comentarios as $coment)
+        {
+            $comentarioDto = new ComentarioDto();
+
+            $comentarioDto->id = $coment->getId();
+            $comentarioDto->pregunta = $coment->getPregunta();
+            $comentarioDto->respuesta = $coment->getRespuesta();
+            $comentarioDto->fechaPregunta = date("d/m/Y", strtotime($coment->getFechaPregunta()));
+            $comentarioDto->fechaRespuesta = date("d/m/Y", strtotime($coment->getFechaRespuesta()));
+            $comentarioDto->usuarioUsername = $coment->getUsuarioUsername();
+
+            $comentariosDto[] = $comentarioDto;
+        }
+
+        echo json_encode($comentariosDto);
     }
 }
