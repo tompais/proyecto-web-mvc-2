@@ -5,6 +5,7 @@ var btnInputRangoFacturacion = $('#btnInputRangoFacturacion');
 var divFormGroupRangoFacturacion = $('#divFormGroupRangoFacturacion');
 var divCardsContainer = $('#divCardsContainer');
 var advertencia = $('#advertencia');
+var advertencia2 = $('#advertencia2');
 var btnFacturar = null;
 var tableId = null;
 
@@ -13,9 +14,9 @@ inicializarDateRangePicker();
 function cargarTablas(registrosComprasPorMes) {
    divCardsContainer.empty();
    if(registrosComprasPorMes === null || registrosComprasPorMes.length === 0) {
-      advertencia.removeClass('d-none');
+      advertencia2.removeClass('d-none');
    } else {
-      advertencia.addClass('d-none');
+      advertencia2.addClass('d-none');
       $.each(registrosComprasPorMes, function (mes, registros) {
          var divCard = $('<div class="card mb-3 w-100">');
 
@@ -200,7 +201,7 @@ function facturacionExitoso (dummy) {
    btnFacturar = null;
    if(divCardsContainer.length === 1) {
       divCardsContainer.removeClass('d-flex').addClass('d-none').empty();
-      advertencia.removeClass('d-none');
+      advertencia2.removeClass('d-none');
    }
    alertify.alert('Facturación exitosa', 'Se ha realizado la facturación correspondiente');
 }

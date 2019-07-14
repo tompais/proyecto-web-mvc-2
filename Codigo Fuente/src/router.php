@@ -27,6 +27,10 @@ class Router
         {
             header("Location: " . getBaseAddress() . "DashBoard/login");
         }
+        else if(self::isDashboardController($explode_url[0]) && (self::isDashboardLoginAction($explode_url[1]) || self::isDashboardLoginAdminAction($explode_url[1])) && isset($_SESSION["sessionAdmin"]))
+        {
+            header("Location: " . getBaseAddress() . "DashBoard/inicio");
+        }
         else
         {
             $request->controller = $explode_url[0];

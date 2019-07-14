@@ -28,7 +28,8 @@
             </div>
         </div>
 
-        <h4 id="advertencia" class="d-none text-black-50 text-center mx-auto">No hay facturaciones pendientes</h4>
+        <h4 id="advertencia" class="d-none text-black-50 text-center mx-auto">No hay compras a facturar</h4>
+        <h4 id="advertencia2" class="d-none text-black-50 text-center mx-auto">No hay facturaciones pendientes en el rango seleccionado</h4>
         <!-- DataTables Example -->
         <div id="divCardsContainer" class="d-none flex-column justify-content-center align-items-center">
         </div>

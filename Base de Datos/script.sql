@@ -6342,11 +6342,17 @@ VALUES ("Ezequiel", "Allio", 20396702119, '1996-05-07', "ezequiel", "eb6a2f962bb
 -- Insercion en la tabla Cateogoria --        
 
 INSERT INTO Categoria (Nombre) VALUES   ("Comestibles"),
-										("Hogar"),
+										("Muebles"),
+                                        ("Inmuebles"),
+                                        ("Hogar"),
 										("Iluminación"),
 										("Librería"),
-										("Ropa"),
-										("Tecnología");
+										("Tecnología"),
+                                        ("Vehículos"),
+                                        ("Ferretería"),
+                                        ("Indumentaria"),
+                                        ("Entretenimiento"),
+                                        ("Joyería");
         
 -- Insercion en la tabla Estado --        
         
